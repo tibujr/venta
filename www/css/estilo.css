@@ -12,6 +12,15 @@ body{
   margin: 0;
 }
 
+/*formulario datos*/
+
+#d_usu h1{
+  margin: .6em;
+  display: inline-block;
+}
+
+/**/
+
 
 /*propuesta sin facebook*/
 

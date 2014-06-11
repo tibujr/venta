@@ -21,6 +21,7 @@ $(document).ready(function () {
 				success : function(data) {
 					$(".main").css({display: 'none'});
 					if(data != 0){
+						$("#d_usu h1").html(data.apellido_usu+", "+data.nombre_usu);
 						$.mobile.changePage("#datos");
 					}else{
 						alert(data)
