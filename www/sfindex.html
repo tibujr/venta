@@ -11,8 +11,8 @@
   	<script type="text/javascript" src="js/accion.js"></script>
 </head>
 <body>
-	<div data-role="page" id="inicio">
-		<div data-role="header">
+	<section data-role="page" id="inicio">
+		<div data-role="header" >
 			<h1>LOGIN</h1>
 		</div>
 		<div data-role="content">
@@ -34,26 +34,60 @@
 				</section>
 			</div>
 		</div>
-	</div>
+	</section>
  
-	<div data-role="page" id="datos">
-		<div data-role="header" id="d_usu">
+	<section data-role="page" id="datos" >
+		<div data-role="header" id="d_usu" data-id="top_fijo" data-position="fixed">
 			<h1>Hola</h1>
 		</div>
 		<div data-role="navbar" class="nav-glyphish-example" data-grid="d">
 			<ul>
-				<li><a href="#" id="menuitem1"><div class="font_ico icon-briefcase"></div></a></li>
-				<li><a href="#" id="menuitem1"><div class="font_ico icon-calendar"></div></a></li>
-				<li><a href="#" id="menuitem1"><div class="font_ico icon-user"></div></a></li>
-				<li><a href="#" id="menuitem1"><div class="font_ico icon-pie"></div></a></li>
-				<li><a href="#" id="menuitem1"><div class="font_ico icon-star"></div></a></li>
-				<!--<li><a href="#" id="menuitem1" data-icon="custom">Menu Item 3</a></li>-->
+				<li><a href="#venta" class="menuitem1"><div class="font_ico icon-briefcase"></div><label>VENTA</label></a></li>
+				<li><a href="#agenda" class="menuitem1"><div class="font_ico icon-calendar"></div><label>AGENDA</label></a></li>
+				<li><a href="#contacto" class="menuitem1"><div class="font_ico icon-user"></div><label>CONTACTO</label></a></li>
+				<li><a href="#estadistica" class="menuitem1"><div class="font_ico icon-pie"></div><label>ESTADISTICA</label></a></li>
+				<li><a href="#logros" class="menuitem1"><div class="font_ico icon-star"></div><label>LOGRO</label></a></li>
 			</ul>
 		</div>
+		<div data-role="header" data-theme="c">
+			<h1>OBJETIVOS</h1>
+		</div>
+		
 		<div data-role="content">	
 			<div>Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usó una galería de textos y los mezcló de tal manera que logró hacer un libro de textos especimen. No sólo sobrevivió 500 años, sino que tambien ingresó como texto de relleno en documentos electrónicos</div>
 		</div>
-		 <footer data-role="footer" data-position="fixed">
+
+		 <footer data-role="footer" data-position="fixed" data-id="pie_fijo" data-theme="b">
+	        <div data-role="navbar" class="nav-glyphish-example" data-grid="b">
+				<ul>
+					<li><a href="#" id="menuitem1"><div class="icon-plus"> VENTA</div></a></li>
+					<li><a href="#" id="menuitem1"><div class="icon-plus"> CONTACTO</div></a></li>
+					<li><a href="#" id="menuitem1"><div class="icon-plus"> AGENDA</div></a></li>
+				</ul>
+			</div>
+	    </footer>
+	</section>
+
+	<div data-role="page" id="venta">
+		<div data-role="header" data-id="top_fijo" data-position="fixed">
+			<a href="#" data-icon="back" data-rel="back">Atras</a>
+			<h1>VENTAS</h1>
+		</div>
+		<div data-role="navbar" class="nav-glyphish-example" data-grid="d">
+			<ul>
+				<li><a href="#" class="menuitem1"><div class="font_ico icon-briefcase"></div><label>VENTA</label></a></li>
+				<li><a href="#agenda" class="menuitem1"><div class="font_ico icon-calendar"></div><label>AGENDA</label></a></li>
+				<li><a href="#contacto" class="menuitem1"><div class="font_ico icon-user"></div><label>CONTACTO</label></a></li>
+				<li><a href="#estadistica" class="menuitem1"><div class="font_ico icon-pie"></div><label>ESTADISTICA</label></a></li>
+				<li><a href="#logros" class="menuitem1"><div class="font_ico icon-star"></div><label>LOGRO</label></a></li>
+			</ul>
+		</div>
+		
+		<div data-role="content">
+			<div>VENTAS</div>
+		</div>
+
+		 <footer data-role="footer" data-position="fixed" data-id="pie_fijo" data-theme="b">
 	        <div data-role="navbar" class="nav-glyphish-example" data-grid="b">
 				<ul>
 					<li><a href="#" id="menuitem1"><div class="icon-plus"> VENTA</div></a></li>
@@ -64,31 +98,124 @@
 	    </footer>
 	</div>
 
-	<!--<div data-role="page" id="datos_listo">
-		<div data-role="header">
-			<h1>Reserva</h1>
+	<div data-role="page" id="agenda">
+		<div data-role="header" data-id="top_fijo" data-position="fixed">
+			<a href="#" data-icon="back" data-rel="back">Atras</a>
+			<h1>AGENDA</h1>
 		</div>
-		<div data-role="content">	
-			<div class="center-wrapper">	
-				<section id="con_table">
-					<article class="col">
-						<div class="fil fil1">Nombre :</div>
-						<div class="fil fil1">Invitado(s) :</div>
-						<div class="fil fil1">Fecha :</div>
-						<div class="fil fil1">Hora :</div>
-					</article>
-					<article class="col">
-						<div class="fil" id="name_ok"></div>
-						<div class="fil" id="cantidad_ok"></div>
-						<div class="fil" id="fecha_ok"></div>
-						<div class="fil" id="hora_ok"></div>
-					</article>
-				</section>
-			</div>
-			<div class="center-wrapper">
-				<div id="btn_listo" data-role="button" data-inline="true" data-theme="b" data-icon="check" data-iconpos="right">Listo</div>
-			</div>
+		<div data-role="navbar" class="nav-glyphish-example" data-grid="d">
+			<ul>
+				<li><a href="#venta" class="menuitem1"><div class="font_ico icon-briefcase"></div><label>VENTA</label></a></li>
+				<li><a href="#" class="menuitem1"><div class="font_ico icon-calendar"></div><label>AGENDA</label></a></li>
+				<li><a href="#contacto" class="menuitem1"><div class="font_ico icon-user"></div><label>CONTACTO</label></a></li>
+				<li><a href="#estadistica" class="menuitem1"><div class="font_ico icon-pie"></div><label>ESTADISTICA</label></a></li>
+				<li><a href="#logros" class="menuitem1"><div class="font_ico icon-star"></div><label>LOGRO</label></a></li>
+			</ul>
 		</div>
-	</div>-->
+		
+		<div data-role="content">
+			<div>AGENDA</div>
+		</div>
+
+		 <footer data-role="footer" data-position="fixed" data-id="pie_fijo" data-theme="b">
+	        <div data-role="navbar" class="nav-glyphish-example" data-grid="b">
+				<ul>
+					<li><a href="#" id="menuitem1"><div class="icon-plus"> VENTA</div></a></li>
+					<li><a href="#" id="menuitem1"><div class="icon-plus"> CONTACTO</div></a></li>
+					<li><a href="#" id="menuitem1"><div class="icon-plus"> AGENDA</div></a></li>
+				</ul>
+			</div>
+	    </footer>
+	</div>
+
+	<div data-role="page" id="contacto">
+		<div data-role="header" data-id="top_fijo" data-position="fixed">
+			<a href="#" data-icon="back" data-rel="back">Atras</a>
+			<h1>CONTACTOS</h1>
+		</div>
+		<div data-role="navbar" class="nav-glyphish-example" data-grid="d">
+			<ul>
+				<li><a href="#venta" class="menuitem1"><div class="font_ico icon-briefcase"></div><label>VENTA</label></a></li>
+				<li><a href="#agenda" class="menuitem1"><div class="font_ico icon-calendar"></div><label>AGENDA</label></a></li>
+				<li><a href="#" class="menuitem1"><div class="font_ico icon-user"></div><label>CONTACTO</label></a></li>
+				<li><a href="#estadistica" class="menuitem1"><div class="font_ico icon-pie"></div><label>ESTADISTICA</label></a></li>
+				<li><a href="#logros" class="menuitem1"><div class="font_ico icon-star"></div><label>LOGRO</label></a></li>
+			</ul>
+		</div>
+		
+		<div data-role="content">
+			<div>CONTACTOS</div>
+		</div>
+
+		 <footer data-role="footer" data-position="fixed" data-id="pie_fijo" data-theme="b">
+	        <div data-role="navbar" class="nav-glyphish-example" data-grid="b">
+				<ul>
+					<li><a href="#" id="menuitem1"><div class="icon-plus"> VENTA</div></a></li>
+					<li><a href="#" id="menuitem1"><div class="icon-plus"> CONTACTO</div></a></li>
+					<li><a href="#" id="menuitem1"><div class="icon-plus"> AGENDA</div></a></li>
+				</ul>
+			</div>
+	    </footer>
+	</div>
+
+	<div data-role="page" id="estadistica">
+		<div data-role="header" data-id="top_fijo" data-position="fixed">
+			<a href="#" data-icon="back" data-rel="back">Atras</a>
+			<h1>ESTADISTICAS</h1>
+		</div>
+		<div data-role="navbar" class="nav-glyphish-example" data-grid="d">
+			<ul>
+				<li><a href="#venta" class="menuitem1"><div class="font_ico icon-briefcase"></div><label>VENTA</label></a></li>
+				<li><a href="#agenda" class="menuitem1"><div class="font_ico icon-calendar"></div><label>AGENDA</label></a></li>
+				<li><a href="#contacto" class="menuitem1"><div class="font_ico icon-user"></div><label>CONTACTO</label></a></li>
+				<li><a href="#" class="menuitem1"><div class="font_ico icon-pie"></div><label>ESTADISTICA</label></a></li>
+				<li><a href="#logros" class="menuitem1"><div class="font_ico icon-star"></div><label>LOGRO</label></a></li>
+			</ul>
+		</div>
+		
+		<div data-role="content">
+			<div>ESTADISTICAS</div>
+		</div>
+
+		 <footer data-role="footer" data-position="fixed" data-id="pie_fijo" data-theme="b">
+	        <div data-role="navbar" class="nav-glyphish-example" data-grid="b">
+				<ul>
+					<li><a href="#" id="menuitem1"><div class="icon-plus"> VENTA</div></a></li>
+					<li><a href="#" id="menuitem1"><div class="icon-plus"> CONTACTO</div></a></li>
+					<li><a href="#" id="menuitem1"><div class="icon-plus"> AGENDA</div></a></li>
+				</ul>
+			</div>
+	    </footer>
+	</div>
+
+	<div data-role="page" id="logros">
+		<div data-role="header" data-id="top_fijo" data-position="fixed">
+			<a href="#" data-icon="back" data-rel="back">Atras</a>
+			<h1>LOGROS</h1>
+		</div>
+		<div data-role="navbar" class="nav-glyphish-example" data-grid="d">
+			<ul>
+				<li><a href="#venta" class="menuitem1"><div class="font_ico icon-briefcase"></div><label>VENTA</label></a></li>
+				<li><a href="#agenda" class="menuitem1"><div class="font_ico icon-calendar"></div><label>AGENDA</label></a></li>
+				<li><a href="#contacto" class="menuitem1"><div class="font_ico icon-user"></div><label>CONTACTO</label></a></li>
+				<li><a href="#estadistica" class="menuitem1"><div class="font_ico icon-pie"></div><label>ESTADISTICA</label></a></li>
+				<li><a href="#" class="menuitem1"><div class="font_ico icon-star"></div><label>LOGRO</label></a></li>
+			</ul>
+		</div>
+		
+		<div data-role="content">
+			<div>LOGROS</div>
+		</div>
+
+		 <footer data-role="footer" data-position="fixed" data-id="pie_fijo" data-theme="b">
+	        <div data-role="navbar" class="nav-glyphish-example" data-grid="b">
+				<ul>
+					<li><a href="#" id="menuitem1"><div class="icon-plus"> VENTA</div></a></li>
+					<li><a href="#" id="menuitem1"><div class="icon-plus"> CONTACTO</div></a></li>
+					<li><a href="#" id="menuitem1"><div class="icon-plus"> AGENDA</div></a></li>
+				</ul>
+			</div>
+	    </footer>
+	</div>
 </body>
 </html>
