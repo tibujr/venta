@@ -37,10 +37,9 @@
 	</section>
  
 	<section data-role="page" id="datos" >
-		<div data-role="header" id="d_usu" data-id="top_fijo" data-position="fixed">
+		<div data-role="header" id="d_usu" data-id="top_fijo" data-position="fixed" data-theme="a">
 			<h1>Hola</h1>
-		
-			<div data-role="navbar" class="nav-glyphish-example" data-grid="d">
+			<div data-role="navbar" data-grid="d">
 				<ul>
 					<li><a href="#venta" class="menuitem1"><div class="font_ico icon-briefcase"></div><label>VENTA</label></a></li>
 					<li><a href="#agenda" class="menuitem1"><div class="font_ico icon-calendar"></div><label>AGENDA</label></a></li>
@@ -61,9 +60,9 @@
 		 <footer data-role="footer" data-position="fixed" data-id="pie_fijo" data-theme="b">
 	        <div data-role="navbar" data-grid="b">
 				<ul>
-					<li><a href="#"><div class="icon-plus"> VENTA</div></a></li>
-					<li><a href="#"><div class="icon-plus"> CONTACTO</div></a></li>
-					<li><a href="#" class="sin_r"><div class="icon-plus"> AGENDA</div></a></li>
+					<li><a href="#venta"><div class="icon-plus"> VENTA</div></a></li>
+					<li><a href="#agenda"><div class="icon-plus"> CONTACTO</div></a></li>
+					<li><a href="#contacto" class="sin_r"><div class="icon-plus"> AGENDA</div></a></li>
 				</ul>
 			</div>
 	    </footer>
@@ -73,10 +72,10 @@
 		<div data-role="header" data-id="top_fijo" data-position="fixed">
 			<a href="#" data-icon="back" data-rel="back">Atras</a>
 			<h1>VENTAS</h1>
-		
-			<div data-role="navbar" class="nav-glyphish-example" data-grid="d">
+			<a href="#" data-theme="b"><div class="icon-plus"></div></a>
+			<div data-role="navbar" data-grid="d">
 				<ul>
-					<li><a href="#" class="menuitem1"><div class="font_ico icon-briefcase"></div><label>VENTA</label></a></li>
+					<li><a href="#" class="menuitem1 ui-btn-active"><div class="font_ico icon-briefcase"></div><label>VENTA</label></a></li>
 					<li><a href="#agenda" class="menuitem1"><div class="font_ico icon-calendar"></div><label>AGENDA</label></a></li>
 					<li><a href="#contacto" class="menuitem1"><div class="font_ico icon-user"></div><label>CONTACTO</label></a></li>
 					<li><a href="#estadistica" class="menuitem1"><div class="font_ico icon-pie"></div><label>ESTADISTICA</label></a></li>
@@ -91,9 +90,9 @@
 		 <footer data-role="footer" data-position="fixed" data-id="pie_fijo" data-theme="b">
 	        <div data-role="navbar" data-grid="b">
 				<ul>
-					<li><a href="#"><div class="icon-plus"> VENTA</div></a></li>
-					<li><a href="#"><div class="icon-plus"> CONTACTO</div></a></li>
-					<li><a href="#" class="sin_r"><div class="icon-plus"> AGENDA</div></a></li>
+					<li><a href="#venta"><div class="icon-plus"> VENTA</div></a></li>
+					<li><a href="#agenda"><div class="icon-plus"> CONTACTO</div></a></li>
+					<li><a href="#contacto" class="sin_r"><div class="icon-plus"> AGENDA</div></a></li>
 				</ul>
 			</div>
 	    </footer>
@@ -103,11 +102,11 @@
 		<div data-role="header" data-id="top_fijo" data-position="fixed">
 			<a href="#" data-icon="back" data-rel="back">Atras</a>
 			<h1>AGENDA</h1>
-		
-			<div data-role="navbar" class="nav-glyphish-example" data-grid="d">
+			<a href="#" data-theme="b"><div class="icon-plus"></div></a>
+			<div data-role="navbar" data-grid="d">
 				<ul>
 					<li><a href="#venta" class="menuitem1"><div class="font_ico icon-briefcase"></div><label>VENTA</label></a></li>
-					<li><a href="#" class="menuitem1"><div class="font_ico icon-calendar"></div><label>AGENDA</label></a></li>
+					<li><a href="#" class="menuitem1 ui-btn-active"><div class="font_ico icon-calendar"></div><label>AGENDA</label></a></li>
 					<li><a href="#contacto" class="menuitem1"><div class="font_ico icon-user"></div><label>CONTACTO</label></a></li>
 					<li><a href="#estadistica" class="menuitem1"><div class="font_ico icon-pie"></div><label>ESTADISTICA</label></a></li>
 					<li><a href="#logros" class="menuitem1 sin_r"><div class="font_ico icon-star"></div><label>LOGRO</label></a></li>
@@ -121,9 +120,9 @@
 		 <footer data-role="footer" data-position="fixed" data-id="pie_fijo" data-theme="b">
 	        <div data-role="navbar" class="nav-glyphish-example" data-grid="b">
 				<ul>
-					<li><a href="#"><div class="icon-plus"> VENTA</div></a></li>
-					<li><a href="#"><div class="icon-plus"> CONTACTO</div></a></li>
-					<li><a href="#" class="sin_r"><div class="icon-plus"> AGENDA</div></a></li>
+					<li><a href="#venta"><div class="icon-plus"> VENTA</div></a></li>
+					<li><a href="#agenda"><div class="icon-plus"> CONTACTO</div></a></li>
+					<li><a href="#contacto" class="sin_r"><div class="icon-plus"> AGENDA</div></a></li>
 				</ul>
 			</div>
 	    </footer>
@@ -133,12 +132,12 @@
 		<div data-role="header" data-id="top_fijo" data-position="fixed">
 			<a href="#" data-icon="back" data-rel="back">Atras</a>
 			<h1>CONTACTOS</h1>
-		
-			<div data-role="navbar" class="nav-glyphish-example" data-grid="d">
+			<a href="#" data-theme="b"><div class="icon-plus"></div></a>
+			<div data-role="navbar" data-grid="d">
 				<ul>
 					<li><a href="#venta" class="menuitem1"><div class="font_ico icon-briefcase"></div><label>VENTA</label></a></li>
 					<li><a href="#agenda" class="menuitem1"><div class="font_ico icon-calendar"></div><label>AGENDA</label></a></li>
-					<li><a href="#" class="menuitem1"><div class="font_ico icon-user"></div><label>CONTACTO</label></a></li>
+					<li><a href="#" class="menuitem1 ui-btn-active"><div class="font_ico icon-user"></div><label>CONTACTO</label></a></li>
 					<li><a href="#estadistica" class="menuitem1"><div class="font_ico icon-pie"></div><label>ESTADISTICA</label></a></li>
 					<li><a href="#logros" class="menuitem1 sin_r"><div class="font_ico icon-star"></div><label>LOGRO</label></a></li>
 				</ul>
@@ -151,9 +150,9 @@
 		 <footer data-role="footer" data-position="fixed" data-id="pie_fijo" data-theme="b">
 	        <div data-role="navbar" class="nav-glyphish-example" data-grid="b">
 				<ul>
-					<li><a href="#"><div class="icon-plus"> VENTA</div></a></li>
-					<li><a href="#"><div class="icon-plus"> CONTACTO</div></a></li>
-					<li><a href="#" class="sin_r"><div class="icon-plus"> AGENDA</div></a></li>
+					<li><a href="#venta"><div class="icon-plus"> VENTA</div></a></li>
+					<li><a href="#agenda"><div class="icon-plus"> CONTACTO</div></a></li>
+					<li><a href="#contacto" class="sin_r"><div class="icon-plus"> AGENDA</div></a></li>
 				</ul>
 			</div>
 	    </footer>
@@ -164,12 +163,12 @@
 			<a href="#" data-icon="back" data-rel="back">Atras</a>
 			<h1>ESTADISTICA</h1>
 		
-			<div data-role="navbar" class="nav-glyphish-example" data-grid="d">
+			<div data-role="navbar" data-grid="d">
 				<ul>
 					<li><a href="#venta" class="menuitem1"><div class="font_ico icon-briefcase"></div><label>VENTA</label></a></li>
 					<li><a href="#agenda" class="menuitem1"><div class="font_ico icon-calendar"></div><label>AGENDA</label></a></li>
 					<li><a href="#contacto" class="menuitem1"><div class="font_ico icon-user"></div><label>CONTACTO</label></a></li>
-					<li><a href="#" class="menuitem1"><div class="font_ico icon-pie"></div><label>ESTADISTICA</label></a></li>
+					<li><a href="#" class="menuitem1 ui-btn-active"><div class="font_ico icon-pie"></div><label>ESTADISTICA</label></a></li>
 					<li><a href="#logros" class="menuitem1 sin_r"><div class="font_ico icon-star"></div><label>LOGRO</label></a></li>
 				</ul>
 			</div>
@@ -181,9 +180,9 @@
 		 <footer data-role="footer" data-position="fixed" data-id="pie_fijo" data-theme="b">
 	        <div data-role="navbar" class="nav-glyphish-example" data-grid="b">
 				<ul>
-					<li><a href="#"><div class="icon-plus"> VENTA</div></a></li>
-					<li><a href="#"><div class="icon-plus"> CONTACTO</div></a></li>
-					<li><a href="#" class="sin_r"><div class="icon-plus"> AGENDA</div></a></li>
+					<li><a href="#venta"><div class="icon-plus"> VENTA</div></a></li>
+					<li><a href="#agenda"><div class="icon-plus"> CONTACTO</div></a></li>
+					<li><a href="#contacto" class="sin_r"><div class="icon-plus"> AGENDA</div></a></li>
 				</ul>
 			</div>
 	    </footer>
@@ -194,13 +193,13 @@
 			<a href="#" data-icon="back" data-rel="back">Atras</a>
 			<h1>LOGROS</h1>
 		
-			<div data-role="navbar" class="nav-glyphish-example" data-grid="d">
+			<div data-role="navbar" data-grid="d">
 				<ul>
 					<li><a href="#venta" class="menuitem1"><div class="font_ico icon-briefcase"></div><label>VENTA</label></a></li>
 					<li><a href="#agenda" class="menuitem1"><div class="font_ico icon-calendar"></div><label>AGENDA</label></a></li>
 					<li><a href="#contacto" class="menuitem1"><div class="font_ico icon-user"></div><label>CONTACTO</label></a></li>
 					<li><a href="#estadistica" class="menuitem1"><div class="font_ico icon-pie"></div><label>ESTADISTICA</label></a></li>
-					<li><a href="#" class="menuitem1 sin_r"><div class="font_ico icon-star"></div><label>LOGRO</label></a></li>
+					<li><a href="#" class="menuitem1 sin_r ui-btn-active"><div class="font_ico icon-star"></div><label>LOGRO</label></a></li>
 				</ul>
 			</div>
 		</div>
@@ -211,9 +210,9 @@
 		 <footer data-role="footer" data-position="fixed" data-id="pie_fijo" data-theme="b">
 	        <div data-role="navbar" class="nav-glyphish-example" data-grid="b">
 				<ul>
-					<li><a href="#"><div class="icon-plus"> VENTA</div></a></li>
-					<li><a href="#"><div class="icon-plus"> CONTACTO</div></a></li>
-					<li><a href="#" class="sin_r"><div class="icon-plus"> AGENDA</div></a></li>
+					<li><a href="#venta"><div class="icon-plus"> VENTA</div></a></li>
+					<li><a href="#agenda"><div class="icon-plus"> CONTACTO</div></a></li>
+					<li><a href="#contacto" class="sin_r"><div class="icon-plus"> AGENDA</div></a></li>
 				</ul>
 			</div>
 	    </footer>

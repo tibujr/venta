@@ -1,5 +1,9 @@
 $(document).ready(function () {
 
+	if(localStorage.getItem('id_user_alm') != null){
+	   $.mobile.changePage('#datos');
+	}
+
 	$("body").on('click', '#btn_login', function(e){
 		if( $("#mail").val() == ""){
 			$("#mail").focus().after("<span class='menError'>Ingresa un usuario</span>");
@@ -21,6 +25,7 @@ $(document).ready(function () {
 				success : function(data) {
 					$(".main").css({display: 'none'});
 					if(data != 0){
+						localStorage.setItem('id_user_alm', data.id_usu);
 						$("#d_usu h1").html(data.nombre_usu);
 						$.mobile.changePage("#datos");
 					}else{
