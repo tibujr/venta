@@ -1,7 +1,10 @@
 $(document).ready(function () {
 
-	if(localStorage.getItem('id_user_alm') != null){
-	   $.mobile.changePage('#datos');
+	if(localStorage.getItem('usu_alm') != null){
+	   //$.mobile.changePage('#datos');
+	   	document.getElementById('mail').value = localStorage.getItem('usu_alm');
+	   	document.getElementById('clave').value = localStorage.getItem('clv_alm');
+		//alert(localStorage.getItem('id_user_alm'));
 	}
 
 	$("body").on('click', '#btn_login', function(e){
@@ -25,11 +28,12 @@ $(document).ready(function () {
 				success : function(data) {
 					$(".main").css({display: 'none'});
 					if(data != 0){
-						localStorage.setItem('id_user_alm', data.id_usu);
+						localStorage.setItem('usu_alm', usu);
+						localStorage.setItem('clv_alm', clv);
 						$("#d_usu h1").html(data.nombre_usu);
 						$.mobile.changePage("#datos");
 					}else{
-						alert(data)
+						alert("usuario o contraseña incorrectos")
 					}
 				},
 				error: function(data){
