@@ -1,10 +1,7 @@
 $(document).ready(function () {
-
 	if(localStorage.getItem('usu_alm') != null){
-	   //$.mobile.changePage('#datos');
 	   	document.getElementById('mail').value = localStorage.getItem('usu_alm');
 	   	document.getElementById('clave').value = localStorage.getItem('clv_alm');
-		//alert(localStorage.getItem('id_user_alm'));
 	}
 
 	$("body").on('click', '#btn_login', function(e){
@@ -51,3 +48,9 @@ $(document).ready(function () {
 	});
 });
 
+/*$( window ).load(function() {
+  var w = $('.device').width();
+  $('.swiper-container').css({ width: w });
+  //$('.swiper-slide').css({ width: w });
+//alert(w);
+});*/
