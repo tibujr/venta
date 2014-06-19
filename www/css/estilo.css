@@ -12,17 +12,44 @@ body{
   margin: 0;
 }
 
+.cabeza, .pie{
+  padding: 0;
+  border: 0;
+}
+
 /*VENTA*/
+
+#cnt_mrv{
+  padding: 0 !important;
+}
 
 #cont_ven{
   width: 100%;
-  height: 358px;
   max-width: 100%;
   overflow: hidden;
 }
 
 .dc_ven{
   
+}
+
+.it_cn{
+  display: inline-block;
+  width: 100%;
+  height: 100%;
+}
+
+.it_it{
+  width: 90%;
+  margin: 1% 5%;
+  min-height: 29px;
+  display: inline-block;
+  background: currentcolor;
+}
+
+.it_it span{
+  color: white;
+  text-shadow: none;
 }
 
 /*FIN VENTA*/
@@ -36,6 +63,7 @@ body{
   font-size: 7px;
   display: inline-block;
 }
+
 /*FIN MENU NAV CABECERA*/
 
 /*formulario datos*/

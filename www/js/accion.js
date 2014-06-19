@@ -1,4 +1,15 @@
 $(document).ready(function () {
+	var an = ($('body').width());
+	var al = ($('body').height())+1;
+	var a = al-147;
+
+	$(".item").css({'min-width': an, 'max-width': an, 'max-height':a});
+
+	$('#gallery').touchSlider({
+			mode: 'index'
+		});
+
+
 	if(localStorage.getItem('usu_alm') != null){
 	   	document.getElementById('mail').value = localStorage.getItem('usu_alm');
 	   	document.getElementById('clave').value = localStorage.getItem('clv_alm');
@@ -46,11 +57,18 @@ $(document).ready(function () {
 			return false;
 		}		
 	});
+
+	$("body").on('click', '#btn_ven', function(e){
+		$('div.item').css({width: $('body').width()+'px', height:al+'px'});
+		$('#cont_ven').css({'max-height': a, 'height': a});
+		$('#gallery').touchSlider({mode: 'index'});
+
+		$.mobile.changePage("#venta");
+		
+	});
+
+	
 });
 
-/*$( window ).load(function() {
-  var w = $('.device').width();
-  $('.swiper-container').css({ width: w });
-  //$('.swiper-slide').css({ width: w });
-//alert(w);
-});*/
+$( window ).load(function() {
+});
