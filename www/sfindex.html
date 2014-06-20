@@ -9,36 +9,28 @@
   	<script src="js/jquery.js"></script>
   	<script src="js/jquery.mobile-1.3.2.min.js"></script>
   	<script type="text/javascript" src="js/iscroll.js"></script>
+  	<script type="text/javascript" src="js/scroll.js"></script>
   	<script type="text/javascript" src="js/accion.js"></script>
   	<script type="text/javascript" src="js/jquery.touchSlider.js"></script>
 
 		<style type="text/css">
-			/* gallery styles */
-			.gallery {width: 100%;overflow: hidden;}
-			.gallery div.holder {width: 100%;position: relative;overflow: hidden;}
-			.gallery div.list {margin: 0;padding: 0;list-style: none;width: 99999px;overflow: hidden;}
-			.gallery div.item {float: left;}
+			#wrapper {
+			    position:absolute;
+			    z-index:1;
+			    top:0px;
+			    bottom:0px;
+			    left:0px;
+			    right:0px;
+			    overflow:auto;
+			}
 
-			/* page styles */
-			html, body {width: 100%;height: 100%;}
-			body {margin: 0;padding: 0;font: 16px/22px Helvetica, Arial, sans-serif;color: #333;}
-			a {color: #333;text-decoration: none;}
-			#container {height: 100%;}
-			#container div {display: block;height: 100%;}
-			figure {height: 100%;display: block;margin: 0;/*padding:0 10px;*/text-align: center;vertical-align: middle;}
-			#container div.item {vertical-align: middle;}
-			img {max-height: 100%;max-width: 98%;vertical-align: top;border: 1px solid #FFF;-webkit-border-radius: 4px;-moz-border-radius: 4px;border-radius: 4px;}
-			#container div.gallery {/*height: 90%;padding-top:10px;padding-bottom: 60px;*/position: relative;}
-			a.prev, a.next {position: absolute;bottom: 4px;width: 48px;height:48px;background: url(pics/buttons.png) no-repeat;text-indent:-9999px;overflow: hidden;}
-			a.prev {left: 5px;}
-			a.next {right: 5px;background-position: -48px 0;}
-			/*.item {min-width:290px;}*/
-			@media all and (min-width: 768px) {
-				#container {padding-top: 0;}
+			.scroller {
+				position:absolute; z-index:1;
+				-webkit-tap-highlight-color:rgba(0,0,0,0);
+				width:100%;
+				padding:0;
 			}
-			@media only screen and (-webkit-min-device-pixel-ratio: 1.5), only screen and (min-device-pixel-ratio: 1.5) {
-				a.prev, a.next {background-image:url(pics/buttons.png);background-size:96px 48px;}
-			}
+						
 		</style>
 </head>
 <body>
@@ -121,23 +113,46 @@
 						<div class='gallery' id='gallery'>
 							<div class='holder'>
 								<div class='list'>
-									<div class='item' id='it_cn'>
-										<section class='it_cn' style='background: red;'>
-											<article class='it_it'><span>VENTA 1</span></article>
-											<article class='it_it'><span>VENTA 3</span></article>
-											<article class='it_it'><span>VENTA 5</span></article>
-											<article class='it_it'><span>VENTA 6</span></article>
-											<article class='it_it'><span>VENTA 7</span></article>
-											<article class='it_it'><span>VENTA 9</span></article>
-											<article class='it_it'><span>VENTA 11</span></article>
-											<article class='it_it'><span>VENTA 12</span></article>
-											<article class='it_it'><span>VENTA 13</span></article>
-											<article class='it_it'><span>VENTA 15</span></article>
-											<article class='it_it'><span>VENTA 16</span></article>
-											<article class='it_it'><span>VENTA 17</span></article>
-											<article class='it_it'><span>VENTA 18</span></article>
-											<article class='it_it'><span>VENTA 19</span></article>
+									<div class='item'>
+										<section class='it_cn' style='background: blue;'>
+											<div id="wrapper">
+						                        <div class="scroller">
+						                            <h1>Page 3</h1>
+						                            <hr/>
+						                            <p>Sed ut perspiciatis, unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam eaque ipsa, quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt, explicabo.</p>
+						                            <p>Nemo enim ipsam voluptatem, quia voluptas sit, aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos, qui ratione voluptatem sequi nesciunt, neque porro quisquam est, qui dolorem ipsum, quia dolor sit amet, consectetur, adipisci[ng] velit, sed quia non numquam [do] eius modi tempora inci[di]dunt, ut labore et dolore magnam aliquam quaerat voluptatem.</p>
+						                            <p>Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur?</p>
+						                            <p>Quis autem vel eum iure reprehenderit, qui in ea voluptate velit esse, quam nihil molestiae consequatur, vel illum, qui dolorem eum fugiat, quo voluptas nulla pariatur?</p>
+						                            <p>At vero eos et accusamus et iusto odio dignissimos ducimus, qui blanditiis praesentium voluptatum deleniti atque corrupti, quos dolores et quas molestias excepturi sint, obcaecati cupiditate non provident, similique sunt in culpa, qui officia deserunt mollitia animi, id est laborum et dolorum fuga.</p>
+						                            <p>Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio, cumque nihil impedit, quo minus id, quod maxime placeat, facere possimus, omnis voluptas assumenda est, omnis dolor repellendus.</p>
+						                            <p>Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet, ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat...</p>
+						                            <br/>
+						                            <h2>More Lorem Ipsum</h2>
+						                            <hr/>
+						                            <p>Sed ut perspiciatis, unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam eaque ipsa, quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt, explicabo.</p>
+						                            <p>Nemo enim ipsam voluptatem, quia voluptas sit, aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos, qui ratione voluptatem sequi nesciunt, neque porro quisquam est, qui dolorem ipsum, quia dolor sit amet, consectetur, adipisci[ng] velit, sed quia non numquam [do] eius modi tempora inci[di]dunt, ut labore et dolore magnam aliquam quaerat voluptatem.</p>
+						                            <p>Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur?</p>
+						                        </div>
+						                    </div>
 										</section>
+									</div>
+									<div class='item'>
+											<section class='it_cn' style='background: red;'>
+												<article class='it_it'><span>VENTA 1</span></article>
+												<article class='it_it'><span>VENTA 3</span></article>
+												<article class='it_it'><span>VENTA 5</span></article>
+												<article class='it_it'><span>VENTA 6</span></article>
+												<article class='it_it'><span>VENTA 7</span></article>
+												<article class='it_it'><span>VENTA 9</span></article>
+												<article class='it_it'><span>VENTA 11</span></article>
+												<article class='it_it'><span>VENTA 12</span></article>
+												<article class='it_it'><span>VENTA 13</span></article>
+												<article class='it_it'><span>VENTA 15</span></article>
+												<article class='it_it'><span>VENTA 16</span></article>
+												<article class='it_it'><span>VENTA 17</span></article>
+												<article class='it_it'><span>VENTA 18</span></article>
+												<article class='it_it'><span>VENTA 19</span></article>
+											</section>
 									</div>
 									<div class='item'>
 										<section class='it_cn' style='background: black;'>

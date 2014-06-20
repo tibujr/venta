@@ -2,6 +2,7 @@ $(document).ready(function () {
 	var an = ($('body').width());
 	var al = ($('body').height())+1;
 	var a = al-147;
+	$('div.item').css({width: $('body').width()+'px', height:al+'px'});
 
 	$(".item").css({'min-width': an, 'max-width': an, 'max-height':a});
 
@@ -60,7 +61,7 @@ $(document).ready(function () {
 
 	$("body").on('click', '#btn_ven', function(e){
 		$('div.item').css({width: $('body').width()+'px', height:al+'px'});
-		$('#cont_ven').css({'max-height': a, 'height': a});
+		$('#cont_ven').css({'max-height': a});
 		$('#gallery').touchSlider({mode: 'index'});
 
 		$.mobile.changePage("#venta");
