@@ -1,15 +1,21 @@
 $(document).ready(function () {
-	var an = ($('body').width());
+	//var an = ($('body').width());
 	var al = ($('body').height())+1;
-	var a = al-147;
-	$('div.item').css({width: $('body').width()+'px', height:al+'px'});
+	//var a = al-147;
+	/*$('div.item').css({width: $('body').width()+'px', height:al+'px'});
 
 	$(".item").css({'min-width': an, 'max-width': an, 'max-height':a});
 
 	$('#gallery').touchSlider({
 			mode: 'index'
 		});
+	*/
 
+	
+	var alCn = al-129;
+	$('.cont_main').css({height:alCn+'px'});
+	var alCitm = alCn-48;
+	$('.cont_item_lst').css({height:alCitm+'px'});
 
 	if(localStorage.getItem('usu_alm') != null){
 	   	document.getElementById('mail').value = localStorage.getItem('usu_alm');
@@ -59,7 +65,7 @@ $(document).ready(function () {
 		}		
 	});
 
-	$("body").on('click', '#btn_ven', function(e){
+	/*$("body").on('click', '#btn_ven', function(e){
 		$('div.item').css({width: $('body').width()+'px', height:al+'px'});
 		$('#cont_ven').css({'max-height': a});
 		$('#gallery').touchSlider({mode: 'index'});
@@ -67,7 +73,7 @@ $(document).ready(function () {
 		$.mobile.changePage("#venta");
 		
 	});
-
+*/
 	
 });
 

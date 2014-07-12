@@ -11,308 +11,132 @@
   	<script type="text/javascript" src="js/iscroll.js"></script>
   	<script type="text/javascript" src="js/scroll.js"></script>
   	<script type="text/javascript" src="js/accion.js"></script>
-  	<script type="text/javascript" src="js/jquery.touchSlider.js"></script>
-
-		<style type="text/css">
-			#wrapper {
-			    position:absolute;
-			    z-index:1;
-			    top:0px;
-			    bottom:0px;
-			    left:0px;
-			    right:0px;
-			    overflow:auto;
-			}
-
-			.scroller {
-				position:absolute; z-index:1;
-				-webkit-tap-highlight-color:rgba(0,0,0,0);
-				width:100%;
-				padding:0;
-			}
-						
-		</style>
+  	<!--<script type="text/javascript" src="js/jquery.touchSlider.js"></script>-->
 </head>
 <body>
 	<section data-role="page" id="inicio" class="pagina">
-		<div data-role="header" >
-			<h1>LOGIN</h1>
-		</div>
-		<div data-role="content">
-			<div class="center-wrapper">
-				<div style="display: inline-block; border: 1px solid black; heigth: 90px;"><img src="img/roinet.png"></div>
-			</div>
-			<label>Usuario</label> 
-			<input type="email" id="mail" name="mail" value="" placeholder="ejemplo@roinet.pe">
-			<label>Password</label> 
-			<input type="password" id="clave" name="clave" value="" placeholder="******">
-			<div class="center-wrapper">
-				<div id="btn_login" data-role="button" data-theme="b" data-icon="arrow-r" data-iconpos="right" data-inline="true">Entrar</div>
-			</div>
-			<div class="center-wrapper">
-				<section class="main">
-					<div class="bar">
-						<i class="sphere"></i>
-					</div>
-				</section>
-			</div>
-		</div>
-	</section>
- 
-	<section data-role="page" id="datos" >
-		<div data-role="header" id="d_usu" data-id="top_fijo" data-position="fixed" class="cabeza">
-			<h1>Hola</h1>
-			<div data-role="navbar" data-grid="d">
-				<ul>
-					<li><a href="javascript:;" class="menuitem1" id="btn_ven"><div class="font_ico icon-briefcase"></div><label>VENTA</label></a></li>
-					<li><a href="#agenda" class="menuitem1"><div class="font_ico icon-calendar"></div><label>AGENDA</label></a></li>
-					<li><a href="#contacto" class="menuitem1"><div class="font_ico icon-user"></div><label>CONTACTO</label></a></li>
-					<li><a href="#estadistica" class="menuitem1"><div class="font_ico icon-pie"></div><label>ESTADISTICA</label></a></li>
-					<li><a href="#logros" class="menuitem1 sin_r"><div class="font_ico icon-star"></div><label>LOGRO</label></a></li>
-				</ul>
-			</div>
-		</div>
-		<div data-role="header" data-theme="c">
-			<h1>OBJETIVOS</h1>
-		</div>
-		
-		<div data-role="content">	
-			<div>Lorem Ipsum es simplemente el texto de relleno de las imprentas y archivos de texto. Lorem Ipsum ha sido el texto de relleno estándar de las industrias desde el año 1500, cuando un impresor (N. del T. persona que se dedica a la imprenta) desconocido usó una galería de textos y los mezcló de tal manera que logró hacer un libro de textos especimen.</div>
-		</div>
+    <article data-role="header" >
+      <h1>LOGIN</h1>
+    </article>
+    <article data-role="content">
+      <div class="center-wrapper">
+        <div style="display: inline-block; border: 1px solid black; heigth: 90px;"><img src="img/roinet.png"></div>
+      </div>
+      <label>Usuario</label> 
+      <input type="email" id="mail" name="mail" value="" placeholder="ejemplo@roinet.pe">
+      <label>Password</label> 
+      <input type="password" id="clave" name="clave" value="" placeholder="******">
+      <div class="center-wrapper">
+        <div id="btn_login" data-role="button" data-theme="b" data-icon="arrow-r" data-iconpos="right" data-inline="true">Entrar</div>
+      </div>
+      <div class="center-wrapper">
+        <section class="main">
+          <div class="bar">
+            <i class="sphere"></i>
+          </div>
+        </section>
+      </div>
+    </article>
+  </section>
 
-		 <footer data-role="footer" data-position="fixed" data-id="pie_fijo" data-theme="b" class="pie">
-	        <div data-role="navbar" data-grid="b">
-				<ul>
-					<li><a href="#venta"><div class="icon-plus"> VENTA</div></a></li>
-					<li><a href="#contacto"><div class="icon-plus"> CONTACTO</div></a></li>
-					<li><a href="#agenda" class="sin_r"><div class="icon-plus"> AGENDA</div></a></li>
-				</ul>
-			</div>
-	    </footer>
-	</section>
+  <section data-role="page" id="datos" >
+    <article data-role="header" id="d_usu" data-id="top_fijo" data-position="fixed" class="cab_nav">
+      <div class="con_cab_a"><h1>Hola</h1></div>
+      <div data-role="navbar" data-grid="d" id="cont_cab_nav">
+        <ul>
+          <li><a href="javascript:;"><div class="icon-office"></div><label>VENTAS</label></a></li>
+          <li><a href="javascript:;"><div class="icon-calendar"></div><label>AGENDA</label></a></li>
+          <li><a href="javascript:;"><div class="icon-address-book"></div><label>CONTACTOS</label></a></li>
+          <li><a href="javascript:;"><div class="icon-pie"></div><label>ESTADISTICAS</label></a></li>
+          <li><a href="javascript:;"><div class="icon-star"></div><label>LOGROS</label></a></li>
+        </ul>
+      </div>
+    </article>
 
-	<div data-role="page" id="venta">
-		<div data-role="header" data-id="top_fijo" data-position="fixed" class="cabeza1">
-			<a href="#" data-icon="back" data-rel="back">Atras</a>
-			<h1>VENTAS</h1>
-			<a href="#" data-theme="b"><div class="icon-plus"></div></a>
-			<div data-role="navbar" data-grid="d">
-				<ul>
-					<li><a href="" class="menuitem1"><div class="font_ico icon-briefcase"></div><label>VENTA</label></a></li>
-					<li><a href="#agenda" class="menuitem1"><div class="font_ico icon-calendar"></div><label>AGENDA</label></a></li>
-					<li><a href="#contacto" class="menuitem1"><div class="font_ico icon-user"></div><label>CONTACTO</label></a></li>
-					<li><a href="#estadistica" class="menuitem1"><div class="font_ico icon-pie"></div><label>ESTADISTICA</label></a></li>
-					<li><a href="#logros" class="menuitem1 sin_r"><div class="font_ico icon-star"></div><label>LOGRO</label></a></li>
-				</ul>
-			</div>
-		</div>
-		<div data-role="content" id="cnt_mrv">
-			  <div id="cont_ven">
-			  	<div id="container">
-					<div class="gallery-holder">
-						<div class='gallery' id='gallery'>
-							<div class='holder'>
-								<div class='list'>
-									<div class='item'>
-										<section class='it_cn' style='background: blue;'>
-											<div id="wrapper">
-						                        <div class="scroller">
-						                            <h1>Page 3</h1>
-						                            <hr/>
-						                            <p>Sed ut perspiciatis, unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam eaque ipsa, quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt, explicabo.</p>
-						                            <p>Nemo enim ipsam voluptatem, quia voluptas sit, aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos, qui ratione voluptatem sequi nesciunt, neque porro quisquam est, qui dolorem ipsum, quia dolor sit amet, consectetur, adipisci[ng] velit, sed quia non numquam [do] eius modi tempora inci[di]dunt, ut labore et dolore magnam aliquam quaerat voluptatem.</p>
-						                            <p>Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur?</p>
-						                            <p>Quis autem vel eum iure reprehenderit, qui in ea voluptate velit esse, quam nihil molestiae consequatur, vel illum, qui dolorem eum fugiat, quo voluptas nulla pariatur?</p>
-						                            <p>At vero eos et accusamus et iusto odio dignissimos ducimus, qui blanditiis praesentium voluptatum deleniti atque corrupti, quos dolores et quas molestias excepturi sint, obcaecati cupiditate non provident, similique sunt in culpa, qui officia deserunt mollitia animi, id est laborum et dolorum fuga.</p>
-						                            <p>Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio, cumque nihil impedit, quo minus id, quod maxime placeat, facere possimus, omnis voluptas assumenda est, omnis dolor repellendus.</p>
-						                            <p>Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet, ut et voluptates repudiandae sint et molestiae non recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat...</p>
-						                            <br/>
-						                            <h2>More Lorem Ipsum</h2>
-						                            <hr/>
-						                            <p>Sed ut perspiciatis, unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam eaque ipsa, quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt, explicabo.</p>
-						                            <p>Nemo enim ipsam voluptatem, quia voluptas sit, aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos, qui ratione voluptatem sequi nesciunt, neque porro quisquam est, qui dolorem ipsum, quia dolor sit amet, consectetur, adipisci[ng] velit, sed quia non numquam [do] eius modi tempora inci[di]dunt, ut labore et dolore magnam aliquam quaerat voluptatem.</p>
-						                            <p>Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur?</p>
-						                        </div>
-						                    </div>
-										</section>
-									</div>
-									<div class='item'>
-											<section class='it_cn' style='background: red;'>
-												<article class='it_it'><span>VENTA 1</span></article>
-												<article class='it_it'><span>VENTA 3</span></article>
-												<article class='it_it'><span>VENTA 5</span></article>
-												<article class='it_it'><span>VENTA 6</span></article>
-												<article class='it_it'><span>VENTA 7</span></article>
-												<article class='it_it'><span>VENTA 9</span></article>
-												<article class='it_it'><span>VENTA 11</span></article>
-												<article class='it_it'><span>VENTA 12</span></article>
-												<article class='it_it'><span>VENTA 13</span></article>
-												<article class='it_it'><span>VENTA 15</span></article>
-												<article class='it_it'><span>VENTA 16</span></article>
-												<article class='it_it'><span>VENTA 17</span></article>
-												<article class='it_it'><span>VENTA 18</span></article>
-												<article class='it_it'><span>VENTA 19</span></article>
-											</section>
-									</div>
-									<div class='item'>
-										<section class='it_cn' style='background: black;'>
-											<article class='it_it'><span>VENTA 2</span></article>
-											<article class='it_it'><span>VENTA 4</span></article>
-											<article class='it_it'><span>VENTA 20</span></article>
-										</section>
-									</div>
-									<div class='item'>
-										<section class='it_cn' style='background: brown;'>
-											<article class='it_it'><span>VENTA 8</span></article>
-											<article class='it_it'><span>VENTA 21</span></article>
-										</section>
-									</div>
-									<div class='item'>
-										<section class='it_cn' style='background: silver;'>
-											<article class='it_it'><span>VENTA 10</span></article>
-											<article class='it_it'><span>VENTA 22</span></article>
-											<article class='it_it'><span>VENTA 23</span></article>
-										</section>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</div>
+    <article data-role="content" class="cont_main"> 
+      <section class='cont_items'>
+        <article class="fase_tit">
+          <!--<select name="select-native-1" id="select-native-3">
+              <option value="1">The 1st Option</option>
+              <option value="2">The 2nd Option</option>
+              <option value="3">The 3rd Option</option>
+              <option value="4">The 4th Option</option>
+          </select>-->
+        </article>
+        <section class='cont_item_lst'>
+          <article class='unid_cont_item'>
+            <section class='sect_uno_item'>
+              <article class='nom_emp_item'><label>ROINET S.A.C</label></article>
+              <article class='valor_emp_item'><label>15,000 NUEVOS SOLES</label></article>
+            </section>
+            <section class='sect_dos_item'>
+              <article class='btn_opc_item'><div class="icon-arrow-down3"></div></article>
+            </section>
+          </article>
 
-		 <footer data-role="footer" data-position="fixed" data-id="pie_fijo" data-theme="b" class="pie1">
-	        <div data-role="navbar" data-grid="b">
-				<ul>
-					<li><a href="#venta"><div class="icon-plus"> VENTA</div></a></li>
-					<li><a href="#contacto"><div class="icon-plus"> CONTACTO</div></a></li>
-					<li><a href="#agenda" class="sin_r"><div class="icon-plus"> AGENDA</div></a></li>
-				</ul>
-			</div>
-	    </footer>
-	</div>
+          <article class='unid_cont_item'>
+            <section class='sect_uno_item'>
+              <article class='nom_emp_item'><label>MOVISTAR PERÚ S.A.C</label></article>
+              <article class='valor_emp_item'><label>15,000 NUEVOS SOLES</label></article>
+            </section>
+            <section class='sect_dos_item'>
+              <article class='btn_opc_item'><div class="icon-arrow-down3"></div></article>
+            </section>
+          </article>
 
-	<div data-role="page" id="agenda">
-		<div data-role="header" data-id="top_fijo" data-position="fixed" class="cabeza">
-			<a href="#" data-icon="back" data-rel="back">Atras</a>
-			<h1>AGENDA</h1>
-			<a href="#" data-theme="b"><div class="icon-plus"></div></a>
-			<div data-role="navbar" data-grid="d">
-				<ul>
-					<li><a href="#venta" class="menuitem1"><div class="font_ico icon-briefcase"></div><label>VENTA</label></a></li>
-					<li><a href="#" class="menuitem1 ui-btn-active"><div class="font_ico icon-calendar"></div><label>AGENDA</label></a></li>
-					<li><a href="#contacto" class="menuitem1"><div class="font_ico icon-user"></div><label>CONTACTO</label></a></li>
-					<li><a href="#estadistica" class="menuitem1"><div class="font_ico icon-pie"></div><label>ESTADISTICA</label></a></li>
-					<li><a href="#logros" class="menuitem1 sin_r"><div class="font_ico icon-star"></div><label>LOGRO</label></a></li>
-				</ul>
-			</div>
-		</div>
-		<div data-role="content">
-			<div>AGENDA</div>
-		</div>
- 
-		 <footer data-role="footer" data-position="fixed" data-id="pie_fijo" data-theme="b" class="pie">
-	        <div data-role="navbar" class="nav-glyphish-example" data-grid="b">
-				<ul>
-					<li><a href="#venta"><div class="icon-plus"> VENTA</div></a></li>
-					<li><a href="#contacto"><div class="icon-plus"> CONTACTO</div></a></li>
-					<li><a href="#agenda" class="sin_r"><div class="icon-plus"> AGENDA</div></a></li>
-				</ul>
-			</div>
-	    </footer>
-	</div>
+          <article class='unid_cont_item'>
+            <section class='sect_uno_item'>
+              <article class='nom_emp_item'><label>LA LUJURIA S.A.C</label></article>
+              <article class='valor_emp_item'><label>15,000 NUEVOS SOLES</label></article>
+            </section>
+            <section class='sect_dos_item'>
+              <article class='btn_opc_item'><div class="icon-arrow-down3"></div></article>
+            </section>
+          </article>
 
-	<!--<div data-role="page" id="contacto">
-		<div data-role="header" data-id="top_fijo" data-position="fixed">
-			<a href="#" data-icon="back" data-rel="back">Atras</a>
-			<h1>CONTACTOS</h1>
-			<a href="#" data-theme="b"><div class="icon-plus"></div></a>
-			<div data-role="navbar" data-grid="d">
-				<ul>
-					<li><a href="#venta" class="menuitem1"><div class="font_ico icon-briefcase"></div><label>VENTA</label></a></li>
-					<li><a href="#agenda" class="menuitem1"><div class="font_ico icon-calendar"></div><label>AGENDA</label></a></li>
-					<li><a href="#" class="menuitem1 ui-btn-active"><div class="font_ico icon-user"></div><label>CONTACTO</label></a></li>
-					<li><a href="#estadistica" class="menuitem1"><div class="font_ico icon-pie"></div><label>ESTADISTICA</label></a></li>
-					<li><a href="#logros" class="menuitem1 sin_r"><div class="font_ico icon-star"></div><label>LOGRO</label></a></li>
-				</ul>
-			</div>
-		</div>
-		<div data-role="content">
-			<div>CONTACTOS</div>
-		</div>
+          <article class='unid_cont_item'>
+            <section class='sect_uno_item'>
+              <article class='nom_emp_item'><label>CASONA DEZA S.A.C</label></article>
+              <article class='valor_emp_item'><label>15,000 NUEVOS SOLES</label></article>
+            </section>
+            <section class='sect_dos_item'>
+              <article class='btn_opc_item'><div class="icon-arrow-down3"></div></article>
+            </section>
+          </article>
 
-		 <footer data-role="footer" data-position="fixed" data-id="pie_fijo" data-theme="b">
-	        <div data-role="navbar" class="nav-glyphish-example" data-grid="b">
-				<ul>
-					<li><a href="#venta"><div class="icon-plus"> VENTA</div></a></li>
-					<li><a href="#contacto"><div class="icon-plus"> CONTACTO</div></a></li>
-					<li><a href="#agenda" class="sin_r"><div class="icon-plus"> AGENDA</div></a></li>
-				</ul>
-			</div>
-	    </footer>
-	</div>
+          <article class='unid_cont_item'>
+            <section class='sect_uno_item'>
+              <article class='nom_emp_item'><label>SHIRAN S.A.C</label></article>
+              <article class='valor_emp_item'><label>15,000 NUEVOS SOLES</label></article>
+            </section>
+            <section class='sect_dos_item'>
+              <article class='btn_opc_item'><div class="icon-arrow-down3"></div></article>
+            </section>
+          </article>
 
-	<div data-role="page" id="estadistica">
-		<div data-role="header" data-id="top_fijo" data-position="fixed">
-			<a href="#" data-icon="back" data-rel="back">Atras</a>
-			<h1>ESTADISTICA</h1>
-		
-			<div data-role="navbar" data-grid="d">
-				<ul>
-					<li><a href="#venta" class="menuitem1"><div class="font_ico icon-briefcase"></div><label>VENTA</label></a></li>
-					<li><a href="#agenda" class="menuitem1"><div class="font_ico icon-calendar"></div><label>AGENDA</label></a></li>
-					<li><a href="#contacto" class="menuitem1"><div class="font_ico icon-user"></div><label>CONTACTO</label></a></li>
-					<li><a href="#" class="menuitem1 ui-btn-active"><div class="font_ico icon-pie"></div><label>ESTADISTICA</label></a></li>
-					<li><a href="#logros" class="menuitem1 sin_r"><div class="font_ico icon-star"></div><label>LOGRO</label></a></li>
-				</ul>
-			</div>
-		</div>
-		<div data-role="content">
-			<div>ESTADISTICA</div>
-		</div>
+          <article class='unid_cont_item'>
+            <section class='sect_uno_item'>
+              <article class='nom_emp_item'><label>GOOGLE INC</label></article>
+              <article class='valor_emp_item'><label>15,000 NUEVOS SOLES</label></article>
+            </section>
+            <section class='sect_dos_item'>
+              <article class='btn_opc_item'><div class="icon-arrow-down3"></div></article>
+            </section>
+          </article>
+        </section>
+      </section>
+    </article>
 
-		 <footer data-role="footer" data-position="fixed" data-id="pie_fijo" data-theme="b">
-	        <div data-role="navbar" class="nav-glyphish-example" data-grid="b">
-				<ul>
-					<li><a href="#venta"><div class="icon-plus"> VENTA</div></a></li>
-					<li><a href="#contacto"><div class="icon-plus"> CONTACTO</div></a></li>
-					<li><a href="#agenda" class="sin_r"><div class="icon-plus"> AGENDA</div></a></li>
-				</ul>
-			</div>
-	    </footer>
-	</div>
+     <article data-role="footer" data-position="fixed" data-id="pie_fijo" data-theme="b" class="pie">
+        <div data-role="navbar" data-grid="b" id="cont_pie_nav">
+          <ul>
+            <li><a href="#venta"><div class="icon-plus"> <label>Venta</label></div></a></li>
+            <li><a href="#contacto"><div class="icon-plus"> <label>Contacto</label></div></a></li>
+            <li><a href="#agenda" class="sin_r"><div class="icon-plus"> <label>Agenda</label></div></a></li>
+          </ul>
+      </div>
+    </article>
+  </section>
 
-	<div data-role="page" id="logros">
-		<div data-role="header" data-id="top_fijo" data-position="fixed">
-			<a href="#" data-icon="back" data-rel="back">Atras</a>
-			<h1>LOGROS</h1>
-		
-			<div data-role="navbar" data-grid="d">
-				<ul>
-					<li><a href="#venta" class="menuitem1"><div class="font_ico icon-briefcase"></div><label>VENTA</label></a></li>
-					<li><a href="#agenda" class="menuitem1"><div class="font_ico icon-calendar"></div><label>AGENDA</label></a></li>
-					<li><a href="#contacto" class="menuitem1"><div class="font_ico icon-user"></div><label>CONTACTO</label></a></li>
-					<li><a href="#estadistica" class="menuitem1"><div class="font_ico icon-pie"></div><label>ESTADISTICA</label></a></li>
-					<li><a href="#" class="menuitem1 sin_r ui-btn-active"><div class="font_ico icon-star"></div><label>LOGRO</label></a></li>
-				</ul>
-			</div>
-		</div>
-		<div data-role="content">
-			<div>LOGROS</div>
-		</div>
-
-		 <footer data-role="footer" data-position="fixed" data-id="pie_fijo" data-theme="b">
-	        <div data-role="navbar" class="nav-glyphish-example" data-grid="b">
-				<ul>
-					<li><a href="#venta"><div class="icon-plus"> VENTA</div></a></li>
-					<li><a href="#contacto"><div class="icon-plus"> CONTACTO</div></a></li>
-					<li><a href="#agenda" class="sin_r"><div class="icon-plus"> AGENDA</div></a></li>
-				</ul>
-			</div>
-	    </footer>
-	</div>
-
-  	-->
 </body>
 </html>
