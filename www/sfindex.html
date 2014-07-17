@@ -32,19 +32,12 @@
 </head>
 <body>
 	<section data-role="page" id="inicio" class="pagina">
-    <article data-role="header" >
-      <h1>LOGIN</h1>
-    </article>
-    <article data-role="content">
+    <article data-role="content" style="font-size:0;">
+      <div style="display: inline-block; margin-bottom: 10px; width: 100%; margin-top: 23%;"><img src="img/logo.jpg"></div>
+      <div class="login_caja"><input type="email" id="mail" name="mail" value="" placeholder="Correo electrónico"></div>
+      <div class="login_caja"><input type="password" id="clave" name="clave" value="" placeholder="******"></div>
       <div class="center-wrapper">
-        <div style="display: inline-block; border: 1px solid black; heigth: 90px;"><img src="img/roinet.png"></div>
-      </div>
-      <label>Usuario</label> 
-      <input type="email" id="mail" name="mail" value="" placeholder="ejemplo@roinet.pe">
-      <label>Password</label> 
-      <input type="password" id="clave" name="clave" value="" placeholder="******">
-      <div class="center-wrapper">
-        <div id="btn_login" data-role="button" data-theme="b" data-icon="arrow-r" data-iconpos="right" data-inline="true">Entrar</div>
+        <div id="btn_login" data-role="button" data-theme="b" data-inline="true">INICIAR SESIÓN</div>
       </div>
       <div class="center-wrapper">
         <section class="main">
@@ -69,7 +62,27 @@
         </ul>
       </div>
     </article>
-
+    <article class='popup_Nusu_n'></article>
+    <article class='popup_Nusu'>
+      <section class='cont_pupup_Nusu'>
+              <article class='cont_req'>
+                <label>Razón Social</label>
+                <input type='text' id='rsoc' placeholder='Ingresar Razón Social'>
+              </article>
+              <article class='cont_req'>
+                <label>RUC</label>
+                <input type='text' id='rsoc' placeholder='Ingresar RUC'>
+              </article>
+              <article class='cont_req'>
+                <label>Decisor</label>
+                <input type='text' id='rsoc' placeholder='Ingresar Decisor'>
+              </article>
+              <article class='cont_req'>
+                <label>Presupuesto</label>
+                <input type='text' id='rsoc' placeholder='Ingresar Presupuesto'>
+              </article>
+      </section>
+    </article>
     <article data-role="content" class="cont_main"> 
       <section class='cont_items'>
         <article class="fase_tit">
@@ -84,125 +97,125 @@
           <div id="wrapper">
             <div class="scroller">
                                 
-          <article class='unid_cont_item'>
-            <section class='sect_uno_item'>
-              <article class='nom_emp_item'><label>ROINET S.A.C</label></article>
-              <article class='valor_emp_item'><label>15,000 NUEVOS SOLES</label></article>
-            </section>
-            <section class='sect_dos_item'>
-              <article class='btn_opc_item'><div class="icon-arrow-down3"></div></article>
-            </section>
-          </article>
+              <article class='unid_cont_item'>
+                <section class='sect_uno_item'>
+                  <article class='nom_emp_item'><label>ROINET S.A.C</label></article>
+                  <article class='valor_emp_item'><label>15,000 NUEVOS SOLES</label></article>
+                </section>
+                <section class='sect_dos_item'>
+                  <article class='btn_opc_item'><div class="icon-arrow-down3"></div></article>
+                </section>
+              </article>
 
-          <article class='unid_cont_item'>
-            <section class='sect_uno_item'>
-              <article class='nom_emp_item'><label>MOVISTAR PERÚ S.A.C</label></article>
-              <article class='valor_emp_item'><label>15,000 NUEVOS SOLES</label></article>
-            </section>
-            <section class='sect_dos_item'>
-              <article class='btn_opc_item'><div class="icon-arrow-down3"></div></article>
-            </section>
-          </article>
+              <article class='unid_cont_item'>
+                <section class='sect_uno_item'>
+                  <article class='nom_emp_item'><label>MOVISTAR PERÚ S.A.C</label></article>
+                  <article class='valor_emp_item'><label>15,000 NUEVOS SOLES</label></article>
+                </section>
+                <section class='sect_dos_item'>
+                  <article class='btn_opc_item'><div class="icon-arrow-down3"></div></article>
+                </section>
+              </article>
 
-          <article class='unid_cont_item'>
-            <section class='sect_uno_item'>
-              <article class='nom_emp_item'><label>LA LUJURIA S.A.C</label></article>
-              <article class='valor_emp_item'><label>15,000 NUEVOS SOLES</label></article>
-            </section>
-            <section class='sect_dos_item'>
-              <article class='btn_opc_item'><div class="icon-arrow-down3"></div></article>
-            </section>
-          </article>
+              <article class='unid_cont_item'>
+                <section class='sect_uno_item'>
+                  <article class='nom_emp_item'><label>LA LUJURIA S.A.C</label></article>
+                  <article class='valor_emp_item'><label>15,000 NUEVOS SOLES</label></article>
+                </section>
+                <section class='sect_dos_item'>
+                  <article class='btn_opc_item'><div class="icon-arrow-down3"></div></article>
+                </section>
+              </article>
 
-          <article class='unid_cont_item'>
-            <section class='sect_uno_item'>
-              <article class='nom_emp_item'><label>CASONA DEZA S.A.C</label></article>
-              <article class='valor_emp_item'><label>15,000 NUEVOS SOLES</label></article>
-            </section>
-            <section class='sect_dos_item'>
-              <article class='btn_opc_item'><div class="icon-arrow-down3"></div></article>
-            </section>
-          </article>
+              <article class='unid_cont_item'>
+                <section class='sect_uno_item'>
+                  <article class='nom_emp_item'><label>CASONA DEZA S.A.C</label></article>
+                  <article class='valor_emp_item'><label>15,000 NUEVOS SOLES</label></article>
+                </section>
+                <section class='sect_dos_item'>
+                  <article class='btn_opc_item'><div class="icon-arrow-down3"></div></article>
+                </section>
+              </article>
 
-          <article class='unid_cont_item'>
-            <section class='sect_uno_item'>
-              <article class='nom_emp_item'><label>SHIRAN S.A.C</label></article>
-              <article class='valor_emp_item'><label>15,000 NUEVOS SOLES</label></article>
-            </section>
-            <section class='sect_dos_item'>
-              <article class='btn_opc_item'><div class="icon-arrow-down3"></div></article>
-            </section>
-          </article>
+              <article class='unid_cont_item'>
+                <section class='sect_uno_item'>
+                  <article class='nom_emp_item'><label>SHIRAN S.A.C</label></article>
+                  <article class='valor_emp_item'><label>15,000 NUEVOS SOLES</label></article>
+                </section>
+                <section class='sect_dos_item'>
+                  <article class='btn_opc_item'><div class="icon-arrow-down3"></div></article>
+                </section>
+              </article>
 
-          <article class='unid_cont_item'>
-            <section class='sect_uno_item'>
-              <article class='nom_emp_item'><label>GOOGLE INC</label></article>
-              <article class='valor_emp_item'><label>15,000 NUEVOS SOLES</label></article>
-            </section>
-            <section class='sect_dos_item'>
-              <article class='btn_opc_item'><div class="icon-arrow-down3"></div></article>
-            </section>
-          </article>
-          <article class='unid_cont_item'>
-            <section class='sect_uno_item'>
-              <article class='nom_emp_item'><label>ROINET S.A.C</label></article>
-              <article class='valor_emp_item'><label>15,000 NUEVOS SOLES</label></article>
-            </section>
-            <section class='sect_dos_item'>
-              <article class='btn_opc_item'><div class="icon-arrow-down3"></div></article>
-            </section>
-          </article>
+              <article class='unid_cont_item'>
+                <section class='sect_uno_item'>
+                  <article class='nom_emp_item'><label>GOOGLE INC</label></article>
+                  <article class='valor_emp_item'><label>15,000 NUEVOS SOLES</label></article>
+                </section>
+                <section class='sect_dos_item'>
+                  <article class='btn_opc_item'><div class="icon-arrow-down3"></div></article>
+                </section>
+              </article>
+              <article class='unid_cont_item'>
+                <section class='sect_uno_item'>
+                  <article class='nom_emp_item'><label>ROINET S.A.C</label></article>
+                  <article class='valor_emp_item'><label>15,000 NUEVOS SOLES</label></article>
+                </section>
+                <section class='sect_dos_item'>
+                  <article class='btn_opc_item'><div class="icon-arrow-down3"></div></article>
+                </section>
+              </article>
 
-          <article class='unid_cont_item'>
-            <section class='sect_uno_item'>
-              <article class='nom_emp_item'><label>MOVISTAR PERÚ S.A.C</label></article>
-              <article class='valor_emp_item'><label>15,000 NUEVOS SOLES</label></article>
-            </section>
-            <section class='sect_dos_item'>
-              <article class='btn_opc_item'><div class="icon-arrow-down3"></div></article>
-            </section>
-          </article>
+              <article class='unid_cont_item'>
+                <section class='sect_uno_item'>
+                  <article class='nom_emp_item'><label>MOVISTAR PERÚ S.A.C</label></article>
+                  <article class='valor_emp_item'><label>15,000 NUEVOS SOLES</label></article>
+                </section>
+                <section class='sect_dos_item'>
+                  <article class='btn_opc_item'><div class="icon-arrow-down3"></div></article>
+                </section>
+              </article>
 
-          <article class='unid_cont_item'>
-            <section class='sect_uno_item'>
-              <article class='nom_emp_item'><label>LA LUJURIA S.A.C</label></article>
-              <article class='valor_emp_item'><label>15,000 NUEVOS SOLES</label></article>
-            </section>
-            <section class='sect_dos_item'>
-              <article class='btn_opc_item'><div class="icon-arrow-down3"></div></article>
-            </section>
-          </article>
+              <article class='unid_cont_item'>
+                <section class='sect_uno_item'>
+                  <article class='nom_emp_item'><label>LA LUJURIA S.A.C</label></article>
+                  <article class='valor_emp_item'><label>15,000 NUEVOS SOLES</label></article>
+                </section>
+                <section class='sect_dos_item'>
+                  <article class='btn_opc_item'><div class="icon-arrow-down3"></div></article>
+                </section>
+              </article>
 
-          <article class='unid_cont_item'>
-            <section class='sect_uno_item'>
-              <article class='nom_emp_item'><label>CASONA DEZA S.A.C</label></article>
-              <article class='valor_emp_item'><label>15,000 NUEVOS SOLES</label></article>
-            </section>
-            <section class='sect_dos_item'>
-              <article class='btn_opc_item'><div class="icon-arrow-down3"></div></article>
-            </section>
-          </article>
+              <article class='unid_cont_item'>
+                <section class='sect_uno_item'>
+                  <article class='nom_emp_item'><label>CASONA DEZA S.A.C</label></article>
+                  <article class='valor_emp_item'><label>15,000 NUEVOS SOLES</label></article>
+                </section>
+                <section class='sect_dos_item'>
+                  <article class='btn_opc_item'><div class="icon-arrow-down3"></div></article>
+                </section>
+              </article>
 
-          <article class='unid_cont_item'>
-            <section class='sect_uno_item'>
-              <article class='nom_emp_item'><label>SHIRAN S.A.C</label></article>
-              <article class='valor_emp_item'><label>15,000 NUEVOS SOLES</label></article>
-            </section>
-            <section class='sect_dos_item'>
-              <article class='btn_opc_item'><div class="icon-arrow-down3"></div></article>
-            </section>
-          </article>
+              <article class='unid_cont_item'>
+                <section class='sect_uno_item'>
+                  <article class='nom_emp_item'><label>SHIRAN S.A.C</label></article>
+                  <article class='valor_emp_item'><label>15,000 NUEVOS SOLES</label></article>
+                </section>
+                <section class='sect_dos_item'>
+                  <article class='btn_opc_item'><div class="icon-arrow-down3"></div></article>
+                </section>
+              </article>
 
-          <article class='unid_cont_item'>
-            <section class='sect_uno_item'>
-              <article class='nom_emp_item'><label>GOOGLE INC</label></article>
-              <article class='valor_emp_item'><label>15,000 NUEVOS SOLES</label></article>
-            </section>
-            <section class='sect_dos_item'>
-              <article class='btn_opc_item'><div class="icon-arrow-down3"></div></article>
-            </section>
-          </article>
-          </div>
+              <article class='unid_cont_item'>
+                <section class='sect_uno_item'>
+                  <article class='nom_emp_item'><label>GOOGLE INC</label></article>
+                  <article class='valor_emp_item'><label>15,000 NUEVOS SOLES</label></article>
+                </section>
+                <section class='sect_dos_item'>
+                  <article class='btn_opc_item'><div class="icon-arrow-down3"></div></article>
+                </section>
+              </article>
+            </div>
           </div>
         </section>
       </section>

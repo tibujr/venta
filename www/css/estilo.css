@@ -1,4 +1,87 @@
+/*CAMBIOS DEL SISTEMA*/
+
+.ui-input-text.ui-focus{
+  box-shadow: none;
+  border-bottom: 1px solid #DF2047;
+}
+
+.ui-input-text{
+  background: none;
+  border: none;
+  box-shadow: none;
+  border-bottom: 1ps solid black;
+  padding: 0 !important;
+  margin: 5px 0 0 0 !important;
+  border-radius: 0;
+  border-bottom: 1px solid #CCC;
+}
+
+::-webkit-input-placeholder {
+   color: #4d4d4d;
+}
+
+:-moz-placeholder { /* Firefox 18- */
+   color: #4d4d4d;  
+}
+
+::-moz-placeholder {  /* Firefox 19+ */
+   color: #4d4d4d;  
+}
+
+:-ms-input-placeholder {  
+   color: #4d4d4d;  
+}
+
+/*FIN CAMBIOS DEL SISTEMA*/
+
 /*conetedor ventas*/
+
+
+
+.popup_Nusu, .popup_Nusu_n{
+  width: 100%;
+  position: absolute;
+  background: black;
+  text-align: center;
+}
+
+.popup_Nusu{
+  background: none;
+}
+
+.popup_Nusu_n{
+  opacity: 0.7;
+}
+
+.cont_pupup_Nusu{
+  width: 84%;
+  height: 84%;
+  margin-top: 10%;
+  display: inline-block;
+  background: white;
+}
+
+.cont_req{
+  width: 90%;
+  display: inline-block;
+  text-align: left;
+  margin-top: 20px;
+}
+
+.cont_req label{
+  display: inline-block;
+  width: 100%;
+  font-size: 13px;
+  color: #a9a9a9;
+  font: 13px ProximaNova, sans-serif;
+}
+
+.cont_req input{
+  font: 16px ProximaNova, sans-serif;
+  padding: 0 !important;
+  color: #4d4d4d;
+}
+
 .cont_items{
   display: inline-block;
   text-align: center;
@@ -181,6 +264,46 @@
 
 /*FORMULARIO LOGIN*/
 
+.login_caja{
+  width: 230px;
+  height: 24px;
+  background: white;
+  padding: 2px 3% 6px 3%;
+  /*margin-bottom: 10px;
+  margin-right: 0;*/
+  margin: 0 8% 10px 8%;
+  border: 1px solid #dddddd;
+  border-radius: 3px;
+  display: inline-block;
+}
+
+.login_caja div{
+  border:none;
+}
+
+.login_caja div input{
+  font: 13px ProximaNova, sans-serif;
+}
+
+.login_caja div:hover{
+  border:none;
+}
+
+#btn_login{
+  border: 1px solid #d3183e;
+  background: #ff1848;
+  text-shadow: none;
+  font: 13px ProximaNovaLight, sans-serif;
+  border-radius: 3px;
+  margin: 0;
+}
+
+#inicio{
+  background-image: url('../img/fondo.jpg');
+  background-size: 100% 100%;
+  text-align: center;
+}
+
 .center-button{
   margin: 0 auto;
 }
@@ -202,7 +325,12 @@
 }
 /*FIN FORMULARIO LOGIN*/
 
+
+
 /* FIN BOTONES DE NAVEGACIÓN CABECERA*/
+
+
+
 
 /*--CARGANDO CSS-*/
 

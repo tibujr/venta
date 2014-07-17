@@ -10,10 +10,11 @@ $(document).ready(function () {
 			mode: 'index'
 		});
 	*/
-
 	
 	var alCn = al-129;
 	$('.cont_main').css({height:alCn+'px'});
+	//$('.popup_Nusu').css({height:alCn+'px'});
+	$('.popup_Nusu, .popup_Nusu_n').css({height:alCn+'px'});
 	var alCitm = alCn-48;
 	$('.cont_item_lst').css({height:alCitm+'px'});
 
@@ -78,4 +79,5 @@ $(document).ready(function () {
 });
 
 $( window ).load(function() {
+
 });
