@@ -184,7 +184,8 @@
   border: 0;
 }
 #cont_cab_nav{
-
+  width: 100%;
+  background: #b01a3c;
 }
 
 #cont_cab_nav div{
