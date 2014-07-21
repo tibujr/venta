@@ -193,6 +193,7 @@
 }
 #cont_cab_nav{
   width: 100%;
+  background: #b01a3c;
 }
 
 #cont_cab_nav div{
@@ -204,10 +205,6 @@
 #cont_cab_nav label{
   font: 8px ProximaNova, sans-serif;
   display: inline-block;
-}
-
-#cont_cab_nav li{
-  background: #b01a3c;
 }
 
 #cont_cab_nav li a{
