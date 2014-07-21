@@ -47,7 +47,7 @@ $(document).ready(function () {
 						localStorage.setItem('usu_alm', usu);
 						localStorage.setItem('clv_alm', clv);
 						$("#d_usu h1").html(data.nombre_usu);
-						$.mobile.changePage("#datos");
+						$.mobile.changePage("#venta");
 					}else{
 						alert("usuario o contraseña incorrectos")
 					}
@@ -66,15 +66,14 @@ $(document).ready(function () {
 		}		
 	});
 
-	/*$("body").on('click', '#btn_ven', function(e){
-		$('div.item').css({width: $('body').width()+'px', height:al+'px'});
+	$("body").on('click', '#btn_actividad', function(e){
+		/*$('div.item').css({width: $('body').width()+'px', height:al+'px'});
 		$('#cont_ven').css({'max-height': a});
-		$('#gallery').touchSlider({mode: 'index'});
+		$('#gallery').touchSlider({mode: 'index'});*/
 
-		$.mobile.changePage("#venta");
+		$.mobile.changePage("#actividad");
 		
 	});
-*/
 	
 });
 

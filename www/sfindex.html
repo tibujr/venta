@@ -49,13 +49,13 @@
     </article>
   </section>
 
-  <section data-role="page" id="datos" >
+  <section data-role="page" id="venta" >
     <article data-role="header" id="d_usu" data-id="top_fijo" data-position="fixed" class="cab_nav">
-      <div class="con_cab_a"><h1>Hola</h1></div>
+      <div class="con_cab_a"><h1>Ventas</h1></div>
       <div data-role="navbar" data-grid="d" id="cont_cab_nav">
         <ul>
-          <li><a href="javascript:;"><div class="icon-office"></div><label>VENTAS</label></a></li>
-          <li><a href="javascript:;"><div class="icon-calendar"></div><label>AGENDA</label></a></li>
+          <li><a href="javascript:;" style="height: 45px;"><div class="icon-office"></div><label>VENTAS</label></a></li>
+          <li><a href="javascript:;" id='btn_actividad'><div class="icon-calendar"></div><label>ACTIVIDADES</label></a></li>
           <li><a href="javascript:;"><div class="icon-address-book"></div><label>CONTACTOS</label></a></li>
           <li><a href="javascript:;"><div class="icon-pie"></div><label>ESTADISTICAS</label></a></li>
           <li><a href="javascript:;"><div class="icon-star"></div><label>LOGROS</label></a></li>
@@ -221,6 +221,34 @@
       </section>
     </article>
 
+     <article data-role="footer" data-position="fixed" data-id="pie_fijo" data-theme="b" class="pie">
+        <div data-role="navbar" data-grid="b" id="cont_pie_nav">
+          <ul>
+            <li><a href="#venta"><div class="icon-plus"> <label>Venta</label></div></a></li>
+            <li><a href="#contacto"><div class="icon-plus"> <label>Contacto</label></div></a></li>
+            <li><a href="#agenda" class="sin_r"><div class="icon-plus"> <label>Agenda</label></div></a></li>
+          </ul>
+      </div>
+    </article>
+  </section>
+
+  <section data-role="page" id="actividad" >
+    <article data-role="header" id="d_usu" data-id="top_fijo" data-position="fixed" class="cab_nav">
+      <div class="con_cab_a"><h1>Actividades</h1></div>
+      <div data-role="navbar" data-grid="d" id="cont_cab_nav">
+        <ul>
+          <li><a href="javascript:;"><div class="icon-office"></div><label>VENTAS</label></a></li>
+          <li><a href="javascript:;" style="height: 45px;"><div class="icon-calendar"></div><label>ACTIVIDADES</label></a></li>
+          <li><a href="javascript:;"><div class="icon-address-book"></div><label>CONTACTOS</label></a></li>
+          <li><a href="javascript:;"><div class="icon-pie"></div><label>ESTADISTICAS</label></a></li>
+          <li><a href="javascript:;"><div class="icon-star"></div><label>LOGROS</label></a></li>
+        </ul>
+      </div>
+    </article>
+    <article data-role="content" class="cont_main"> 
+      <section class='cont_items'>
+      </section>
+    </article>
      <article data-role="footer" data-position="fixed" data-id="pie_fijo" data-theme="b" class="pie">
         <div data-role="navbar" data-grid="b" id="cont_pie_nav">
           <ul>
