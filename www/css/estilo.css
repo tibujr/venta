@@ -36,7 +36,15 @@
 
 /*conetedor ventas*/
 
-
+.fase_tit  div span.ui-btn-inner{
+  font-size: 13px;
+  height: 24px;
+  padding: 10px 0 0 0;
+  background: #5e5e5e;
+  text-shadow: none;
+  color: white;
+  font-family: ProximaNovaLight, sans-serif;
+}
 
 .popup_Nusu, .popup_Nusu_n{
   width: 100%;
@@ -185,7 +193,6 @@
 }
 #cont_cab_nav{
   width: 100%;
-  /*background: #b01a3c;*/
 }
 
 #cont_cab_nav div{
@@ -193,9 +200,14 @@
   color: #490d1a;
 }
 
+
 #cont_cab_nav label{
   font: 8px ProximaNova, sans-serif;
   display: inline-block;
+}
+
+#cont_cab_nav li{
+  background: #b01a3c;
 }
 
 #cont_cab_nav li a{
