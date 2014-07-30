@@ -1,5 +1,15 @@
 $(document).ready(function () {
 
+	/*var container = $('.lst_campos'),
+    scrollTo = $('#row_8');
+
+	container.animate({
+	    scrollTop: scrollTo.offset().top - container.offset().top + container.scrollTop()
+	});
+*/
+
+	$(".lst_campos").animate({scrollTop: 0});
+
 //*************************************** BASE DE DATOS WEBSQL
 
 	var db;

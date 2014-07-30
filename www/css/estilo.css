@@ -1,3 +1,10 @@
+.lst_campos{
+  width: 100%;
+    height: 70px;
+    border: 1px solid blue;
+    overflow: auto;
+}
+
 /*ISCROLLER*/
 #wrapper {
   z-index:1;
