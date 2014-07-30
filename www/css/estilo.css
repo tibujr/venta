@@ -5,6 +5,10 @@
     overflow: auto;
 }
 
+.cont_item_lst{
+  overflow: auto;
+}
+
 /*ISCROLLER*/
 #wrapper {
   z-index:1;

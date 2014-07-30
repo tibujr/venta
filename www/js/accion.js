@@ -88,8 +88,9 @@ $(document).ready(function () {
 	var alCn = al-129;
 	$('.cont_main').css({height:alCn+'px'});
 	//$('.popup_Nusu, .popup_Nusu_n').css({height:alCn+'px'});
-	var alCitm = alCn-48;
+	var alCitm = alCn-52; //alCn-48
 	$('.cont_item_lst').css({height:alCitm+'px'});
+	$('.cont_item_lst').animate({scrollTop: 0});
 
 	//asignando valor para saber si trabaja on o offline
 	localStorage.setItem('onof', 'on');
@@ -446,6 +447,8 @@ $(document).ready(function () {
 				console.log(data);
 			}
 		});
+
+		//$(".cont_item_lst").animate({scrollTop: 0});
 	}
 
 	function llenarEstado()
