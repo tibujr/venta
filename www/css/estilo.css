@@ -1,4 +1,50 @@
+/*ISCROLLER*/
+#wrapper {
+  z-index:1;
+  top:0px;
+  bottom:0px;
+  left:0px;
+  right:0px;
+  overflow:auto;
+}
+
+.scroller {
+  -webkit-tap-highlight-color:rgba(0,0,0,0);
+  width:100%;
+  padding:0;
+}
+/*FIN ISCROLLER*/
 /*CAMBIOS DEL SISTEMA*/
+
+.atras_btn{
+  display: inline-block;
+  font-size: 25px;
+  margin-top: 6px;
+  vertical-align: top;
+}
+
+.btn_back{
+  background: none;
+  border-radius: 0;
+  width: 80px;
+  height: 33px;
+  box-shadow: none !important;
+  text-align: left;
+  font-family: ProximaNova, sans-serif;
+  border: 0;
+}
+
+.btn_back span.ui-btn-inner{
+  display: inline-block;
+  width: 100%;
+  height: 100%;
+  padding: 0;
+}
+
+.btn_back span.ui-btn-inner label{
+  display: inline-block;
+  margin-top: 10px;
+}
 
 .ui-input-text.ui-focus{
   box-shadow: none;
@@ -36,7 +82,7 @@
 
 /*conetedor ventas*/
 
-.fase_tit  div span.ui-btn-inner{
+.fase_tit  div span.ui-btn-inner, .fase_tit  div div span.ui-btn-inner {
   font-size: 13px;
   height: 24px;
   padding: 10px 0 0 0;
@@ -45,6 +91,8 @@
   color: white;
   font-family: ProximaNovaLight, sans-serif;
 }
+
+
 
 .popup_Nusu, .popup_Nusu_n{
   width: 100%;
@@ -274,6 +322,16 @@
 /* FIN BOTONES DE NAVEGACIÓN CABECERA Y PIE*/
 
 /*FORMULARIO LOGIN*/
+
+#onOf{
+  background: chartreuse;
+  position: absolute;
+  width: 35px;
+  height: 35px;
+  top: 5px;
+  left: 5px;
+  cursor: pointer;
+}
 
 .login_caja{
   width: 230px;
