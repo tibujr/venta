@@ -77,7 +77,7 @@ $(document).ready(function () {
 	
 	var alCn = al-129;
 	$('.cont_main').css({height:alCn+'px'});
-	$('.popup_Nusu, .popup_Nusu_n').css({height:alCn+'px'});
+	//$('.popup_Nusu, .popup_Nusu_n').css({height:alCn+'px'});
 	var alCitm = alCn-48;
 	$('.cont_item_lst').css({height:alCitm+'px'});
 
@@ -242,7 +242,7 @@ $(document).ready(function () {
 
 	function listarProspectoOff(id)
 	{
-		$(".scroller").html("");
+		$(".lst_itm").html("");
 		var idUsu = localStorage.getItem('id_usu');
 
 		db.transaction(function(transaction) {
@@ -252,7 +252,7 @@ $(document).ready(function () {
 				if (result != null && result.rows.length > 0) {
 					for (var i = 0; i < result.rows.length; i++) {
 						var row = result.rows.item(i);
-						$(".scroller").append(" <article class='unid_cont_item'><section class='sect_uno_item'><article class='nom_emp_item'><label>"+row.razon_social+"</label></article><article class='valor_emp_item'><label>"+row.presupuesto+" NUEVOS SOLES</label></article></section><section class='sect_dos_item'><article class='btn_opc_item' id='"+row.id+"'><div class='icon-arrow-down3'></div></article></section></article>");
+						$(".lst_itm").append(" <article class='unid_cont_item'><section class='sect_uno_item'><article class='nom_emp_item'><label>"+row.razon_social+"</label></article><article class='valor_emp_item'><label>"+row.presupuesto+" NUEVOS SOLES</label></article></section><section class='sect_dos_item'><article class='btn_opc_item' id='"+row.id+"'><div class='icon-arrow-down3'></div></article></section></article>");
 					}
 				}
 			},errorBD);
@@ -414,7 +414,7 @@ $(document).ready(function () {
 
 	function listarProspecto(id)
 	{
-		$(".scroller").html("");
+		$(".lst_itm").html("");
 		var idUsu = localStorage.getItem('id_usu');
 		$.ajax({
 			type: 'POST',
@@ -428,7 +428,7 @@ $(document).ready(function () {
 				{
 					for(var i=0; i< data.length; i++)
 					{
-						$(".scroller").append(" <article class='unid_cont_item'><section class='sect_uno_item'><article class='nom_emp_item'><label>"+data[i]['razon_social_cuen']+"</label></article><article class='valor_emp_item'><label>"+data[i]['presupuesto_pros']+" NUEVOS SOLES</label></article></section><section class='sect_dos_item'><article class='btn_opc_item' id='"+data[i]['id_pros']+"'><div class='icon-arrow-down3'></div></article></section></article>");
+						$(".lst_itm").append(" <article class='unid_cont_item'><section class='sect_uno_item'><article class='nom_emp_item'><label>"+data[i]['razon_social_cuen']+"</label></article><article class='valor_emp_item'><label>"+data[i]['presupuesto_pros']+" NUEVOS SOLES</label></article></section><section class='sect_dos_item'><article class='btn_opc_item' id='"+data[i]['id_pros']+"'><div class='icon-arrow-down3'></div></article></section></article>");
 					}
 				}
 			},
