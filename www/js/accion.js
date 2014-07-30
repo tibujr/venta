@@ -92,6 +92,11 @@ $(document).ready(function () {
 	$('.cont_item_lst').css({height:alCitm+'px'});
 	$('.cont_item_lst').animate({scrollTop: 0});
 
+	//var alCitm = alCn-52;
+
+	var alCam = alCitm - 14;
+	$('.lst_campos').css({height:alCam+'px'});
+
 	//asignando valor para saber si trabaja on o offline
 	localStorage.setItem('onof', 'on');
 
@@ -447,8 +452,6 @@ $(document).ready(function () {
 				console.log(data);
 			}
 		});
-
-		//$(".cont_item_lst").animate({scrollTop: 0});
 	}
 
 	function llenarEstado()

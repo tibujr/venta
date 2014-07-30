@@ -1,31 +1,9 @@
-.lst_campos{
-  width: 100%;
-    height: 70px;
-    border: 1px solid blue;
-    overflow: auto;
-}
-
-.cont_item_lst{
-  overflow: auto;
-}
-
-/*ISCROLLER*/
-#wrapper {
-  z-index:1;
-  top:0px;
-  bottom:0px;
-  left:0px;
-  right:0px;
-  overflow:auto;
-}
-
-.scroller {
-  -webkit-tap-highlight-color:rgba(0,0,0,0);
-  width:100%;
-  padding:0;
-}
-/*FIN ISCROLLER*/
 /*CAMBIOS DEL SISTEMA*/
+
+.cont_req .ui-input-text{
+  margin: 5px 0 0 0 !important;
+  padding-bottom: 3px !important;
+}
 
 .atras_btn{
   display: inline-block;
@@ -103,8 +81,6 @@
   font-family: ProximaNovaLight, sans-serif;
 }
 
-
-
 .popup_Nusu, .popup_Nusu_n{
   width: 100%;
   position: absolute;
@@ -120,25 +96,16 @@
   opacity: 0.7;
 }
 
-.cont_pupup_Nusu{
-  width: 95%;
-  margin-top: 2%;
-  padding-bottom: 40px;
-  display: inline-block;
-  background: white;
-}
-
 .cont_req{
   width: 90%;
   display: inline-block;
   text-align: left;
-  margin-top: 20px;
+  margin: 15px 0 7px 0;
 }
 
 .cont_req label{
   display: inline-block;
   width: 100%;
-  font-size: 13px;
   color: #a9a9a9;
   font: 13px ProximaNova, sans-serif;
 }
@@ -170,7 +137,48 @@
 }
 
 .cont_item_lst{
+  overflow: auto;
+}
 
+.lst_campos{
+  overflow: auto;
+  /*padding-bottom: 4%;*/
+}
+
+.cont_pupup_Nusu{
+  width: 94%;
+  margin-top: 2%;
+  display: inline-block;
+  background: white;
+  box-shadow: 0px 2px 1px #c1c1c1;
+}
+
+.cont_btn_form{
+  display: inline-block;
+  height: 36px;
+  width: 100%;
+  border-top: 1px solid #f1f1f1;
+}
+
+.cont_btn_form article{
+  display: inline-block;
+  width: 50%;
+  height: 100%;
+  font: 14px ProximaNova, sans-serif;
+  color: #df2047;
+}
+
+.cont_btn_form article label{
+  display: inline-block;
+  padding: 9px;
+}
+
+.cont_btn_form #btn_cancelar_frm{
+  text-align: left;
+}
+
+.cont_btn_form #btn_guardar_frm{
+  text-align: right;
 }
 
 .unid_cont_item{
