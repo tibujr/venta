@@ -94,8 +94,8 @@ $(document).ready(function () {
 
 	//var alCitm = alCn-52;
 
-	var alCam = alCitm - 14;
-	$('.lst_campos').css({height:alCam+'px'});
+	//var alCam = alCitm - 2;
+	$('.lst_campos').css({height:alCitm+'px'});
 
 	//asignando valor para saber si trabaja on o offline
 	localStorage.setItem('onof', 'on');
