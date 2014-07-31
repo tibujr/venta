@@ -51,6 +51,25 @@
   border-bottom: 1px solid #CCC;
 }
 
+.cont_req .chkocultar{
+  opacity: 0;
+}
+
+.cont_req .lblcheck{
+  color: #4d4d4d;
+  background: none;
+  border: none;
+  margin: 0;
+}
+
+.cont_req .lblcheck span.ui-icon-checkbox-on{
+  background-color: #0e9c57;
+}
+
+.cont_req .lblcheck span.ui-btn-text{
+  font-size: 13px;
+}
+
 /*FIN CAMBIOS DEL SISTEMA*/
 
 /*conetedor ventas*/
@@ -100,6 +119,9 @@
   color: #4d4d4d;
 }
 
+.cont_ckh_reg{
+  margin: 5px 0 0 0;
+}
 .cont_items{
   display: inline-block;
   text-align: center;
@@ -129,6 +151,7 @@
   /*padding-bottom: 4%;*/
 }
 
+
 .cont_pupup_Nusu{
   width: 94%;
   margin-top: 2%;
@@ -146,7 +169,7 @@
 
 .cont_btn_form article{
   display: inline-block;
-  width: 50%;
+  width: 45%;
   height: 100%;
   font: 14px ProximaNova, sans-serif;
   color: #df2047;
