@@ -35,7 +35,7 @@
   margin-top: 10px;
 }
 
-.ui-input-text.ui-focus{
+.cont_req .ui-focus{
   box-shadow: none;
   border-bottom: 1px solid #DF2047;
 }
@@ -169,15 +169,19 @@
 
 .cont_btn_form article{
   display: inline-block;
-  width: 45%;
-  height: 100%;
+  width: 48%;
+  /*height: 100%;*/
   font: 14px ProximaNova, sans-serif;
   color: #df2047;
+  cursor: pointer;
 }
 
-.cont_btn_form article label{
+.cont_btn_form article label, .cont_btn_form article a{
   display: inline-block;
   padding: 9px;
+  text-decoration: none;
+  color: #df2047 !important;
+  font-weight: normal !important;
 }
 
 .cont_btn_form #btn_cancelar_frm{

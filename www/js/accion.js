@@ -1,14 +1,13 @@
 $(document).ready(function () {
 
-	/*ORIENTACION*/
-
+	/*ORIENTACION VERTICAL PERMANENTE*/
 	window.addEventListener("orientationchange", orientationChange, true);
-
 	function orientationChange(e) {
 		var orientation="portrait";
 		if(window.orientation == -90 || window.orientation == 90) orientation = "landscape";
 		document.getElementById("status").innerHTML+=orientation+"<br>";
 	}
+	/*FIN ORIENTACION VERTICAL PERMANENTE*/
 
 	/*var container = $('.lst_campos'),
     scrollTo = $('#row_8');
@@ -234,8 +233,64 @@ $(document).ready(function () {
 	});
 
 	$("body").on("click",".btn_opc_item", function(e){
+		var idv = this.id;
+		getProspectoId(idv);
 		$.mobile.changePage("#formulario_venta", {transition:"slidedown"});
+
 	});
+
+	$("body").on("focus",".inpt_sel", function(e){
+		$("."+this.id).css({color:'#DF2047'});
+	});
+
+	$("body").on("blur",".inpt_sel", function(e){
+		$("."+this.id).css({color:'#a9a9a9'});
+	});
+
+	/*$("body").on("keyup",".inpt_sel", function(e){
+		
+		var dat = $("#"+this.id).val();
+		console.log(dat)
+		$.ajax({
+			type: 'POST',
+			dataType: 'json', 
+			data: {dat:dat},
+			beforeSend : function (){
+		    },
+			url: "https://roinet.pe/NWROInet/venta/index.php/mobile_controller/prueba",
+			success : function(data) {
+				if(data != 0){
+					for(var i=0; i< data.length; i++)
+					{ 
+						console.log(data[i].razon_social)
+					}
+				}
+			},
+			error: function(data){
+				console.log(data);
+			}
+		});
+	});*/
+
+	function getProspectoId(id)
+	{
+		db.transaction(function(transaction) {
+			var q = "SELECT p.id, c.id, c.ruc,c.razon_social, t.id, t.nombre, t.apellido, p.presupuesto,  p.necesidad,  p.propuesta,  p.fecha_aprox FROM tb_prospecto p INNER JOIN tb_cuenta c ON p.id_cuenta = c.id INNER JOIN tb_contacto t ON p.id_contacto = t.id WHERE p.id ="+id;
+			transaction.executeSql(q, [],
+			function(transaction, result) {
+				if (result != null && result.rows.length > 0) {
+					var row = result.rows.item(0);
+					$("#rsoc").val(row.razon_social)
+					$("#ruc").val(row.ruc)
+					$("#deci").val(row.nombre+" "+row.apellido)
+					$("#presu").val(row.presupuesto)
+					$("#nece").val(row.necesidad)
+					$("#prop").val(row.propuesta)
+					$("#fecha_aprox").val(row.fecha_aprox)
+				}
+			},errorBD);
+		},errorBD,nullHandler);
+	}
 
 	//OFFLINE
 	function mostrarDataOffline()
