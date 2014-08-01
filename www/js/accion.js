@@ -94,6 +94,9 @@ $(document).ready(function () {
 	var idFase = 1; // ID de la Fase que se muestra
 	var al = ($('body').height())+1;
 	
+	var cad = "100% "+al+"px";
+	$('#inicio').css({'background-size':cad});
+
 	var alCn = al-129;
 	$('.cont_main').css({height:alCn+'px'});
 	//$('.popup_Nusu, .popup_Nusu_n').css({height:alCn+'px'});
