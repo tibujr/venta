@@ -35,10 +35,16 @@
   margin-top: 10px;
 }
 
-.cont_req .ui-focus{
+/*.cont_req .ui-focus{
+  box-shadow: none;
+  border-bottom: 1px solid #DF2047;
+}*/
+
+.ui-input-text.ui-focus{
   box-shadow: none;
   border-bottom: 1px solid #DF2047;
 }
+
 
 .ui-input-text{
   background: none;

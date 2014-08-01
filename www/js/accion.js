@@ -234,7 +234,12 @@ $(document).ready(function () {
 
 	$("body").on("click",".btn_opc_item", function(e){
 		var idv = this.id;
-		getProspectoId(idv);
+		if(localStorage.getItem('onof') == 'on')
+		{
+			getProspectoIdOn(idv);
+		}else{
+			getProspectoIdOff(idv);
+		}
 		$.mobile.changePage("#formulario_venta", {transition:"slidedown"});
 
 	});
@@ -272,7 +277,11 @@ $(document).ready(function () {
 		});
 	});*/
 
-	function getProspectoId(id)
+	
+
+	//OFFLINE
+
+	function getProspectoIdOff(id)
 	{
 		db.transaction(function(transaction) {
 			var q = "SELECT p.id, c.id, c.ruc,c.razon_social, t.id, t.nombre, t.apellido, p.presupuesto,  p.necesidad,  p.propuesta,  p.fecha_aprox FROM tb_prospecto p INNER JOIN tb_cuenta c ON p.id_cuenta = c.id INNER JOIN tb_contacto t ON p.id_contacto = t.id WHERE p.id ="+id;
@@ -292,7 +301,6 @@ $(document).ready(function () {
 		},errorBD,nullHandler);
 	}
 
-	//OFFLINE
 	function mostrarDataOffline()
 	{
 		if(localStorage.getItem('onof') == 'of')
@@ -324,7 +332,7 @@ $(document).ready(function () {
 	function listarProspectoOff(id)
 	{
 		$(".lst_itm").html("");
-		var idUsu = localStorage.getItem('id_usu');
+		//var idUsu = localStorage.getItem('id_usu');
 
 		db.transaction(function(transaction) {
 			var q = "SELECT p.id, c.id, c.razon_social, p.id_contacto, p.presupuesto FROM tb_prospecto p INNER JOIN tb_cuenta c ON p.id_cuenta = c.id WHERE p.id_fase ="+id;
@@ -341,6 +349,41 @@ $(document).ready(function () {
 	}
 
 	//ONLINE
+
+	function getProspectoIdOn(id)
+	{
+		//var idUsu = localStorage.getItem('id_usu');
+					/*$("#rsoc").val(row.razon_social)
+					$("#ruc").val(row.ruc)
+					$("#deci").val(row.nombre+" "+row.apellido)
+					$("#presu").val(row.presupuesto)
+					$("#nece").val(row.necesidad)
+					$("#prop").val(row.propuesta)
+					$("#fecha_aprox").val(row.fecha_aprox)*/
+		$.ajax({
+			type: 'POST',
+			dataType: 'json', 
+			data: {id:id},
+			beforeSend : function (){
+		    },
+			url: "https://roinet.pe/NWROInet/venta/index.php/mobile_controller/getProspectoIdOn",
+			success : function(data) {
+				if(data != 0){
+					$("#rsoc").val(data.razon_social_cuen)
+					$("#ruc").val(data.ruc_cuen)
+					$("#deci").val(data.nombre_con+" "+data.apellido_con)
+					$("#presu").val(data.presupuesto_pros)
+					$("#nece").val(data.necesidad_pros)
+					$("#prop").val(data.propuesta_pros)
+					$("#fecha_aprox").val(data.fecha_cierre_pros)
+				}
+			},
+			error: function(data){
+				console.log(data);
+			}
+		});
+	}
+
 	function llenarVentaBD(id)
 	{
 		if(localStorage.getItem('onof') == 'on'){
