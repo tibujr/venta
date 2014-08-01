@@ -27,7 +27,7 @@
     <preference name="android-installLocation" value="auto" />
 
     <preference name="KeyboardShrinksView" value="true" />
-    <preference name="android-windowSoftInputMode" value="stateVisible" />
+    <preference name="android-windowSoftInputMode" value="stateVisible|adjustResize" />
 
     <icon src="icon.png" />
     <icon gap:density="ldpi" gap:platform="android" src="res/icon/android/icon-36-ldpi.png" />
