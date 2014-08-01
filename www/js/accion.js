@@ -2,7 +2,7 @@ $(document).ready(function () {
 
 	/*CAMBIOS SISTEMA*/
 
-	ocument.addEventListener("deviceready", onDeviceReady, false);
+	document.addEventListener("deviceready", onDeviceReady, false);
 
 	function onDeviceReady() {
 		document.addEventListener("backbutton", onBackKeyDown, false);
