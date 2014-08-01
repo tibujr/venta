@@ -1,18 +1,5 @@
 $(document).ready(function () {
 
-	/*CAMBIOS SISTEMA*/
-
-	document.addEventListener("deviceready", onDeviceReady, false);
-
-	function onDeviceReady() {
-		document.addEventListener("backbutton", onBackKeyDown, false);
-	}
-
-	function onBackKeyDown() {
-		alert("no uses boton atras feo")
-	}
-	/*FIN CAMBIOS SISTEMA*/
-
 	/*ORIENTACION VERTICAL PERMANENTE
 	window.addEventListener("orientationchange", orientationChange, true);
 	function orientationChange(e) {

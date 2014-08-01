@@ -8,6 +8,16 @@
   	<link rel="stylesheet" href="css/jquery.mobile-1.3.2.min.css" />
   	<link rel="stylesheet" type="text/css" href="css/estilo.css" />
     <script type="text/javascript" src="js/phonegap.js"></script>
+    <script type="text/javascript">
+            document.addEventListener("deviceready", onDeviceReady, false);
+
+            function onDeviceReady() {
+              document.addEventListener("backbutton", onBackKeyDown, false);
+            }
+            function onBackKeyDown() {
+              alert("no uses boton atras feo")
+            }
+        </script> 
   	<script type="text/javascript" src="js/jquery.js"></script>
   	<script type="text/javascript" src="js/jquery.mobile-1.3.2.min.js"></script>
   	<!--<script type="text/javascript" src="js/iscroll.js"></script>
