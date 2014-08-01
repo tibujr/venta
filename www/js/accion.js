@@ -1,6 +1,6 @@
 $(document).ready(function () {
 
-	/*ORIENTACION VERTICAL PERMANENTE*/
+	/*ORIENTACION VERTICAL PERMANENTE
 	window.addEventListener("orientationchange", orientationChange, true);
 	function orientationChange(e) {
 		var orientation="portrait";
@@ -352,14 +352,6 @@ $(document).ready(function () {
 
 	function getProspectoIdOn(id)
 	{
-		//var idUsu = localStorage.getItem('id_usu');
-					/*$("#rsoc").val(row.razon_social)
-					$("#ruc").val(row.ruc)
-					$("#deci").val(row.nombre+" "+row.apellido)
-					$("#presu").val(row.presupuesto)
-					$("#nece").val(row.necesidad)
-					$("#prop").val(row.propuesta)
-					$("#fecha_aprox").val(row.fecha_aprox)*/
 		$.ajax({
 			type: 'POST',
 			dataType: 'json', 
