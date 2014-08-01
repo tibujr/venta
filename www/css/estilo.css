@@ -21,6 +21,9 @@
   text-align: left;
   font-family: ProximaNova, sans-serif;
   border: 0;
+  display: inline-block !important;
+  top: 5px !important;
+  left: 5px !important;
 }
 
 .btn_back span.ui-btn-inner{
@@ -33,6 +36,10 @@
 .btn_back span.ui-btn-inner label{
   display: inline-block;
   margin-top: 10px;
+}
+
+.ui-fixed-hidden{
+  position: fixed;
 }
 
 /*.cont_req .ui-focus{
@@ -349,10 +356,6 @@
 .pie{
   border: none;
   background: #df2047;
-}
-
-.ui-fixed-hidden{
-  position: fixed;
 }
 
 /* FIN BOTONES DE NAVEGACIÓN CABECERA Y PIE*/
