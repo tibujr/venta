@@ -35,13 +35,17 @@ $(document).ready(function () {
 	}
     
     function exitoBD(){}
+
+    function aqui(){
+    	alert("aqui")
+    }
          
     function nullHandler(){}
          
     function inicarBD()
     {
 		if (!window.openDatabase) {
-			alert('Las bases de datos no son compatibles con este navegador.');
+			alert('Error con base de datos: Contactar con el administrador');
 			return;
 		}
 		db = openDatabase(shortName, version, displayName,maxSize);
@@ -237,12 +241,15 @@ $(document).ready(function () {
 
 	$("body").on("click",".btn_opc_item", function(e){
 		var idv = this.id;
+		$('#id_pros').val(idv);
+
 		if(localStorage.getItem('onof') == 'on')
 		{
 			getProspectoIdOn(idv);
 		}else{
 			getProspectoIdOff(idv);
 		}
+
 		$.mobile.changePage("#formulario_venta", {transition:"slidedown"});
 
 	});
@@ -253,6 +260,16 @@ $(document).ready(function () {
 
 	$("body").on("blur",".inpt_sel", function(e){
 		$("."+this.id).css({color:'#a9a9a9'});
+	});
+
+	$("body").on("click","#btn_guardar_frm", function(e){
+		var id = $('#id_pros').val();
+		if(localStorage.getItem('onof') == 'on')
+		{
+			editProspectoOn(id);
+		}else{
+			editProspectoOff(id);
+		}
 	});
 
 	/*$("body").on("keyup",".inpt_sel", function(e){
@@ -284,21 +301,42 @@ $(document).ready(function () {
 
 	//OFFLINE
 
+	function editProspectoOff(id)
+	{
+		/*	p.id, p.presupuesto,  p.necesidad,  p.propuesta,  p.fecha_aprox 
+		 	tb_prospecto p */
+		var cu = "UPDATE tb_cuenta SET ruc = '"+$('#ruc').val()+"', razon_social='"+$('#rsoc').val()+"', cambio = 's' WHERE id ="+$('#id_pros').val();
+		var co = "UPDATE tb_contacto SET nombre = '"+$('#nom_deci').val()+"', apellido='"+$('#ape_deci').val()+"', cambio = 's' WHERE id ="+$('#id_con').val();
+		var pr = "UPDATE tb_prospecto SET presupuesto = '"+$('#presu').val()+"', necesidad='"+$('#nece').val()+"', propuesta='"+$('#prop').val()+"', fecha_aprox='"+$('#fecha_aprox').val()+"', cambio = 's' WHERE id ="+$('#id_pros').val();
+		db.transaction(function(transaction) {
+			transaction.executeSql(cu,[], nullHandler,errorBD);
+			transaction.executeSql(co,[], nullHandler,errorBD);
+			transaction.executeSql(pr,[], nullHandler,errorBD);
+		});
+		listarProspectoOff(idFase);
+		$.mobile.changePage("#venta", {transition:"slideup"});
+       	return false;
+	}
+
 	function getProspectoIdOff(id)
 	{
 		db.transaction(function(transaction) {
-			var q = "SELECT p.id, c.id, c.ruc,c.razon_social, t.id, t.nombre, t.apellido, p.presupuesto,  p.necesidad,  p.propuesta,  p.fecha_aprox FROM tb_prospecto p INNER JOIN tb_cuenta c ON p.id_cuenta = c.id INNER JOIN tb_contacto t ON p.id_contacto = t.id WHERE p.id ="+id;
+			var q = "SELECT p.id, c.id as 'id_cuen', c.ruc,c.razon_social, t.id as 'id_cont', t.nombre, t.apellido, p.presupuesto,  p.necesidad,  p.propuesta,  p.fecha_aprox FROM tb_prospecto p INNER JOIN tb_cuenta c ON p.id_cuenta = c.id INNER JOIN tb_contacto t ON p.id_contacto = t.id WHERE p.id ="+id;
 			transaction.executeSql(q, [],
 			function(transaction, result) {
 				if (result != null && result.rows.length > 0) {
 					var row = result.rows.item(0);
 					$("#rsoc").val(row.razon_social)
 					$("#ruc").val(row.ruc)
-					$("#deci").val(row.nombre+" "+row.apellido)
+					$("#nom_deci").val(row.nombre)
+					$("#ape_deci").val(row.apellido)
 					$("#presu").val(row.presupuesto)
 					$("#nece").val(row.necesidad)
 					$("#prop").val(row.propuesta)
 					$("#fecha_aprox").val(row.fecha_aprox)
+
+					$('#id_pros').val(row.id_cuen);
+					$('#id_con').val(row.id_cont);
 				}
 			},errorBD);
 		},errorBD,nullHandler);
@@ -353,6 +391,36 @@ $(document).ready(function () {
 
 	//ONLINE
 
+	function editProspectoOn(id)
+	{
+		$.ajax({
+			type: 'POST',
+			dataType: 'json', 
+			data: {id:id},
+			beforeSend : function (){
+		    },
+			url: "https://roinet.pe/NWROInet/venta/index.php/mobile_controller/getProspectoIdOn",
+			success : function(data) {
+				if(data != 0){
+					$("#rsoc").val(data.razon_social_cuen)
+					$("#ruc").val(data.ruc_cuen)
+					$("#nom_deci").val(data.nombre_con)
+					$("#ape_deci").val(data.apellido_con)
+					$("#presu").val(data.presupuesto_pros)
+					$("#nece").val(data.necesidad_pros)
+					$("#prop").val(data.propuesta_pros)
+					$("#fecha_aprox").val(data.fecha_cierre_pros)
+
+					$('#id_pros').val(data.id_cuen);
+					$('#id_con').val(data.id_con);
+				}
+			},
+			error: function(data){
+				console.log(data);
+			}
+		});
+	}
+
 	function getProspectoIdOn(id)
 	{
 		$.ajax({
@@ -366,7 +434,8 @@ $(document).ready(function () {
 				if(data != 0){
 					$("#rsoc").val(data.razon_social_cuen)
 					$("#ruc").val(data.ruc_cuen)
-					$("#deci").val(data.nombre_con+" "+data.apellido_con)
+					$("#nom_deci").val(data.nombre_con)
+					$("#ape_deci").val(data.apellido_con)
 					$("#presu").val(data.presupuesto_pros)
 					$("#nece").val(data.necesidad_pros)
 					$("#prop").val(data.propuesta_pros)
@@ -405,7 +474,8 @@ $(document).ready(function () {
 			success : function(data) {
 				if(data != 0){
 					db.transaction(function(tx){
-						tx.executeSql("DELETE FROM tb_prospecto where cambio='n'",nullHandler,nullHandler);
+						tx.executeSql("DELETE FROM tb_prospecto",nullHandler,nullHandler);
+						//tx.executeSql("DELETE FROM tb_prospecto where cambio='n'",nullHandler,nullHandler);
 						for(var i=0; i< data.length; i++)
 						{ 
 							idP = data[i]['id_pros'];
@@ -418,7 +488,7 @@ $(document).ready(function () {
 							idFa = data[i]['id_fpros'];
 							idE = data[i]['id_epros'];
 							cam = 'n';
-							tx.executeSql('INSERT INTO tb_prospecto(id, id_cuenta, id_contacto, presupuesto, necesidad, propuesta, fecha_aprox, id_fase, id_estado, cambio) VALUES (?,?,?,?,?,?,?,?,?,?)',[idP,idC,idO,pre,nec,prop,fecha,idFa,idE, cam], nullHandler,errorBD);
+							tx.executeSql('INSERT INTO tb_prospecto(id, id_cuenta, id_contacto, presupuesto, necesidad, propuesta, fecha_aprox, id_fase, id_estado, cambio) VALUES (?,?,?,?,?,?,?,?,?,?)',[idP,idC,idO,pre,nec,prop,fecha,idFa,idE, cam], nullHandler,aqui);
 						}
 					});
 				}
@@ -442,7 +512,8 @@ $(document).ready(function () {
 			success : function(data) {
 				if(data != 0){
 					db.transaction(function(tx){
-						tx.executeSql("DELETE FROM tb_cuenta where cambio='n'",nullHandler,nullHandler);
+						tx.executeSql("DELETE FROM tb_cuenta",nullHandler,nullHandler);
+						//tx.executeSql("DELETE FROM tb_cuenta where cambio='n'",nullHandler,nullHandler);
 						for(var i=0; i< data.length; i++)
 						{ 
 							id = data[i]['id_cuen'];
@@ -474,7 +545,8 @@ $(document).ready(function () {
 			success : function(data) {
 				if(data != 0){
 					db.transaction(function(tx){
-						tx.executeSql("DELETE FROM tb_contacto where cambio='n'",nullHandler,nullHandler);
+						tx.executeSql("DELETE FROM tb_contacto",nullHandler,nullHandler);
+						//tx.executeSql("DELETE FROM tb_contacto where cambio='n'",nullHandler,nullHandler);
 						for(var i=0; i< data.length; i++)
 						{ 
 							id = data[i]['id_con'];
