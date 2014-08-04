@@ -94,6 +94,8 @@ $(document).ready(function () {
 	}*/
 
 //*********************************************** FIN BASE DE DATOS WEBSQL
+	
+	var rucE, rsE, nomE, apeE, preE, necE, proE, fecE;
 
 	var idFase = 1; // ID de la Fase que se muestra
 	var al = ($('body').height())+1;
@@ -303,8 +305,6 @@ $(document).ready(function () {
 
 	function editProspectoOff(id)
 	{
-		/*	p.id, p.presupuesto,  p.necesidad,  p.propuesta,  p.fecha_aprox 
-		 	tb_prospecto p */
 		var cu = "UPDATE tb_cuenta SET ruc = '"+$('#ruc').val()+"', razon_social='"+$('#rsoc').val()+"', cambio = 's' WHERE id ="+$('#id_pros').val();
 		var co = "UPDATE tb_contacto SET nombre = '"+$('#nom_deci').val()+"', apellido='"+$('#ape_deci').val()+"', cambio = 's' WHERE id ="+$('#id_con').val();
 		var pr = "UPDATE tb_prospecto SET presupuesto = '"+$('#presu').val()+"', necesidad='"+$('#nece').val()+"', propuesta='"+$('#prop').val()+"', fecha_aprox='"+$('#fecha_aprox').val()+"', cambio = 's' WHERE id ="+$('#id_pros').val();
