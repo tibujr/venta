@@ -24,10 +24,10 @@
 <body>
 	<section data-role="page" id="inicio" class="pagina">
     <article data-role="content" style="font-size:0;">
-      <div id='onOf'></div>
+      <div id='onOf'><div class="icon-wifi-full"></div><div id='bloq_wifi' class="icon-blocked"></div></div>
       <div style="display: inline-block; margin-bottom: 10px; width: 100%; margin-top: 35%;"><img src="img/logo.jpg"></div>
-      <div class="login_caja"><input type="email" id="mail" name="mail" value="" placeholder="Correo electrónico"></div>
-      <div class="login_caja"><input type="password" id="clave" name="clave" value="" placeholder="******"></div>
+      <div class="login_caja"><input type="email" id="mail" name="mail" value="cmasias@roinet.pe" placeholder="Correo electrónico"></div>
+      <div class="login_caja"><input type="password" id="clave" name="clave" value="123456" placeholder="******"></div>
       <div class="center-wrapper">
         <div id="btn_login" data-role="button" data-theme="b" data-inline="true">INICIAR SESIÓN</div>
       </div>
@@ -124,7 +124,14 @@
       </div>
     </article>
     <article data-role="content" class="cont_main"> 
-      <section class='cont_items'>
+      <section id='cont_contacto'>
+        <article class="cont_elm_contacto">
+          <section class="uno_cont_ev"></section>
+          <section class="dos_cont_ev">
+            <article class="dos_nom_ev"></article>
+            <article class="dos_ico_ev"></article>
+          </section>
+        </article>
       </section>
     </article>
      <article data-role="footer" data-position="fixed" data-id="pie_fijo" data-theme="b" class="pie">
@@ -167,6 +174,7 @@
                   <article class='cont_req'>
                     <label class='ruc'>RUC</label>
                     <input type='number' id='ruc' maxlength="11" class='inpt_sel'>
+                    <!--<input name="t1" type="time" size="5" value="13:00">-->
                   </article>
                   <article class='cont_req'>
                     <label class='nom_deci'>Nombre  de decisor</label>

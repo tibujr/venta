@@ -85,6 +85,35 @@
 
 /*FIN CAMBIOS DEL SISTEMA*/
 
+/*CONTACTOS*/
+
+#cont_contacto{
+  width: 100%;
+  height: 100%;
+}
+
+.cont_elm_contacto{
+
+}
+
+.uno_cont_ev{
+
+}
+
+.dos_cont_ev{
+
+}
+
+.dos_nom_ev{
+
+}
+
+.dos_ico_ev{
+
+}
+
+/*FIN CONTACTOS*/
+
 /*conetedor ventas*/
 
 .fase_tit  div span.ui-btn-inner, .fase_tit  div div span.ui-btn-inner {
@@ -362,14 +391,26 @@
 
 /*FORMULARIO LOGIN*/
 
+#bloq_wifi{
+  position: relative;top: -32px;
+  left: -10px;
+  font-size: 44px;
+  display: none;
+}
+
 #onOf{
-  background: chartreuse;
   position: absolute;
-  width: 35px;
-  height: 35px;
-  top: 5px;
-  left: 5px;
+  width: 25px;
+  height: 25px;
+  top: 10px;
+  left: 10px;
   cursor: pointer;
+  font-size: 23px;
+  padding: 5px;
+  color: white;
+  text-shadow: none;
+  background: #bc1e3e;
+  border-radius: 21px;
 }
 
 .login_caja{
@@ -505,11 +546,11 @@
 /*FONTS ICONOS CSS*/
 @font-face {
   font-family: 'icomoon';
-  src:url('fonts/icomoon.eot?-pspnsd');
-  src:url('fonts/icomoon.eot?#iefix-pspnsd') format('embedded-opentype'),
-    url('fonts/icomoon.woff?-pspnsd') format('woff'),
-    url('fonts/icomoon.ttf?-pspnsd') format('truetype'),
-    url('fonts/icomoon.svg?-pspnsd#icomoon') format('svg');
+  src:url('fonts/icomoon.eot?x7s91p');
+  src:url('fonts/icomoon.eot?#iefixx7s91p') format('embedded-opentype'),
+    url('fonts/icomoon.woff?x7s91p') format('woff'),
+    url('fonts/icomoon.ttf?x7s91p') format('truetype'),
+    url('fonts/icomoon.svg?x7s91p#icomoon') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -528,37 +569,76 @@
   -moz-osx-font-smoothing: grayscale;
 }
 
-.icon-office:before {
-  content: "\e600";
+.icon-wi-fi:before {
+  content: "\e60c";
 }
-.icon-pencil:before {
-  content: "\e601";
+.icon-edit:before {
+  content: "\e60d";
 }
-.icon-address-book:before {
-  content: "\e602";
+.icon-wifi-mid:before {
+  content: "\e60e";
 }
-.icon-calendar:before {
-  content: "\e603";
+.icon-wifi-full:before {
+  content: "\e60f";
 }
-.icon-pie:before {
-  content: "\e604";
+.icon-moneybag:before {
+  content: "\e610";
 }
-.icon-star:before {
-  content: "\e605";
-}
-.icon-plus:before {
-  content: "\e606";
-}
-.icon-arrow-down:before {
-  content: "\e607";
+.icon-blocked:before {
+  content: "\e611";
 }
 .icon-arrow-left:before {
-  content: "\e608";
+  content: "\e600";
 }
-.icon-arrow-down2:before {
-  content: "\e609";
+.icon-arrow-down:before {
+  content: "\e601";
 }
 .icon-arrow-left2:before {
+  content: "\e602";
+}
+.icon-arrow-down2:before {
+  content: "\e603";
+}
+.icon-envelope:before {
+  content: "\f0e0";
+}
+.icon-pencil-square:before {
+  content: "\f14b";
+}
+.icon-dollar:before {
+  content: "\f155";
+}
+.icon-office:before {
+  content: "\e604";
+}
+.icon-pencil:before {
+  content: "\e605";
+}
+.icon-file:before {
+  content: "\e612";
+}
+.icon-phone:before {
+  content: "\e613";
+}
+.icon-address-book:before {
+  content: "\e606";
+}
+.icon-location:before {
+  content: "\e614";
+}
+.icon-calendar:before {
+  content: "\e607";
+}
+.icon-user:before {
+  content: "\e615";
+}
+.icon-pie:before {
+  content: "\e608";
+}
+.icon-star:before {
+  content: "\e609";
+}
+.icon-plus:before {
   content: "\e60a";
 }
 .icon-arrow-down3:before {

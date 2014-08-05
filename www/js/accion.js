@@ -18,6 +18,7 @@ $(document).ready(function () {
 */
 
 	$(".lst_campos").animate({scrollTop: 0});
+	$("#cont_contacto").animate({scrollTop: 0});
 
 //*************************************** BASE DE DATOS WEBSQL
 
@@ -95,7 +96,7 @@ $(document).ready(function () {
 
 //*********************************************** FIN BASE DE DATOS WEBSQL
 	
-	var rucE, rsE, nomE, apeE, preE, necE, proE, fecE;
+	var rucE, rsE, nomE, apeE, preE, necE, proE, fecE, camCuE = 'n', camCoE = 'n', camPrE = 'n';
 
 	var idFase = 1; // ID de la Fase que se muestra
 	var al = ($('body').height())+1;
@@ -223,10 +224,10 @@ $(document).ready(function () {
 
 	$("body").on('click', '#onOf', function(e) {
 		if(localStorage.getItem('onof') == 'on'){
-			$(this).css({background: 'silver'});
+			$("#bloq_wifi").css({display:'inline-block'});
 			localStorage.setItem('onof','of');
 		}else{
-			$(this).css({background: 'chartreuse'});
+			$("#bloq_wifi").css({display:'none'});
 			localStorage.setItem('onof','on');
 		}
 	});
@@ -305,9 +306,13 @@ $(document).ready(function () {
 
 	function editProspectoOff(id)
 	{
-		var cu = "UPDATE tb_cuenta SET ruc = '"+$('#ruc').val()+"', razon_social='"+$('#rsoc').val()+"', cambio = 's' WHERE id ="+$('#id_pros').val();
-		var co = "UPDATE tb_contacto SET nombre = '"+$('#nom_deci').val()+"', apellido='"+$('#ape_deci').val()+"', cambio = 's' WHERE id ="+$('#id_con').val();
-		var pr = "UPDATE tb_prospecto SET presupuesto = '"+$('#presu').val()+"', necesidad='"+$('#nece').val()+"', propuesta='"+$('#prop').val()+"', fecha_aprox='"+$('#fecha_aprox').val()+"', cambio = 's' WHERE id ="+$('#id_pros').val();
+		if(rsE != $('#rsoc').val() || rucE != $('#ruc').val()) camCuE = 's';
+		if(nomE != $('#nom_deci').val() || apeE != $('#ape_deci').val()) camCoE = 's';
+		if(preE != $('#presu').val() || necE != $('#nece').val() || proE != $('#prop').val() || fecE != $('#fecha_aprox').val()) camPrE = 's';
+
+		var cu = "UPDATE tb_cuenta SET ruc = '"+$('#ruc').val()+"', razon_social='"+$('#rsoc').val()+"', cambio = '"+camCuE+"' WHERE id ="+$('#id_pros').val();
+		var co = "UPDATE tb_contacto SET nombre = '"+$('#nom_deci').val()+"', apellido='"+$('#ape_deci').val()+"', cambio = '"+camCoE+"' WHERE id ="+$('#id_con').val();
+		var pr = "UPDATE tb_prospecto SET presupuesto = '"+$('#presu').val()+"', necesidad='"+$('#nece').val()+"', propuesta='"+$('#prop').val()+"', fecha_aprox='"+$('#fecha_aprox').val()+"', cambio = '"+camPrE+"' WHERE id ="+$('#id_pros').val();
 		db.transaction(function(transaction) {
 			transaction.executeSql(cu,[], nullHandler,errorBD);
 			transaction.executeSql(co,[], nullHandler,errorBD);
@@ -326,17 +331,26 @@ $(document).ready(function () {
 			function(transaction, result) {
 				if (result != null && result.rows.length > 0) {
 					var row = result.rows.item(0);
-					$("#rsoc").val(row.razon_social)
-					$("#ruc").val(row.ruc)
-					$("#nom_deci").val(row.nombre)
-					$("#ape_deci").val(row.apellido)
-					$("#presu").val(row.presupuesto)
-					$("#nece").val(row.necesidad)
-					$("#prop").val(row.propuesta)
-					$("#fecha_aprox").val(row.fecha_aprox)
+					$("#rsoc").val(row.razon_social);
+					$("#ruc").val(row.ruc);
+					$("#nom_deci").val(row.nombre);
+					$("#ape_deci").val(row.apellido);
+					$("#presu").val(row.presupuesto);
+					$("#nece").val(row.necesidad);
+					$("#prop").val(row.propuesta);
+					$("#fecha_aprox").val(row.fecha_aprox);
 
 					$('#id_pros').val(row.id_cuen);
 					$('#id_con').val(row.id_cont);
+
+					rsE = row.razon_social;
+					rucE = row.ruc;
+					nomE = row.nombre;
+					apeE = row.apellido;
+					preE = row.presupuesto;
+					necE = row.necesidad;
+					proE = row.propuesta;
+					fecE = row.fecha_aprox;
 				}
 			},errorBD);
 		},errorBD,nullHandler);
@@ -382,7 +396,7 @@ $(document).ready(function () {
 				if (result != null && result.rows.length > 0) {
 					for (var i = 0; i < result.rows.length; i++) {
 						var row = result.rows.item(i);
-						$(".lst_itm").append(" <article class='unid_cont_item'><section class='sect_uno_item'><article class='nom_emp_item'><label>"+row.razon_social+"</label></article><article class='valor_emp_item'><label>"+row.presupuesto+" NUEVOS SOLES</label></article></section><section class='sect_dos_item'><article class='btn_opc_item' id='"+row.id+"'><div class='icon-arrow-down3'></div></article></section></article>");
+						$(".lst_itm").append(" <article class='unid_cont_item'><section class='sect_uno_item'><article class='nom_emp_item'><label>"+row.razon_social+"</label></article><article class='valor_emp_item'><label>"+row.presupuesto+" NUEVOS SOLES</label></article></section><section class='sect_dos_item'><article class='btn_opc_item' id='"+row.id+"'><div class='icon-arrow-down2'></div></article></section></article>");
 					}
 				}
 			},errorBD);
@@ -393,7 +407,7 @@ $(document).ready(function () {
 
 	function editProspectoOn(id)
 	{
-		$.ajax({
+		/*$.ajax({
 			type: 'POST',
 			dataType: 'json', 
 			data: {id:id},
@@ -418,7 +432,7 @@ $(document).ready(function () {
 			error: function(data){
 				console.log(data);
 			}
-		});
+		});*/
 	}
 
 	function getProspectoIdOn(id)
@@ -440,6 +454,15 @@ $(document).ready(function () {
 					$("#nece").val(data.necesidad_pros)
 					$("#prop").val(data.propuesta_pros)
 					$("#fecha_aprox").val(data.fecha_cierre_pros)
+
+					rsE = data.razon_social_cuen;
+					rucE = data.ruc_cuen;
+					nomE = data.nombre_con;
+					apeE = data.apellido_con;
+					preE = data.presupuesto_pros;
+					necE = data.necesidad_pros;
+					proE = data.propuesta_pros;
+					fecE = data.fecha_cierre_pros;
 				}
 			},
 			error: function(data){
@@ -619,7 +642,7 @@ $(document).ready(function () {
 				{
 					for(var i=0; i< data.length; i++)
 					{
-						$(".lst_itm").append(" <article class='unid_cont_item'><section class='sect_uno_item'><article class='nom_emp_item'><label>"+data[i]['razon_social_cuen']+"</label></article><article class='valor_emp_item'><label>"+data[i]['presupuesto_pros']+" NUEVOS SOLES</label></article></section><section class='sect_dos_item'><article class='btn_opc_item' id='"+data[i]['id_pros']+"'><div class='icon-arrow-down3'></div></article></section></article>");
+						$(".lst_itm").append(" <article class='unid_cont_item'><section class='sect_uno_item'><article class='nom_emp_item'><label>"+data[i]['razon_social_cuen']+"</label></article><article class='valor_emp_item'><label>"+data[i]['presupuesto_pros']+" NUEVOS SOLES</label></article></section><section class='sect_dos_item'><article class='btn_opc_item' id='"+data[i]['id_pros']+"'><div class='icon-arrow-down2'></div></article></section></article>");
 					}
 				}
 			},
