@@ -270,6 +270,7 @@ $(document).ready(function () {
 		if(localStorage.getItem('onof') == 'on')
 		{
 			editProspectoOn(id);
+			$.mobile.changePage("#venta", {transition:"slideup"});
 		}else{
 			editProspectoOff(id);
 		}
@@ -318,9 +319,25 @@ $(document).ready(function () {
 			transaction.executeSql(co,[], nullHandler,errorBD);
 			transaction.executeSql(pr,[], nullHandler,errorBD);
 		});
+		limpiarDataEdit();
 		listarProspectoOff(idFase);
 		$.mobile.changePage("#venta", {transition:"slideup"});
        	return false;
+	}
+
+	function limpiarDataEdit()
+	{
+		rsE = "";
+		rucE = "";
+		nomE = "";
+		apeE = "";
+		preE = "";
+		necE = "";
+		proE = "";
+		fecE = "";
+		camCuE = "n";
+		camCoE = "n";
+		camPrE = "n";
 	}
 
 	function getProspectoIdOff(id)
@@ -340,7 +357,8 @@ $(document).ready(function () {
 					$("#prop").val(row.propuesta);
 					$("#fecha_aprox").val(row.fecha_aprox);
 
-					$('#id_pros').val(row.id_cuen);
+					$('#id_pros').val(row.id);
+					$('#id_cuen').val(row.id_cuen);
 					$('#id_con').val(row.id_cont);
 
 					rsE = row.razon_social;
@@ -407,32 +425,42 @@ $(document).ready(function () {
 
 	function editProspectoOn(id)
 	{
-		/*$.ajax({
+		rsE = $("#rsoc").val();
+		rucE = $("#ruc").val();
+		nomE = $("#nom_deci").val();
+		apeE = $("#ape_deci").val();
+		preE = $("#presu").val();
+		necE = $("#nece").val();
+		proE = $("#prop").val();
+		fecE = $("#fecha_aprox").val();
+		var idProsp = id;
+		var idCuenta = $('#id_cuen').val();
+		var idContact = $('#id_con').val();
+
+		$.ajax({
 			type: 'POST',
 			dataType: 'json', 
-			data: {id:id},
+			data: {rsE:rsE, rucE:rucE, nomE:nomE, apeE:apeE, preE:preE, necE:necE, proE:proE, fecE:fecE, idProsp:idProsp, idCuenta:idCuenta, idContact:idContact},
 			beforeSend : function (){
 		    },
-			url: "https://roinet.pe/NWROInet/venta/index.php/mobile_controller/getProspectoIdOn",
+			url: "https://roinet.pe/NWROInet/venta/index.php/mobile_controller/editProspectoOn",
 			success : function(data) {
 				if(data != 0){
-					$("#rsoc").val(data.razon_social_cuen)
-					$("#ruc").val(data.ruc_cuen)
-					$("#nom_deci").val(data.nombre_con)
-					$("#ape_deci").val(data.apellido_con)
-					$("#presu").val(data.presupuesto_pros)
-					$("#nece").val(data.necesidad_pros)
-					$("#prop").val(data.propuesta_pros)
-					$("#fecha_aprox").val(data.fecha_cierre_pros)
-
-					$('#id_pros').val(data.id_cuen);
-					$('#id_con').val(data.id_con);
+					//limpiarDataEdit();
+					var usuid = localStorage.getItem('id_usu');
+					llenarProspecto(usuid);
+					llenarCuenta(usuid);
+					llenarContacto(usuid);
+					listarProspecto(idFase);
+					//listarProspecto(idFase);
+					//$.mobile.changePage("#venta", {transition:"slideup"});
 				}
 			},
 			error: function(data){
 				console.log(data);
 			}
-		});*/
+		});
+		limpiarDataEdit()
 	}
 
 	function getProspectoIdOn(id)
@@ -455,14 +483,9 @@ $(document).ready(function () {
 					$("#prop").val(data.propuesta_pros)
 					$("#fecha_aprox").val(data.fecha_cierre_pros)
 
-					rsE = data.razon_social_cuen;
-					rucE = data.ruc_cuen;
-					nomE = data.nombre_con;
-					apeE = data.apellido_con;
-					preE = data.presupuesto_pros;
-					necE = data.necesidad_pros;
-					proE = data.propuesta_pros;
-					fecE = data.fecha_cierre_pros;
+					$('#id_pros').val(data.id_pros);
+					$('#id_cuen').val(data.id_cuen);
+					$('#id_con').val(data.id_con);
 				}
 			},
 			error: function(data){
