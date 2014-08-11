@@ -29,6 +29,7 @@ $(document).ready(function () {
 	var maxSize = 65535;
 
 	inicarBD();
+
          
 	function errorBD(transaction, error)
 	{
@@ -36,11 +37,7 @@ $(document).ready(function () {
 	}
     
     function exitoBD(){}
-
-    function aqui(){
-    	alert("aqui")
-    }
-         
+  
     function nullHandler(){}
          
     function inicarBD()
@@ -78,27 +75,13 @@ $(document).ready(function () {
 		});  
         ListDBValues();
         return false;
-	}
-
-	function editarItem() 
-	{
-    	if (!window.openDatabase) {
-			alert('Navegador no soporta base de datos');
-            return;
-		}
-        var q = "UPDATE User SET FirstName = '"+$('#nombre').val()+"', LastName='"+$('#apellido').val()+"' WHERE UserId ="+$('#id').val();
-		db.transaction(function(transaction) {
-			transaction.executeSql(q,[], nullHandler,errorHandler);
-		});
-		ListDBValues();
-       	return false;
 	}*/
-
 //*********************************************** FIN BASE DE DATOS WEBSQL
 	
-	var rucE, rsE, nomE, apeE, preE, necE, proE, fecE, camCuE = 'n', camCoE = 'n', camPrE = 'n';
+	var reqArr = [];
+	var rucE, rsE, nomE, apeE, preE, necE, proE, fecE, camCuE = 'n', camCoE = 'n', camPrE = 'n'; //campos editar venta
 
-	var idFase = 1; // ID de la Fase que se muestra
+	var idFase = 1; // ID de la Fase que se muestra el prospecto
 	var al = ($('body').height())+1;
 	
 	var cad = "100% "+al+"px";
@@ -234,6 +217,7 @@ $(document).ready(function () {
 
 	$("body").on('change', '#cboFase', function(e){
 		var id = $('#cboFase').val();
+		idFase = id;
 		if(localStorage.getItem('onof') == 'on')
 		{
 			listarProspecto(id);
@@ -245,6 +229,7 @@ $(document).ready(function () {
 	$("body").on("click",".btn_opc_item", function(e){
 		var idv = this.id;
 		$('#id_pros').val(idv);
+		$('#accion_frm').val("editar");
 
 		if(localStorage.getItem('onof') == 'on')
 		{
@@ -257,6 +242,29 @@ $(document).ready(function () {
 
 	});
 
+	$("body").on("click","#btn_add_venta", function(e){
+		$('#accion_frm').val("nuevo");
+		$('#id_pros').val("");
+		$('#id_cuen').val("");
+		$('#id_con').val("");
+		$("#rsoc").val("");
+		$("#ruc").val("");
+		$("#nom_deci").val("");
+		$("#ape_deci").val("");
+		$("#presu").val("");
+		$("#nece").val("");
+		$("#prop").val("");
+		$("#fecha_aprox").val("");
+
+		/*if(localStorage.getItem('onof') == 'on')
+		{
+			//getProspectoIdOn(idv);
+		}else{
+			getProspectoIdOff(idv);
+		}*/
+		$.mobile.changePage("#formulario_venta", {transition:"slidedown"});
+	});
+
 	$("body").on("focus",".inpt_sel", function(e){
 		$("."+this.id).css({color:'#DF2047'});
 	});
@@ -266,42 +274,60 @@ $(document).ready(function () {
 	});
 
 	$("body").on("click","#btn_guardar_frm", function(e){
-		var id = $('#id_pros').val();
-		if(localStorage.getItem('onof') == 'on')
-		{
-			editProspectoOn(id);
-			$.mobile.changePage("#venta", {transition:"slideup"});
+		if($('#accion_frm').val() == "editar"){
+			//FORMULARIO VENTA EDITAR
+			var id = $('#id_pros').val();
+			if(localStorage.getItem('onof') == 'on')
+			{
+				$(".lst_itm").html("");
+				editProspectoOn(id);
+				limpiarDataEdit();
+				$.mobile.changePage("#venta", {transition:"slideup"});
+			}else{
+				editProspectoOff(id);
+			}
 		}else{
-			editProspectoOff(id);
+			var idR;
+			//FORMULARIO VENTA NUEVO
+			for(i=0; i<reqArr.length; i++)
+			{
+				idR = "#req_"+reqArr[i]+":checked";
+				console.log(idR+" : "+$(idR).val());
+			}
+			
 		}
 	});
 
-	/*$("body").on("keyup",".inpt_sel", function(e){
-		
-		var dat = $("#"+this.id).val();
-		console.log(dat)
-		$.ajax({
-			type: 'POST',
-			dataType: 'json', 
-			data: {dat:dat},
-			beforeSend : function (){
-		    },
-			url: "https://roinet.pe/NWROInet/venta/index.php/mobile_controller/prueba",
-			success : function(data) {
-				if(data != 0){
-					for(var i=0; i< data.length; i++)
-					{ 
-						console.log(data[i].razon_social)
-					}
-				}
-			},
-			error: function(data){
-				console.log(data);
-			}
-		});
-	});*/
+	$("body").on("keyup",".inpt_sel", function(e){
 
-	
+		var availableTags = [
+	      "ActionScript",
+	      "AppleScript",
+	      "Asp",
+	      "BASIC",
+	      "C",
+	      "C++",
+	      "Clojure",
+	      "COBOL",
+	      "ColdFusion",
+	      "Erlang",
+	      "Fortran",
+	      "Groovy",
+	      "Haskell",
+	      "Java",
+	      "JavaScript",
+	      "Lisp",
+	      "Perl",
+	      "PHP",
+	      "Python",
+	      "Ruby",
+	      "Scala",
+	      "Scheme"
+	    ];
+	    $( "#rsoc" ).autocomplete({
+	      source: availableTags
+	    });
+	});
 
 	//OFFLINE
 
@@ -321,6 +347,7 @@ $(document).ready(function () {
 		});
 		limpiarDataEdit();
 		listarProspectoOff(idFase);
+		listarFaseOff();
 		$.mobile.changePage("#venta", {transition:"slideup"});
        	return false;
 	}
@@ -380,6 +407,7 @@ $(document).ready(function () {
 		{
 			listarFaseOff();
 			listarProspectoOff(idFase);
+			$( "#cont_reque" ).html("");
 		}
 	}
 
@@ -446,12 +474,13 @@ $(document).ready(function () {
 			url: "https://roinet.pe/NWROInet/venta/index.php/mobile_controller/editProspectoOn",
 			success : function(data) {
 				if(data != 0){
-					//limpiarDataEdit();
 					var usuid = localStorage.getItem('id_usu');
+					llenarFase()
 					llenarProspecto(usuid);
 					llenarCuenta(usuid);
 					llenarContacto(usuid);
 					listarProspecto(idFase);
+
 					//listarProspecto(idFase);
 					//$.mobile.changePage("#venta", {transition:"slideup"});
 				}
@@ -460,11 +489,11 @@ $(document).ready(function () {
 				console.log(data);
 			}
 		});
-		limpiarDataEdit()
 	}
 
-	function getProspectoIdOn(id)
+	function getProspectoIdOn(id)//permite traer todos los datos del prospecto incluyendo los requisitos
 	{
+		var reqArrTemp = [];
 		$.ajax({
 			type: 'POST',
 			dataType: 'json', 
@@ -486,6 +515,20 @@ $(document).ready(function () {
 					$('#id_pros').val(data.id_pros);
 					$('#id_cuen').val(data.id_cuen);
 					$('#id_con').val(data.id_con);
+
+					for (var i = 0; i < reqArr.length; i++) {
+						var a = "req_"+reqArr[i];
+						var b = "reqc_"+reqArr[i];
+						if(data[a] == "S"){
+							$('#'+a+":checkbox").prop('checked', true);
+							$('.'+b+" span span.ui-icon").removeClass( "ui-icon-checkbox-off" )
+							$('.'+b+" span span.ui-icon").addClass( "ui-icon-checkbox-on" )
+						}else{
+							$('#'+a+":checkbox").prop('checked', false);
+							$('.'+b+" span span.ui-icon").addClass( "ui-icon-checkbox-off" )
+							$('.'+b+" span span.ui-icon").removeClass( "ui-icon-checkbox-on" )
+						}
+					};
 				}
 			},
 			error: function(data){
@@ -503,7 +546,33 @@ $(document).ready(function () {
 			llenarProspecto(id);
 			llenarCuenta(id);
 			llenarContacto(id);
+
+			mostrarRequisitosHtml();
 		}
+	}
+
+	function mostrarRequisitosHtml()
+	{
+		$.ajax({
+			type: 'POST',
+			dataType: 'json', 
+			data: {},
+			beforeSend : function (){
+		    },
+			url: "https://roinet.pe/NWROInet/venta/index.php/mobile_controller/gerRequisitos",
+			success : function(data) {
+				if(data != 0){
+					for(var i=0; i< data.length; i++)
+					{
+						reqArr[i]=data[i]['id_req'];
+						$( "#cont_reque" ).append("<article class='cont_req cont_ckh_reg'><input type='checkbox' name='req_"+data[i]['id_req']+"' id='req_"+data[i]['id_req']+"' class='chkocultar'/><label class='lblcheck reqc_"+data[i]['id_req']+"' for='req_"+data[i]['id_req']+"' >"+data[i]['descripcion_req']+"</label></article>");
+					}
+				}
+			},
+			error: function(data){
+				console.log(data);
+			}
+		});
 	}
 
 	function llenarProspecto(id)
@@ -534,7 +603,7 @@ $(document).ready(function () {
 							idFa = data[i]['id_fpros'];
 							idE = data[i]['id_epros'];
 							cam = 'n';
-							tx.executeSql('INSERT INTO tb_prospecto(id, id_cuenta, id_contacto, presupuesto, necesidad, propuesta, fecha_aprox, id_fase, id_estado, cambio) VALUES (?,?,?,?,?,?,?,?,?,?)',[idP,idC,idO,pre,nec,prop,fecha,idFa,idE, cam], nullHandler,aqui);
+							tx.executeSql('INSERT INTO tb_prospecto(id, id_cuenta, id_contacto, presupuesto, necesidad, propuesta, fecha_aprox, id_fase, id_estado, cambio) VALUES (?,?,?,?,?,?,?,?,?,?)',[idP,idC,idO,pre,nec,prop,fecha,idFa,idE, cam], nullHandler,errorBD);
 						}
 					});
 				}

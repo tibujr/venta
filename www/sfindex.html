@@ -5,10 +5,12 @@
   	<title>Ventas - Roinet</title>
     <meta name="format-detection" content="telephone=no" />
   	<meta name="viewport" content="user-scalable=no, maximum-scale=1, minimum-scale=1, user-scalable=no, initial-scale=1, width=device-width, height=device-height">
+    <link rel="stylesheet" href="css/jquery-ui.css" />
   	<link rel="stylesheet" href="css/jquery.mobile-1.3.2.min.css" />
   	<link rel="stylesheet" type="text/css" href="css/estilo.css" />
     <script type="text/javascript" src="js/phonegap.js"></script>
     <script type="text/javascript" src="js/jquery.js"></script>
+    <script type="text/javascript" src="js/jquery-ui-1.10.4.custom.min.js"></script>
   	<script type="text/javascript" src="js/jquery.mobile-1.3.2.min.js"></script>
   	<script type="text/javascript" src="js/accion.js"></script>
 
@@ -43,6 +45,7 @@
 
   <section data-role="page" id="venta">
     <article data-role="header" id="d_usu" data-id="top_fijo" data-position="fixed" class="cab_nav">
+      <a href="#" data-rel="back" class="btn_back"><div class="icon-arrow-left atras_btn"></div><label>Atras</label></a>
       <div class="con_cab_a"><h1>Ventas</h1></div>
       <div data-role="navbar" data-grid="d" id="cont_cab_nav">
         <ul>
@@ -72,9 +75,9 @@
     <article data-role="footer" data-position="fixed" data-id="pie_fijo" data-theme="b" class="pie">
       <div data-role="navbar" data-grid="b" id="cont_pie_nav">
         <ul>
-          <li><a href="#venta"><div class="icon-plus"> <label>Venta</label></div></a></li>
+          <li><a href="javascript:;" id='btn_add_venta'><div class="icon-plus"> <label>Venta</label></div></a></li>
           <li><a href="#contacto"><div class="icon-plus"> <label>Contacto</label></div></a></li>
-          <li><a href="#agenda" class="sin_r"><div class="icon-plus"> <label>Agenda</label></div></a></li>
+          <li><a href="#actividad" class="sin_r"><div class="icon-plus"> <label>Actividad</label></div></a></li>
         </ul>
       </div>
     </article>
@@ -101,9 +104,9 @@
      <article data-role="footer" data-position="fixed" data-id="pie_fijo" data-theme="b" class="pie">
         <div data-role="navbar" data-grid="b" id="cont_pie_nav">
           <ul>
-            <li><a href="#venta"><div class="icon-plus"> <label>Venta</label></div></a></li>
+            <li><a href="javascript:;" id='btn_add_venta'><div class="icon-plus"> <label>Venta</label></div></a></li>
             <li><a href="#contacto"><div class="icon-plus"> <label>Contacto</label></div></a></li>
-            <li><a href="#agenda" class="sin_r"><div class="icon-plus"> <label>Agenda</label></div></a></li>
+            <li><a href="#actividad" class="sin_r"><div class="icon-plus"> <label>Actividad</label></div></a></li>
           </ul>
       </div>
     </article>
@@ -137,9 +140,9 @@
      <article data-role="footer" data-position="fixed" data-id="pie_fijo" data-theme="b" class="pie">
         <div data-role="navbar" data-grid="b" id="cont_pie_nav">
           <ul>
-            <li><a href="#venta"><div class="icon-plus"> <label>Venta</label></div></a></li>
+            <li><a href="javascript:;" id='btn_add_venta'><div class="icon-plus"> <label>Venta</label></div></a></li>
             <li><a href="#contacto"><div class="icon-plus"> <label>Contacto</label></div></a></li>
-            <li><a href="#agenda" class="sin_r"><div class="icon-plus"> <label>Agenda</label></div></a></li>
+            <li><a href="#actividad" class="sin_r"><div class="icon-plus"> <label>Actividad</label></div></a></li>
           </ul>
       </div>
     </article>
@@ -164,6 +167,7 @@
         <!--<article class='popup_Nusu'>-->
           <section class='cont_pupup_Nusu'>
                 <section class="lst_campos">
+                  <input type='hidden' id='accion_frm' name='accion_frm' value=''>
                   <input type='hidden' id='id_pros' name='id_pros' value=''>
                   <input type='hidden' id='id_cuen' name='id_cuen' value=''>
                   <input type='hidden' id='id_con' name='id_con' value=''>
@@ -200,7 +204,8 @@
                     <label class='fecha_aprox'>Fecha Aproximada de Cierre</label>
                     <input type='date' data-bind="value: processDate" data-value-update="blur" id='fecha_aprox' class='inpt_sel'>
                   </article>
-                  <article class='cont_req cont_ckh_reg'>
+                  <section id='cont_reque'>
+                  <!--<article class='cont_req cont_ckh_reg'>
                     <input type="checkbox" name="firma" id="firma"  class='chkocultar'/>
                     <label for="firma" class='lblcheck'>Firma del Contrato</label>
                   </article>
@@ -211,12 +216,13 @@
                   <article class='cont_req cont_ckh_reg'>
                     <input type="checkbox" name="entraga" id="entraga" class="chkocultar" />
                     <label for="entraga" class='lblcheck'>Entrega de Producto</label>
-                  </article>
+                  </article>-->
+                  </section>
                 </section>
                 <section class='cont_btn_form'>
                   <article id='btn_cancelar_frm'><a href="#" data-rel='back'>CANCELAR</a></article>
                   <article id='btn_guardar_frm'><label>GUARDAR</label></article>
-                </section>  
+                </section>
           </section>
         <!--</article>-->
       </section>
@@ -224,9 +230,9 @@
      <article data-role="footer" data-position="fixed" data-id="pie_fijo" data-theme="b" class="pie">
         <div data-role="navbar" data-grid="b" id="cont_pie_nav">
           <ul>
-            <li><a href="#venta"><div class="icon-plus"> <label>Venta</label></div></a></li>
+            <li><a href="javascript:;"><div class="icon-plus"> <label>Venta</label></div></a></li>
             <li><a href="#contacto"><div class="icon-plus"> <label>Contacto</label></div></a></li>
-            <li><a href="#agenda" class="sin_r"><div class="icon-plus"> <label>Agenda</label></div></a></li>
+            <li><a href="#actividad" class="sin_r"><div class="icon-plus"> <label>Actividad</label></div></a></li>
           </ul>
       </div>
     </article>
