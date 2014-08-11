@@ -217,7 +217,7 @@ $(document).ready(function () {
 
 	$("body").on('change', '#cboFase', function(e){
 		var id = $('#cboFase').val();
-		idFase = id;
+		idFase = id; 
 		if(localStorage.getItem('onof') == 'on')
 		{
 			listarProspecto(id);
@@ -256,6 +256,15 @@ $(document).ready(function () {
 		$("#prop").val("");
 		$("#fecha_aprox").val("");
 
+		for (var i = 0; i < reqArr.length; i++) {
+			var a = "req_"+reqArr[i];
+			var b = "reqc_"+reqArr[i];
+			
+			$('#'+a+":checkbox").prop('checked', false);
+			$('.'+b+" span span.ui-icon").addClass( "ui-icon-checkbox-off" )
+			$('.'+b+" span span.ui-icon").removeClass( "ui-icon-checkbox-on" )
+		};
+
 		/*if(localStorage.getItem('onof') == 'on')
 		{
 			//getProspectoIdOn(idv);
@@ -277,11 +286,10 @@ $(document).ready(function () {
 		if($('#accion_frm').val() == "editar"){
 			//FORMULARIO VENTA EDITAR
 			var id = $('#id_pros').val();
+			//$(".lst_itm").html("");
 			if(localStorage.getItem('onof') == 'on')
 			{
-				$(".lst_itm").html("");
 				editProspectoOn(id);
-				limpiarDataEdit();
 				$.mobile.changePage("#venta", {transition:"slideup"});
 			}else{
 				editProspectoOff(id);
@@ -479,10 +487,8 @@ $(document).ready(function () {
 					llenarProspecto(usuid);
 					llenarCuenta(usuid);
 					llenarContacto(usuid);
-					listarProspecto(idFase);
-
 					//listarProspecto(idFase);
-					//$.mobile.changePage("#venta", {transition:"slideup"});
+					limpiarDataEdit();
 				}
 			},
 			error: function(data){
