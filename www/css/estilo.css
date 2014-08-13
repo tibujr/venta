@@ -1,5 +1,9 @@
 /*CAMBIOS DEL SISTEMA*/
 
+.ui-checkbox-on .ui-icon, .ui-radio-on .ui-icon {
+  background-color: #4596ce;
+}
+
 .cont_req .ui-input-text{
   margin: 5px 0 0 0 !important;
   padding-bottom: 3px !important;

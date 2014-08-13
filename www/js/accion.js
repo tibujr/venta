@@ -114,7 +114,8 @@ $(document).ready(function () {
 		}else if( $("#clave").val() == ""){
 			$("#clave").focus().after("<span class='menError'>Ingresa clave</span>");
 			return false;
-		}else{
+		}else{ 
+			idFase = 1;
 			var usu = $("#mail").val();
 			var clv = $("#clave").val();
 			if(localStorage.getItem('onof') == 'on')
@@ -429,7 +430,10 @@ $(document).ready(function () {
 					for (var i = 0; i < result.rows.length; i++) {
 						var row = result.rows.item(i);
 						$("#cboFase").append("<option value='"+row.id+"'>"+row.descripcion+"</option>")
-						if(row.id == idFase){ $(".fase_tit div div div span span span").html(row.descripcion)}
+						if(row.id == idFase){ 
+							$(".fase_tit div div div span span span").html(row.descripcion)
+							$("#cboFase option[value="+ row.id +"]").attr("selected",true);
+						}
 					}
 				}else{
 					alert("Debe iniciar una coneccion a internet para continuar")
@@ -473,21 +477,34 @@ $(document).ready(function () {
 		var idCuenta = $('#id_cuen').val();
 		var idContact = $('#id_con').val();
 
+		var reqArrTemp = Array();
+
+		var idReq;
+		for(i=0; i<reqArr.length; i++)
+		{
+			if($("#req_"+reqArr[i]+":checked").val() == "on"){
+				reqArrTemp[reqArr[i]] = "S";
+			}
+			else{
+				reqArrTemp[reqArr[i]] = "N";
+			}
+		}
+
 		$.ajax({
 			type: 'POST',
 			dataType: 'json', 
-			data: {rsE:rsE, rucE:rucE, nomE:nomE, apeE:apeE, preE:preE, necE:necE, proE:proE, fecE:fecE, idProsp:idProsp, idCuenta:idCuenta, idContact:idContact},
+			data: {rsE:rsE, rucE:rucE, nomE:nomE, apeE:apeE, preE:preE, necE:necE, proE:proE, fecE:fecE, idProsp:idProsp, idCuenta:idCuenta, idContact:idContact, reqArrTemp:reqArrTemp},
 			beforeSend : function (){
 		    },
 			url: "https://roinet.pe/NWROInet/venta/index.php/mobile_controller/editProspectoOn",
 			success : function(data) {
 				if(data != 0){
+					console.log(data);
 					var usuid = localStorage.getItem('id_usu');
 					llenarFase()
 					llenarProspecto(usuid);
 					llenarCuenta(usuid);
 					llenarContacto(usuid);
-					//listarProspecto(idFase);
 					limpiarDataEdit();
 				}
 			},
@@ -499,7 +516,6 @@ $(document).ready(function () {
 
 	function getProspectoIdOn(id)//permite traer todos los datos del prospecto incluyendo los requisitos
 	{
-		var reqArrTemp = [];
 		$.ajax({
 			type: 'POST',
 			dataType: 'json', 
@@ -534,7 +550,7 @@ $(document).ready(function () {
 							$('.'+b+" span span.ui-icon").addClass( "ui-icon-checkbox-off" )
 							$('.'+b+" span span.ui-icon").removeClass( "ui-icon-checkbox-on" )
 						}
-					};
+					}
 				}
 			},
 			error: function(data){
@@ -559,6 +575,7 @@ $(document).ready(function () {
 
 	function mostrarRequisitosHtml()
 	{
+		$( "#cont_reque" ).html("");
 		$.ajax({
 			type: 'POST',
 			dataType: 'json', 
@@ -710,7 +727,10 @@ $(document).ready(function () {
 							tx.executeSql('INSERT INTO tb_fase(id,descripcion) VALUES (?,?)',[id, desc], nullHandler,errorBD);
 							//llenado de combo
 							$("#cboFase").append("<option value='"+id+"'>"+desc+"</option>")
-							if(id == idFase){ $(".fase_tit div div div span span span").html(desc)}
+							if(id == idFase){ 
+								$(".fase_tit div div div span span span").html(desc);
+								$("#cboFase option[value="+ id +"]").attr("selected",true);
+							}
 
 						}
 					});
