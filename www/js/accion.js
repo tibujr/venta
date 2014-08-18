@@ -564,7 +564,10 @@ $(document).ready(function () {
 					//agregar o quitar check actividad
 					if(data.hoy == 'S'){
 						$(".hora_scit").css({width : '30%'});
-						$(".hora_scit").css({display : 'inline-block'});
+						$(".check_actv").css({display : 'inline-block'});
+					}else{
+						$(".hora_scit").css({width : '45%'});
+						$(".check_actv").css({display : 'none'});
 					}
 				}
 			},
