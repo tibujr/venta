@@ -99,6 +99,7 @@
   height: 20px;
   vertical-align: top;
   margin-top: 9px;
+  overflow: hidden;
 }
 
 .fecha_scit{

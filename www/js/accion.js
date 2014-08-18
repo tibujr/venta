@@ -341,6 +341,47 @@ $(document).ready(function () {
 	    });
 	});
 
+	$("body").on("change","#activ", function(e){
+		if(confirm('¿marcar como terminado?')){
+			if($("#activ:checked").val() == "on"){
+				var usuid = localStorage.getItem('id_usu');
+				var idAct = $("#activ_check").val();
+
+				$.ajax({
+					type: 'POST',
+					dataType: 'json', 
+					data: {usuid:usuid, idAct:idAct},
+					beforeSend : function (){
+				    },
+					url: "https://roinet.pe/NWROInet/venta/index.php/mobile_controller/evaluarActividad",
+					success : function(data) {
+						/*if(data != 0){
+
+						}*/
+						$('#sig_cita').val("");
+						$('#hra_cita').val("");
+						$('#activ_check').val("");
+
+						alert("GUARDADO");
+
+						$(".hora_scit").css({width : '45%'});
+						$(".check_actv").css({display : 'none'});
+
+						$("#activ:checkbox").prop('checked', false);
+						$("#activ:checkbox").removeClass( "ui-icon-checkbox-off" )
+						$("#activ:checkbox").addClass( "ui-icon-checkbox-on" )
+					},
+					error: function(data){
+						console.log(data);
+					}
+				});
+			}
+		}else{
+			console.log("no");
+			$("#activ:checkbox").prop('checked', false);
+		}
+	});
+
 	//OFFLINE
 
 	function editProspectoOff(id)
@@ -546,6 +587,7 @@ $(document).ready(function () {
 
 					$('#sig_cita').val(data.fecha_act);
 					$('#hra_cita').val(data.hora_act);
+					$('#activ_check').val(data.id_act);
 
 					for (var i = 0; i < reqArr.length; i++) {
 						var a = "req_"+reqArr[i];
@@ -560,6 +602,8 @@ $(document).ready(function () {
 							$('.'+b+" span span.ui-icon").removeClass( "ui-icon-checkbox-on" )
 						}
 					}
+
+					console.log("actividad "+data.id_act)
 
 					//agregar o quitar check actividad
 					if(data.hoy == 'S'){
