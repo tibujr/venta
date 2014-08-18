@@ -91,29 +91,89 @@
 
 /*CONTACTOS*/
 
+/*sistema contacto*/
+
+.check_actv{
+  display: none;
+  width: 15%;
+  height: 20px;
+  vertical-align: top;
+  margin-top: 9px;
+}
+
+.fecha_scit{
+  display: inline-block;
+  width: 50%;
+}
+
+.hora_scit{
+  display: inline-block;
+  width: 45%;
+  margin-left: 5% !important;
+}
+
+.ico_empresa_contactos{
+  display: inline-block;
+  width: 36px;
+  height: 29px;
+  font-size: 20px;
+  background: #df2047;
+  margin: 10px;
+  border-radius: 18px;
+  text-align: center;
+  padding-top: 8px;
+  color: #ffffff;
+}
+
+
+.ico_empresa_contactos div{
+  text-shadow: 0 1px 0 #df2047;
+}
+
+
 #cont_contacto{
-  width: 100%;
-  height: 100%;
+  width: 96%;
+  height: 96%;
+  margin-top: 3%;
+  text-align: center;
+  background: gray;
+  display: inline-block;
+  border: 1px solid #eeeeee;
 }
 
 .cont_elm_contacto{
-
-}
+  display: inline-block;
+  background: #ffffff;
+  width: 100%;
+  height: 56px;
+  font-size: 0;
+  }
 
 .uno_cont_ev{
-
+  display: inline-block;
+  width: 19%;
+  height: 57px;
 }
 
 .dos_cont_ev{
-
+  display: inline-block;
+  width: 81%;
+  height: 55px;
+  border-bottom: 1px solid #eeeeee;
+  font-size: 0;
+  vertical-align: top;
 }
 
 .dos_nom_ev{
-
+  display: inline-block;
+  width: 75%;
+  height: 56px;
 }
 
 .dos_ico_ev{
-
+  display: inline-block;
+  width: 25%;
+  height: 56px;
 }
 
 /*FIN CONTACTOS*/

@@ -126,10 +126,10 @@
         </ul>
       </div>
     </article>
-    <article data-role="content" class="cont_main"> 
+    <article data-role="content" class="cont_main" style='text-align: center;'> 
       <section id='cont_contacto'>
         <article class="cont_elm_contacto">
-          <section class="uno_cont_ev"></section>
+          <section class="uno_cont_ev"><article class='ico_empresa_contactos'><div class="icon-office"></div></article></section>
           <section class="dos_cont_ev">
             <article class="dos_nom_ev"></article>
             <article class="dos_ico_ev"></article>
@@ -218,6 +218,15 @@
                     <label for="entraga" class='lblcheck'>Entrega de Producto</label>
                   </article>-->
                   </section>
+                  <article class='cont_req'>
+                    <label class='sig_cita hra_cita'>Siguiente reunión</label>
+                    <div class='fecha_scit'><input type='date' id='sig_cita' class='inpt_sel'></div>
+                    <div class='hora_scit'><input type='time' max="23:00" min="08:00" step="900" id='hra_cita' class='inpt_sel'></div>
+                    <div class='check_actv'>
+                      <input type="checkbox" name="activ" id="activ"  class='chkocultar'/>
+                      <label for="activ" class='lblcheck'></label>
+                    </div>
+                  </article>
                 </section>
                 <section class='cont_btn_form'>
                   <article id='btn_cancelar_frm'><a href="#" data-rel='back'>CANCELAR</a></article>

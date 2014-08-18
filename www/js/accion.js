@@ -78,6 +78,9 @@ $(document).ready(function () {
 	}*/
 //*********************************************** FIN BASE DE DATOS WEBSQL
 	
+	//metodos inicializando
+	mostrarRequisitosHtml();
+
 	var reqArr = [];
 	var rucE, rsE, nomE, apeE, preE, necE, proE, fecE, camCuE = 'n', camCoE = 'n', camPrE = 'n'; //campos editar venta
 
@@ -416,7 +419,7 @@ $(document).ready(function () {
 		{
 			listarFaseOff();
 			listarProspectoOff(idFase);
-			$( "#cont_reque" ).html("");
+			$( "#cont_reque" ).css({display: 'none'});
 		}
 	}
 
@@ -476,6 +479,9 @@ $(document).ready(function () {
 		var idProsp = id;
 		var idCuenta = $('#id_cuen').val();
 		var idContact = $('#id_con').val();
+		var fecha_scit = $('#sig_cita').val();
+		var hora_scit = $('#hra_cita').val();
+		var usuedt =  localStorage.getItem('id_usu');
 
 		var reqArrTemp = Array();
 
@@ -493,7 +499,7 @@ $(document).ready(function () {
 		$.ajax({
 			type: 'POST',
 			dataType: 'json', 
-			data: {rsE:rsE, rucE:rucE, nomE:nomE, apeE:apeE, preE:preE, necE:necE, proE:proE, fecE:fecE, idProsp:idProsp, idCuenta:idCuenta, idContact:idContact, reqArrTemp:reqArrTemp},
+			data: {rsE:rsE, rucE:rucE, nomE:nomE, apeE:apeE, preE:preE, necE:necE, proE:proE, fecE:fecE, idProsp:idProsp, idCuenta:idCuenta, idContact:idContact, reqArrTemp:reqArrTemp, fecha_scit:fecha_scit, hora_scit:hora_scit, usuedt:usuedt},
 			beforeSend : function (){
 		    },
 			url: "https://roinet.pe/NWROInet/venta/index.php/mobile_controller/editProspectoOn",
@@ -514,7 +520,7 @@ $(document).ready(function () {
 		});
 	}
 
-	function getProspectoIdOn(id)//permite traer todos los datos del prospecto incluyendo los requisitos
+	function getProspectoIdOn(id)//permite traer todos los datos del prospecto incluyendo los requisitos 
 	{
 		$.ajax({
 			type: 'POST',
@@ -538,6 +544,9 @@ $(document).ready(function () {
 					$('#id_cuen').val(data.id_cuen);
 					$('#id_con').val(data.id_con);
 
+					$('#sig_cita').val(data.fecha_act);
+					$('#hra_cita').val(data.hora_act);
+
 					for (var i = 0; i < reqArr.length; i++) {
 						var a = "req_"+reqArr[i];
 						var b = "reqc_"+reqArr[i];
@@ -550,6 +559,12 @@ $(document).ready(function () {
 							$('.'+b+" span span.ui-icon").addClass( "ui-icon-checkbox-off" )
 							$('.'+b+" span span.ui-icon").removeClass( "ui-icon-checkbox-on" )
 						}
+					}
+
+					//agregar o quitar check actividad
+					if(data.hoy == 'S'){
+						$(".hora_scit").css({width : '30%'});
+						$(".hora_scit").css({display : 'inline-block'});
 					}
 				}
 			},
@@ -568,34 +583,36 @@ $(document).ready(function () {
 			llenarProspecto(id);
 			llenarCuenta(id);
 			llenarContacto(id);
-
-			mostrarRequisitosHtml();
+			$( "#cont_reque" ).css({display: 'block'});
 		}
 	}
 
+
+
 	function mostrarRequisitosHtml()
 	{
-		$( "#cont_reque" ).html("");
-		$.ajax({
-			type: 'POST',
-			dataType: 'json', 
-			data: {},
-			beforeSend : function (){
-		    },
-			url: "https://roinet.pe/NWROInet/venta/index.php/mobile_controller/gerRequisitos",
-			success : function(data) {
-				if(data != 0){
-					for(var i=0; i< data.length; i++)
-					{
-						reqArr[i]=data[i]['id_req'];
-						$( "#cont_reque" ).append("<article class='cont_req cont_ckh_reg'><input type='checkbox' name='req_"+data[i]['id_req']+"' id='req_"+data[i]['id_req']+"' class='chkocultar'/><label class='lblcheck reqc_"+data[i]['id_req']+"' for='req_"+data[i]['id_req']+"' >"+data[i]['descripcion_req']+"</label></article>");
+		if(localStorage.getItem('onof') == 'on'){
+			$.ajax({
+				type: 'POST',
+				dataType: 'json', 
+				data: {},
+				beforeSend : function (){
+			    },
+				url: "https://roinet.pe/NWROInet/venta/index.php/mobile_controller/getRequisitos",
+				success : function(data) {
+					if(data != 0){
+						for(var i=0; i< data.length; i++)
+						{
+							reqArr[i]=data[i]['id_req'];
+							$( "#cont_reque" ).append("<article class='cont_req cont_ckh_reg'><input type='checkbox' name='req_"+data[i]['id_req']+"' id='req_"+data[i]['id_req']+"' class='chkocultar'/><label class='lblcheck reqc_"+data[i]['id_req']+"' for='req_"+data[i]['id_req']+"' >"+data[i]['descripcion_req']+"</label></article>");
+						}
 					}
+				},
+				error: function(data){
+					console.log(data);
 				}
-			},
-			error: function(data){
-				console.log(data);
-			}
-		});
+			});
+		}
 	}
 
 	function llenarProspecto(id)
