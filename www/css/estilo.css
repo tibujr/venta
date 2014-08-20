@@ -93,6 +93,13 @@
 
 /*sistema contacto*/
 
+#agre_cont article input{
+  border: none;
+  border-bottom: 1px solid #CCC;
+  width: 100%;
+  padding: 5px 0 !important;
+}
+
 .ui-autocomplete{
   max-width: 84%;
 }
@@ -263,7 +270,7 @@
   display: inline-block;
   width: 100%;
   color: #a9a9a9;
-  font: 13px ProximaNova, sans-serif;
+  font: 12px ProximaNova, sans-serif;
 }
 
 .cont_req input{
