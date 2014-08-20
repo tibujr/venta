@@ -189,6 +189,35 @@ $(document).ready(function () {
 		}		
 	});
 
+	$("body").on('click', '#agregar_contacto_np', function(e){
+		if( $("#ndeci").val() == ""){
+			$("#ndeci").focus().after("<span class='menError'>Ingrese nombre</span>");
+			return false;
+		}else if( $("#pdeci").val() == ""){
+			$("#pdeci").focus().after("<span class='menError'>Ingrese apellido</span>");
+			return false;
+		}else{
+
+			var ntap = $("#ndeci").val();
+			var atap = $("#pdeci").val();
+
+			$("#nomConNP").val(ntap);
+			$("#apeConNP").val(atap);
+
+			$("#agre_cont").fadeOut();
+			$("#popup_fnd").fadeOut();
+
+			$("#nom_deci").val(ntap+" "+atap).prop('disabled', true);
+		}
+	});
+
+	$("#ndeci, #pdeci").keyup(function(){
+		if( $(this).val() != "" ){
+			$(".menError").fadeOut();			
+			return false;
+		}		
+	});
+
 	$("body").on('click', '#btn_venta', function(e){
 		var id = $('#cboFase').val();
 		if(localStorage.getItem('onof') == 'on'){
@@ -310,35 +339,79 @@ $(document).ready(function () {
 		}
 	});
 
-	$("body").on("keyup",".inpt_sel", function(e){
+	$("body").on("keyup","#rsoc", function(e){
 
-		var availableTags = [
-	      "ActionScript",
-	      "AppleScript",
-	      "Asp",
-	      "BASIC",
-	      "C",
-	      "C++",
-	      "Clojure",
-	      "COBOL",
-	      "ColdFusion",
-	      "Erlang",
-	      "Fortran",
-	      "Groovy",
-	      "Haskell",
-	      "Java",
-	      "JavaScript",
-	      "Lisp",
-	      "Perl",
-	      "PHP",
-	      "Python",
-	      "Ruby",
-	      "Scala",
-	      "Scheme"
-	    ];
-	    $( "#rsoc" ).autocomplete({
-	      source: availableTags
-	    });
+		var dtb = $("#rsoc").val();
+
+		if(dtb == ""){
+			$("#rsoc").autocomplete({source: []});
+			$("#nom_deci").autocomplete({source: []});
+			$("#nom_deci").val("").prop('disabled', false);
+		}
+
+        if (!(event.keyCode == 38 || event.keyCode == 40 || event.keyCode == 13)) {
+        	$.ajax({
+	          	type: 'POST',
+				dataType: 'json', 
+				data: {dtb:dtb},
+				cache: false,
+				url: "https://roinet.pe/NWROInet/venta/index.php/mobile_controller/search_empresa",
+				success : function(datab) {
+	              if (datab != 0) {
+	              	console.log(datab)
+	                $("#rsoc").autocomplete({
+	                  	source: datab,
+	                  	minLength: 1,
+	                  	autoFocus : true,
+	                  	select: function(e,u){ 
+	                  		var codCuen = u.item.id_cuen;
+				 			$("#id_cuen").val(codCuen); 
+							//$("#ruc_cuen").val(u.item.ruc).prop('disabled', true);
+	                        $.ajax({
+								type: 'POST',
+								dataType: 'json', 
+								data: {codCuen:codCuen},
+								url: "https://roinet.pe/NWROInet/venta/index.php/mobile_controller/search_contacto",
+								success : function(datac) {
+	                                if (datac != 0) {
+	                                	if(datac.length == 1){
+		                                	$("#id_con").val(datac[0].id_con);
+                                        	$("#nom_deci").val(datac[0].value).prop('disabled', true);
+                                        	$("#presu").focus();
+                                        	$("#nom_deci").autocomplete({source: []});
+	                                    }else{
+	                                    	$("#nom_deci").autocomplete({
+							                  	source: datac,
+							                  	minLength: 0,
+							                  	autoFocus : true,
+							                  	select: function(e,u){
+										 			$("#id_con").val(u.item.id_con); 
+										 		}
+										 	}).on('focus', function(event) {
+	                                       	 	var self = this;
+	                                        	$(self).autocomplete( "search", "");
+	                                        });
+	                                        $("#nom_deci").focus();
+	                                    }
+	                                }else{
+	                                	$("#nom_deci").autocomplete({source: []});
+	                                	//$(".cont_req").children("div#agre_cont").remove();
+	                                	alert("debe ingresar un contacto");
+	                                	$("#agre_cont").fadeIn();//css({display: 'none'});
+										$("#popup_fnd").fadeIn();
+	                                }
+								}
+							});
+						}
+	                  });//,html: true
+	                }//);
+	              //}
+	          },
+	          error: function(data){
+	            console.log(data);
+	          }
+	        });
+        }
 	});
 
 	$("body").on("change","#activ", function(e){
@@ -361,15 +434,11 @@ $(document).ready(function () {
 						$('#sig_cita').val("");
 						$('#hra_cita').val("");
 						$('#activ_check').val("");
-
-						alert("GUARDADO");
-
 						$(".hora_scit").css({width : '45%'});
 						$(".check_actv").css({display : 'none'});
-
 						$("#activ:checkbox").prop('checked', false);
-						$("#activ:checkbox").removeClass( "ui-icon-checkbox-off" )
-						$("#activ:checkbox").addClass( "ui-icon-checkbox-on" )
+						$(".lbact span span.ui-icon").addClass( "ui-icon-checkbox-off" )
+						$(".lbact span span.ui-icon").removeClass( "ui-icon-checkbox-on" )
 					},
 					error: function(data){
 						console.log(data);
@@ -390,8 +459,8 @@ $(document).ready(function () {
 		if(nomE != $('#nom_deci').val() || apeE != $('#ape_deci').val()) camCoE = 's';
 		if(preE != $('#presu').val() || necE != $('#nece').val() || proE != $('#prop').val() || fecE != $('#fecha_aprox').val()) camPrE = 's';
 
-		var cu = "UPDATE tb_cuenta SET ruc = '"+$('#ruc').val()+"', razon_social='"+$('#rsoc').val()+"', cambio = '"+camCuE+"' WHERE id ="+$('#id_pros').val();
-		var co = "UPDATE tb_contacto SET nombre = '"+$('#nom_deci').val()+"', apellido='"+$('#ape_deci').val()+"', cambio = '"+camCoE+"' WHERE id ="+$('#id_con').val();
+		//var cu = "UPDATE tb_cuenta SET ruc = '"+$('#ruc').val()+"', razon_social='"+$('#rsoc').val()+"', cambio = '"+camCuE+"' WHERE id ="+$('#id_pros').val();
+		//var co = "UPDATE tb_contacto SET nombre = '"+$('#nom_deci').val()+"', apellido='"+$('#ape_deci').val()+"', cambio = '"+camCoE+"' WHERE id ="+$('#id_con').val();
 		var pr = "UPDATE tb_prospecto SET presupuesto = '"+$('#presu').val()+"', necesidad='"+$('#nece').val()+"', propuesta='"+$('#prop').val()+"', fecha_aprox='"+$('#fecha_aprox').val()+"', cambio = '"+camPrE+"' WHERE id ="+$('#id_pros').val();
 		db.transaction(function(transaction) {
 			transaction.executeSql(cu,[], nullHandler,errorBD);
@@ -509,10 +578,10 @@ $(document).ready(function () {
 
 	function editProspectoOn(id)
 	{
-		rsE = $("#rsoc").val();
+		/*rsE = $("#rsoc").val();
 		rucE = $("#ruc").val();
 		nomE = $("#nom_deci").val();
-		apeE = $("#ape_deci").val();
+		apeE = $("#ape_deci").val();*/
 		preE = $("#presu").val();
 		necE = $("#nece").val();
 		proE = $("#prop").val();
@@ -522,7 +591,9 @@ $(document).ready(function () {
 		var idContact = $('#id_con').val();
 		var fecha_scit = $('#sig_cita').val();
 		var hora_scit = $('#hra_cita').val();
-		var usuedt =  localStorage.getItem('id_usu');
+		var usuedt = localStorage.getItem('id_usu');
+
+		var idacti = $('#activ_check').val();
 
 		var reqArrTemp = Array();
 
@@ -540,7 +611,7 @@ $(document).ready(function () {
 		$.ajax({
 			type: 'POST',
 			dataType: 'json', 
-			data: {rsE:rsE, rucE:rucE, nomE:nomE, apeE:apeE, preE:preE, necE:necE, proE:proE, fecE:fecE, idProsp:idProsp, idCuenta:idCuenta, idContact:idContact, reqArrTemp:reqArrTemp, fecha_scit:fecha_scit, hora_scit:hora_scit, usuedt:usuedt},
+			data: {/*rsE:rsE, rucE:rucE, nomE:nomE, apeE:apeE, */preE:preE, necE:necE, proE:proE, fecE:fecE, idProsp:idProsp, idCuenta:idCuenta, idContact:idContact, reqArrTemp:reqArrTemp, fecha_scit:fecha_scit, hora_scit:hora_scit, usuedt:usuedt, idacti:idacti},
 			beforeSend : function (){
 		    },
 			url: "https://roinet.pe/NWROInet/venta/index.php/mobile_controller/editProspectoOn",
@@ -572,10 +643,11 @@ $(document).ready(function () {
 			url: "https://roinet.pe/NWROInet/venta/index.php/mobile_controller/getProspectoIdOn",
 			success : function(data) {
 				if(data != 0){
-					$("#rsoc").val(data.razon_social_cuen)
-					$("#ruc").val(data.ruc_cuen)
+					$("#rsoc").val(data.razon_social_cuen).prop('disabled', true);
+					$("#nom_deci").val(data.nombre_con+' '+data.apellido_con).prop('disabled', true);
+					/*$("#ruc").val(data.ruc_cuen)
 					$("#nom_deci").val(data.nombre_con)
-					$("#ape_deci").val(data.apellido_con)
+					$("#ape_deci").val(data.apellido_con)*/
 					$("#presu").val(data.presupuesto_pros)
 					$("#nece").val(data.necesidad_pros)
 					$("#prop").val(data.propuesta_pros)

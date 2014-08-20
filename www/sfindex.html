@@ -173,59 +173,53 @@
                   <input type='hidden' id='id_con' name='id_con' value=''>
                   <article class='cont_req'>
                     <label class='rsoc' style='heigth: 0px;'>Razón Social</label>
-                    <input type='text' id='rsoc' class='inpt_sel'>
+                    <input type='text' id='rsoc' name='rsoc' class='inpt_sel'>
                   </article>
                   <article class='cont_req'>
-                    <label class='ruc'>RUC</label>
-                    <input type='number' id='ruc' maxlength="11" class='inpt_sel'>
-                    <!--<input name="t1" type="time" size="5" value="13:00">-->
-                  </article>
-                  <article class='cont_req'>
-                    <label class='nom_deci'>Nombre  de decisor</label>
-                    <input type='text' id='nom_deci' class='inpt_sel'>
-                  </article>
-                  <article class='cont_req'>
-                    <label class='ape_deci'>Apellido de decisor</label>
-                    <input type='text' id='ape_deci' class='inpt_sel'>
+                    <label class='nom_deci'>Decisor</label>
+                    <input type='text' id='nom_deci' name='nom_deci' class='inpt_sel'>
+                    <div id='agre_cont'>
+                      <input type='hidden' id='nomConNP' name='nomConNP' value=''>
+                      <input type='hidden' id='apeConNP' name='apeConNP' value=''>
+                      <h1>NUEVO CONTACTO</h1>
+                      <article class='cont_req'>
+                        <label class='ndeci' style='heigth: 0px;'>Nombre</label>
+                        <input type='text' id='ndeci' name='ndeci' class='inpt_sel'>
+                      </article>
+                      <article class='cont_req'>
+                        <label class='pdeci' style='heigth: 0px;'>Apellido</label>
+                        <input type='text' id='pdeci' name='pdeci' class='inpt_sel'>
+                      </article>
+                      <section id='agregar_contacto_np'>Agregar</section>
+                    </div>
                   </article>
                   <article class='cont_req'>
                     <label class='presu'>Presupuesto</label>
-                    <input type='number' id='presu' class='inpt_sel'>
+                    <input type='number' id='presu' name='presu' class='inpt_sel'>
                   </article>
                   <article class='cont_req'>
                     <label class='nece'>Necesidad</label>
-                    <input type='text' id='nece' class='inpt_sel'>
+                    <input type='text' id='nece' name='nece' class='inpt_sel'>
                   </article>
                   <article class='cont_req'>
                     <label class='prop'>Propuesta</label>
-                    <input type='text' id='prop' class='inpt_sel'>
+                    <input type='text' id='prop' name='prop' class='inpt_sel'>
                   </article>
                   <article class='cont_req'>
                     <label class='fecha_aprox'>Fecha Aproximada de Cierre</label>
-                    <input type='date' data-bind="value: processDate" data-value-update="blur" id='fecha_aprox' class='inpt_sel'>
+                    <input type='date' data-bind="value: processDate" data-value-update="blur" id='fecha_aprox' name='fecha_aprox' class='inpt_sel'>
                   </article>
                   <section id='cont_reque'>
-                  <!--<article class='cont_req cont_ckh_reg'>
-                    <input type="checkbox" name="firma" id="firma"  class='chkocultar'/>
-                    <label for="firma" class='lblcheck'>Firma del Contrato</label>
-                  </article>
-                  <article class='cont_req cont_ckh_reg'>
-                    <input type="checkbox" name="pago" id="pago" class="chkocultar" />
-                    <label for="pago" class='lblcheck'>Pago de venta</label>
-                  </article>
-                  <article class='cont_req cont_ckh_reg'>
-                    <input type="checkbox" name="entraga" id="entraga" class="chkocultar" />
-                    <label for="entraga" class='lblcheck'>Entrega de Producto</label>
-                  </article>-->
+                    <label class='lblRequi'>Requisitos</label>
                   </section>
                   <article class='cont_req'>
-                    <input type='hidden' id='activ_check' name='activ_check' value=''>
                     <label class='sig_cita hra_cita'>Siguiente reunión</label>
                     <div class='fecha_scit'><input type='date' name='sig_cita' id='sig_cita' class='inpt_sel'></div>
-                    <div class='hora_scit'><input type='time' max="23:00" min="08:00" step="900" id='hra_cita' class='inpt_sel'></div>
+                    <div class='hora_scit'><input type='time' max="23:00" min="07:00" step="900" id='hra_cita' class='inpt_sel'></div>
                     <div class='check_actv'>
-                      <input type="checkbox" name="activ" id="activ"  class='chkocultar'/>
-                      <label for="activ" class='lblcheck activ'></label>
+                      <input type='hidden' id='activ_check' name='activ_check' value=''>
+                      <input type="checkbox" name="activ" id="activ" class='chkocultar'/>
+                      <label for="activ" class='lblcheck lbact'></label>
                     </div>
                   </article>
                 </section>
@@ -247,6 +241,8 @@
       </div>
     </article>
   </section>
+
+  <section id='popup_fnd'></section>
 
 </body>
 </html>

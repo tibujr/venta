@@ -93,6 +93,10 @@
 
 /*sistema contacto*/
 
+.ui-autocomplete{
+  max-width: 84%;
+}
+
 .check_actv{
   display: none;
   width: 15%;
@@ -126,6 +130,39 @@
   color: #ffffff;
 }
 
+#agre_cont{
+  display: none;
+  position: absolute;
+  background: white;
+  width: 75%;
+  padding: 5% 4%;
+  z-index: 5;
+  top: 150px;
+  left: 8.5%;
+  border-radius: 3px;
+  text-align: center;
+}
+
+#agre_cont h1{
+  display: inline-block;
+  font: 15px ProximaNova, sans-serif;
+  padding: 0;
+  margin: 6px 0;
+  font-weight: bold;
+}
+
+#agregar_contacto_np{
+  display: inline-block;
+  width: 100px;
+  margin-top: 15px;
+  padding: 10px 0;
+  font: 15px ProximaNova, sans-serif;
+  background: #df2047;
+  color: white;
+  text-shadow: none;
+  border-radius: 3px;
+  cursor: pointer;
+}
 
 .ico_empresa_contactos div{
   text-shadow: 0 1px 0 #df2047;
@@ -180,6 +217,15 @@
 /*FIN CONTACTOS*/
 
 /*conetedor ventas*/
+
+.lblRequi{
+  display: inline-block;
+  font: 13px ProximaNova, sans-serif;
+  float: left;
+  margin-left: 15px;
+  margin-top: 15px;
+  color: #a9a9a9;
+}
 
 .fase_tit  div span.ui-btn-inner, .fase_tit  div div span.ui-btn-inner {
   font-size: 13px;
@@ -368,6 +414,15 @@
   width: 100%;
 }
 
+#popup_fnd{
+  display: none;
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  background: black;
+  opacity: 0.75;
+}
+
 /*FIN CONTENEDOR CUERPO*/
 
 /* BOTONES DE NAVEGACIÓN CABECERA Y PIE*/
@@ -526,7 +581,7 @@
 }
 
 .menError{
-  background: rgb(88, 122, 160);
+  background: green;
   display: block;
   font-family: arial;
   color: white;
