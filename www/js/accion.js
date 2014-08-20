@@ -399,6 +399,7 @@ $(document).ready(function () {
 	                                	alert("debe ingresar un contacto");
 	                                	$("#agre_cont").fadeIn();//css({display: 'none'});
 										$("#popup_fnd").fadeIn();
+										$("#ndeci").focus();
 	                                }
 								}
 							});
