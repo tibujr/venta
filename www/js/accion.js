@@ -86,6 +86,8 @@ $(document).ready(function () {
 
 	var idFase = 1; // ID de la Fase que se muestra el prospecto
 	var al = ($('body').height())+1;
+
+	$("#popup_fnd").css({height: al});
 	
 	var cad = "100% "+al+"px";
 	$('#inicio').css({'background-size':cad});
