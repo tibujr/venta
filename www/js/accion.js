@@ -275,23 +275,31 @@ $(document).ready(function () {
 			getProspectoIdOff(idv);
 		}
 
+		$(".nvo_pros").css({display: 'inline-block'});
 		$.mobile.changePage("#formulario_venta", {transition:"slidedown"});
 
 	});
 
 	$("body").on("click","#btn_add_venta", function(e){
+
+		$(".nvo_pros").css({display: 'none'});
+
 		$('#accion_frm').val("nuevo");
 		$('#id_pros').val("");
 		$('#id_cuen').val("");
 		$('#id_con').val("");
-		$("#rsoc").val("");
-		$("#ruc").val("");
-		$("#nom_deci").val("");
-		$("#ape_deci").val("");
+		$("#rsoc").val("").prop('disabled', false);
+		$("#nom_deci").val("").prop('disabled', false);
 		$("#presu").val("");
 		$("#nece").val("");
 		$("#prop").val("");
 		$("#fecha_aprox").val("");
+
+		$("#ndeci").val("");
+		$("#pdeci").val("");
+		
+		$("#nomConNP").val("");
+		$("#apeConNP").val("");
 
 		for (var i = 0; i < reqArr.length; i++) {
 			var a = "req_"+reqArr[i];
@@ -327,33 +335,72 @@ $(document).ready(function () {
 			if(localStorage.getItem('onof') == 'on')
 			{
 				editProspectoOn(id);
-				$.mobile.changePage("#venta", {transition:"slideup"});
+				//$.mobile.changePage("#venta", {transition:"slideup"});
 			}else{
 				editProspectoOff(id);
+				//$.mobile.changePage("#venta", {transition:"slideup"});
 			}
+			$.mobile.changePage("#venta", {transition:"slideup"});
 		}else{
-			var idR;
-			//FORMULARIO VENTA NUEVO
-			for(i=0; i<reqArr.length; i++)
-			{
-				idR = "#req_"+reqArr[i]+":checked";
-				console.log(idR+" : "+$(idR).val());
+			if( $("#rsoc").val() == ""){
+				$("#rsoc").focus().after("<span class='menError'>Ingresar Razon social</span>");
+				return false;
+			}else if( $("#nom_deci").val() == ""){
+				$("#nom_deci").focus().after("<span class='menError'>Ingresar decisor</span>");
+				return false;
+			}else if( $("#presu").val() == ""){
+				$("#presu").focus().after("<span class='menError'>Ingresar presupuesto</span>");
+				return false;
+			}else if( $("#nece").val() == ""){
+				$("#nece").focus().after("<span class='menError'>Ingresar necesidad</span>");
+				return false;
+			}else if( $("#fecha_aprox").val() == ""){
+				$("#fecha_aprox").focus()//.after("<span class='menError'>Ingresar fecha aproximada</span>");
+				return false;
+			}else if( $("#sig_cita").val() == ""){
+				$("#sig_cita").focus()//.after("<span class='menError'>Ingresar fecha cita</span>");
+				return false;
+			}else if( $("#hra_cita").val() == ""){
+				$("#hra_cita").focus()//.after("<span class='menError'>Ingresar hora cita</span>");
+				return false;
+			}else{
+				if(localStorage.getItem('onof') == 'on')
+				{
+					agregarAprospectoOn();
+				}
+				else{
+					
+				}
 			}
-			
+			$.mobile.changePage("#venta", {transition:"slideup"});
 		}
 	});
 
-	$("body").on("keyup","#rsoc", function(e){
+	$("#nom_deci, #presu, #nece, #fecha_aprox, #sig_cita, #hra_cita").keyup(function(){
+		if( $(this).val() != "" ){
+			$(".menError").fadeOut();			
+			return false;
+		}		
+	});
+
+	//$('#rsoc').keyup(function() {
+	
+	$("body").on("keyup", "#rsoc", function(e){
+
+		$(".menError").fadeOut(); //eliminamos mensaje de error
 
 		var dtb = $("#rsoc").val();
-
 		if(dtb == ""){
 			$("#rsoc").autocomplete({source: []});
 			$("#nom_deci").autocomplete({source: []});
 			$("#nom_deci").val("").prop('disabled', false);
-		}
+		}/*else{
+						
+			return false;
+		}*/
 
         if (!(event.keyCode == 38 || event.keyCode == 40 || event.keyCode == 13)) {
+        	
         	$.ajax({
 	          	type: 'POST',
 				dataType: 'json', 
@@ -362,7 +409,7 @@ $(document).ready(function () {
 				url: "https://roinet.pe/NWROInet/venta/index.php/mobile_controller/search_empresa",
 				success : function(datab) {
 	              if (datab != 0) {
-	              	console.log(datab)
+	              	//console.log(datab)
 	                $("#rsoc").autocomplete({
 	                  	source: datab,
 	                  	minLength: 1,
@@ -370,7 +417,6 @@ $(document).ready(function () {
 	                  	select: function(e,u){ 
 	                  		var codCuen = u.item.id_cuen;
 				 			$("#id_cuen").val(codCuen); 
-							//$("#ruc_cuen").val(u.item.ruc).prop('disabled', true);
 	                        $.ajax({
 								type: 'POST',
 								dataType: 'json', 
@@ -399,7 +445,6 @@ $(document).ready(function () {
 	                                    }
 	                                }else{
 	                                	$("#nom_deci").autocomplete({source: []});
-	                                	//$(".cont_req").children("div#agre_cont").remove();
 	                                	alert("debe ingresar un contacto");
 	                                	$("#agre_cont").fadeIn();//css({display: 'none'});
 										$("#popup_fnd").fadeIn();
@@ -409,8 +454,7 @@ $(document).ready(function () {
 							});
 						}
 	                  });//,html: true
-	                }//);
-	              //}
+	                }
 	          },
 	          error: function(data){
 	            console.log(data);
@@ -475,7 +519,6 @@ $(document).ready(function () {
 		limpiarDataEdit();
 		listarProspectoOff(idFase);
 		listarFaseOff();
-		$.mobile.changePage("#venta", {transition:"slideup"});
        	return false;
 	}
 
@@ -580,6 +623,44 @@ $(document).ready(function () {
 	}
 
 	//ONLINE
+
+	function agregarAprospectoOn()
+	{
+		nomE = $("#nomConNP").val();
+		apeE = $("#apeConNP").val();
+		preE = $("#presu").val();
+		necE = $("#nece").val();
+		fecE = $("#fecha_aprox").val();
+
+		var fecha_scit = $('#sig_cita').val();
+		var hora_scit = $('#hra_cita').val();
+		var usuG = localStorage.getItem('id_usu');
+		var idCuenta = $('#id_cuen').val();
+		var idContact = $('#id_con').val();
+
+		$.ajax({
+			type: 'POST',
+			dataType: 'json', 
+			data: {nomE:nomE, apeE:apeE, preE:preE, necE:necE, fecE:fecE, fecha_scit:fecha_scit, hora_scit:hora_scit, usuG:usuG, idCuenta:idCuenta, idContact:idContact},
+			beforeSend : function (){
+		    },
+			url: "https://roinet.pe/NWROInet/venta/index.php/mobile_controller/guardaNuevoProspecto",
+			success : function(data) {
+				if(data != 0){
+					console.log(data+" : inserto con exito");
+					var usuid = localStorage.getItem('id_usu');
+					llenarFase()
+					llenarProspecto(usuid);
+					llenarCuenta(usuid);
+					llenarContacto(usuid);
+					limpiarDataEdit();
+				}
+			},
+			error: function(data){
+				console.log(data);
+			}
+		});
+	}
 
 	function editProspectoOn(id)
 	{
