@@ -1,22 +1,5 @@
 $(document).ready(function () {
 
-	/*ORIENTACION VERTICAL PERMANENTE
-	window.addEventListener("orientationchange", orientationChange, true);
-	function orientationChange(e) {
-		var orientation="portrait";
-		if(window.orientation == -90 || window.orientation == 90) orientation = "landscape";
-		document.getElementById("status").innerHTML+=orientation+"<br>";
-	}
-	/*FIN ORIENTACION VERTICAL PERMANENTE*/
-
-	/*var container = $('.lst_campos'),
-    scrollTo = $('#row_8');
-
-	container.animate({
-	    scrollTop: scrollTo.offset().top - container.offset().top + container.scrollTop()
-	});
-*/
-
 	$(".lst_campos").animate({scrollTop: 0});
 	$("#cont_contacto").animate({scrollTop: 0});
 
@@ -394,22 +377,20 @@ $(document).ready(function () {
 			$("#rsoc").autocomplete({source: []});
 			$("#nom_deci").autocomplete({source: []});
 			$("#nom_deci").val("").prop('disabled', false);
-		}/*else{
-						
-			return false;
-		}*/
+		}
 
         if (!(event.keyCode == 38 || event.keyCode == 40 || event.keyCode == 13)) {
         	
+        	var usuid = localStorage.getItem('id_usu');
         	$.ajax({
 	          	type: 'POST',
 				dataType: 'json', 
-				data: {dtb:dtb},
+				data: {dtb:dtb,usuid:usuid},
 				cache: false,
 				url: "https://roinet.pe/NWROInet/venta/index.php/mobile_controller/search_empresa",
 				success : function(datab) {
 	              if (datab != 0) {
-	              	//console.log(datab)
+	              	console.log(datab)
 	                $("#rsoc").autocomplete({
 	                  	source: datab,
 	                  	minLength: 1,
@@ -851,6 +832,10 @@ $(document).ready(function () {
 							tx.executeSql('INSERT INTO tb_prospecto(id, id_cuenta, id_contacto, presupuesto, necesidad, propuesta, fecha_aprox, id_fase, id_estado, cambio) VALUES (?,?,?,?,?,?,?,?,?,?)',[idP,idC,idO,pre,nec,prop,fecha,idFa,idE, cam], nullHandler,errorBD);
 						}
 					});
+				}else{
+					db.transaction(function(tx){
+						tx.executeSql("DELETE FROM tb_prospecto",nullHandler,nullHandler);
+					});
 				}
 			},
 			error: function(data){
@@ -883,6 +868,10 @@ $(document).ready(function () {
 							cam = 'n';
 							tx.executeSql('INSERT INTO tb_cuenta(id, ruc, razon_social, volumen_venta, cambio) VALUES (?,?,?,?,?)',[id, ruc, rs, vol, cam], nullHandler,errorBD);
 						}
+					});
+				}else{
+					db.transaction(function(tx){
+						tx.executeSql("DELETE FROM tb_cuenta",nullHandler,nullHandler);
 					});
 				}
 			},
@@ -918,6 +907,10 @@ $(document).ready(function () {
 							cam = 'n';
 							tx.executeSql('INSERT INTO tb_contacto(id, id_cuenta, nombre, apellido, mail, celular, cambio) VALUES (?,?,?,?,?,?,?)',[id, idc, nom, ape, mail, cel, cam], nullHandler,errorBD);
 						}
+					});
+				}else{
+					db.transaction(function(tx){
+						tx.executeSql("DELETE FROM tb_contacto",nullHandler,nullHandler);
 					});
 				}
 			},
