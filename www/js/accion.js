@@ -251,6 +251,8 @@ $(document).ready(function () {
 		$('#id_pros').val(idv);
 		$('#accion_frm').val("editar");
 
+		$(".nvo_pros").css({display: 'inline-block'});
+
 		if(localStorage.getItem('onof') == 'on')
 		{
 			getProspectoIdOn(idv);
@@ -258,7 +260,6 @@ $(document).ready(function () {
 			getProspectoIdOff(idv);
 		}
 
-		$(".nvo_pros").css({display: 'inline-block'});
 		$.mobile.changePage("#formulario_venta", {transition:"slidedown"});
 
 	});
