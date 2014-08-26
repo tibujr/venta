@@ -770,7 +770,7 @@ $(document).ready(function () {
 			llenarProspecto(id);
 			llenarCuenta(id);
 			llenarContacto(id);
-			$( "#cont_reque" ).css({display: 'block'});
+			$( "#cont_reque" ).css({display: 'inline-block'});
 		}
 	}
 
