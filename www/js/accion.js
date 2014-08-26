@@ -61,6 +61,9 @@ $(document).ready(function () {
 	}*/
 //*********************************************** FIN BASE DE DATOS WEBSQL
 	
+	//asignando valor para saber si trabaja on o offline
+	localStorage.setItem('onof', 'on');
+
 	//metodos inicializando
 	mostrarRequisitosHtml();
 
@@ -88,9 +91,6 @@ $(document).ready(function () {
 
 	//var alCam = alCitm - 2;
 	$('.lst_campos').css({height:alCitm+'px'});
-
-	//asignando valor para saber si trabaja on o offline
-	localStorage.setItem('onof', 'on');
 
 	if(localStorage.getItem('usu_alm') != null){
 	   	document.getElementById('mail').value = localStorage.getItem('usu_alm');
@@ -557,9 +557,10 @@ $(document).ready(function () {
 	{
 		if(localStorage.getItem('onof') == 'of')
 		{
+			$( "#cont_reque" ).css({display: 'none'});
 			listarFaseOff();
 			listarProspectoOff(idFase);
-			$( "#cont_reque" ).css({display: 'none'});
+			
 		}
 	}
 
