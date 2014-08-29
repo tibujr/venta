@@ -282,8 +282,8 @@ $(document).ready(function () {
 		$("#ndeci").val("");
 		$("#pdeci").val("");
 		
-		$("#nomConNP").val("");
-		$("#apeConNP").val("");
+		$("#sig_cita").val("");
+		$("#hra_cita").val("");
 
 		for (var i = 0; i < reqArr.length; i++) {
 			var a = "req_"+reqArr[i];
@@ -598,7 +598,7 @@ $(document).ready(function () {
 				if (result != null && result.rows.length > 0) {
 					for (var i = 0; i < result.rows.length; i++) {
 						var row = result.rows.item(i);
-						$(".lst_itm").append(" <article class='unid_cont_item'><section class='sect_uno_item'><article class='nom_emp_item'><label>"+row.razon_social+"</label></article><article class='valor_emp_item'><label>"+row.presupuesto+" NUEVOS SOLES</label></article></section><section class='sect_dos_item'><article class='btn_opc_item' id='"+row.id+"'><div class='icon-arrow-down2'></div></article></section></article>");
+						$(".lst_itm").append("<article class='unid_cont_item'><section class='sect_uno_item'><article class='nom_emp_item'><label>"+row.razon_social+"</label></article><article class='valor_emp_item'><label>"+row.presupuesto+" NUEVOS SOLES</label></article></section><section class='sect_dos_item'><article class='btn_opc_item' id='"+row.id+"'><div class='icon-arrow-down2'></div></article></section></article>");
 					}
 				}
 			},errorBD);
