@@ -4,6 +4,14 @@ body{
   padding: 0;
 }
 
+.ui-state-disabled{
+  opacity: 1;
+}
+
+.ui-disabled{
+  opacity: .5;
+}
+
 .ui-checkbox-on .ui-icon, .ui-radio-on .ui-icon {
   background-color: #4596ce;
 }

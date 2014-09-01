@@ -101,6 +101,7 @@ $(document).ready(function () {
 	}
 
 	$("body").on('click', '#btn_login', function(e){
+
 		if( $("#mail").val() == ""){
 			$("#mail").focus().after("<span class='menError'>Ingresa un usuario</span>");
 			return false;
@@ -259,13 +260,31 @@ $(document).ready(function () {
 		if(localStorage.getItem('onof') == 'on')
 		{
 			getProspectoDetalleOn(idv);
-			//getProspectoIdOn(idv);
 		}else{
 			//getProspectoIdOff(idv);
 		}
 
 		$.mobile.changePage("#venta_detalle", {transition:"slidedown"});
 
+	});
+
+	$("body").on("click","#btn_perdido_det_ven", function(e){
+		/*$('#datepicker').val('2014-08-19');
+		var date = $('#datepicker').datepicker({ dateFormat: 'DD, d MM, yy' }).val('2014-08-19'); */
+		var d = new Date();
+        var day = d.getDate();
+        var month = d.getMonth() + 1;
+        var year = d.getFullYear();
+        if (day < 10) {
+            day = "0" + day;
+        }
+        if (month < 10) {
+            month = "0" + month;
+        }
+        var date = day + "/" + month + "/" + year;
+
+        var rr = $.datepicker.formatDate('dd/M/yy', '2014-08-19')
+		console.log(rr)
 	});
 
 	$("body").on("click",".edit_prosp_frm", function(e){
@@ -278,6 +297,8 @@ $(document).ready(function () {
 		if(localStorage.getItem('onof') == 'on')
 		{	
 			$(".desa_det_venta").prop('disabled', false);
+			$("#rsoc").prop('disabled', true);
+			$("#nom_deci").prop('disabled', true);
 			//getProspectoIdOn(idv);
 		}else{
 			//getProspectoIdOff(idv);
@@ -295,8 +316,10 @@ $(document).ready(function () {
 		$('#id_pros').val("");
 		$('#id_cuen').val("");
 		$('#id_con').val("");
+		
 		$("#rsoc").val("").prop('disabled', false);
 		$("#nom_deci").val("").prop('disabled', false);
+
 		$("#presu").val("");
 		$("#nece").val("");
 		$("#prop").val("");
@@ -721,7 +744,7 @@ $(document).ready(function () {
 		});
 	}
 
-	function getProspectoIdOn(id)//permite traer todos los datos del prospecto incluyendo los requisitos 
+	/*function getProspectoIdOn(id)//permite traer todos los datos del prospecto incluyendo los requisitos 
 	{
 		$.ajax({
 			type: 'POST',
@@ -778,7 +801,7 @@ $(document).ready(function () {
 				console.log(data);
 			}
 		});
-	}
+	}*/
 
 	function getProspectoDetalleOn(id)//permite traer todos los datos del prospecto incluyendo los requisitos 
 	{
@@ -802,6 +825,7 @@ $(document).ready(function () {
 					$(".valor_emp_det_pros").html(data.presupuesto_pros+"<span> NUEVOS SOLES</span>");
 					$(".nece_emp_det_pros").html(data.necesidad_pros);
 					$(".fecha_emp_det_pros").html(data.fecha_cierre_pros);
+					$(".propu_emp_det_pros").html(data.propuesta_pros);
 
 					for (var i = 0; i < reqArr.length; i++) {
 						var a = "req_"+reqArr[i];
@@ -819,8 +843,8 @@ $(document).ready(function () {
 
 					/* FORMULARIO EDITAR*/
 
-					$("#rsoc").val(data.razon_social_cuen).prop('disabled', true);
-					$("#nom_deci").val(data.nombre_con+' '+data.apellido_con).prop('disabled', true);
+					$("#rsoc").val(data.razon_social_cuen)//.prop('disabled', true);
+					$("#nom_deci").val(data.nombre_con+' '+data.apellido_con)//.prop('disabled', true);
 					$("#presu").val(data.presupuesto_pros)
 					$("#nece").val(data.necesidad_pros)
 					$("#prop").val(data.propuesta_pros)
