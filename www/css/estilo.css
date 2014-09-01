@@ -1,4 +1,8 @@
 /*CAMBIOS DEL SISTEMA*/
+body{
+  margin: 0;
+  padding: 0;
+}
 
 .ui-checkbox-on .ui-icon, .ui-radio-on .ui-icon {
   background-color: #4596ce;
@@ -416,6 +420,7 @@
 /*CONTENEDOR CUERPO*/
 
 .cont_main{
+  font-size: 0;
   background: #e5e5e5;
   padding: 0;
   width: 100%;
@@ -512,6 +517,9 @@
 }
 
 .pie{
+  bottom: 0;
+  max-height: 35px;
+  padding: 0;
   border: none;
   background: #df2047;
 }
@@ -1632,13 +1640,16 @@ textarea {
 
 /*MIS CAMBIOS EN ALFREDO*/
 .req_vd{
-  width: 33%;
   margin: 7px 0 0;
 }
 
 .vent_ind_det_f_cont .cont_req div.ui-checkbox{
   padding: 0;
   display: inline-block;
+}
+
+.cont_dato_detalle_venta{
+  overflow: auto;
 }
 
 

@@ -66,12 +66,7 @@
             <select name="cboFase" id="cboFase"></select>
           </div>
         </article>
-        <section class='cont_item_lst lst_itm'>
-
-          <!--<div id="wrapper">
-            <div class="scroller lst_itm"></div>
-          </div>-->
-        </section>
+        <section class='cont_item_lst lst_itm'></section>
       </section>
     </article>
     <article data-role="footer" data-position="fixed" data-id="pie_fijo" data-theme="b" class="pie">
@@ -247,12 +242,13 @@
     </article>
     <article data-role="content" class="cont_main"> 
       <section class='cont_items'>
+        <section class='cont_dato_detalle_venta'>
             <section class="vent_ind_item_act">
               <section class="vent_ind_item_porc"></section>
 
               <section class="vent_div_nuevo">
                 <section class="vent_div_nuevo_cont">
-                  <div class="punto-text-big">30%</div>
+                  <div class="punto-text-big avance_face_nom_dp"></div>
                 </section>
               </section>
             </section>
@@ -260,7 +256,7 @@
             <section class="vent_ind_deta_btns">
               <div class="white-button">PERDIDO</div>
               <div class="color-button">GANADO</div>
-              <div class="edits-button"><div class="icon-pencil"></div></div>
+              <div class="edits-button edit_prosp_frm"><div class="icon-pencil"></div></div>
             </section>
 
             <section class="vent_ind_det_fondo">
@@ -272,8 +268,8 @@
                   </div>
                 </section>
                 <section class="vent_ind_det_f_der">
-                  <div class="vent_ind_der_top">Alfredo Arroyo Diaz</div>
-                  <div class="vent_ind_der_bot">ROINET S.A.C</div>
+                  <div class="vent_ind_der_top nom_con_det_pros"></div>
+                  <div class="vent_ind_der_bot nom_emp_det_pros"></div>
                 </section>
               </section>
 
@@ -284,7 +280,7 @@
                   </div>
                 </section>
                 <section class="vent_ind_det_f_der">
-                  <div class="vent_ind_der_mid">15,000 <span>NUEVOS SOLES</span></div>
+                  <div class="vent_ind_der_mid valor_emp_det_pros"></div>
                 </section>
               </section>
 
@@ -296,7 +292,7 @@
                 </section>
                 <section class="vent_ind_det_f_der">
                   <div class="vent_ind_der_top_color">Necesidad</div>
-                  <div class="vent_ind_der_bot_white">Nulla vitae elit libero, a pharetra augue. Aenean lacinia bibendum nulla sed consectetur.</div>
+                  <div class="vent_ind_der_bot_white nece_emp_det_pros"></div>
                 </section>
               </section>
 
@@ -307,23 +303,23 @@
                   </div>
                 </section>
                 <section class="vent_ind_det_f_der">
-                  <div class="vent_ind_der_mid txt_sm">Mar, 16 Agosto</div>
+                  <div class="vent_ind_der_mid txt_sm fecha_emp_det_pros"></div>
                 </section>
               </section>
               
-              <section class="vent_ind_det_f_cont">
-                <article class='cont_req req_vd'>
+              <section class="vent_ind_det_f_cont" id="req_detalle_venta">
+                <!--<article class='cont_req req_vd'>
                   <input type='checkbox' name='chk1' id='chk1' class='chkocultar'/>
-                  <label class='lblcheck' for='chk1' >Firma</label>
+                  <label class='lblcheck' for='chk1' >Firma del Contrato</label>
                 </article>
                 <article class='cont_req req_vd'>
                   <input type='checkbox' name='chk2' id='chk2' class='chkocultar'/>
-                  <label class='lblcheck' for='chk2' >Paga</label>
+                  <label class='lblcheck' for='chk2' >Pago de venta</label>
                 </article>
                 <article class='cont_req req_vd'>
                   <input type='checkbox' name='chk3' id='chk3' class='chkocultar'/>
-                  <label class='lblcheck' for='chk3' >Entrega</label>
-                </article>
+                  <label class='lblcheck' for='chk3' >Entrega de Producto</label>
+                </article>-->
               </section>
             </section>
 
@@ -352,7 +348,8 @@
                   </article>
                 </section>
               </article>
-        </div>
+        <!--</div>-->
+        </section>
       </section>
     </article>
      <article data-role="footer" data-position="fixed" data-id="pie_fijo" data-theme="b" class="pie">

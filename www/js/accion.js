@@ -74,16 +74,19 @@ $(document).ready(function () {
 	var al = ($('body').height())+1;
 	var an = $('body').width();
 
-	$("#popup_fnd").css({height: al});
-	$("#popup_fnd").css({width: an});
+	$("#popup_fnd").css({height: al, width: an});
 	
 	var cad = "100% "+al+"px";
 	$('#inicio').css({'background-size':cad});
 
-	var alCn = al-129;
+	var alCn = al-128;//129
 	$('.cont_main').css({height:alCn+'px'});
+
+	$(".cont_dato_detalle_venta").css({height: alCn, width: an});//contenedor de detalle de la venta
+	$(".cont_dato_detalle_venta").animate({scrollTop: 0});
+
 	//$('.popup_Nusu, .popup_Nusu_n').css({height:alCn+'px'});
-	var alCitm = alCn-52; //alCn-48
+	var alCitm = alCn-48; //alCn-52
 	$('.cont_item_lst').css({height:alCitm+'px'});
 	$('.cont_item_lst').animate({scrollTop: 0});
 
@@ -246,7 +249,7 @@ $(document).ready(function () {
 		}
 	});
 
-	$("body").on("click",".btn_opc_item", function(e){
+	$("body").on("click",".btn_opc_item, .unid_cont_item", function(e){
 		var idv = this.id;
 		$('#id_pros').val(idv);
 		$('#accion_frm').val("editar");
@@ -255,9 +258,29 @@ $(document).ready(function () {
 
 		if(localStorage.getItem('onof') == 'on')
 		{
-			getProspectoIdOn(idv);
+			getProspectoDetalleOn(idv);
+			//getProspectoIdOn(idv);
 		}else{
-			getProspectoIdOff(idv);
+			//getProspectoIdOff(idv);
+		}
+
+		$.mobile.changePage("#venta_detalle", {transition:"slidedown"});
+
+	});
+
+	$("body").on("click",".edit_prosp_frm", function(e){
+		var idv = this.id;
+		$('#id_pros').val(idv);
+		$('#accion_frm').val("editar");
+
+		$(".nvo_pros").css({display: 'inline-block'});
+
+		if(localStorage.getItem('onof') == 'on')
+		{	
+			$(".desa_det_venta").prop('disabled', false);
+			//getProspectoIdOn(idv);
+		}else{
+			//getProspectoIdOff(idv);
 		}
 
 		$.mobile.changePage("#formulario_venta", {transition:"slidedown"});
@@ -459,9 +482,6 @@ $(document).ready(function () {
 				    },
 					url: "https://roinet.pe/NWROInet/venta/index.php/mobile_controller/evaluarActividad",
 					success : function(data) {
-						/*if(data != 0){
-
-						}*/
 						$('#sig_cita').val("");
 						$('#hra_cita').val("");
 						$('#activ_check').val("");
@@ -598,7 +618,7 @@ $(document).ready(function () {
 				if (result != null && result.rows.length > 0) {
 					for (var i = 0; i < result.rows.length; i++) {
 						var row = result.rows.item(i);
-						$(".lst_itm").append("<article class='unid_cont_item'><section class='sect_uno_item'><article class='nom_emp_item'><label>"+row.razon_social+"</label></article><article class='valor_emp_item'><label>"+row.presupuesto+" NUEVOS SOLES</label></article></section><section class='sect_dos_item'><article class='btn_opc_item' id='"+row.id+"'><div class='icon-arrow-down2'></div></article></section></article>");
+						$(".lst_itm").append("<article class='unid_cont_item' id='"+data[i]['id_pros']+"'><section class='sect_uno_item'><article class='nom_emp_item'><label>"+row.razon_social+"</label></article><article class='valor_emp_item'><label>"+row.presupuesto+" NUEVOS SOLES</label></article></section><section class='sect_dos_item'><article class='btn_opc_item' id='"+row.id+"'><div class='icon-arrow-down2'></div></article></section></article>");
 					}
 				}
 			},errorBD);
@@ -714,9 +734,6 @@ $(document).ready(function () {
 				if(data != 0){
 					$("#rsoc").val(data.razon_social_cuen).prop('disabled', true);
 					$("#nom_deci").val(data.nombre_con+' '+data.apellido_con).prop('disabled', true);
-					/*$("#ruc").val(data.ruc_cuen)
-					$("#nom_deci").val(data.nombre_con)
-					$("#ape_deci").val(data.apellido_con)*/
 					$("#presu").val(data.presupuesto_pros)
 					$("#nece").val(data.necesidad_pros)
 					$("#prop").val(data.propuesta_pros)
@@ -744,7 +761,82 @@ $(document).ready(function () {
 						}
 					}
 
-					console.log("actividad "+data.id_act)
+					//$(".desa_det_venta").prop('disabled', false);
+					//console.log("actividad "+data.id_act)
+
+					//agregar o quitar check actividad
+					if(data.hoy == 'S'){
+						$(".hora_scit").css({width : '30%'});
+						$(".check_actv").css({display : 'inline-block'});
+					}else{
+						$(".hora_scit").css({width : '45%'});
+						$(".check_actv").css({display : 'none'});
+					}
+				}
+			},
+			error: function(data){
+				console.log(data);
+			}
+		});
+	}
+
+	function getProspectoDetalleOn(id)//permite traer todos los datos del prospecto incluyendo los requisitos 
+	{
+		$.ajax({
+			type: 'POST',
+			dataType: 'json', 
+			data: {id:id},
+			beforeSend : function (){
+		    },
+			url: "https://roinet.pe/NWROInet/venta/index.php/mobile_controller/getProspectoDetalleOn",
+			success : function(data) {
+				if(data != 0){
+
+					var por_avan = data.avance+"%";
+					$(".vent_ind_item_porc").css({width: por_avan});
+					$(".avance_face_nom_dp").html(por_avan);
+
+					$(".edit_prosp_frm").attr("id",id);
+					$(".nom_con_det_pros").html(data.nombre_con+' '+data.apellido_con);
+					$(".nom_emp_det_pros").html(data.razon_social_cuen);
+					$(".valor_emp_det_pros").html(data.presupuesto_pros+"<span> NUEVOS SOLES</span>");
+					$(".nece_emp_det_pros").html(data.necesidad_pros);
+					$(".fecha_emp_det_pros").html(data.fecha_cierre_pros);
+
+					for (var i = 0; i < reqArr.length; i++) {
+						var a = "req_"+reqArr[i];
+						var b = "reqc_"+reqArr[i];
+						if(data[a] == "S"){
+							$('#'+a+":checkbox").prop('checked', true);
+							$('.'+b+" span span.ui-icon").removeClass( "ui-icon-checkbox-off" )
+							$('.'+b+" span span.ui-icon").addClass( "ui-icon-checkbox-on" )
+						}else{
+							$('#'+a+":checkbox").prop('checked', false);
+							$('.'+b+" span span.ui-icon").addClass( "ui-icon-checkbox-off" )
+							$('.'+b+" span span.ui-icon").removeClass( "ui-icon-checkbox-on" )
+						}
+					}
+
+					/* FORMULARIO EDITAR*/
+
+					$("#rsoc").val(data.razon_social_cuen).prop('disabled', true);
+					$("#nom_deci").val(data.nombre_con+' '+data.apellido_con).prop('disabled', true);
+					$("#presu").val(data.presupuesto_pros)
+					$("#nece").val(data.necesidad_pros)
+					$("#prop").val(data.propuesta_pros)
+					$("#fecha_aprox").val(data.fecha_cierre_pros)
+
+					$('#id_pros').val(data.id_pros);
+					$('#id_cuen').val(data.id_cuen);
+					$('#id_con').val(data.id_con);
+
+					$('#sig_cita').val(data.fecha_act);
+					$('#hra_cita').val(data.hora_act);
+					$('#activ_check').val(data.id_act);
+
+					
+
+					$(".desa_det_venta").prop('disabled', 'true');
 
 					//agregar o quitar check actividad
 					if(data.hoy == 'S'){
@@ -792,7 +884,8 @@ $(document).ready(function () {
 						for(var i=0; i< data.length; i++)
 						{
 							reqArr[i]=data[i]['id_req'];
-							$( "#cont_reque" ).append("<article class='cont_req cont_ckh_reg'><input type='checkbox' name='req_"+data[i]['id_req']+"' id='req_"+data[i]['id_req']+"' class='chkocultar'/><label class='lblcheck reqc_"+data[i]['id_req']+"' for='req_"+data[i]['id_req']+"' >"+data[i]['descripcion_req']+"</label></article>");
+							$( "#cont_reque, #req_detalle_venta" ).append("<article class='cont_req cont_ckh_reg'><input type='checkbox' name='req_"+data[i]['id_req']+"' id='req_"+data[i]['id_req']+"' class='chkocultar desa_det_venta'/><label class='lblcheck reqc_"+data[i]['id_req']+"' for='req_"+data[i]['id_req']+"' >"+data[i]['descripcion_req']+"</label></article>");
+							//$( "#req_detalle_venta" ).append("<article class='cont_req req_vd'><input type='checkbox' name='req_det_"+data[i]['id_req']+"' name='req_det_"+data[i]['id_req']+"' class='chkocultar'/><label class='lblcheck' for='req_det_"+data[i]['id_req']+"' >"+data[i]['descripcion_req']+"</label></article>")
 						}
 					}
 				},
@@ -977,7 +1070,7 @@ $(document).ready(function () {
 				{
 					for(var i=0; i< data.length; i++)
 					{
-						$(".lst_itm").append(" <article class='unid_cont_item'><section class='sect_uno_item'><article class='nom_emp_item'><label>"+data[i]['razon_social_cuen']+"</label></article><article class='valor_emp_item'><label>"+data[i]['presupuesto_pros']+" NUEVOS SOLES</label></article></section><section class='sect_dos_item'><article class='btn_opc_item' id='"+data[i]['id_pros']+"'><div class='icon-arrow-down2'></div></article></section></article>");
+						$(".lst_itm").append(" <article class='unid_cont_item' id='"+data[i]['id_pros']+"'><section class='sect_uno_item'><article class='nom_emp_item'><label>"+data[i]['razon_social_cuen']+"</label></article><article class='valor_emp_item'><label>"+data[i]['presupuesto_pros']+" NUEVOS SOLES</label></article></section><section class='sect_dos_item'><article class='btn_opc_item' id='"+data[i]['id_pros']+"'><div class='icon-arrow-down2'></div></article></section></article>");
 					}
 				}
 			},
