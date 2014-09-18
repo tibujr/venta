@@ -5,6 +5,7 @@ $(document).ready(function () {
 
 //*************************************** BASE DE DATOS WEBSQL
 
+	var urlP = "https://roinet.pe/NWROInet/venta/index.php/mobile_controller/";
 	var db;
 	var shortName = 'ventaBD';
 	var version = '1.0';
@@ -121,7 +122,7 @@ $(document).ready(function () {
 					beforeSend : function (){
 			            $(".main").css({display: 'inline-block'});
 			        },
-					url: "https://roinet.pe/NWROInet/venta/index.php/mobile_controller/login",
+					url: urlP+"login",
 					success : function(data) {
 						$(".main").css({display: 'none'});
 						if(data != 0){
@@ -259,6 +260,7 @@ $(document).ready(function () {
 
 		if(localStorage.getItem('onof') == 'on')
 		{
+			limpiarProsDeta();
 			getProspectoDetalleOn(idv);
 		}else{
 			//getProspectoIdOff(idv);
@@ -268,23 +270,38 @@ $(document).ready(function () {
 
 	});
 
-	$("body").on("click","#btn_perdido_det_ven", function(e){
-		/*$('#datepicker').val('2014-08-19');
-		var date = $('#datepicker').datepicker({ dateFormat: 'DD, d MM, yy' }).val('2014-08-19'); */
-		var d = new Date();
-        var day = d.getDate();
-        var month = d.getMonth() + 1;
-        var year = d.getFullYear();
-        if (day < 10) {
-            day = "0" + day;
-        }
-        if (month < 10) {
-            month = "0" + month;
-        }
-        var date = day + "/" + month + "/" + year;
+	function limpiarProsDeta()
+	{
+		$(".nom_con_det_pros").html("");
+		$(".nom_emp_det_pros").html("");
+		$(".valor_emp_det_pros").html("");
+		$(".nece_emp_det_pros").html("");
+		$(".propu_emp_det_pros").html("");
+		$(".fecha_emp_det_pros").html("");
 
-        var rr = $.datepicker.formatDate('dd/M/yy', '2014-08-19')
-		console.log(rr)
+		for (var i = 0; i < reqArr.length; i++) {
+			var a = "req_"+reqArr[i];
+			var b = "reqc_"+reqArr[i];
+			$('#'+a+":checkbox").prop('checked', false);
+			$('.'+b+" span span.ui-icon").addClass( "ui-icon-checkbox-off" )
+			$('.'+b+" span span.ui-icon").removeClass( "ui-icon-checkbox-on" )			
+		}
+	}
+
+	$("body").on("click","#btn_perdido_det_ven", function(e){
+		
+		var Dia = new Array("Dom", "Lun", "Mar", "Mié", "Jue", "Vie", "Sáb");
+		var Mes = new Array("Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep",
+		"Oct", "Nov", "Dic");
+		//var fecha = "2014-08-15 18:15";
+		var fecha = ("2014-08-15 18:15:00").split('-').join('/');
+		//console.log(fecha)
+		var Hoy = new Date(fecha);
+		//console.log(Hoy)
+		var Anio = Hoy.getFullYear();
+		var Fecha = Dia[Hoy.getDay()] + ", " + Hoy.getDate() + " de " + Mes[Hoy.getMonth()] + " del " + Anio + ". ";
+
+		console.log(Fecha+"  "+Hoy.getTime());
 	});
 
 	$("body").on("click",".edit_prosp_frm", function(e){
@@ -317,6 +334,7 @@ $(document).ready(function () {
 		$('#id_cuen').val("");
 		$('#id_con').val("");
 		
+		$("#titpros").val("");
 		$("#rsoc").val("").prop('disabled', false);
 		$("#nom_deci").val("").prop('disabled', false);
 
@@ -372,7 +390,10 @@ $(document).ready(function () {
 			}
 			$.mobile.changePage("#venta", {transition:"slideup"});
 		}else{
-			if( $("#rsoc").val() == ""){
+			if( $("#titpros").val() == ""){
+				$("#titpros").focus().after("<span class='menError'>Ingresar Titulo</span>");
+				return false;
+			}else if( $("#rsoc").val() == ""){
 				$("#rsoc").focus().after("<span class='menError'>Ingresar Razon social</span>");
 				return false;
 			}else if( $("#nom_deci").val() == ""){
@@ -424,6 +445,8 @@ $(document).ready(function () {
 			$("#rsoc").autocomplete({source: []});
 			$("#nom_deci").autocomplete({source: []});
 			$("#nom_deci").val("").prop('disabled', false);
+			$("#id_cuen").val("");
+			$("#id_con").val("");
 		}
 
         if (!(event.keyCode == 38 || event.keyCode == 40 || event.keyCode == 13)) {
@@ -434,7 +457,7 @@ $(document).ready(function () {
 				dataType: 'json', 
 				data: {dtb:dtb,usuid:usuid},
 				cache: false,
-				url: "https://roinet.pe/NWROInet/venta/index.php/mobile_controller/search_empresa",
+				url: urlP+"search_empresa",
 				success : function(datab) {
 	              if (datab != 0) {
 	              	console.log(datab)
@@ -449,7 +472,7 @@ $(document).ready(function () {
 								type: 'POST',
 								dataType: 'json', 
 								data: {codCuen:codCuen},
-								url: "https://roinet.pe/NWROInet/venta/index.php/mobile_controller/search_contacto",
+								url: urlP+"search_contacto",
 								success : function(datac) {
 	                                if (datac != 0) {
 	                                	if(datac.length == 1){
@@ -503,7 +526,7 @@ $(document).ready(function () {
 					data: {usuid:usuid, idAct:idAct},
 					beforeSend : function (){
 				    },
-					url: "https://roinet.pe/NWROInet/venta/index.php/mobile_controller/evaluarActividad",
+					url: urlP+"evaluarActividad",
 					success : function(data) {
 						$('#sig_cita').val("");
 						$('#hra_cita').val("");
@@ -663,14 +686,15 @@ $(document).ready(function () {
 		var usuG = localStorage.getItem('id_usu');
 		var idCuenta = $('#id_cuen').val();
 		var idContact = $('#id_con').val();
+		var titPros = $('#titpros').val();
 
 		$.ajax({
 			type: 'POST',
 			dataType: 'json', 
-			data: {nomE:nomE, apeE:apeE, preE:preE, necE:necE, fecE:fecE, fecha_scit:fecha_scit, hora_scit:hora_scit, usuG:usuG, idCuenta:idCuenta, idContact:idContact},
+			data: {titPros:titPros, nomE:nomE, apeE:apeE, preE:preE, necE:necE, fecE:fecE, fecha_scit:fecha_scit, hora_scit:hora_scit, usuG:usuG, idCuenta:idCuenta, idContact:idContact},
 			beforeSend : function (){
 		    },
-			url: "https://roinet.pe/NWROInet/venta/index.php/mobile_controller/guardaNuevoProspecto",
+			url: urlP+"guardaNuevoProspecto",
 			success : function(data) {
 				if(data != 0){
 					console.log(data+" : inserto con exito");
@@ -690,10 +714,6 @@ $(document).ready(function () {
 
 	function editProspectoOn(id)
 	{
-		/*rsE = $("#rsoc").val();
-		rucE = $("#ruc").val();
-		nomE = $("#nom_deci").val();
-		apeE = $("#ape_deci").val();*/
 		preE = $("#presu").val();
 		necE = $("#nece").val();
 		proE = $("#prop").val();
@@ -704,6 +724,7 @@ $(document).ready(function () {
 		var fecha_scit = $('#sig_cita').val();
 		var hora_scit = $('#hra_cita').val();
 		var usuedt = localStorage.getItem('id_usu');
+		var titOpor = $('#titpros').val();
 
 		var idacti = $('#activ_check').val();
 
@@ -723,10 +744,10 @@ $(document).ready(function () {
 		$.ajax({
 			type: 'POST',
 			dataType: 'json', 
-			data: {/*rsE:rsE, rucE:rucE, nomE:nomE, apeE:apeE, */preE:preE, necE:necE, proE:proE, fecE:fecE, idProsp:idProsp, idCuenta:idCuenta, idContact:idContact, reqArrTemp:reqArrTemp, fecha_scit:fecha_scit, hora_scit:hora_scit, usuedt:usuedt, idacti:idacti},
+			data: {titOpor:titOpor, preE:preE, necE:necE, proE:proE, fecE:fecE, idProsp:idProsp, idCuenta:idCuenta, idContact:idContact, reqArrTemp:reqArrTemp, fecha_scit:fecha_scit, hora_scit:hora_scit, usuedt:usuedt, idacti:idacti},
 			beforeSend : function (){
 		    },
-			url: "https://roinet.pe/NWROInet/venta/index.php/mobile_controller/editProspectoOn",
+			url: urlP+"editProspectoOn",
 			success : function(data) {
 				if(data != 0){
 					console.log(data);
@@ -744,65 +765,6 @@ $(document).ready(function () {
 		});
 	}
 
-	/*function getProspectoIdOn(id)//permite traer todos los datos del prospecto incluyendo los requisitos 
-	{
-		$.ajax({
-			type: 'POST',
-			dataType: 'json', 
-			data: {id:id},
-			beforeSend : function (){
-		    },
-			url: "https://roinet.pe/NWROInet/venta/index.php/mobile_controller/getProspectoIdOn",
-			success : function(data) {
-				if(data != 0){
-					$("#rsoc").val(data.razon_social_cuen).prop('disabled', true);
-					$("#nom_deci").val(data.nombre_con+' '+data.apellido_con).prop('disabled', true);
-					$("#presu").val(data.presupuesto_pros)
-					$("#nece").val(data.necesidad_pros)
-					$("#prop").val(data.propuesta_pros)
-					$("#fecha_aprox").val(data.fecha_cierre_pros)
-
-					$('#id_pros').val(data.id_pros);
-					$('#id_cuen').val(data.id_cuen);
-					$('#id_con').val(data.id_con);
-
-					$('#sig_cita').val(data.fecha_act);
-					$('#hra_cita').val(data.hora_act);
-					$('#activ_check').val(data.id_act);
-
-					for (var i = 0; i < reqArr.length; i++) {
-						var a = "req_"+reqArr[i];
-						var b = "reqc_"+reqArr[i];
-						if(data[a] == "S"){
-							$('#'+a+":checkbox").prop('checked', true);
-							$('.'+b+" span span.ui-icon").removeClass( "ui-icon-checkbox-off" )
-							$('.'+b+" span span.ui-icon").addClass( "ui-icon-checkbox-on" )
-						}else{
-							$('#'+a+":checkbox").prop('checked', false);
-							$('.'+b+" span span.ui-icon").addClass( "ui-icon-checkbox-off" )
-							$('.'+b+" span span.ui-icon").removeClass( "ui-icon-checkbox-on" )
-						}
-					}
-
-					//$(".desa_det_venta").prop('disabled', false);
-					//console.log("actividad "+data.id_act)
-
-					//agregar o quitar check actividad
-					if(data.hoy == 'S'){
-						$(".hora_scit").css({width : '30%'});
-						$(".check_actv").css({display : 'inline-block'});
-					}else{
-						$(".hora_scit").css({width : '45%'});
-						$(".check_actv").css({display : 'none'});
-					}
-				}
-			},
-			error: function(data){
-				console.log(data);
-			}
-		});
-	}*/
-
 	function getProspectoDetalleOn(id)//permite traer todos los datos del prospecto incluyendo los requisitos 
 	{
 		$.ajax({
@@ -811,7 +773,7 @@ $(document).ready(function () {
 			data: {id:id},
 			beforeSend : function (){
 		    },
-			url: "https://roinet.pe/NWROInet/venta/index.php/mobile_controller/getProspectoDetalleOn",
+			url: urlP+"getProspectoDetalleOn",
 			success : function(data) {
 				if(data != 0){
 
@@ -843,7 +805,8 @@ $(document).ready(function () {
 
 					/* FORMULARIO EDITAR*/
 
-					$("#rsoc").val(data.razon_social_cuen)//.prop('disabled', true);
+					$("#titpros").val(data.titulo);
+					$("#rsoc").val(data.razon_social_cuen);//.prop('disabled', true);
 					$("#nom_deci").val(data.nombre_con+' '+data.apellido_con)//.prop('disabled', true);
 					$("#presu").val(data.presupuesto_pros)
 					$("#nece").val(data.necesidad_pros)
@@ -902,9 +865,11 @@ $(document).ready(function () {
 				data: {},
 				beforeSend : function (){
 			    },
-				url: "https://roinet.pe/NWROInet/venta/index.php/mobile_controller/getRequisitos",
+				url: urlP+"getRequisitos",
 				success : function(data) {
 					if(data != 0){
+
+						console.log(data)
 						for(var i=0; i< data.length; i++)
 						{
 							reqArr[i]=data[i]['id_req'];
@@ -930,7 +895,7 @@ $(document).ready(function () {
 			data: {id:id},
 			beforeSend : function (){
 		    },
-			url: "https://roinet.pe/NWROInet/venta/index.php/mobile_controller/getProspectoUser",
+			url: urlP+"getProspectoUser",
 			success : function(data) {
 				if(data != 0){
 					db.transaction(function(tx){
@@ -972,7 +937,7 @@ $(document).ready(function () {
 			data: {id:id},
 			beforeSend : function (){
 		    },
-			url: "https://roinet.pe/NWROInet/venta/index.php/mobile_controller/getCuentaUser",
+			url: urlP+"getCuentaUser",
 			success : function(data) {
 				if(data != 0){
 					db.transaction(function(tx){
@@ -1009,7 +974,7 @@ $(document).ready(function () {
 			data: {id:id},
 			beforeSend : function (){
 		    },
-			url: "https://roinet.pe/NWROInet/venta/index.php/mobile_controller/getContactoUser",
+			url: urlP+"getContactoUser",
 			success : function(data) {
 				if(data != 0){
 					db.transaction(function(tx){
@@ -1049,7 +1014,7 @@ $(document).ready(function () {
 			data: {},
 			beforeSend : function (){
 		    },
-			url: "https://roinet.pe/NWROInet/venta/index.php/mobile_controller/getFase",
+			url: urlP+"getFase",
 			success : function(data) {
 				if(data != 0){
 					db.transaction(function(tx){
@@ -1088,7 +1053,7 @@ $(document).ready(function () {
 			data: {idUsu:idUsu, id:id},
 			beforeSend : function (){
 		    },
-			url: "https://roinet.pe/NWROInet/venta/index.php/mobile_controller/getProspecto",
+			url: urlP+"getProspecto",
 			success : function(data) {
 				if(data != 0)
 				{
@@ -1113,7 +1078,7 @@ $(document).ready(function () {
 			data: {},
 			beforeSend : function (){
 		    },
-			url: "https://roinet.pe/NWROInet/venta/index.php/mobile_controller/getEstadoProspecto",
+			url: urlP+"getEstadoProspecto",
 			success : function(data) {
 				if(data != 0){
 					db.transaction(function(tx){
