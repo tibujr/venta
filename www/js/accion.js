@@ -224,7 +224,10 @@ $(document).ready(function () {
 
 	$("body").on('click', '#btn_actividad', function(e){
 		$.mobile.changePage("#actividad", {transition:"slide"});
-		
+	});
+
+	$("body").on("click",".sect_uno_item_mid", function(e){
+		$.mobile.changePage("#actividad_detalle", {transition:"slidedown"});
 	});
 
 	$("body").on('click', '#btn_contacto', function(e){
@@ -244,10 +247,26 @@ $(document).ready(function () {
 		$.mobile.changePage("#contactos-empresa", {transition:"slide"});
 	});
 
+	$("body").on("click",".cont_item_contend_uni_emp", function(e){
+		$.mobile.changePage("#contacto_deta_empresa", {transition:"slidedown"});
+	});
+
+	$("body").on('click', '#cont_deta_emp_blank_der', function(e){
+		$.mobile.changePage("#contacto_emp_nuevo_editar", {transition:"slide"});
+	});
+
 	$("body").on('click', '#btn_persona', function(e){
 		estFlCon = 'on';
 		$(".sub-menu-nn").addClass('ocultar');
 		$.mobile.changePage("#contactos-persona", {transition:"slide"});
+	});
+
+	$("body").on("click",".cont_item_contend_uni_per", function(e){
+		$.mobile.changePage("#contacto_deta_persona", {transition:"slidedown"});
+	});
+
+	$("body").on('click', '#cont_deta_per_blank_der', function(e){
+		$.mobile.changePage("#contacto_per_nuevo_editar", {transition:"slide"});
 	});
 
 	$("body").on('click', '#add-contacto-bot', function(e){

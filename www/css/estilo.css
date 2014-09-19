@@ -246,14 +246,21 @@ body{
   color: #a9a9a9;
 }
 
-.fase_tit  div span.ui-btn-inner, .fase_tit  div div span.ui-btn-inner {
+.fase_tit  div span.ui-btn-inner, .fase_tit  div div span.ui-btn-inner, .contacto_filtro div span.ui-btn-inner, .contacto_filtro  div div span.ui-btn-inner{
   font-size: 13px;
   height: 24px;
   padding: 10px 0 0 0;
-  background: #5e5e5e;
   text-shadow: none;
   color: white;
   font-family: ProximaNovaLight, sans-serif;
+}
+
+.fase_tit  div span.ui-btn-inner, .fase_tit  div div span.ui-btn-inner{
+  background: #5e5e5e;
+}
+
+.contacto_filtro div span.ui-btn-inner, .contacto_filtro  div div span.ui-btn-inner{
+  background: #df2047;
 }
 
 .popup_Nusu, .popup_Nusu_n{
@@ -302,7 +309,7 @@ body{
   font-size: 0;
 }
 
-.fase_tit{
+.fase_tit, .contacto_filtro{
   display: inline-block;
   width: 93%;
   height: 34px;
@@ -883,7 +890,7 @@ textarea {
   height: 60px;
   border: 1px solid #F2F2F2;
   box-shadow: 0px 2px 1px #C7C7C7;
-  margin-top: 10px;
+  margin-bottom: 10px;
 }
 
 .unid_cont_item_act_contac {
@@ -893,7 +900,7 @@ textarea {
   max-width: 93%;
   box-shadow: 0px 2px 1px #C7C7C7;
   border-bottom: 1px solid #DDD;
-  margin-top: 10px;
+  margin-bottom: 10px;
 }
 
 .unid_cont_item_act_contac .cont_item_contend_uni_emp:last-child{
@@ -1258,10 +1265,20 @@ textarea {
 
 .white-button
 {/*uso*/
-  background: #FFF;
+  /*background: #FFF;
   color: #7B7B7B;
   float: left;
-  border: 1px solid #dddddd;
+  border: 1px solid #dddddd;*/
+  text-align: center;
+  display: inline-block;
+  background: #FFF;
+  color:#3b3b3b;
+  font-size: 16px;
+  text-shadow: none;
+  padding: .5em 0;
+  width: 30%;
+  -webkit-border-radius: 2px;
+  border-radius: 2px;
 }
 
 .white-button:active, .white-button:hover
@@ -1271,9 +1288,19 @@ textarea {
 }
 
 .color-button{ /*uso*/
-  background: #df2047;
+  /*background: #df2047;
   color: #FFF;
-  border: 1px solid #bc1e3e;
+  border: 1px solid #bc1e3e;*/
+  text-align: center;
+  display: inline-block;
+  background: #df2047;
+    color:#FFF;
+  font-size: 16px;
+  text-shadow: none;
+  padding: .5em 0;
+  width: 30%;
+  -webkit-border-radius: 2px;
+  border-radius: 2px;
 }
 
 .color-button:active, .color-button:hover
@@ -1419,6 +1446,7 @@ textarea {
 
 .sec_cont_item_mid_nuevo .ui-input-text{
   margin-top: 20px !important;
+  margin-bottom: 10px !important;
 }
 
 .sec_cont_item_mid_nuevo input{
@@ -1538,36 +1566,29 @@ textarea {
   display: inline-block;
   width: 92.8%;
   max-width: 93%;
-  margin-top: 10px;
   text-align: left;
 }
 
 .vent_ind_deta_btns .white-button, .vent_ind_deta_btns .color-button{/*uso*/
   font-family: ProximaNovaLight, sans-serif;
-  font-size: 13px !important;
-  padding: 9px 10% 0 !important;
-  height: 23px;
-  text-align: center;
-  display: inline-block;
-  text-shadow: none;
-  border-radius: 2px;
-  box-shadow: 0px 1px 1px #c1c1c1;
+  font-size: 12px !important;
+  padding: .8em 1.17em !important;
 }
 
+.vent_ind_deta_btns div:first-child{
+  float: left; /* NUEVO */
+}
+
+.vent_ind_deta_btns div:last-child{
+  float: right; /* NUEVO */
+}
+
+
 .edits-button{ /*uso*/
-  text-align: center;
-  display: inline-block;
-  background: #490d1a;
-  color: #FFF;
-  font-size: 16px;
-  text-shadow: none;
-  padding: .55em 0;
-  width: 34px;
-  height: 16px;
-  -webkit-border-radius: 2px;
-  border-radius: 16px;
-  vertical-align: top;
-  float: right;
+  width: auto;
+  height: 100% !important; /* cambio 2.1*/
+  vertical-align: middle;
+  text-align: center; /* cambio 2.1*/
 }
 
 .vent_ind_det_fondo { /*uso*/
@@ -1732,7 +1753,7 @@ textarea {
   /*float: right;*/
 }
 
-#cont_deta_emp_blank_der div, #cont_deta_per_blank_der div{
+#cont_deta_emp_blank_der div, #cont_deta_per_blank_der div, .edits-button div{
   color: #FFF;
   font-size: 15px;
   text-shadow: none;
@@ -1744,7 +1765,7 @@ textarea {
   line-height: 2.3rem;
 }
 
-.fase_tit .ui-field-contain .ui-select{
+.fase_tit .ui-field-contain .ui-select, .contacto_filtro .ui-field-contain .ui-select{
   width: 100% !important;
 }
 
@@ -1779,8 +1800,12 @@ textarea {
   max-width: 93%;
   box-shadow: 0px 2px 1px #C7C7C7;
   border-bottom: 1px solid #DDD;
-  margin-top: 10px;
+  margin: 10px 0;
   padding-bottom: 10px;
+}
+
+.cont_ind_det_fondo_deci{
+  margin-bottom: 10px;
 }
 
 .cont_ind_det_f_izq {
@@ -1811,6 +1836,7 @@ textarea {
 .cont_ind_det_izq_ico{
   color: #DF2047;
   margin: 0;
+  font-size: 16px;
 }
 
 .cont_ind_det_fondo .cont_ind_det_f_conta:last-child .cont_ind_det_f_der{
@@ -1922,4 +1948,45 @@ textarea {
   overflow: auto;
 }
 
+
+/*ultimo cambio¡*/
+
+/*CAMBIO UNO .edits-button div
+#cont_deta_emp_blank_der div, #cont_deta_per_blank_der div, .edits-button div{
+  color: #FFF;
+  font-size: 15px;
+  text-shadow: none;
+  width: 36px;
+  height: 36px;
+  display: inline-block;
+  border-radius: 50%;
+  background: #DF2047;
+  line-height: 2.3rem;
+}
+
+.vent_ind_deta_btns .white-button, .vent_ind_deta_btns .color-button{
+  font-family: ProximaNovaLight, sans-serif;
+  font-size: 12px !important;
+  padding: .86em 1.17em !important; /* CAMBIO x */
+  /* margin-right: 15px;  CAMBIO x */
+}
+
+/*CAMBIO 2
+.edits-button{
+  width: auto;
+  height: 100% !important;
+  vertical-align: middle;
+  text-align: center;
+}*/
+
+/*fin CAMBIO 2*/
+
+/* Cambio 3 
+.vent_ind_deta_btns{
+  display: inline-block;
+  width: 92.8%;
+  max-width: 93%;
+  margin-top: 10px;
+  text-align: center; /* cambio 3*/
+}
 
