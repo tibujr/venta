@@ -68,6 +68,7 @@ $(document).ready(function () {
 	//metodos inicializando
 	mostrarRequisitosHtml();
 
+	var estFlCon = 'on';
 	var reqArr = [];
 	var rucE, rsE, nomE, apeE, preE, necE, proE, fecE, camCuE = 'n', camCoE = 'n', camPrE = 'n'; //campos editar venta
 
@@ -227,7 +228,49 @@ $(document).ready(function () {
 	});
 
 	$("body").on('click', '#btn_contacto', function(e){
-		$.mobile.changePage("#contactos", {transition:"slide"});
+
+		if(estFlCon == 'on'){
+			estFlCon = 'of';
+			$(".sub-menu-nn").removeClass('ocultar');
+		}else{
+			estFlCon = 'on';
+			$(".sub-menu-nn").addClass('ocultar');
+		}
+	});
+
+	$("body").on('click', '#btn_empresa', function(e){
+		estFlCon = 'on';
+		$(".sub-menu-nn").addClass('ocultar');
+		$.mobile.changePage("#contactos-empresa", {transition:"slide"});
+	});
+
+	$("body").on('click', '#btn_persona', function(e){
+		estFlCon = 'on';
+		$(".sub-menu-nn").addClass('ocultar');
+		$.mobile.changePage("#contactos-persona", {transition:"slide"});
+	});
+
+	$("body").on('click', '#add-contacto-bot', function(e){
+
+		if(estFlCon == 'on'){
+			estFlCon = 'of';
+			$(".sub-menu-nn-d").removeClass('ocultar');
+		}else{
+			estFlCon = 'on';
+			$(".sub-menu-nn-d").addClass('ocultar');
+		}
+	});
+
+	$("body").on('click', '#btn_empresa_bot', function(e){
+		estFlCon = 'on';
+		$(".sub-menu-nn-d").addClass('ocultar');
+		$.mobile.changePage("#contacto_emp_nuevo_editar", {transition:"slide"});
+	});
+
+	$("body").on('click', '#btn_persona_bot', function(e){
+		estFlCon = 'on';
+		$(".sub-menu-nn-d").addClass('ocultar');
+		$.mobile.changePage("#contacto_per_nuevo_editar", {transition:"slide"});
 	});
 
 	$("body").on('click', '#onOf', function(e) {
