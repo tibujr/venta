@@ -366,7 +366,7 @@ body{
   text-align: left;
 }
 
-.cont_btn_form #btn_guardar_frm{
+.cont_btn_form #btn_guardar_frm, .cont_btn_form #btn_guardar_emp, .cont_btn_form #btn_guardar_per{
   text-align: right;
 }
 
@@ -2002,3 +2002,19 @@ textarea {
   width: 100%;
   margin: 10px 0;
 }
+
+#cont-cbo-tcartera{
+  width: 100%;
+}
+
+#cont-cbo-tcartera div.ui-btn{
+  border: none;
+}
+
+#cont-cbo-tcartera span.ui-btn-inner{
+  border-bottom: 1px solid #c4c4c4;
+  background: #e5e5e5;
+  color: #7D7D7D;
+}
+
+

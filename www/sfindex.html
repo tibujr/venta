@@ -917,6 +917,7 @@
       </div>
     </article>
     <article data-role="content" class="cont_main"> 
+      <input type='hidden' name='accion_frm_emp' id='accion_frm_emp' value='' >
       <section class='cont_items'>
         <section class='cont_dato_detalle_venta'>
 
@@ -979,11 +980,28 @@
               <section class="cont_item_contend_uni_nuevo">
                 <section class="sec_cont_item_izq_nuevo">
                   <div class="sec_cont_item_izq_ico_nuevo">
-                    <div class="icon-address-book"></div>
+                    <!--<div class="icon-address-book"></div>-->
                   </div>
                 </section>
                 <section class="sec_cont_item_mid_nuevo">
-                  <input type="text" class="sec_cont_item_izq_text_nuevo" placeholder="Tipo de cartera" id='edt_emp_tcart' name='edt_emp_tcart'></input>
+                  <!--<input type="text" class="sec_cont_item_izq_text_nuevo" placeholder="Tipo de cartera" id='edt_emp_tcart' name='edt_emp_tcart'></input>-->
+                  <!--<section id='cont-cbo-tcartera'>
+                    <select>
+                      <option>Carterizado</option>
+                      <option>No Carterizado</option>
+                      <option>Premium</option>
+                    </select>
+                  </section>-->
+                  <article class="contacto_filtro" id='cont-cbo-tcartera'>
+                    <div data-role="fieldcontain">
+                      <select name="cboTipoCartera" id="cboTipoCartera">
+                        <!--<option value="volvo">PREMIUM </option>
+                        <option value="volvo">TOP 2</option>
+                        <option value="volvo">TOP 1</option>
+                        <option value="volvo">NO CARTERIZADO</option>-->
+                      </select>
+                    </div>
+                  </article>
                 </section>
               </section>
 
@@ -1010,8 +1028,8 @@
               </section>-->
                 </section>
                 <section class='cont_btn_form'>
-                  <article id='btn_cancelar_frm'><a href="#" data-rel='back'>CANCELAR</a></article>
-                  <article id='btn_guardar_frm'><label>GUARDAR</label></article>
+                  <article id='btn_cancelar_frm'><a href='#' data-rel='back'>CANCELAR</a></article>
+                  <article id='btn_guardar_emp'><label>GUARDAR</label></article>
                 </section>
           </section>
         </section>
@@ -1188,6 +1206,8 @@
     <article data-role="content" class="cont_main"> 
       <section class='cont_items'>
         <section class='cont_dato_detalle_venta'>
+
+            <input type='hidden' name='idEmp' id='idEmp' val=''>
 
             <section class="cont_ind_deta_blank">
               <section class="cont_ind_deta_blank_izq"><div id='det_emp_nom'>Telefonica del Perú S.A.C</div></section>
@@ -1594,7 +1614,7 @@
                 </section>
                 <section class='cont_btn_form'>
                   <article id='btn_cancelar_frm'><a href="#" data-rel='back'>CANCELAR</a></article>
-                  <article id='btn_guardar_frm'><label>GUARDAR</label></article>
+                  <article id='btn_guardar_per'><label>GUARDAR</label></article>
                 </section>
           </section>
       </section>

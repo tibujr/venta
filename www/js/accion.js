@@ -67,6 +67,7 @@ $(document).ready(function () {
 
 	//metodos inicializando
 	mostrarRequisitosHtml();
+	llenarTipoCartera();
 
 	//calendario español
 	var Dia = new Array("Dom", "Lun", "Mar", "Mié", "Jue", "Vie", "Sáb");
@@ -252,7 +253,7 @@ $(document).ready(function () {
 		if(localStorage.getItem('onof') == 'on'){
 			listarUsuarioEmpresaOn(id_usu_emp);
 		}else{
-
+			console.log("lista empresa off")
 		}
 		$.mobile.changePage("#contactos-empresa", {transition:"slide"});
 	});
@@ -272,7 +273,35 @@ $(document).ready(function () {
 	});
 
 	$("body").on('click', '#cont_deta_emp_blank_der', function(e){
+		$("#accion_frm_emp").val("editar");
 		$.mobile.changePage("#contacto_emp_nuevo_editar", {transition:"slide"});
+	});
+
+	$("body").on('click', '#btn_guardar_emp', function(e){
+		
+		var idEmp = $("#idEmp").val();
+
+		if(localStorage.getItem('onof') == 'on'){
+			if ($("#accion_frm_emp").val() == 'editar')
+			{
+				editarEmpresaOn(idEmp);
+				alert("editar on")
+			}
+			else if ($("#accion_frm_emp").val() == 'nuevo') 
+			{
+				alert("nuevo on")
+			}
+		}else{
+			if ($("#accion_frm_emp").val() == 'editar')
+			{
+				alert("editar of")
+			}
+			else if ($("#accion_frm_emp").val() == 'nuevo') 
+			{
+				alert("nuevo of")
+			}
+		}
+		$.mobile.changePage("#contacto_deta_empresa", {transition:"slide"});
 	});
 
 	$("body").on('click', '#btn_persona', function(e){
@@ -303,6 +332,7 @@ $(document).ready(function () {
 	$("body").on('click', '#btn_empresa_bot', function(e){
 		estFlCon = 'on';
 		$(".sub-menu-nn-d").addClass('ocultar');
+		$("#accion_frm_emp").val("nuevo");
 		$.mobile.changePage("#contacto_emp_nuevo_editar", {transition:"slide"});
 	});
 
@@ -957,6 +987,7 @@ $(document).ready(function () {
 
 	function mostrarRequisitosHtml()
 	{
+		$( "#cont_reque, #req_detalle_venta" ).html("");
 		if(localStorage.getItem('onof') == 'on'){
 			$.ajax({
 				type: 'POST',
@@ -966,14 +997,39 @@ $(document).ready(function () {
 			    },
 				url: urlP+"getRequisitos",
 				success : function(data) {
-					if(data != 0){
-
-						console.log(data)
+					if(data != 0)
+					{
 						for(var i=0; i< data.length; i++)
 						{
 							reqArr[i]=data[i]['id_req'];
 							$( "#cont_reque, #req_detalle_venta" ).append("<article class='cont_req cont_ckh_reg'><input type='checkbox' name='req_"+data[i]['id_req']+"' id='req_"+data[i]['id_req']+"' class='chkocultar desa_det_venta'/><label class='lblcheck reqc_"+data[i]['id_req']+"' for='req_"+data[i]['id_req']+"' >"+data[i]['descripcion_req']+"</label></article>");
 							//$( "#req_detalle_venta" ).append("<article class='cont_req req_vd'><input type='checkbox' name='req_det_"+data[i]['id_req']+"' name='req_det_"+data[i]['id_req']+"' class='chkocultar'/><label class='lblcheck' for='req_det_"+data[i]['id_req']+"' >"+data[i]['descripcion_req']+"</label></article>")
+						}
+					}
+				},
+				error: function(data){
+					console.log(data);
+				}
+			});
+		}
+	}
+
+	function llenarTipoCartera()
+	{
+		$("#cboTipoCartera").html("<option value='0'>TIPO DE CARTERA</option>");
+		if(localStorage.getItem('onof') == 'on'){
+			$.ajax({
+				type: 'POST',
+				dataType: 'json', 
+				data: {},
+				beforeSend : function (){
+			    },
+				url: urlP+"getTipoCartera",
+				success : function(data) {
+					if(data != 0){
+						for(var i=0; i< data.length; i++)
+						{
+							$("#cboTipoCartera").append("<option value='"+data[i]['id']+"'>"+data[i]['descripcion']+"</option>")
 						}
 					}
 				},
@@ -1225,6 +1281,7 @@ $(document).ready(function () {
 
 	function getDetalleEmpresaOn(idEmp)
 	{
+		$("#idEmp").val(idEmp);//guardarIdEmpresa
 		$("#cnt_cnt_emp_deci").html("");//limpiar decisor contenedor
 		$("#cont_oport_gen_emp").html("");//limpiar prospecto contenedor
 		$("#cont_actv_gen_emp").html("");//limpiar actividad contenedor
@@ -1262,9 +1319,10 @@ $(document).ready(function () {
 				$("#edt_emp_ruc").val(etd[0]['ruc_cuen']);
 				$("#edt_emp_ntrab").val(etd[0]['numero_trabajadores_cuen']);
 				$("#edt_emp_vven").val(etd[0]['volumen_venta_cuen']);
-				$("#edt_emp_tcart").val(etd[0]['tipo_cartera_cuen']);
 				$("#edt_emp_telf").val(etd[0]['telefono_cuen']);
-
+				(!etd[0]['tipo_cartera_cuen'])? $("#cont-cbo-tcartera span.ui-btn-text span").html("TIPO DE CARTERA") : $("#cont-cbo-tcartera span.ui-btn-text span").html(etd[0]['tipo_cartera_cuen']);
+				(!etd[0]['id_tipo_cartera'])? $("#cboTipoCartera option[value=0]").attr("selected",'selected'):$("#cboTipoCartera option[value='"+etd[0]['id_tipo_cartera']+"']").attr("selected",'selected');
+				
 				/*DECISOR*/
 				var ctd = data['con'];
 				for(var i = 0; i < ctd.length; i++)
@@ -1288,19 +1346,14 @@ $(document).ready(function () {
 				}
 
 				/*ACTIVIDAD*/
-
 				var atd = data['act'];
 				for(var i = 0; i < atd.length; i++)
 				{
 					var fg = generaFecha(atd[i]['fecha_act']);
-					//console.log(atd[i]['fecha_act']);
-					console.log(fg['diaNom']+ " "+  fg['diaNum'] + " " + fg['mesNom'])
 					if(!atd[i]['desc_tact'])atd[i]['desc_tact'] = 'Pendiente';
 					if(!atd[i]['hora_act'])atd[i]['hora_act'] = '00:00';
 					var ac ="<article class='unid_cont_item_act'><section class='sect_uno_item_izq'><div class='div_fecha_act_top'>"+fg['diaNom']+"</div><div class='div_fecha_act_bot'>"+fg['diaNum']+" "+fg['mesNom']+"</div></section><section class='sect_uno_item_mid' id='"+atd[i]['id_act']+"'><div class='div_tipo_act_top'>"+atd[i]['desc_tact']+"</div><div class='div_tipo_act_bot'><div class='div_tipo_act_bot_izq'>"+atd[i]['hora_act'].substring(0,5)+" / </div><div class='div_tipo_act_bot_der'> "+etd[0]['razon_social_cuen']+"</div></div></section><section class='sect_uno_item_der'><article class='cont_req cont_ckh_act'><input type='checkbox' name='act_"+atd[i]['id_act']+"' id='act_"+atd[i]['id_act']+"' class='chkocultar desa_det_venta'/><label class='lblcheck chk-lft' for='act_"+atd[i]['id_act']+"'></label></article></section></article>";
-		                
-		                /**/
-					$("#cont_actv_gen_emp").append(ac);
+		            $("#cont_actv_gen_emp").append(ac);
 				}
 			},
 			error: function(data){
@@ -1337,17 +1390,51 @@ $(document).ready(function () {
 		$("#edt_emp_telf").html("");
 	}
 
+	function editarEmpresaOn(idEmp)
+	{
+		var usuE = localStorage.getItem('id_usu');
+		var eEmp = $("#edt_emp_nom").val();
+		var eRuc = $("#edt_emp_ruc").val();
+		var nTrab = $("#edt_emp_ntrab").val();
+		var vVen = $("#edt_emp_vven").val();
+		var tCar = $("#cboTipoCartera").val();
+		var eTelf = $("#edt_emp_telf").val();
+
+		//var 
+
+		$.ajax({
+			type: 'POST',
+			dataType: 'json', 
+			data: {usuE:usuE, idEmp:idEmp, eEmp:eEmp, eRuc:eRuc, nTrab:nTrab, vVen:vVen, tCar:tCar, eTelf:eTelf},
+			beforeSend : function (){
+		    },
+			url: urlP+"editarEmpresaOn",
+			success : function(data) {
+				$("#det_emp_nom").html(eEmp);
+				$("#det_emp_ruc").html(eRuc);
+				$("#det_emp_numT").html(nTrab);
+				$("#det_emp_voluV").html(vVen);
+				$("#det_emp_telf").html(eTelf);
+				$("#det_emp_tCartera").html($("#id_mi_select option:selected").text());
+				console.log("se edito correctamente")
+			},
+			error: function(data){
+				console.log(data);
+			}
+		});
+	}
+
 	function generaFecha(d)
 	{
 		var fret = new Array();
 		var fecha = (d).split('-').join('/');
-		var Hoy = new Date(fecha);
-		var Anio = Hoy.getFullYear();
-
+		var nf = new Date(fecha);
+		var Anio = nf.getFullYear();
+		//var Fecha = Dia[nf.getDay()] + ", " + nf.getDate() + " de " + Mes[nf.getMonth()] + " del " + Anio + ". ";
 		if (d.length < 11) {
-			fret['diaNom'] = Dia[Hoy.getDay()];
-			fret['diaNum'] = Hoy.getDate();
-			fret['mesNom'] = Mes[Hoy.getMonth()];
+			fret['diaNom'] = Dia[nf.getDay()];
+			fret['diaNum'] = nf.getDate();
+			fret['mesNom'] = Mes[nf.getMonth()];
 		}
 		return fret;
 	}
