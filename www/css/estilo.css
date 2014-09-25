@@ -698,11 +698,11 @@ body{
 /*FONTS ICONOS CSS*/
 @font-face {
   font-family: 'icomoon';
-  src:url('fonts/icomoon.eot?x7s91p');
-  src:url('fonts/icomoon.eot?#iefixx7s91p') format('embedded-opentype'),
-    url('fonts/icomoon.woff?x7s91p') format('woff'),
-    url('fonts/icomoon.ttf?x7s91p') format('truetype'),
-    url('fonts/icomoon.svg?x7s91p#icomoon') format('svg');
+  src:url('fonts/icomoon.eot?s97qyu');
+  src:url('fonts/icomoon.eot?#iefixs97qyu') format('embedded-opentype'),
+    url('fonts/icomoon.woff?s97qyu') format('woff'),
+    url('fonts/icomoon.ttf?s97qyu') format('truetype'),
+    url('fonts/icomoon.svg?s97qyu#icomoon') format('svg');
   font-weight: normal;
   font-style: normal;
 }
@@ -733,8 +733,14 @@ body{
 .icon-wifi-full:before {
   content: "\e60f";
 }
+.icon-time:before {
+  content: "\e617";
+}
 .icon-moneybag:before {
   content: "\e610";
+}
+.icon-coins:before {
+  content: "\e61b";
 }
 .icon-blocked:before {
   content: "\e611";
@@ -745,11 +751,17 @@ body{
 .icon-arrow-down:before {
   content: "\e601";
 }
+.icon-arrow-right:before {
+  content: "\e61a";
+}
 .icon-arrow-left2:before {
   content: "\e602";
 }
 .icon-arrow-down2:before {
   content: "\e603";
+}
+.icon-group:before {
+  content: "\f0c0";
 }
 .icon-envelope:before {
   content: "\f0e0";
@@ -775,11 +787,23 @@ body{
 .icon-address-book:before {
   content: "\e606";
 }
+.icon-envelope2:before {
+  content: "\e619";
+}
 .icon-location:before {
   content: "\e614";
 }
+.icon-stopwatch:before {
+  content: "\e618";
+}
 .icon-calendar:before {
   content: "\e607";
+}
+.icon-cabinet:before {
+  content: "\e61c";
+}
+.icon-users:before {
+  content: "\e616";
 }
 .icon-user:before {
   content: "\e615";
@@ -1357,8 +1381,9 @@ textarea {
 .fase_tit_sel_act_ind .ui-input-text{
   width: 60%;
   display: inline-block;
-  top: -12px;
-  padding-bottom: 3px !important;
+  top: -13px;
+  padding-bottom: 2px !important;
+  border-bottom: 2px solid red;
 }
 
 .sec_cont_item_izq_text {
@@ -1935,6 +1960,26 @@ textarea {
 }
 
 /*MIS CAMBIOS EN ALFREDO*/
+
+
+.cont_ckh_act{
+  margin: 20px 0 0 0;
+  overflow: hidden;
+}
+
+.cont_ckh_act_det{
+  margin: 0;
+  padding: 0;
+  width: 19px;
+  overflow: visible;
+  vertical-align: middle;
+}
+
+.cont_ckh_act_det .ui-btn-inner{
+  top: 4px;
+  background: none !important;
+}
+
 .req_vd{
   margin: 7px 0 0;
 }
@@ -1948,45 +1993,12 @@ textarea {
   overflow: auto;
 }
 
+.chk-lft{
+  left: -10px;
+}
 
-/*ultimo cambio¡*/
-
-/*CAMBIO UNO .edits-button div
-#cont_deta_emp_blank_der div, #cont_deta_per_blank_der div, .edits-button div{
-  color: #FFF;
-  font-size: 15px;
-  text-shadow: none;
-  width: 36px;
-  height: 36px;
+#cont_actv_gen_emp, #cont_oport_gen_emp{
   display: inline-block;
-  border-radius: 50%;
-  background: #DF2047;
-  line-height: 2.3rem;
+  width: 100%;
+  margin: 10px 0;
 }
-
-.vent_ind_deta_btns .white-button, .vent_ind_deta_btns .color-button{
-  font-family: ProximaNovaLight, sans-serif;
-  font-size: 12px !important;
-  padding: .86em 1.17em !important; /* CAMBIO x */
-  /* margin-right: 15px;  CAMBIO x */
-}
-
-/*CAMBIO 2
-.edits-button{
-  width: auto;
-  height: 100% !important;
-  vertical-align: middle;
-  text-align: center;
-}*/
-
-/*fin CAMBIO 2*/
-
-/* Cambio 3 
-.vent_ind_deta_btns{
-  display: inline-block;
-  width: 92.8%;
-  max-width: 93%;
-  margin-top: 10px;
-  text-align: center; /* cambio 3*/
-}
-

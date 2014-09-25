@@ -68,6 +68,10 @@ $(document).ready(function () {
 	//metodos inicializando
 	mostrarRequisitosHtml();
 
+	//calendario español
+	var Dia = new Array("Dom", "Lun", "Mar", "Mié", "Jue", "Vie", "Sáb");
+	var Mes = new Array("Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep","Oct", "Nov", "Dic");
+
 	var estFlCon = 'on';
 	var reqArr = [];
 	var rucE, rsE, nomE, apeE, preE, necE, proE, fecE, camCuE = 'n', camCoE = 'n', camPrE = 'n'; //campos editar venta
@@ -243,11 +247,27 @@ $(document).ready(function () {
 
 	$("body").on('click', '#btn_empresa', function(e){
 		estFlCon = 'on';
+		var id_usu_emp = localStorage.getItem('id_usu');
 		$(".sub-menu-nn").addClass('ocultar');
+		if(localStorage.getItem('onof') == 'on'){
+			listarUsuarioEmpresaOn(id_usu_emp);
+		}else{
+
+		}
 		$.mobile.changePage("#contactos-empresa", {transition:"slide"});
 	});
 
 	$("body").on("click",".cont_item_contend_uni_emp", function(e){
+		var idEmpUsu = $(this).attr('id');//$("#id_emp_sel").val();
+		//alert(spt)
+		//$(this).attr('id');
+		var idted = idEmpUsu.substring(4);
+		$("#id_emp_sel").val(idted);
+		if(localStorage.getItem('onof') == 'on'){
+			getDetalleEmpresaOn(idted);
+		}else{
+
+		}
 		$.mobile.changePage("#contacto_deta_empresa", {transition:"slidedown"});
 	});
 
@@ -313,6 +333,26 @@ $(document).ready(function () {
 		}
 	});
 
+	$("body").on('click', '#btn-general-demp', function(e){
+		ocultarContDAOEmp("#cont_deta_gen_emp","#btn-general-demp");
+	});
+
+	$("body").on('click', '#btn-actividad-demp', function(e){
+		ocultarContDAOEmp("#cont_actv_gen_emp","#btn-actividad-demp");
+	});
+
+	$("body").on('click', '#btn-oportunidad-demp', function(e){
+		ocultarContDAOEmp("#cont_oport_gen_emp","#btn-oportunidad-demp");
+	});
+
+	function ocultarContDAOEmp(dat, fnd)
+	{
+		$("#cont_deta_gen_emp, #cont_actv_gen_emp, #cont_oport_gen_emp").css({display: 'none'});
+		$("#btn-general-demp, #btn-actividad-demp, #btn-oportunidad-demp").css({background: '#FFF', color: 'black'});
+		$(dat).css({display: 'inline-block'});
+		$(fnd).css({background: '#df2047', color:'#FFF'});
+	}
+
 	$("body").on("click",".btn_opc_item, .unid_cont_item", function(e){
 		var idv = this.id;
 		$('#id_pros').val(idv);
@@ -352,18 +392,15 @@ $(document).ready(function () {
 
 	$("body").on("click","#btn_perdido_det_ven", function(e){
 		
-		var Dia = new Array("Dom", "Lun", "Mar", "Mié", "Jue", "Vie", "Sáb");
-		var Mes = new Array("Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep",
-		"Oct", "Nov", "Dic");
-		//var fecha = "2014-08-15 18:15";
+		/*//var Dia = new Array("Dom", "Lun", "Mar", "Mié", "Jue", "Vie", "Sáb");
+		//var Mes = new Array("Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep","Oct", "Nov", "Dic");
+		
 		var fecha = ("2014-08-15 18:15:00").split('-').join('/');
-		//console.log(fecha)
 		var Hoy = new Date(fecha);
-		//console.log(Hoy)
 		var Anio = Hoy.getFullYear();
 		var Fecha = Dia[Hoy.getDay()] + ", " + Hoy.getDate() + " de " + Mes[Hoy.getMonth()] + " del " + Anio + ". ";
 
-		console.log(Fecha+"  "+Hoy.getTime());
+		console.log(Fecha+"  "+Hoy.getTime());*/
 	});
 
 	$("body").on("click",".edit_prosp_frm", function(e){
@@ -1158,6 +1195,161 @@ $(document).ready(function () {
 				console.log(data);
 			}
 		});
+	}
+
+	function listarUsuarioEmpresaOn(id)
+	{
+		$(".lst-empresa").html("");
+		$.ajax({
+			type: 'POST',
+			dataType: 'json', 
+			data: {id:id},
+			beforeSend : function (){
+		    },
+			url: urlP+"listarUsuarioEmpresaOn",
+			success : function(data) {
+				if(data != 0){
+					for(var i=0; i< data.length; i++)
+					{
+						$(".lst-empresa").append("<section class='cont_item_contend_uni_emp' id='emp_"+data[i]['id_cuen']+"'><section class='sec_cont_item_izq'><div class='sec_cont_item_izq_ico'><div class='icon-office ico-usr'></div></div></section><section class='sec_cont_item_mid'><div class='sec_cont_item_izq_text'>"+data[i]['razon_social_cuen']+" inc</div></section><section class='sec_cont_item_der'><div class='sec_cont_item_izq_flecha'><div class='icon-arrow-right'></div></div></section></section>");
+					}
+				}else{
+					alert("No tienes empresas asignadas")
+				}
+			},
+			error: function(data){
+				console.log(data);
+			}
+		});
+	}
+
+	function getDetalleEmpresaOn(idEmp)
+	{
+		$("#cnt_cnt_emp_deci").html("");//limpiar decisor contenedor
+		$("#cont_oport_gen_emp").html("");//limpiar prospecto contenedor
+		$("#cont_actv_gen_emp").html("");//limpiar actividad contenedor
+
+		limpiarDetalleEmpresa();
+		limpiarEditarEmpresa();
+
+		ocultarContDAOEmp("#cont_deta_gen_emp","#btn-general-demp");
+
+		$.ajax({
+			type: 'POST',
+			dataType: 'json', 
+			data: {idEmp:idEmp},
+			beforeSend : function (){
+		    },
+			url: urlP+"getDetalleEmpresaOn",
+			success : function(data) {
+				console.log(data);
+
+				/*EMPRESA*/
+				var etd = data['emp'];
+				//datos detalle empresa
+				$("#det_emp_nom").html(etd[0]['razon_social_cuen']);
+				$("#det_emp_ruc").html(etd[0]['ruc_cuen']);
+				$("#det_emp_numT").html(etd[0]['numero_trabajadores_cuen']);
+				$("#det_emp_voluV").html(etd[0]['volumen_venta_cuen']);
+				$("#det_emp_giro").html(etd[0]['giro_cuen']);
+				$("#det_emp_tCartera").html(etd[0]['tipo_cartera_cuen']);
+				$("#det_emp_telf").html(etd[0]['telefono_cuen']);
+				if(etd[0]['direccion_cuen'])
+					$("#det_emp_dire").html(etd[0]['direccion_cuen']+", "+etd[0]['distrito_cuen']);
+				$("#det_emp_asig").html(etd[0]['nombre_usu']+" "+etd[0]['apellido_usu']);
+				//datos editar empresa
+				$("#edt_emp_nom").val(etd[0]['razon_social_cuen']);
+				$("#edt_emp_ruc").val(etd[0]['ruc_cuen']);
+				$("#edt_emp_ntrab").val(etd[0]['numero_trabajadores_cuen']);
+				$("#edt_emp_vven").val(etd[0]['volumen_venta_cuen']);
+				$("#edt_emp_tcart").val(etd[0]['tipo_cartera_cuen']);
+				$("#edt_emp_telf").val(etd[0]['telefono_cuen']);
+
+				/*DECISOR*/
+				var ctd = data['con'];
+				for(var i = 0; i < ctd.length; i++)
+				{
+					if(!ctd[i]['apellido_con'])ctd[i]['apellido_con'] = "";
+					if(!ctd[i]['cargo'])ctd[i]['cargo'] = "cargo"; 
+					if(!ctd[i]['celular_con'])ctd[i]['celular_con'] = "- - -"; 
+					if(!ctd[i]['mail_con'])ctd[i]['mail_con'] = "- - -"; 
+					var de ="<section class='cont_ind_det_fondo_deci'><section class='cont_ind_det_f_conta'><section class='cont_ind_det_f_izq'><div class='cont_ind_det_izq_ico'><div class='icon-user ico-usr'></div></div></section><section class='cont_ind_det_f_der'><div class='cont_ind_der_top' id='det_emp_cont_nom'>"+ctd[i]['nombre_con']+" "+ctd[i]['apellido_con']+"</div><div class='cont_ind_der_bot' id='det_emp_cont_cargo'>"+ctd[i]['cargo']+"</div></section></section><section class='cont_ind_det_f_conta'><section class='cont_ind_det_f_izq'><div class='cont_ind_det_izq_ico'><div class='icon-phone'></div></div></section><section class='cont_ind_det_f_der'><div class='cont_ind_der_top' id='det_emp_cont_celu'>"+ctd[i]['celular_con']+"</div><div class='cont_ind_der_bot'>Celular</div></section></section><section class='cont_ind_det_f_conta'><section class='cont_ind_det_f_izq'><div class='cont_ind_det_izq_ico'><div class='icon-envelope'></div></div></section><section class='cont_ind_det_f_der'><div class='cont_ind_der_top' id='det_emp_cont_mail'>"+ctd[i]['mail_con']+"</div><div class='cont_ind_der_bot'>Correo</div></section></section></section>";
+					$("#cnt_cnt_emp_deci").append(de);
+				}
+
+				/*PROSPECTO*/
+				var ptd = data['pros'];
+				for(var i = 0; i < ptd.length; i++)
+				{
+					if(!ptd[i]['titulo'])ptd[i]['titulo'] = etd[0]['razon_social_cuen'];
+					if(!ptd[i]['presupuesto_pros'])ptd[i]['presupuesto_pros'] = 0.00;
+					var pc ="<article class='unid_cont_item' id='"+ptd[i]['id_pros']+"'><section class='sect_uno_item'><article class='nom_emp_item'><label>"+ptd[i]['titulo']+"</label></article><article class='valor_emp_item'><label>"+ptd[i]['presupuesto_pros']+" NUEVOS SOLES</label></article></section><section class='sect_dos_item'></section></article>";
+					$("#cont_oport_gen_emp").append(pc);
+				}
+
+				/*ACTIVIDAD*/
+
+				var atd = data['act'];
+				for(var i = 0; i < atd.length; i++)
+				{
+					var fg = generaFecha(atd[i]['fecha_act']);
+					//console.log(atd[i]['fecha_act']);
+					console.log(fg['diaNom']+ " "+  fg['diaNum'] + " " + fg['mesNom'])
+					if(!atd[i]['desc_tact'])atd[i]['desc_tact'] = 'Pendiente';
+					if(!atd[i]['hora_act'])atd[i]['hora_act'] = '00:00';
+					var ac ="<article class='unid_cont_item_act'><section class='sect_uno_item_izq'><div class='div_fecha_act_top'>"+fg['diaNom']+"</div><div class='div_fecha_act_bot'>"+fg['diaNum']+" "+fg['mesNom']+"</div></section><section class='sect_uno_item_mid' id='"+atd[i]['id_act']+"'><div class='div_tipo_act_top'>"+atd[i]['desc_tact']+"</div><div class='div_tipo_act_bot'><div class='div_tipo_act_bot_izq'>"+atd[i]['hora_act'].substring(0,5)+" / </div><div class='div_tipo_act_bot_der'> "+etd[0]['razon_social_cuen']+"</div></div></section><section class='sect_uno_item_der'><article class='cont_req cont_ckh_act'><input type='checkbox' name='act_"+atd[i]['id_act']+"' id='act_"+atd[i]['id_act']+"' class='chkocultar desa_det_venta'/><label class='lblcheck chk-lft' for='act_"+atd[i]['id_act']+"'></label></article></section></article>";
+		                
+		                /**/
+					$("#cont_actv_gen_emp").append(ac);
+				}
+			},
+			error: function(data){
+				console.log(data);
+			}
+		});
+	}
+
+	function limpiarDetalleEmpresa()
+	{
+		$("#det_emp_nom").html("");
+		$("#det_emp_ruc").html("");
+		$("#det_emp_numT").html("");
+		$("#det_emp_voluV").html("");
+		$("#det_emp_giro").html("");
+		$("#det_emp_tCartera").html("");
+		$("#det_emp_telf").html("");
+		$("#det_emp_dire").html("");
+		$("#det_emp_asig").html("");
+
+		$("#det_emp_cont_nom").html("");
+		$("#det_emp_cont_cargo").html("");
+		$("#det_emp_cont_celu").html("");
+		$("#det_emp_cont_mail").html("");
+	}
+
+	function limpiarEditarEmpresa()
+	{
+		$("#edt_emp_nom").html("");
+		$("#edt_emp_ruc").html("");
+		$("#edt_emp_ntrab").html("");
+		$("#edt_emp_vven").html("");
+		$("#edt_emp_tcart").html("");
+		$("#edt_emp_telf").html("");
+	}
+
+	function generaFecha(d)
+	{
+		var fret = new Array();
+		var fecha = (d).split('-').join('/');
+		var Hoy = new Date(fecha);
+		var Anio = Hoy.getFullYear();
+
+		if (d.length < 11) {
+			fret['diaNom'] = Dia[Hoy.getDay()];
+			fret['diaNum'] = Hoy.getDate();
+			fret['mesNom'] = Mes[Hoy.getMonth()];
+		}
+		return fret;
 	}
 
 });
