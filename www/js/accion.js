@@ -341,6 +341,7 @@ $(document).ready(function () {
 			}
 			else if ($("#accion_frm_emp").val() == 'nuevo') 
 			{
+
 				agregarEmpresaOn();
 				//$.mobile.changePage("#contactos-empresa", {transition:"slide"});
 			}
@@ -358,6 +359,23 @@ $(document).ready(function () {
 		$.mobile.back();
 		//$.mobile.changePage("#contacto_deta_empresa", {transition:"slide"});
 	});
+
+	/*function validarCamposFrmContacto()
+	{
+		if($("#edt_emp_nom").val() == ""){
+			$("#edt_emp_nom").focus().after("<span class='menError'>Ingresar Razón Social</span>");
+			return false;
+		}else if($("#edt_emp_ruc").val() == ""){
+			$("#edt_emp_ruc").focus().after("<span class='menError'>Ingresar RUC</span>");
+			return false;
+		}else if($("#edt_emp_ntrab").val() == ""){
+			$("#edt_emp_ntrab").focus().after("<span class='menError'>Número de trabajadores</span>");
+			return false;
+		}else if($("#edt_emp_ntrab").val() == ""){
+			$("#edt_emp_ntrab").focus().after("<span class='menError'>Número de trabajadores</span>");
+			return false;
+		}
+	}*/
 
 	$("body").on('click', '#btn_guardar_per', function(e){
 		
@@ -613,7 +631,11 @@ $(document).ready(function () {
 			},
 			url: urlP+"evaluarProspecto",
 			success : function(data) {
-				console.log("correctooo")
+				llenarFase()
+				llenarProspecto(us);
+				llenarCuenta(us);
+				llenarContacto(us);
+				limpiarDataEdit();
 			},
 			error: function(data){
 				console.log(data);
