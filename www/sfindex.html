@@ -26,8 +26,8 @@
     <article data-role="content" style="font-size:0;">
       <div id='onOf'><div class="icon-wifi-full"></div><div id='bloq_wifi' class="icon-blocked"></div></div>
       <div style="display: inline-block; margin-bottom: 10px; width: 100%; margin-top: 35%;"><img src="img/logo.jpg"></div>
-      <div class="login_caja"><input type="email" id="mail" name="mail" value="cmasias@roinet.pe" placeholder="Correo electrónico"></div>
-      <div class="login_caja"><input type="password" id="clave" name="clave" value="123456" placeholder="******"></div>
+      <div class="login_caja"><input type="email" id="mail" name="mail" value="" placeholder="Correo electrónico"></div>
+      <div class="login_caja"><input type="password" id="clave" name="clave" value="" placeholder="******"></div>
       <div class="center-wrapper">
         <div id="btn_login" data-role="button" data-theme="b" data-inline="true">INICIAR SESIÓN</div>
       </div>
@@ -471,33 +471,6 @@
               
               <section class="vent_ind_det_f_cont" id="req_detalle_venta"></section>
             </section>
-
-            <!--<section class="vent_ind_deta_act">
-              <section class="vent_div_linea_act">
-                <div class="punto-text-big">Actividades</div>
-              </section>
-            </section>
-
-            <article class="unid_cont_item_act">
-                <section class="sect_uno_item_izq">
-                  <div class="div_fecha_act_top">Vie</div>
-                  <div class="div_fecha_act_bot">30 Ago</div>
-                </section>
-                <section class="sect_uno_item_mid">
-                  <div class="div_tipo_act_top">Reunión</div>
-                  <div class="div_tipo_act_bot">
-                    <div class="div_tipo_act_bot_izq">13:00 /</div>
-                    <div class="div_tipo_act_bot_der">Teléfonica del Perú</div>
-                  </div>
-                </section>
-                <section class="sect_uno_item_der">
-                  <article class='cont_req act_mv'>
-                    <input type='checkbox' name='chkn' id='chkn' class='chkocultar'/>
-                    <label class='lblcheck' for='chkn' ></label>
-                  </article>
-                </section>
-              </article>-->
-        <!--</div>-->
         </section>
       </section>
     </article>
@@ -546,7 +519,7 @@
       <section class='cont_items'>
         <section class='cont_dato_detalle_venta'>
 
-          <article class="contacto_filtro">
+          <!--<article class="contacto_filtro">
             <div data-role="fieldcontain">
               <select name="cboEmpresaFiltro" id="cboEmpresaFiltro">
                 <option value="volvo">Filtros </option>
@@ -555,7 +528,7 @@
                  <option value="volvo">Del mes</option>
               </select>
             </div>
-          </article>
+          </article>-->
 
           <input type='hidden' name='id_emp_sel' id='id_emp_sel' val=''>
           <article class="unid_cont_item_act_contac lst-empresa"></article>
@@ -712,39 +685,14 @@
                 </section>
               </section>
 
-              <!--<section class="cont_item_contend_uni_nuevo">
-                <section class="sec_cont_item_izq_nuevo">
-                  <div class="sec_cont_item_izq_ico_nuevo">
-                    <div class="icon-moneybag"></div>
-                  </div>
-                </section>
-                <section class="sec_cont_item_mid_nuevo ocl-edit">
-                  <input type="text" class="sec_cont_item_izq_text_nuevo" placeholder="Giro"></input>
-                </section>
-              </section>-->
-
               <section class="cont_item_contend_uni_nuevo">
                 <section class="sec_cont_item_izq_nuevo">
-                  <div class="sec_cont_item_izq_ico_nuevo">
-                    <!--<div class="icon-address-book"></div>-->
-                  </div>
+                  <div class="sec_cont_item_izq_ico_nuevo"></div>
                 </section>
                 <section class="sec_cont_item_mid_nuevo">
-                  <!--<input type="text" class="sec_cont_item_izq_text_nuevo" placeholder="Tipo de cartera" id='edt_emp_tcart' name='edt_emp_tcart'></input>-->
-                  <!--<section id='cont-cbo-tcartera'>
-                    <select>
-                      <option>Carterizado</option>
-                      <option>No Carterizado</option>
-                      <option>Premium</option>
-                    </select>
-                  </section>-->
                   <article class="contacto_filtro" id='cont-cbo-tcartera'>
                     <div data-role="fieldcontain">
                       <select name="cboTipoCartera" id="cboTipoCartera">
-                        <!--<option value="volvo">PREMIUM </option>
-                        <option value="volvo">TOP 2</option>
-                        <option value="volvo">TOP 1</option>
-                        <option value="volvo">NO CARTERIZADO</option>-->
                       </select>
                     </div>
                   </article>
@@ -761,22 +709,11 @@
                   <input type="text" class="sec_cont_item_izq_text_nuevo" placeholder="Teléfono" id='edt_emp_telf' name='edt_emp_telf'></input>
                 </section>
               </section>
-
-              <!--<section class="cont_item_contend_uni_nuevo">
-                <section class="sec_cont_item_izq_nuevo">
-                  <div class="sec_cont_item_izq_ico_nuevo">
-                    <div class="icon-location"></div>
-                  </div>
-                </section>
-                <section class="sec_cont_item_mid_nuevo">
-                  <input type="text" class="sec_cont_item_izq_text_nuevo" placeholder="Dirección"></input>
-                </section>
-              </section>-->
-                </section>
-                <section class='cont_btn_form'>
-                  <article id='btn_cancelar_frm'><a href='#' data-rel='back'>CANCELAR</a></article>
-                  <article id='btn_guardar_emp'><label>GUARDAR</label></article>
-                </section>
+            </section>
+            <section class='cont_btn_form'>
+              <article id='btn_cancelar_frm'><a href='#' data-rel='back'>CANCELAR</a></article>
+              <article id='btn_guardar_emp'><label>GUARDAR</label></article>
+            .</section>
           </section>
         </section>
       </section>
@@ -797,136 +734,6 @@
       </div>
     </article>
   </section>
-
-  <!--<section data-role="page" id="contacto_per_nuevo_editar">
-    <article data-role="header" id="d_usu" data-id="top_fijo" data-position="fixed" class="cab_nav">
-      <a href="#" data-rel="back" class="btn_back"><div class="icon-arrow-left atras_btn"></div><label>Atras</label></a>
-      <div class="con_cab_a"><h1>Contacto Persona Nuevo</h1></div>
-      <div data-role="navbar" data-grid="d" id="cont_cab_nav">
-        <ul>
-          <li><a href="javascript:;" id='btn_venta'><div class="icon-office"></div><label>OPORTUNIDAD</label></a></li>
-          <li><a href="javascript:;" id='btn_actividad'><div class="icon-calendar"></div><label>ACTIVIDADES</label></a></li>
-          <li>
-            <a href="javascript:;" id='btn_contacto' style="border-bottom: 6px solid #490d1a; height: 44px;"><div class="icon-address-book"></div><label>CONTACTOS</label>
-            </a>
-            <ul id="sub-menu-vent" class="ocultar sub-menu-nn">
-                  <li id='btn_empresa'>Empresa</li>
-                  <li id='btn_persona'>Persona</li>
-            </ul>
-          </li>
-          <li><a href="javascript:;"><div class="icon-pie"></div><label>ESTADISTICAS</label></a></li>
-          <li><a href="javascript:;"><div class="icon-star"></div><label>LOGROS</label></a></li>
-        </ul>
-      </div>
-    </article>
-    <article data-role="content" class="cont_main"> 
-      <section class='cont_items'>
-          <article class="unid_cont_item_act_contac">
-
-            <section class="cont_item_contend_uni_nuevo">
-              <section class="sec_cont_item_izq_nuevo">
-                <div class="sec_cont_item_izq_ico_nuevo">
-                  <div class="icon-office"></div>
-                </div>
-              </section>
-              <section class="sec_cont_item_mid_nuevo">
-                <input type="text" class="sec_cont_item_izq_text_nuevo" placeholder="Persona"></input>
-              </section>
-            </section>
-            
-            <section class="cont_item_contend_uni_nuevo">
-              <section class="sec_cont_item_izq_nuevo">
-                <div class="sec_cont_item_izq_ico_nuevo">
-                  <div class="icon-office"></div>
-                </div>
-              </section>
-              <section class="sec_cont_item_mid_nuevo">
-                <input type="text" class="sec_cont_item_izq_text_nuevo" placeholder="Tipo de documento"></input>
-              </section>
-            </section>
-
-            <section class="cont_item_contend_uni_nuevo">
-              <section class="sec_cont_item_izq_nuevo">
-                <div class="sec_cont_item_izq_ico_nuevo">
-                  <div class="icon-office"></div>
-                </div>
-              </section>
-              <section class="sec_cont_item_mid_nuevo">
-                <input type="text" class="sec_cont_item_izq_text_nuevo" placeholder="Numero de documento"></input>
-              </section>
-            </section>
-
-            <section class="cont_item_contend_uni_nuevo">
-              <section class="sec_cont_item_izq_nuevo">
-                <div class="sec_cont_item_izq_ico_nuevo">
-                  <div class="icon-office"></div>
-                </div>
-              </section>
-              <section class="sec_cont_item_mid_nuevo">
-                <input type="text" class="sec_cont_item_izq_text_nuevo" placeholder="Email"></input>
-              </section>
-            </section>
-
-            <section class="cont_item_contend_uni_nuevo">
-              <section class="sec_cont_item_izq_nuevo">
-                <div class="sec_cont_item_izq_ico_nuevo">
-                  <div class="icon-office"></div>
-                </div>
-              </section>
-              <section class="sec_cont_item_mid_nuevo">
-                <input type="text" class="sec_cont_item_izq_text_nuevo" placeholder="Teléfono"></input>
-              </section>
-            </section>
-
-            <section class="cont_item_contend_uni_nuevo">
-              <section class="sec_cont_item_izq_nuevo">
-                <div class="sec_cont_item_izq_ico_nuevo">
-                  <div class="icon-office"></div>
-                </div>
-              </section>
-              <section class="sec_cont_item_mid_nuevo">
-                <input type="text" class="sec_cont_item_izq_text_nuevo" placeholder="Cargo"></input>
-              </section>
-            </section>
-
-            <section class="cont_item_contend_uni_nuevo">
-              <section class="sec_cont_item_izq_nuevo">
-                <div class="sec_cont_item_izq_ico_nuevo">
-                  <div class="icon-office"></div>
-                </div>
-              </section>
-              <section class="sec_cont_item_mid_nuevo">
-                <input type="text" class="sec_cont_item_izq_text_nuevo" placeholder="Empresa"></input>
-              </section>
-            </section>
-
-            <section class="cont_div_nuevo"></section>
-
-            <section class="cont_item_contend_btn_nuevo">
-              <span>Cancelar</span>
-              <div>Guardar</div>
-            </section>
-
-          </article>
-      </section>
-    </article>
-     <article data-role="footer" data-position="fixed" data-id="pie_fijo" data-theme="b" class="pie">
-        <div data-role="navbar" data-grid="b" id="cont_pie_nav">
-          <ul>
-            <li><a href="javascript:;"><div class="icon-plus"> <label>Oportunidad</label></div></a></li>
-            <li>
-              <a href="javascript:;"><div class="icon-plus"> <label>Contacto</label></div>
-              </a>
-              <ul id="sub-menu-act-bot" class="ocultar sub-menu-nn-d">
-                <li id='btn_empresa_bot'>Nueva Empresa</li>
-                <li id='btn_persona_bot'>Nueva Persona</li>
-              </ul>
-            </li>
-            <li><a href="javascript:;" class="sin_r"><div class="icon-plus"> <label>Actividades</label></div></a></li>
-          </ul>
-      </div>
-    </article>
-  </section>-->
 
   <section data-role="page" id="contacto_deta_empresa">
     <article data-role="header" id="d_usu" data-id="top_fijo" data-position="fixed" class="cab_nav">
@@ -1303,15 +1110,9 @@
                       </div>
                     </section>
                     <section class="sec_cont_item_mid_nuevo">
-                      <!--<input type="text" class="sec_cont_item_izq_text_nuevo" placeholder="Tipo de documento" id='dt_frm_per_tdoc' name='dt_frm_per_tdoc'></input>-->
                       <article class="contacto_filtro" id='cont-cbo-tdoc'>
                         <div data-role="fieldcontain">
-                          <select name="cboTipoDocumento" id="cboTipoDocumento">
-                            <!--<option value="volvo">PREMIUM </option>
-                            <option value="volvo">TOP 2</option>
-                            <option value="volvo">TOP 1</option>
-                            <option value="volvo">NO CARTERIZADO</option>-->
-                          </select>
+                          <select name="cboTipoDocumento" id="cboTipoDocumento"></select>
                         </div>
                   </article>
                     </section>
@@ -1349,28 +1150,6 @@
                       <input type="text" class="sec_cont_item_izq_text_nuevo" placeholder="Teléfono" id='dt_frm_per_telf' name='dt_frm_per_telf'></input>
                     </section>
                   </section>
-
-                  <!--<section class="cont_item_contend_uni_nuevo">
-                    <section class="sec_cont_item_izq_nuevo">
-                      <div class="sec_cont_item_izq_ico_nuevo">
-                        <div class="icon-star"></div>
-                      </div>
-                    </section>
-                    <section class="sec_cont_item_mid_nuevo">
-                      <input type="text" class="sec_cont_item_izq_text_nuevo" placeholder="Cargo" id='dt_frm_per_cargo' name='dt_frm_per_cargo'></input>
-                    </section>
-                  </section>-->
-
-                  <!--<section class="cont_item_contend_uni_nuevo">
-                    <section class="sec_cont_item_izq_nuevo">
-                      <div class="sec_cont_item_izq_ico_nuevo">
-                        <div class="icon-office"></div>
-                      </div>
-                    </section>
-                    <section class="sec_cont_item_mid_nuevo">
-                      <input type="text" class="sec_cont_item_izq_text_nuevo" placeholder="Empresa" id='dt_frm_per_emp' name='dt_frm_per_emp'></input>
-                    </section>
-                  </section>-->
                 </section>
                 <section class='cont_btn_form'>
                   <article id='btn_cancelar_frm'><a href="#" data-rel='back'>CANCELAR</a></article>
@@ -1512,7 +1291,6 @@
   </section>
 
   <!-- FIN FORMULARIO 1-->
-
   <section id='popup_fnd'></section>
   <div id='agre_cont'>
     <input type='hidden' id='nomConNP' name='nomConNP' value=''>
