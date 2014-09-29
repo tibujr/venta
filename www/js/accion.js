@@ -85,6 +85,8 @@ $(document).ready(function () {
 	var al = ($('body').height())+1;
 	var an = $('body').width();
 
+	$("#inicio, #venta, #actividad, #formulario_venta, #venta_detalle, #contactos-empresa, #contactos-persona, #contacto_emp_nuevo_editar, #contacto_deta_empresa, #contacto_deta_persona, #contacto_per_nuevo_editar, #actividad_detalle").css({'max-height': al});//alto a todas las capas
+
 	$("#popup_fnd").css({height: al, width: an});
 	
 	var cad = "100% "+al+"px";
