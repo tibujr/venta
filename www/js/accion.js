@@ -68,10 +68,14 @@ $(document).ready(function () {
 	//metodos inicializando
 	mostrarRequisitosHtml();
 	llenarTipoCartera();
+	llenarTipoDocumento();
 
 	//calendario español
 	var Dia = new Array("Dom", "Lun", "Mar", "Mié", "Jue", "Vie", "Sáb");
 	var Mes = new Array("Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep","Oct", "Nov", "Dic");
+
+	var arEmpEdit = new Array();//form edit Emp
+	var arPerEdit = new Array();//form edit PER
 
 	var estFlCon = 'on';
 	var reqArr = [];
@@ -228,11 +232,42 @@ $(document).ready(function () {
 	});
 
 	$("body").on('click', '#btn_actividad', function(e){
+
+		if(localStorage.getItem('onof') == 'on'){
+			listarUsuarioActividad();
+		}else{
+
+		}
 		$.mobile.changePage("#actividad", {transition:"slide"});
 	});
 
 	$("body").on("click",".sect_uno_item_mid", function(e){
+
+		var idAct = $(this).attr('id');
+		$("#frmValAct").val("editar");
+
+		if(localStorage.getItem('onof') == 'on')
+		{	
+			getDetalleActividad(idAct);
+		}else{
+
+		}
 		$.mobile.changePage("#actividad_detalle", {transition:"slidedown"});
+	});
+
+	$("body").on('click', '#btn_guardar_act', function(e){
+		$("#frmValAct").val("editar");
+		if(localStorage.getItem('onof') == 'on')
+		{
+			if($("#frmValAct").val() == 'editar'){
+
+			}else if($("#frmValAct").val() == 'nuevo'){
+
+			}
+		}else{
+
+		}
+		$.mobile.changePage("#actividad", {transition:"slide"});
 	});
 
 	$("body").on('click', '#btn_contacto', function(e){
@@ -260,8 +295,6 @@ $(document).ready(function () {
 
 	$("body").on("click",".cont_item_contend_uni_emp", function(e){
 		var idEmpUsu = $(this).attr('id');//$("#id_emp_sel").val();
-		//alert(spt)
-		//$(this).attr('id');
 		var idted = idEmpUsu.substring(4);
 		$("#id_emp_sel").val(idted);
 		if(localStorage.getItem('onof') == 'on'){
@@ -274,6 +307,15 @@ $(document).ready(function () {
 
 	$("body").on('click', '#cont_deta_emp_blank_der', function(e){
 		$("#accion_frm_emp").val("editar");
+
+		$("#edt_emp_nom").val(arEmpEdit['razonSocial']);
+		$("#edt_emp_ruc").val(arEmpEdit['ruc']);
+		$("#edt_emp_ntrab").val(arEmpEdit['numTrab']);
+		$("#edt_emp_vven").val(arEmpEdit['volVen']);
+		$("#edt_emp_telf").val(arEmpEdit['telf']);
+		$("#cont-cbo-tcartera span.ui-btn-text span").html(arEmpEdit['desTCart']);
+		$("#cboTipoCartera option[value="+arEmpEdit['idTCart']+"]").attr("selected",'selected');
+				
 		$.mobile.changePage("#contacto_emp_nuevo_editar", {transition:"slide"});
 	});
 
@@ -282,14 +324,23 @@ $(document).ready(function () {
 		var idEmp = $("#idEmp").val();
 
 		if(localStorage.getItem('onof') == 'on'){
+			console.log($("#accion_frm_emp").val())
 			if ($("#accion_frm_emp").val() == 'editar')
 			{
+				arEmpEdit['razonSocial'] = $("#edt_emp_nom").val();
+				arEmpEdit['ruc'] = $("#edt_emp_ruc").val();
+				arEmpEdit['numTrab'] = $("#edt_emp_ntrab").val();
+				arEmpEdit['volVen'] = $("#edt_emp_vven").val();
+				arEmpEdit['idTCart'] = $("#cboTipoCartera").val();
+				arEmpEdit['desTCart'] = $("#cboTipoCartera option:selected").text();
+				arEmpEdit['telf'] = $("#edt_emp_telf").val();
 				editarEmpresaOn(idEmp);
-				alert("editar on")
+				//$.mobile.back();
 			}
 			else if ($("#accion_frm_emp").val() == 'nuevo') 
 			{
-				alert("nuevo on")
+				agregarEmpresaOn();
+				//$.mobile.changePage("#contactos-empresa", {transition:"slide"});
 			}
 		}else{
 			if ($("#accion_frm_emp").val() == 'editar')
@@ -301,20 +352,82 @@ $(document).ready(function () {
 				alert("nuevo of")
 			}
 		}
-		$.mobile.changePage("#contacto_deta_empresa", {transition:"slide"});
+
+		$.mobile.back();
+		//$.mobile.changePage("#contacto_deta_empresa", {transition:"slide"});
+	});
+
+	$("body").on('click', '#btn_guardar_per', function(e){
+		
+		var idper = $("#idPer").val();
+
+		if(localStorage.getItem('onof') == 'on'){
+			console.log($("#accion_frm_per").val())
+			if ($("#accion_frm_per").val() == 'editar')
+			{
+				arPerEdit['nom'] = $("#dt_frm_per_nom").val();
+				arPerEdit['ape'] = $("#dt_frm_per_ape").val();
+				arPerEdit['idtdoc'] = $("#cboTipoDocumento").val();
+				arPerEdit['tdoc'] = $("#cboTipoDocumento option:selected").text();
+				arPerEdit['ndoc'] = $("#dt_frm_per_ndoc").val();
+				arPerEdit['mail'] = $("#dt_frm_per_mail").val();
+				arPerEdit['telf'] = $("#dt_frm_per_telf").val();
+				editarPersonaOn(idper);
+			}
+			else if ($("#accion_frm_per").val() == 'nuevo') 
+			{
+				agregarPersonaOn();
+				//$.mobile.changePage("#contactos-empresa", {transition:"slide"});
+			}
+		}else{
+			if ($("#accion_frm_emp").val() == 'editar')
+			{
+				alert("editar of")
+			}
+			else if ($("#accion_frm_emp").val() == 'nuevo') 
+			{
+				alert("nuevo of")
+			}
+		}
+
+		$.mobile.back();
 	});
 
 	$("body").on('click', '#btn_persona', function(e){
 		estFlCon = 'on';
 		$(".sub-menu-nn").addClass('ocultar');
+
+		var id_usu_emp = localStorage.getItem('id_usu');
+		if(localStorage.getItem('onof') == 'on'){
+			listarUsuarioPersonaOn(id_usu_emp);
+		}else{
+			console.log("lista empresa off")
+		}
+
 		$.mobile.changePage("#contactos-persona", {transition:"slide"});
 	});
 
 	$("body").on("click",".cont_item_contend_uni_per", function(e){
+		var idPerDet = $(this).attr('id');
+		if(localStorage.getItem('onof') == 'on'){
+			getDetallePersonaOn(idPerDet);
+		}else{
+			console.log("lista empresa off")
+		}
+
 		$.mobile.changePage("#contacto_deta_persona", {transition:"slidedown"});
 	});
 
 	$("body").on('click', '#cont_deta_per_blank_der', function(e){
+		$("#accion_frm_per").val("editar");
+		$("#dt_frm_per_nom").val(arPerEdit['nom']);
+		$("#dt_frm_per_ape").val(arPerEdit['ape']);
+		$("#dt_frm_per_ndoc").val(arPerEdit['ndoc']);
+		$("#dt_frm_per_mail").val(arPerEdit['mail']);
+		$("#dt_frm_per_telf").val(arPerEdit['telf']);
+		$("#cont-cbo-tdoc span.ui-btn-text span").html(arPerEdit['tdoc']);
+		$("#cboTipoDocumento option[value='"+arPerEdit['idtdoc']+"']").attr("selected",'selected');
+
 		$.mobile.changePage("#contacto_per_nuevo_editar", {transition:"slide"});
 	});
 
@@ -331,14 +444,29 @@ $(document).ready(function () {
 
 	$("body").on('click', '#btn_empresa_bot', function(e){
 		estFlCon = 'on';
+
+		limpiarEditarEmpresa();
+
 		$(".sub-menu-nn-d").addClass('ocultar');
-		$("#accion_frm_emp").val("nuevo");
+		$("#accion_frm_emp").val("nuevo");//NUEVA CUENTA
+
+		$("#cont-cbo-tcartera span.ui-btn-text span").html("TIPO DE CARTERA");//TIPO DE CARTERA SELECCIONA(NOMBRE)
+		$("#cboTipoCartera option[value=0]").attr("selected",'selected');//TIPO DE CARTERA SELECCIONA(VALOR)
+
 		$.mobile.changePage("#contacto_emp_nuevo_editar", {transition:"slide"});
 	});
 
 	$("body").on('click', '#btn_persona_bot', function(e){
 		estFlCon = 'on';
+
+		limpiarEditarPersona();
+
 		$(".sub-menu-nn-d").addClass('ocultar');
+		$("#accion_frm_per").val("nuevo");
+
+		$("#cont-cbo-tdoc span.ui-btn-text span").html("TIPO DE DOCUMENTO");//TIPO DE CARTERA SELECCIONA(NOMBRE)
+		$("#cboTipoDocumento option[value=0]").attr("selected",'selected');//TIPO DE CARTERA SELECCIONA(VALOR)
+
 		$.mobile.changePage("#contacto_per_nuevo_editar", {transition:"slide"});
 	});
 
@@ -383,6 +511,26 @@ $(document).ready(function () {
 		$(fnd).css({background: '#df2047', color:'#FFF'});
 	}
 
+	$("body").on('click', '#btn-general-dper', function(e){
+		ocultarContDAOPed("#cont_desc_per","#btn-general-dper");
+	});
+
+	$("body").on('click', '#btn-actividad-dper', function(e){
+		ocultarContDAOPed("#cont_actv_per","#btn-actividad-dper");
+	});
+
+	$("body").on('click', '#btn-oportunidad-dper', function(e){
+		ocultarContDAOPed("#cont_oport_per","#btn-oportunidad-dper");
+	});
+
+	function ocultarContDAOPed(dat, fnd)
+	{
+		$("#cont_desc_per, #cont_actv_per, #cont_oport_per").css({display: 'none'});
+		$("#btn-general-dper, #btn-actividad-dper, #btn-oportunidad-dper").css({background: '#FFF', color: 'black'});
+		$(dat).css({display: 'inline-block'});
+		$(fnd).css({background: '#df2047', color:'#FFF'});
+	}
+
 	$("body").on("click",".btn_opc_item, .unid_cont_item", function(e){
 		var idv = this.id;
 		$('#id_pros').val(idv);
@@ -422,16 +570,54 @@ $(document).ready(function () {
 
 	$("body").on("click","#btn_perdido_det_ven", function(e){
 		
-		/*//var Dia = new Array("Dom", "Lun", "Mar", "Mié", "Jue", "Vie", "Sáb");
-		//var Mes = new Array("Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep","Oct", "Nov", "Dic");
-		
-		var fecha = ("2014-08-15 18:15:00").split('-').join('/');
-		var Hoy = new Date(fecha);
-		var Anio = Hoy.getFullYear();
-		var Fecha = Dia[Hoy.getDay()] + ", " + Hoy.getDate() + " de " + Mes[Hoy.getMonth()] + " del " + Anio + ". ";
+		var idProsp = $("#id_pros").val();
 
-		console.log(Fecha+"  "+Hoy.getTime());*/
+		if(localStorage.getItem('onof') == 'on')
+		{	
+			//listarProspecto(idFase);
+			evaluarProspecto(idProsp,'p'); //p de perdido
+			alert("Prospecto Perdido");
+		}else{
+			//getProspectoIdOff(idv);
+		}
+
+		$.mobile.back();
 	});
+
+	$("body").on("click","#btn_ganado_det_ven", function(e){
+		
+		var idProsp = $("#id_pros").val();
+
+		if(localStorage.getItem('onof') == 'on')
+		{	
+			//listarProspecto(idFase);
+			evaluarProspecto(idProsp,'g'); //g de ganado
+			alert("Prospecto Ganado");
+		}else{
+			//getProspectoIdOff(idv);
+		}
+
+		$.mobile.back();
+	});
+
+	function evaluarProspecto(id, va)
+	{
+		var us = localStorage.getItem('id_usu');
+		$.ajax({
+			type: 'POST',
+			dataType: 'json', 
+			data: {us:us, id:id, va:va},
+			beforeSend : function (){
+			},
+			url: urlP+"evaluarProspecto",
+			success : function(data) {
+				console.log("correctooo")
+			},
+			error: function(data){
+				console.log(data);
+			}
+		});
+	}
 
 	$("body").on("click",".edit_prosp_frm", function(e){
 		var idv = this.id;
@@ -1040,6 +1226,34 @@ $(document).ready(function () {
 		}
 	}
 
+/**/
+
+	function llenarTipoDocumento()
+	{
+		$("#cboTipoDocumento").html("<option value='0'>TIPO DE DOCUMENTO</option>");
+		if(localStorage.getItem('onof') == 'on'){
+			$.ajax({
+				type: 'POST',
+				dataType: 'json', 
+				data: {},
+				beforeSend : function (){
+			    },
+				url: urlP+"getTipoDocumento",
+				success : function(data) {
+					if(data != 0){
+						for(var i=0; i< data.length; i++)
+						{
+							$("#cboTipoDocumento").append("<option value='"+data[i]['id']+"'>"+data[i]['descripcion']+"</option>")
+						}
+					}
+				},
+				error: function(data){
+					console.log(data);
+				}
+			});
+		}
+	}
+
 	function llenarProspecto(id)
 	{
 		var idP,idC,idO,pre,nec,prop,fecha,idFa,idE, cam;
@@ -1256,6 +1470,7 @@ $(document).ready(function () {
 	function listarUsuarioEmpresaOn(id)
 	{
 		$(".lst-empresa").html("");
+		$("#idEmp").val("");//limpiamos valor de la empresa
 		$.ajax({
 			type: 'POST',
 			dataType: 'json', 
@@ -1323,6 +1538,14 @@ $(document).ready(function () {
 				(!etd[0]['tipo_cartera_cuen'])? $("#cont-cbo-tcartera span.ui-btn-text span").html("TIPO DE CARTERA") : $("#cont-cbo-tcartera span.ui-btn-text span").html(etd[0]['tipo_cartera_cuen']);
 				(!etd[0]['id_tipo_cartera'])? $("#cboTipoCartera option[value=0]").attr("selected",'selected'):$("#cboTipoCartera option[value='"+etd[0]['id_tipo_cartera']+"']").attr("selected",'selected');
 				
+				arEmpEdit['razonSocial'] = etd[0]['razon_social_cuen'];
+				arEmpEdit['ruc'] = etd[0]['ruc_cuen'];
+				arEmpEdit['numTrab'] = etd[0]['numero_trabajadores_cuen'];
+				arEmpEdit['volVen'] = etd[0]['volumen_venta_cuen'];
+				(!etd[0]['id_tipo_cartera'])? arEmpEdit['idTCart'] = 0 : arEmpEdit['idTCart'] = etd[0]['id_tipo_cartera'];
+				(!etd[0]['tipo_cartera_cuen'])? arEmpEdit['desTCart'] = "TIPO DE CARTERA" : arEmpEdit['desTCart'] = etd[0]['tipo_cartera_cuen'];
+				arEmpEdit['telf'] = etd[0]['telefono_cuen'];
+
 				/*DECISOR*/
 				var ctd = data['con'];
 				for(var i = 0; i < ctd.length; i++)
@@ -1382,12 +1605,12 @@ $(document).ready(function () {
 
 	function limpiarEditarEmpresa()
 	{
-		$("#edt_emp_nom").html("");
-		$("#edt_emp_ruc").html("");
-		$("#edt_emp_ntrab").html("");
-		$("#edt_emp_vven").html("");
-		$("#edt_emp_tcart").html("");
-		$("#edt_emp_telf").html("");
+		$("#edt_emp_nom").val("");
+		$("#edt_emp_ruc").val("");
+		$("#edt_emp_ntrab").val("");
+		$("#edt_emp_vven").val("");
+		$("#edt_emp_tcart").val("");
+		$("#edt_emp_telf").val("");
 	}
 
 	function editarEmpresaOn(idEmp)
@@ -1399,9 +1622,6 @@ $(document).ready(function () {
 		var vVen = $("#edt_emp_vven").val();
 		var tCar = $("#cboTipoCartera").val();
 		var eTelf = $("#edt_emp_telf").val();
-
-		//var 
-
 		$.ajax({
 			type: 'POST',
 			dataType: 'json', 
@@ -1410,13 +1630,228 @@ $(document).ready(function () {
 		    },
 			url: urlP+"editarEmpresaOn",
 			success : function(data) {
-				$("#det_emp_nom").html(eEmp);
-				$("#det_emp_ruc").html(eRuc);
-				$("#det_emp_numT").html(nTrab);
-				$("#det_emp_voluV").html(vVen);
-				$("#det_emp_telf").html(eTelf);
-				$("#det_emp_tCartera").html($("#id_mi_select option:selected").text());
-				console.log("se edito correctamente")
+				if(data== 'ok'){
+					$("#det_emp_nom").html(eEmp);
+					$("#det_emp_ruc").html(eRuc);
+					$("#det_emp_numT").html(nTrab);
+					$("#det_emp_voluV").html(vVen);
+					$("#det_emp_telf").html(eTelf);
+					$("#det_emp_tCartera").html($("#cboTipoCartera option:selected").text());
+					console.log("se edito correctamente")
+				}
+			},
+			error: function(data){
+				console.log(data);
+			}
+		});
+	}
+
+	function agregarEmpresaOn()
+	{
+		var usuE = localStorage.getItem('id_usu');
+		var eEmp = $("#edt_emp_nom").val();
+		var eRuc = $("#edt_emp_ruc").val();
+		var nTrab = $("#edt_emp_ntrab").val();
+		var vVen = $("#edt_emp_vven").val();
+		var tCar = $("#cboTipoCartera").val();
+		var eTelf = $("#edt_emp_telf").val();
+		$.ajax({
+			type: 'POST',
+			dataType: 'json', 
+			data: {usuE:usuE, eEmp:eEmp, eRuc:eRuc, nTrab:nTrab, vVen:vVen, tCar:tCar, eTelf:eTelf},
+			beforeSend : function (){
+		    },
+			url: urlP+"agregarEmpresaOn",
+			success : function(data) {
+				if(data != ""){
+					$("#idEmp").val(data.id);
+					console.log("se agrego correctamente");
+				}
+			},
+			error: function(data){
+				console.log(data);
+			}
+		});
+	}
+
+	function listarUsuarioPersonaOn(id)
+	{
+		$(".lst-persona").html("");
+		$("#idPer").val("");//limpiamos id de la persona
+		$.ajax({
+			type: 'POST',
+			dataType: 'json', 
+			data: {id:id},
+			beforeSend : function (){
+		    },
+			url: urlP+"listarUsuarioPersonaOn",
+			success : function(data) {
+				if(data != 0){
+					for(var i=0; i< data.length; i++)
+					{
+						var cadP ="<section class='cont_item_contend_uni_per' id='"+data[i]['id_con']+"'><section class='sec_cont_item_izq'><div class='sec_cont_item_izq_ico'><div class='icon-user ico-usr'></div></div></section><section class='sec_cont_item_mid'><div class='sec_cont_item_izq_text' >"+data[i]['contacto']+"</div></section><section class='sec_cont_item_der'><div class='sec_cont_item_izq_flecha'><div class='icon-plus'></div></div></section></section>";
+						$(".lst-persona").append(cadP);
+					}
+				}else{
+					alert("No tienes personas asignadas")
+				}
+			},
+			error: function(data){
+				console.log(data);
+			}
+		});
+	}
+
+	function getDetallePersonaOn(idPer)
+	{
+		$("#idPer").val(idPer);//guardarIdCOntacto
+		$("#cont_oport_per").html("");//limpiar prospecto contenedor
+		$("#cont_actv_per").html("");//limpiar actividad contenedor
+
+		limpiarDetallePersona();
+		limpiarEditarPersona();
+
+		ocultarContDAOPed("#cont_desc_per","#btn-general-dper");
+
+		$.ajax({
+			type: 'POST',
+			dataType: 'json', 
+			data: {idPer:idPer},
+			beforeSend : function (){
+		    },
+			url: urlP+"getDetallePersonaOn",
+			success : function(data) {
+				console.log(data);
+
+				/*PERSONA*/
+				var etd = data['per'];
+				//datos detalle persona
+				$("#frm_per_nom").html(etd[0]['nombre_con'] +" "+ etd[0]['apellido_con']);
+				$("#frm_per_tdoc").html(etd[0]['tipo_doc']);
+				$("#frm_per_ndoc").html(etd[0]['numero_documento_con']);
+				$("#frm_per_mail").html(etd[0]['mail_con']);
+				$("#frm_per_tel").html(etd[0]['celular_con']);
+				$("#frm_per_cargo").html(etd[0]['cargo']);
+				$("#frm_per_emp").html(etd[0]['razon_social_cuen']);
+				$("#frm_per_asig").html(etd[0]['nombre_usu']+" "+etd[0]['apellido_usu']);
+				//datos editar persona
+				$("#dt_frm_per_nom").val(etd[0]['nombre_con']);
+				$("#dt_frm_per_ape").val(etd[0]['apellido_con']);
+				$("#dt_frm_per_ndoc").val(etd[0]['numero_documento_con']);
+				$("#dt_frm_per_mail").val(etd[0]['mail_con']);
+				$("#dt_frm_per_telf").val(etd[0]['celular_con']);
+				(!etd[0]['tipo_doc'])? $("#cont-cbo-tdoc span.ui-btn-text span").html("TIPO DE DOCUMENTO") : $("#cont-cbo-tdoc span.ui-btn-text span").html(etd[0]['tipo_doc']);
+				(!etd[0]['id_tipo_documento'])? $("#cboTipoDocumento option[value=0]").attr("selected",'selected'):$("#cboTipoDocumento option[value='"+etd[0]['id_tipo_documento']+"']").attr("selected",'selected');
+
+				arPerEdit['nom'] = etd[0]['nombre_con'];
+				arPerEdit['ape'] = etd[0]['apellido_con'];
+				(!etd[0]['id_tipo_documento'])? arPerEdit['idtdoc'] = 0 : arPerEdit['idtdoc'] = etd[0]['id_tipo_documento'];
+				(!etd[0]['tipo_doc'])? arPerEdit['tdoc'] = "TIPO DE DOCUMENTO" : arPerEdit['tdoc'] = etd[0]['tipo_doc'];
+				arPerEdit['ndoc'] = etd[0]['numero_documento_con'];
+				arPerEdit['mail'] = etd[0]['mail_con'];
+				arPerEdit['telf'] = etd[0]['celular_con'];
+
+				/*PROSPECTO*/
+				var ptd = data['pros'];
+				for(var i = 0; i < ptd.length; i++)
+				{
+					if(!ptd[i]['titulo'])ptd[i]['titulo'] = etd[0]['nombre_con'] +" "+ etd[0]['apellido_con'];
+					if(!ptd[i]['presupuesto_pros'])ptd[i]['presupuesto_pros'] = 0.00;
+					var pc ="<article class='unid_cont_item' id='"+ptd[i]['id_pros']+"'><section class='sect_uno_item'><article class='nom_emp_item'><label>"+ptd[i]['titulo']+"</label></article><article class='valor_emp_item'><label>"+ptd[i]['presupuesto_pros']+" NUEVOS SOLES</label></article></section><section class='sect_dos_item'></section></article>";
+					$("#cont_oport_per").append(pc);
+				}
+
+				/*ACTIVIDAD*/
+				var atd = data['act'];
+				for(var i = 0; i < atd.length; i++)
+				{
+					var fg = generaFecha(atd[i]['fecha_act']);
+					if(!atd[i]['desc_tact'])atd[i]['desc_tact'] = 'Pendiente';
+					if(!atd[i]['hora_act'])atd[i]['hora_act'] = '00:00';
+					var ac ="<article class='unid_cont_item_act'><section class='sect_uno_item_izq'><div class='div_fecha_act_top'>"+fg['diaNom']+"</div><div class='div_fecha_act_bot'>"+fg['diaNum']+" "+fg['mesNom']+"</div></section><section class='sect_uno_item_mid' id='"+atd[i]['id_act']+"'><div class='div_tipo_act_top'>"+atd[i]['desc_tact']+"</div><div class='div_tipo_act_bot'><div class='div_tipo_act_bot_izq'>"+atd[i]['hora_act'].substring(0,5)+" / </div><div class='div_tipo_act_bot_der'> "+etd[0]['razon_social_cuen']+"</div></div></section><section class='sect_uno_item_der'><article class='cont_req cont_ckh_act'><input type='checkbox' name='act_"+atd[i]['id_act']+"' id='act_"+atd[i]['id_act']+"' class='chkocultar desa_det_venta'/><label class='lblcheck chk-lft' for='act_"+atd[i]['id_act']+"'></label></article></section></article>";
+		            $("#cont_actv_per").append(ac);
+				}
+			},
+			error: function(data){
+				console.log(data);
+			}
+		});
+	}
+
+	function limpiarDetallePersona()
+	{
+		$("#frm_per_nom").html("");
+		$("#frm_per_tdoc").html("");
+		$("#frm_per_ndoc").html("");
+		$("#frm_per_mail").html("");
+		$("#frm_per_tel").html("");
+		$("#frm_per_cargo").html("");
+		$("#frm_per_emp").html("");
+		$("#frm_per_asig").html("");
+	}
+
+	function limpiarEditarPersona()
+	{
+		$("#dt_frm_per_nom").val("");
+		$("#dt_frm_per_ape").val("");
+		$("#dt_frm_per_ndoc").val("");
+		$("#dt_frm_per_mail").val("");
+		$("#dt_frm_per_telf").val("");
+	}
+
+	function editarPersonaOn(idPer)
+	{
+		var usuE = localStorage.getItem('id_usu');
+		var nPer = $("#dt_frm_per_nom").val();
+		var aPer = $("#dt_frm_per_ape").val();
+		var tDoc = $("#cboTipoDocumento").val();
+		var ndoc = $("#dt_frm_per_ndoc").val();
+		var mailp = $("#dt_frm_per_mail").val();
+		var telp = $("#dt_frm_per_telf").val();
+		$.ajax({
+			type: 'POST',
+			dataType: 'json', 
+			data: {usuE:usuE, idPer:idPer, nPer:nPer, aPer:aPer, tDoc:tDoc, ndoc:ndoc, mailp:mailp, telp:telp},
+			beforeSend : function (){
+		    },
+			url: urlP+"editarPersonaOn",
+			success : function(data) {
+				if(data == 'ok'){
+					$("#frm_per_nom").html(nPer +" "+ aPer);
+					$("#frm_per_ndoc").html(ndoc);
+					$("#frm_per_mail").html(mailp);
+					$("#frm_per_tel").html(telp);
+					$("#frm_per_tdoc").html($("#cboTipoDocumento option:selected").text());
+					console.log("se edito persona")
+				}
+			},
+			error: function(data){
+				console.log(data);
+			}
+		});
+	}
+
+	function agregarPersonaOn()
+	{
+		var usuE = localStorage.getItem('id_usu');
+		var nPer = $("#dt_frm_per_nom").val();
+		var aPer = $("#dt_frm_per_ape").val();
+		var tDoc = $("#cboTipoDocumento").val();
+		var ndoc = $("#dt_frm_per_ndoc").val();
+		var mailp = $("#dt_frm_per_mail").val();
+		var telp = $("#dt_frm_per_telf").val();
+		$.ajax({
+			type: 'POST',
+			dataType: 'json', 
+			data: {usuE:usuE, nPer:nPer, aPer:aPer, tDoc:tDoc, ndoc:ndoc, mailp:mailp, telp:telp},
+			beforeSend : function (){
+		    },
+			url: urlP+"agregarPersonaOn",
+			success : function(data) {
+				if(data != ""){
+					$("#idPer").val(data.id);
+					console.log("se agrego correctamente");
+				}
 			},
 			error: function(data){
 				console.log(data);
@@ -1437,6 +1872,39 @@ $(document).ready(function () {
 			fret['mesNom'] = Mes[nf.getMonth()];
 		}
 		return fret;
+	}
+
+	function listarUsuarioActividad()
+	{
+		var usuE = localStorage.getItem('id_usu');
+		$("#cnt_act_itm").html("");
+
+		$.ajax({
+			type: 'POST',
+			dataType: 'json', 
+			data: {usuE:usuE},
+			beforeSend : function (){
+		    },
+			url: urlP+"listarUsuarioActividad",
+			success : function(data) {
+				if(data != 0){
+					for(var i = 0; i < data.length; i++)
+					{
+						var fg = generaFecha(data[i]['fecha_act']);
+						if(!data[i]['razon_social_cuen'])data[i]['razon_social_cuen'] = 'RAZON SOCIAL';
+						if(!data[i]['desc_tact'])data[i]['desc_tact'] = 'Pendiente';
+						if(!data[i]['hora_act'])data[i]['hora_act'] = '00:00';
+						var ac ="<article class='unid_cont_item_act'><section class='sect_uno_item_izq'><div class='div_fecha_act_top'>"+fg['diaNom']+"</div><div class='div_fecha_act_bot'>"+fg['diaNum']+" "+fg['mesNom']+"</div></section><section class='sect_uno_item_mid' id='"+data[i]['id_act']+"'><div class='div_tipo_act_top'>"+data[i]['desc_tact']+"</div><div class='div_tipo_act_bot'><div class='div_tipo_act_bot_izq'>"+data[i]['hora_act'].substring(0,5)+" / </div><div class='div_tipo_act_bot_der'> "+data[i]['razon_social_cuen']+"</div></div></section><section class='sect_uno_item_der'><article class='cont_req cont_ckh_act'><input type='checkbox' name='act_"+data[i]['id_act']+"' id='act_"+data[i]['id_act']+"' class='desa_det_venta'/><label class='lblcheck chk-lft' for='act_"+data[i]['id_act']+"'></label></article></section></article>";
+			            $("#cnt_act_itm").append(ac);
+					}
+				}else{
+					alert("No tienes actividades asignadas")
+				}
+			},
+			error: function(data){
+				console.log(data);
+			}
+		});
 	}
 
 });

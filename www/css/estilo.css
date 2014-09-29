@@ -1997,21 +1997,21 @@ textarea {
   left: -10px;
 }
 
-#cont_actv_gen_emp, #cont_oport_gen_emp{
+#cont_actv_gen_emp, #cont_oport_gen_emp, #cont_actv_per, #cont_oport_per{
   display: inline-block;
   width: 100%;
   margin: 10px 0;
 }
 
-#cont-cbo-tcartera{
+#cont-cbo-tcartera, #cont-cbo-tdoc{
   width: 100%;
 }
 
-#cont-cbo-tcartera div.ui-btn{
+#cont-cbo-tcartera div.ui-btn, #cont-cbo-tdoc div.ui-btn{
   border: none;
 }
 
-#cont-cbo-tcartera span.ui-btn-inner{
+#cont-cbo-tcartera span.ui-btn-inner, #cont-cbo-tdoc span.ui-btn-inner{
   border-bottom: 1px solid #c4c4c4;
   background: #e5e5e5;
   color: #7D7D7D;
