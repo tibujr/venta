@@ -24,7 +24,7 @@
 <body>
   <section data-role="page" id="inicio" class="pagina">
     <article data-role="content" style="font-size:0;">
-      <div id='onOf'><div class="icon-wifi-full"></div><div id='bloq_wifi' class="icon-blocked"></div></div>
+      <div id='onOf' style='display: none;'><div class="icon-wifi-full"></div><div id='bloq_wifi' class="icon-blocked"></div></div>
       <div style="display: inline-block; margin-bottom: 10px; width: 100%; margin-top: 35%;"><img src="img/logo.jpg"></div>
       <div class="login_caja"><input type="email" id="mail" name="mail" value="cmasias@roinet.pe" placeholder="Correo electrónico"></div>
       <div class="login_caja"><input type="password" id="clave" name="clave" value="123456" placeholder="******"></div>
@@ -117,7 +117,7 @@
     <article data-role="content" class="cont_main"> 
       <section class='cont_items'>
 
-        <article class="contacto_filtro">
+        <!--<article class="contacto_filtro">
           <div data-role="fieldcontain">
             <select name="cboActividadFiltro" id="cboActividadFiltro">
               <option value="volvo">Filtros </option>
@@ -126,9 +126,11 @@
               <option value="volvo">Del mes</option>
             </select>
           </div>
-        </article>
+        </article>-->
 
-      <section class="cont_item_lst" id='cnt_act_itm'>
+      <!--<section class="cont_item_lst" id='cnt_act_itm'>-->
+      <section class="cont_dato_detalle_venta" id='cnt_act_itm'>
+
               <article class="unid_cont_item_act">
                 <section class="sect_uno_item_izq">
                   <div class="div_fecha_act_top">Vie</div>
@@ -306,10 +308,12 @@
                   </article>
                   <article class='cont_req'>
                     <label class='rsoc' style='heigth: 0px;'>Razón Social</label>
+                    <span id='rsoc_lbl'>Roinet SAC</span>
                     <input type='text' id='rsoc' name='rsoc' class='inpt_sel'>
                   </article>
                   <article class='cont_req'>
                     <label class='nom_deci'>Decisor</label>
+                    <span id='nom_deci_lbl'>Moises Tiburcio</span>
                     <input type='text' id='nom_deci' name='nom_deci' class='inpt_sel'>
                   </article>
                   <article class='cont_req'>
@@ -519,7 +523,7 @@
       <section class='cont_items'>
         <section class='cont_dato_detalle_venta'>
 
-          <article class="contacto_filtro">
+          <!--<article class="contacto_filtro">
             <div data-role="fieldcontain">
               <select name="cboEmpresaFiltro" id="cboEmpresaFiltro">
                 <option value="volvo">Filtros </option>
@@ -528,7 +532,7 @@
                  <option value="volvo">Del mes</option>
               </select>
             </div>
-          </article>
+          </article>-->
 
           <input type='hidden' name='id_emp_sel' id='id_emp_sel' val=''>
           <article class="unid_cont_item_act_contac lst-empresa"></article>
@@ -580,7 +584,7 @@
     <article data-role="content" class="cont_main"> 
       <section class='cont_items'>
         <section class='cont_dato_detalle_venta'>
-          <article class="contacto_filtro">
+          <!--<article class="contacto_filtro">
             <div data-role="fieldcontain">
               <select name="cboPersonaFiltro" id="cboPersonaFiltro">
                 <option value="volvo">Filtros </option>
@@ -589,7 +593,7 @@
                 <option value="volvo">Del mes</option>
               </select>
             </div>
-          </article>
+          </article>-->
  
           <article class="unid_cont_item_act_contac lst-persona"></article><!-- lista de personas-->
 
@@ -875,7 +879,7 @@
               </section>
 
               <section class="vent_ind_deta_act">
-                  <section id="text-big-add-deci">+ Agregar decisor</section>             
+                  <section id="add_decisor_empresa">+ Agregar decisor</section>             
               </section>
 
               <section id='cnt_cnt_emp_deci'></section>

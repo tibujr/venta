@@ -243,19 +243,19 @@ $(document).ready(function () {
 		$.mobile.changePage("#actividad", {transition:"slide"});
 	});
 
-	$("body").on("click",".sect_uno_item_mid", function(e){
+	/*$("body").on("click",".sect_uno_item_mid", function(e){
 
 		var idAct = $(this).attr('id');
 		$("#frmValAct").val("editar");
 
 		if(localStorage.getItem('onof') == 'on')
 		{	
-			getDetalleActividad(idAct);
+			//getDetalleActividad(idAct);
 		}else{
 
 		}
 		$.mobile.changePage("#actividad_detalle", {transition:"slidedown"});
-	});
+	});*/
 
 	$("body").on('click', '#btn_guardar_act', function(e){
 		$("#frmValAct").val("editar");
@@ -293,6 +293,19 @@ $(document).ready(function () {
 			console.log("lista empresa off")
 		}
 		$.mobile.changePage("#contactos-empresa", {transition:"slide"});
+	});
+
+	$("body").on('click', '#add_decisor_empresa', function(e){
+		//var idEp = $('#idEmp').val();
+		/*if(localStorage.getItem('onof') == 'on'){
+			//llenarFase();
+			//agregarDeciso(id);
+		}else{
+			mostrarDataOffline()
+		}*/
+		limpiarEditarPersona();
+		$("#accion_frm_per").val("empresa");
+		$.mobile.changePage("#contacto_per_nuevo_editar", {transition:"slide"});
 	});
 
 	$("body").on("click",".cont_item_contend_uni_emp", function(e){
@@ -398,6 +411,9 @@ $(document).ready(function () {
 			{
 				agregarPersonaOn();
 				//$.mobile.changePage("#contactos-empresa", {transition:"slide"});
+			}else if ($("#accion_frm_per").val() == 'empresa') 
+			{
+				agregarPersonaEmpresaOn();
 			}
 		}else{
 			if ($("#accion_frm_emp").val() == 'editar')
@@ -653,8 +669,10 @@ $(document).ready(function () {
 		if(localStorage.getItem('onof') == 'on')
 		{	
 			$(".desa_det_venta").prop('disabled', false);
-			$("#rsoc").prop('disabled', true);
-			$("#nom_deci").prop('disabled', true);
+			$("#rsoc_lbl, #nom_deci_lbl").css({display: 'inline-block'});
+			$("#rsoc, #nom_deci").css({display: 'none'});
+			//$("#nom_deci").prop('disabled', true);
+
 			//getProspectoIdOn(idv);
 		}else{
 			//getProspectoIdOff(idv);
@@ -674,8 +692,11 @@ $(document).ready(function () {
 		$('#id_con').val("");
 		
 		$("#titpros").val("");
-		$("#rsoc").val("").prop('disabled', false);
-		$("#nom_deci").val("").prop('disabled', false);
+		$("#rsoc_lbl, #nom_deci_lbl").css({display: 'none'});
+		$("#rsoc, #nom_deci").css({display: 'inline-block'});
+		$("#rsoc, #nom_deci").val("");
+		//$("#rsoc").val("").prop('disabled', false);
+		//$("#nom_deci").val("").prop('disabled', false);
 
 		$("#presu").val("");
 		$("#nece").val("");
@@ -940,6 +961,9 @@ $(document).ready(function () {
 					$("#nece").val(row.necesidad);
 					$("#prop").val(row.propuesta);
 					$("#fecha_aprox").val(row.fecha_aprox);
+					
+					//$("#rsoc_lbl").html(row.razon_social);
+					//$("#nom_deci_lbl").val(row.nombre+ " " +row.apellido)
 
 					$('#id_pros').val(row.id);
 					$('#id_cuen').val(row.id_cuen);
@@ -1003,7 +1027,7 @@ $(document).ready(function () {
 				if (result != null && result.rows.length > 0) {
 					for (var i = 0; i < result.rows.length; i++) {
 						var row = result.rows.item(i);
-						$(".lst_itm").append("<article class='unid_cont_item' id='"+data[i]['id_pros']+"'><section class='sect_uno_item'><article class='nom_emp_item'><label>"+row.razon_social+"</label></article><article class='valor_emp_item'><label>"+row.presupuesto+" NUEVOS SOLES</label></article></section><section class='sect_dos_item'><article class='btn_opc_item' id='"+row.id+"'><div class='icon-arrow-down2'></div></article></section></article>");
+						$(".lst_itm").append("<article class='unid_cont_item' id='"+data[i]['id_pros']+"'><section class='sect_uno_item'><article class='nom_emp_item'><label>"+row.razon_social+"</label></article><article class='valor_emp_item'><label>"+row.presupuesto+" NUEVOS SOLES</label></article></section><section class='sect_dos_item'><article class='btn_opc_item' id='"+row.id+"'><div class='icon-arrow-right'></div></article></section></article>");
 					}
 				}
 			},errorBD);
@@ -1151,6 +1175,9 @@ $(document).ready(function () {
 					$("#nece").val(data.necesidad_pros)
 					$("#prop").val(data.propuesta_pros)
 					$("#fecha_aprox").val(data.fecha_cierre_pros)
+
+					$("#rsoc_lbl").html(data.razon_social_cuen);
+					$("#nom_deci_lbl").html(data.nombre_con+' '+data.apellido_con)
 
 					$('#id_pros').val(data.id_pros);
 					$('#id_cuen').val(data.id_cuen);
@@ -1452,7 +1479,7 @@ $(document).ready(function () {
 				{
 					for(var i=0; i< data.length; i++)
 					{
-						$(".lst_itm").append(" <article class='unid_cont_item' id='"+data[i]['id_pros']+"'><section class='sect_uno_item'><article class='nom_emp_item'><label>"+data[i]['razon_social_cuen']+"</label></article><article class='valor_emp_item'><label>"+data[i]['presupuesto_pros']+" NUEVOS SOLES</label></article></section><section class='sect_dos_item'><article class='btn_opc_item' id='"+data[i]['id_pros']+"'><div class='icon-arrow-down2'></div></article></section></article>");
+						$(".lst_itm").append(" <article class='unid_cont_item' id='"+data[i]['id_pros']+"'><section class='sect_uno_item'><article class='nom_emp_item'><label>"+data[i]['razon_social_cuen']+"</label></article><article class='valor_emp_item'><label>"+data[i]['presupuesto_pros']+" NUEVOS SOLES</label></article></section><section class='sect_dos_item'><article class='btn_opc_item' id='"+data[i]['id_pros']+"'><div class='icon-arrow-right'></div></article></section></article>");
 					}
 				}
 			},
@@ -1883,6 +1910,37 @@ $(document).ready(function () {
 		});
 	}
 
+	function agregarPersonaEmpresaOn()
+	{
+		var usuE = localStorage.getItem('id_usu');
+		var idEmp = $("#idEmp").val();
+		var nPer = $("#dt_frm_per_nom").val();
+		var aPer = $("#dt_frm_per_ape").val();
+		var tDoc = $("#cboTipoDocumento").val();
+		var ndoc = $("#dt_frm_per_ndoc").val();
+		var mailp = $("#dt_frm_per_mail").val();
+		var telp = $("#dt_frm_per_telf").val();
+		$.ajax({
+			type: 'POST',
+			dataType: 'json', 
+			data: {usuE:usuE, idEmp:idEmp, nPer:nPer, aPer:aPer, tDoc:tDoc, ndoc:ndoc, mailp:mailp, telp:telp},
+			beforeSend : function (){
+		    },
+			url: urlP+"agregarPersonaEmpresaOn",
+			success : function(data) {
+				if(data != ""){
+					var de ="<section class='cont_ind_det_fondo_deci'><section class='cont_ind_det_f_conta'><section class='cont_ind_det_f_izq'><div class='cont_ind_det_izq_ico'><div class='icon-user ico-usr'></div></div></section><section class='cont_ind_det_f_der'><div class='cont_ind_der_top' id='det_emp_cont_nom'>"+$("#dt_frm_per_nom").val()+" "+$("#dt_frm_per_ape").val()+"</div><div class='cont_ind_der_bot' id='det_emp_cont_cargo'>CARGO</div></section></section><section class='cont_ind_det_f_conta'><section class='cont_ind_det_f_izq'><div class='cont_ind_det_izq_ico'><div class='icon-phone'></div></div></section><section class='cont_ind_det_f_der'><div class='cont_ind_der_top' id='det_emp_cont_celu'>"+$("#dt_frm_per_telf").val()+"</div><div class='cont_ind_der_bot'>Celular</div></section></section><section class='cont_ind_det_f_conta'><section class='cont_ind_det_f_izq'><div class='cont_ind_det_izq_ico'><div class='icon-envelope'></div></div></section><section class='cont_ind_det_f_der'><div class='cont_ind_der_top' id='det_emp_cont_mail'>"+$("#dt_frm_per_mail").val()+"</div><div class='cont_ind_der_bot'>Correo</div></section></section></section>";
+					$("#cnt_cnt_emp_deci").append(de);
+					//$("#idPer").val(data.id);
+					//console.log("se agrego correctamente");
+				}
+			},
+			error: function(data){
+				console.log(data);
+			}
+		});
+	}
+
 	function generaFecha(d)
 	{
 		var fret = new Array();
@@ -1918,7 +1976,8 @@ $(document).ready(function () {
 						if(!data[i]['razon_social_cuen'])data[i]['razon_social_cuen'] = 'RAZON SOCIAL';
 						if(!data[i]['desc_tact'])data[i]['desc_tact'] = 'Pendiente';
 						if(!data[i]['hora_act'])data[i]['hora_act'] = '00:00';
-						var ac ="<article class='unid_cont_item_act'><section class='sect_uno_item_izq'><div class='div_fecha_act_top'>"+fg['diaNom']+"</div><div class='div_fecha_act_bot'>"+fg['diaNum']+" "+fg['mesNom']+"</div></section><section class='sect_uno_item_mid' id='"+data[i]['id_act']+"'><div class='div_tipo_act_top'>"+data[i]['desc_tact']+"</div><div class='div_tipo_act_bot'><div class='div_tipo_act_bot_izq'>"+data[i]['hora_act'].substring(0,5)+" / </div><div class='div_tipo_act_bot_der'> "+data[i]['razon_social_cuen']+"</div></div></section><section class='sect_uno_item_der'><article class='cont_req cont_ckh_act'><input type='checkbox' name='act_"+data[i]['id_act']+"' id='act_"+data[i]['id_act']+"' class='desa_det_venta'/><label class='lblcheck chk-lft' for='act_"+data[i]['id_act']+"'></label></article></section></article>";
+						//var ac ="<article class='unid_cont_item_act'><section class='sect_uno_item_izq'><div class='div_fecha_act_top'>"+fg['diaNom']+"</div><div class='div_fecha_act_bot'>"+fg['diaNum']+" "+fg['mesNom']+"</div></section><section class='sect_uno_item_mid' id='"+data[i]['id_act']+"'><div class='div_tipo_act_top'>"+data[i]['desc_tact']+"</div><div class='div_tipo_act_bot'><div class='div_tipo_act_bot_izq'>"+data[i]['hora_act'].substring(0,5)+" / </div><div class='div_tipo_act_bot_der'> "+data[i]['razon_social_cuen']+"</div></div></section><section class='sect_uno_item_der'><article class='cont_req cont_ckh_act'><input type='checkbox' name='act_"+data[i]['id_act']+"' id='act_"+data[i]['id_act']+"' class='desa_det_venta'/><label class='lblcheck chk-lft' for='act_"+data[i]['id_act']+"'></label></article></section></article>";
+						var ac ="<article class='unid_cont_item_act'><section class='sect_uno_item_izq'><div class='div_fecha_act_top'>"+fg['diaNom']+"</div><div class='div_fecha_act_bot'>"+fg['diaNum']+" "+fg['mesNom']+"</div></section><section class='sect_uno_item_mid' id='"+data[i]['id_act']+"'><div class='div_tipo_act_top'>"+data[i]['desc_tact']+"</div><div class='div_tipo_act_bot'><div class='div_tipo_act_bot_izq'>"+data[i]['hora_act'].substring(0,5)+" / </div><div class='div_tipo_act_bot_der'> "+data[i]['razon_social_cuen']+"</div></div></section><section class='sect_uno_item_der'><article class='cont_req cont_ckh_act'></article></section></article>";
 			            $("#cnt_act_itm").append(ac);
 					}
 				}else{

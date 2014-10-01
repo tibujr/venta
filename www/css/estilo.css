@@ -237,6 +237,13 @@ body{
 
 /*conetedor ventas*/
 
+#rsoc_lbl, #nom_deci_lbl{
+  font: 15px ProximaNova, sans-serif;
+  margin-top: 7px;
+  color: #9A9A9A;
+  display: none;
+}
+
 .lblRequi{
   display: inline-block;
   font: 13px ProximaNova, sans-serif;
@@ -1872,7 +1879,7 @@ textarea {
   padding-bottom: 0;
 }
 
-#text-big-add-deci{
+#add_decisor_empresa{
   background: #E5E5E5;
   font-size: 13px;
   margin-top: 2px;
