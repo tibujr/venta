@@ -253,7 +253,7 @@ body{
   color: #a9a9a9;
 }
 
-.fase_tit  div span.ui-btn-inner, .fase_tit  div div span.ui-btn-inner, .contacto_filtro div span.ui-btn-inner, .contacto_filtro  div div span.ui-btn-inner{
+.fase_tit  div span.ui-btn-inner, .fase_tit  div div span.ui-btn-inner, .contacto_filtro div span.ui-btn-inner, .contacto_filtro  div div span.ui-btn-inner, .actividad_tipo div span.ui-btn-inner, .actividad_tipo  div div span.ui-btn-inner {
   font-size: 13px;
   height: 24px;
   padding: 10px 0 0 0;
@@ -266,9 +266,16 @@ body{
   background: #5e5e5e;
 }
 
-.contacto_filtro div span.ui-btn-inner, .contacto_filtro  div div span.ui-btn-inner{
+.contacto_filtro div span.ui-btn-inner, .contacto_filtro  div div span.ui-btn-inner {
   background: #df2047;
 }
+
+.actividad_tipo div span.ui-btn-inner, .actividad_tipo  div div span.ui-btn-inner {
+  background: white;
+  color: #df2047;
+  border-bottom: 2px solid #df2047;
+}
+
 
 .popup_Nusu, .popup_Nusu_n{
   width: 100%;
@@ -316,7 +323,7 @@ body{
   font-size: 0;
 }
 
-.fase_tit, .contacto_filtro{
+.fase_tit, .contacto_filtro, .actividad_tipo{
   display: inline-block;
   width: 93%;
   height: 34px;
@@ -332,7 +339,7 @@ body{
   overflow: auto;
 }
 
-.lst_campos{
+.lst_campos, .lst_campos_act{
   overflow: auto;
   /*padding-bottom: 4%;*/
 }
@@ -373,7 +380,7 @@ body{
   text-align: left;
 }
 
-.cont_btn_form #btn_guardar_frm, .cont_btn_form #btn_guardar_emp, .cont_btn_form #btn_guardar_per{
+.cont_btn_form #btn_guardar_frm, .cont_btn_form #btn_guardar_emp, .cont_btn_form #btn_guardar_per, .cont_btn_form #btn_guardar_frm_act{
   text-align: right;
 }
 
@@ -1778,7 +1785,7 @@ textarea {
   border-bottom: 1px solid #c7c7c7;
 }
 
-#cont_deta_emp_blank_der , #cont_deta_per_blank_der{
+#cont_deta_emp_blank_der, #cont_deta_act_blank_der , #cont_deta_per_blank_der{
   display: inline-block;
   width: 15%;
   height: 100%;
@@ -1787,7 +1794,7 @@ textarea {
   /*float: right;*/
 }
 
-#cont_deta_emp_blank_der div, #cont_deta_per_blank_der div, .edits-button div{
+#cont_deta_emp_blank_der div, #cont_deta_act_blank_der div, #cont_deta_per_blank_der div, .edits-button div{
   color: #FFF;
   font-size: 15px;
   text-shadow: none;
@@ -1799,7 +1806,7 @@ textarea {
   line-height: 2.3rem;
 }
 
-.fase_tit .ui-field-contain .ui-select, .contacto_filtro .ui-field-contain .ui-select{
+.fase_tit .ui-field-contain .ui-select, .contacto_filtro .ui-field-contain .ui-select, .actividad_tipo .ui-field-contain .ui-select{
   width: 100% !important;
 }
 
@@ -2013,12 +2020,17 @@ textarea {
   margin: 10px 0;
 }
 
-#cont-cbo-tcartera, #cont-cbo-tdoc{
+#cont-cbo-tcartera, #cont-cbo-tdoc, #cont-cbo-dura{
   width: 100%;
 }
 
-#cont-cbo-tcartera div.ui-btn, #cont-cbo-tdoc div.ui-btn{
+#cont-cbo-tcartera div.ui-btn, #cont-cbo-tdoc div.ui-btn, #cont-cbo-dura div.ui-btn{
   border: none;
+}
+
+#cont-cbo-dura div.ui-btn{
+  text-align: left;
+  box-shadow: none;
 }
 
 #cont-cbo-tcartera span.ui-btn-inner, #cont-cbo-tdoc span.ui-btn-inner{
@@ -2026,3 +2038,44 @@ textarea {
   background: #e5e5e5;
   color: #7D7D7D;
 }
+
+#cont-cbo-dura span.ui-btn-inner{
+  border-bottom: 1px solid #c4c4c4;
+  background: white;
+  color: black;
+}
+
+/*DETALLE ACTIVIDAD*/
+/*.cont_top_det_act{
+  display: inline-block;
+  width: 92.8%;
+  margin: 10px 0 0 0;
+  background: white;
+  border-bottom: 2px solid #df2047;
+}
+
+.cont_top_det_act article.cont_req{
+  width: 80%;
+  float: left;
+  margin: 0;
+}*/
+
+#det_act_tit{
+  border-bottom: 2px solid;
+}
+
+.cnt-dt-act-elm{
+  display: inline-block;
+  font: 13px ProximaNova, sans-serif;
+  width: 100%;
+  margin-bottom: 10px;
+  color: #7b7b7b;
+}
+
+.cnt-dt-act-elm span{
+  float: right;
+  margin-right: 15px;
+  text-decoration: underline;
+}
+
+

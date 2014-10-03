@@ -1,7 +1,9 @@
 $(document).ready(function () {
 
 	$(".lst_campos").animate({scrollTop: 0});
+	$('.lst_campos_act').css({height:alCitm+'px'}); //52-
 	$("#cont_contacto").animate({scrollTop: 0});
+
 
 //*************************************** BASE DE DATOS WEBSQL
 
@@ -106,7 +108,9 @@ $(document).ready(function () {
 	//var alCitm = alCn-52;
 
 	//var alCam = alCitm - 2;
-	$('.lst_campos').css({height:alCitm+'px'});
+	$('.lst_campos').css({height:alCitm+'px'}); //52-
+	var alCact = alCn-100;
+	$('.lst_campos_act').css({height:alCact+'px'}); //52-
 
 	if(localStorage.getItem('usu_alm') != null){
 	   	document.getElementById('mail').value = localStorage.getItem('usu_alm');
@@ -243,7 +247,17 @@ $(document).ready(function () {
 		$.mobile.changePage("#actividad", {transition:"slide"});
 	});
 
-	/*$("body").on("click",".sect_uno_item_mid", function(e){
+	$("body").on('click', '#cont_deta_act_blank_der', function(e){
+
+		if(localStorage.getItem('onof') == 'on'){
+			
+		}else{
+
+		}
+		$.mobile.changePage("#frm_actividad_editar", {transition:"slide"});
+	});
+
+	$("body").on("click",".sect_uno_item_mid", function(e){
 
 		var idAct = $(this).attr('id');
 		$("#frmValAct").val("editar");
@@ -255,7 +269,7 @@ $(document).ready(function () {
 
 		}
 		$.mobile.changePage("#actividad_detalle", {transition:"slidedown"});
-	});*/
+	});
 
 	$("body").on('click', '#btn_guardar_act', function(e){
 		$("#frmValAct").val("editar");
@@ -602,6 +616,7 @@ $(document).ready(function () {
 			$('.'+b+" span span.ui-icon").addClass( "ui-icon-checkbox-off" )
 			$('.'+b+" span span.ui-icon").removeClass( "ui-icon-checkbox-on" )			
 		}
+		console.log("limpiar chk")
 	}
 
 	$("body").on("click","#btn_perdido_det_ven", function(e){
@@ -1128,7 +1143,7 @@ $(document).ready(function () {
 		});
 	}
 
-	function getProspectoDetalleOn(id)//permite traer todos los datos del prospecto incluyendo los requisitos 
+	function getProspectoDetalleOn(id)//trae todos los datos del prospecto incluyendo los requisitos 
 	{
 		$.ajax({
 			type: 'POST',
@@ -1154,13 +1169,18 @@ $(document).ready(function () {
 
 					for (var i = 0; i < reqArr.length; i++) {
 						var a = "req_"+reqArr[i];
+						//var ad = "req_"+reqArr[i];
 						var b = "reqc_"+reqArr[i];
 						if(data[a] == "S"){
+							console.log(a+" on")
 							$('#'+a+":checkbox").prop('checked', true);
+							//$('#'+ad+":checkbox").prop('checked', true);
 							$('.'+b+" span span.ui-icon").removeClass( "ui-icon-checkbox-off" )
 							$('.'+b+" span span.ui-icon").addClass( "ui-icon-checkbox-on" )
 						}else{
+							console.log(a+" off")
 							$('#'+a+":checkbox").prop('checked', false);
+							//$('#'+ad+":checkbox").prop('checked', false);
 							$('.'+b+" span span.ui-icon").addClass( "ui-icon-checkbox-off" )
 							$('.'+b+" span span.ui-icon").removeClass( "ui-icon-checkbox-on" )
 						}
@@ -1240,7 +1260,8 @@ $(document).ready(function () {
 						{
 							reqArr[i]=data[i]['id_req'];
 							$( "#cont_reque, #req_detalle_venta" ).append("<article class='cont_req cont_ckh_reg'><input type='checkbox' name='req_"+data[i]['id_req']+"' id='req_"+data[i]['id_req']+"' class='chkocultar desa_det_venta'/><label class='lblcheck reqc_"+data[i]['id_req']+"' for='req_"+data[i]['id_req']+"' >"+data[i]['descripcion_req']+"</label></article>");
-							//$( "#req_detalle_venta" ).append("<article class='cont_req req_vd'><input type='checkbox' name='req_det_"+data[i]['id_req']+"' name='req_det_"+data[i]['id_req']+"' class='chkocultar'/><label class='lblcheck' for='req_det_"+data[i]['id_req']+"' >"+data[i]['descripcion_req']+"</label></article>")
+							//$( "#req_detalle_venta" ).append("<article class='cont_req cont_ckh_reg'><input type='checkbox' name='reqd_"+data[i]['id_req']+"' id='reqd_"+data[i]['id_req']+"' class='chkocultar desa_det_venta'/><label class='lblcheck reqc_"+data[i]['id_req']+"' for='reqd_"+data[i]['id_req']+"' >"+data[i]['descripcion_req']+"</label></article>");
+							//$( "#cont_reque" ).append("<article class='cont_req cont_ckh_reg'><input type='checkbox' name='req_"+data[i]['id_req']+"' id='req_"+data[i]['id_req']+"' class='chkocultar desa_det_venta'/><label class='lblcheck reqc_"+data[i]['id_req']+"' for='req_"+data[i]['id_req']+"' >"+data[i]['descripcion_req']+"</label></article>");
 						}
 					}
 				},
@@ -1587,7 +1608,7 @@ $(document).ready(function () {
 				$("#edt_emp_vven").val(etd[0]['volumen_venta_cuen']);
 				$("#edt_emp_telf").val(etd[0]['telefono_cuen']);
 				(!etd[0]['tipo_cartera_cuen'])? $("#cont-cbo-tcartera span.ui-btn-text span").html("TIPO DE CARTERA") : $("#cont-cbo-tcartera span.ui-btn-text span").html(etd[0]['tipo_cartera_cuen']);
-				(!etd[0]['id_tipo_cartera'])? $("#cboTipoCartera option[value=0]").attr("selected",'selected'):$("#cboTipoCartera option[value='"+etd[0]['id_tipo_cartera']+"']").attr("selected",'selected');
+				(!etd[0]['id_tipo_cartera'])? $("#cboTipoCartera option[value=0]").attr("selected",'selected'):$("#cboTipoCartera option[value='3").attr("selected",'selected');
 				
 				arEmpEdit['razonSocial'] = etd[0]['razon_social_cuen'];
 				arEmpEdit['ruc'] = etd[0]['ruc_cuen'];
@@ -1976,8 +1997,7 @@ $(document).ready(function () {
 						if(!data[i]['razon_social_cuen'])data[i]['razon_social_cuen'] = 'RAZON SOCIAL';
 						if(!data[i]['desc_tact'])data[i]['desc_tact'] = 'Pendiente';
 						if(!data[i]['hora_act'])data[i]['hora_act'] = '00:00';
-						//var ac ="<article class='unid_cont_item_act'><section class='sect_uno_item_izq'><div class='div_fecha_act_top'>"+fg['diaNom']+"</div><div class='div_fecha_act_bot'>"+fg['diaNum']+" "+fg['mesNom']+"</div></section><section class='sect_uno_item_mid' id='"+data[i]['id_act']+"'><div class='div_tipo_act_top'>"+data[i]['desc_tact']+"</div><div class='div_tipo_act_bot'><div class='div_tipo_act_bot_izq'>"+data[i]['hora_act'].substring(0,5)+" / </div><div class='div_tipo_act_bot_der'> "+data[i]['razon_social_cuen']+"</div></div></section><section class='sect_uno_item_der'><article class='cont_req cont_ckh_act'><input type='checkbox' name='act_"+data[i]['id_act']+"' id='act_"+data[i]['id_act']+"' class='desa_det_venta'/><label class='lblcheck chk-lft' for='act_"+data[i]['id_act']+"'></label></article></section></article>";
-						var ac ="<article class='unid_cont_item_act'><section class='sect_uno_item_izq'><div class='div_fecha_act_top'>"+fg['diaNom']+"</div><div class='div_fecha_act_bot'>"+fg['diaNum']+" "+fg['mesNom']+"</div></section><section class='sect_uno_item_mid' id='"+data[i]['id_act']+"'><div class='div_tipo_act_top'>"+data[i]['desc_tact']+"</div><div class='div_tipo_act_bot'><div class='div_tipo_act_bot_izq'>"+data[i]['hora_act'].substring(0,5)+" / </div><div class='div_tipo_act_bot_der'> "+data[i]['razon_social_cuen']+"</div></div></section><section class='sect_uno_item_der'><article class='cont_req cont_ckh_act'></article></section></article>";
+						var ac ="<article class='unid_cont_item_act'><section class='sect_uno_item_izq'><div class='div_fecha_act_top'>"+fg['diaNom']+"</div><div class='div_fecha_act_bot'>"+fg['diaNum']+" "+fg['mesNom']+"</div></section><section class='sect_uno_item_mid' id='"+data[i]['id_act']+"'><div class='div_tipo_act_top'>"+data[i]['desc_tact']+"</div><div class='div_tipo_act_bot'><div class='div_tipo_act_bot_izq'>"+data[i]['hora_act'].substring(0,5)+" / </div><div class='div_tipo_act_bot_der'> "+data[i]['razon_social_cuen']+"</div></div></section><section class='sect_uno_item_der'><article class='cont_req cont_ckh_act'><input type='checkbox' name='act_"+data[i]['id_act']+"' id='act_"+data[i]['id_act']+"' class='desa_det_venta'/><label class='lblcheck chk-lft' for='act_"+data[i]['id_act']+"'></label></article></section></article>";
 			            $("#cnt_act_itm").append(ac);
 					}
 				}else{
