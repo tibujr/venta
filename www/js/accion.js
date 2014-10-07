@@ -69,6 +69,7 @@ $(document).ready(function () {
 
 	//metodos inicializando
 	mostrarRequisitosHtml();
+	llenarTipoActividad();
 	llenarTipoCartera();
 	llenarTipoDocumento();
 
@@ -113,8 +114,8 @@ $(document).ready(function () {
 	$('.lst_campos_act').css({height:alCact+'px'}); //52-
 
 	if(localStorage.getItem('usu_alm') != null){
-	   	document.getElementById('mail').value = localStorage.getItem('usu_alm');
-	   	document.getElementById('clave').value = localStorage.getItem('clv_alm');
+	   	//document.getElementById('mail').value = localStorage.getItem('usu_alm');
+	   //	document.getElementById('clave').value = localStorage.getItem('clv_alm');
 	}
 
 	$("body").on('click', '#btn_login', function(e){
@@ -264,12 +265,73 @@ $(document).ready(function () {
 
 		if(localStorage.getItem('onof') == 'on')
 		{	
-			//getDetalleActividad(idAct);
+			getDetalleActividad(idAct);
 		}else{
 
 		}
 		$.mobile.changePage("#actividad_detalle", {transition:"slidedown"});
 	});
+
+	function getDetalleActividad(id)
+	{
+		$.ajax({
+			type: 'POST',
+			dataType: 'json', 
+			data: {id:id},
+			beforeSend : function (){
+		    },
+			url: urlP+"getDetalleActividad",
+			success : function(data) {
+				//a.id_tact, t.desc_tact, a.objetivo_act, a.fecha_act, a.hora_act, 
+				//a.duracion_act, a.id_pros, p.titulo, a.id_cuen, cu.razon_social_cuen , 
+				//a.id_con, co.nombre_con, co.apellido_con, a.nota_act
+				limpiarDetalleActividad();
+				$("#det_act_tit").html(data.desc_tact);
+				$("#det_act_obj").html(data.objetivo_act);
+				$("#det_act_fecha").html(data.fecha_act);
+				$("#det_act_hora").html(data.hora_act.substring(0,5));
+				$("#det_act_dura").html(data.duracion_act.substring(0,5));
+				$("#det_act_opor").html(data.titulo);
+				$("#det_act_emp").html(data.razon_social_cuen);
+				$("#det_act_cont").html(data.nombre_con+ " "+ data.apellido_con);
+				$("#det_act_nota").html(data.nota_act);
+
+				limpiarFormularioActividad();
+				$("#cboTipoActividad option[value="+ data.id_tact +"]").attr("selected",true);
+				$("#fmr_act_obj").val(data.objetivo_act);
+				$("#fmr_act_fecha").val(data.fecha_act);
+				$("#fmr_act_hora").val(data.hora_act.substring(0,5));
+				$("#cboDuracionAct option[value=0]").attr("selected",'selected');
+				$("#fmr_act_nota").val(data.nota_act);
+			},
+			error: function(data){
+				console.log(data);
+			}
+		});
+	}
+
+	function limpiarDetalleActividad()
+	{
+		$("#det_act_tit").html("");
+		$("#det_act_obj").html("");
+		$("#det_act_fecha").html("");
+		$("#det_act_hora").html("");
+		$("#det_act_dura").html("");
+		$("#det_act_opor").html("");
+		$("#det_act_emp").html("");
+		$("#det_act_cont").html("");
+		$("#det_act_nota").html("");
+	}
+
+	function limpiarFormularioActividad()
+	{
+		$("#cboTipoActividad option[value=0]").attr("selected",'selected');
+		$("#cboDuracionAct option[value=0]").attr("selected",'selected');
+		$("#fmr_act_obj").val("");
+		$("#fmr_act_fecha").val("");
+		$("#fmr_act_hora").val("");
+		$("#fmr_act_nota").val("");
+	}
 
 	$("body").on('click', '#btn_guardar_act', function(e){
 		$("#frmValAct").val("editar");
@@ -1271,6 +1333,33 @@ $(document).ready(function () {
 			});
 		}
 	}
+
+	function llenarTipoActividad()
+	{
+		var arAct = Array();
+		$( "#cboTipoActividad" ).html("");
+		$( "#cboTipoActividad" ).append("<option value='0'>SELECCIONAR TIPO</option>");
+		if(localStorage.getItem('onof') == 'on'){
+			$.ajax({
+				type: 'POST',
+				dataType: 'json', 
+				data: {},
+				beforeSend : function (){
+			    },
+				url: urlP+"llenarTipoActividad",
+				success : function(data) {
+					for(var i=0; i< data.length; i++)
+					{
+						$( "#cboTipoActividad" ).append("<option value='"+data[i]['id_tact']+"'>"+data[i]['desc_tact']+"</option>");
+					}
+				},
+				error: function(data){
+					console.log(data);
+				}
+			});
+		}
+	}
+
 
 	function llenarTipoCartera()
 	{
