@@ -12,14 +12,8 @@ Autor: Ruben Lacasa Mas <http://rubenlacasa.es>
 </head>
 <body>
     <div class="ui-content">
-    <input type="text" class="date-input-css">
+    <input type="text" data-role='date'>
     <!--<input type="text" data-role='date'>-->
-</div>
-
-<div id="datepicker"></div>
-<div id="datos">
-    <label for='fecha'>Fecha:</label>
-    <input type='text' name='fecha' id='fecha' readonly />
 </div>
 <script>
     var options = {
@@ -30,24 +24,6 @@ Autor: Ruben Lacasa Mas <http://rubenlacasa.es>
     datePicker.show(options, function(date){
       alert("date result " + date);  
     });
-/*$( "#datepicker" ).datepicker({
-    // Formato de la fecha
-    dateFormat: "dd/mm/yy",
-    // Primer dia de la semana El lunes
-    firstDay: 1,
-    // Dias Largo en castellano
-    dayNames: [ "Domingo", "Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado" ],
-    // Dias cortos en castellano
-    dayNamesMin: [ "Do", "Lu", "Ma", "Mi", "Ju", "Vi", "Sa" ],
-    // Nombres largos de los meses en castellano
-    monthNames: [ "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre" ],
-    // Nombres de los meses en formato corto 
-    monthNamesShort: [ "Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dec" ],
-    // Cuando seleccionamos la fecha esta se pone en el campo Input 
-    onSelect: function(dateText) { 
-          $('#fecha').val(dateText);
-      }
-});*/
 </script>
 </body>
 </html>

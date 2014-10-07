@@ -8,15 +8,17 @@
     
     <link rel="stylesheet" href="css/jquery-ui.css" />
     <link rel="stylesheet" href="css/jquery.mobile-1.3.2.min.css" />
+    <!--<link rel="stylesheet" href="//code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css">-->
     <link rel="stylesheet" type="text/css" href="css/estilo.css" />
 
     <script type="text/javascript" src="js/phonegap.js"></script>
     <script type="text/javascript" src="js/jquery.js"></script>
   	<script type="text/javascript" src="js/jquery.mobile-1.3.2.min.js"></script>
     <script type="text/javascript" src="js/jquery-ui-1.10.4.custom.min.js"></script>
+    <!--<script src="//code.jquery.com/ui/1.11.1/jquery-ui.js"></script>-->
   	<script type="text/javascript" src="js/accion.js"></script>
-
     <script type="text/javascript" src="js/index.js"></script>
+    
     <script type="text/javascript">
       app.initialize();
     </script>
@@ -203,6 +205,7 @@
                   <input type='hidden' id='id_cuen' name='id_cuen' value=''>
                   <input type='hidden' id='id_con' name='id_con' value=''>
                   <article class='cont_req'>
+                    <input type='text' class='datepicker'>
                     <label class='titpros' style='heigth: 0px;'>Titulo</label>
                     <input type='text' id='titpros' name='titpros' class='inpt_sel'>
                   </article>
@@ -1380,5 +1383,16 @@
     </article>
     <section id='agregar_contacto_np'>Agregar</section>
   </div>
+
+    <script>
+      $( ".datepicker" ).datepicker({
+        dateFormat: "dd/mm/yy",
+        firstDay: 1,
+        dayNames: [ "Domingo", "Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado" ],
+        dayNamesMin: [ "Do", "Lu", "Ma", "Mi", "Ju", "Vi", "Sa" ],
+        monthNames: [ "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre" ],
+        monthNamesShort: [ "Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dec" ]
+      });
+    </script>
 </body>
 </html>
