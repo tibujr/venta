@@ -127,12 +127,14 @@ body{
 
 .fecha_scit{
   display: inline-block;
+  vertical-align: top;
   width: 50%;
 }
 
 .hora_scit{
   display: inline-block;
   width: 45%;
+  vertical-align: top;
   margin-left: 5% !important;
 }
 
@@ -1310,8 +1312,8 @@ textarea {
   border: 1px solid #dddddd;*/
   text-align: center;
   display: inline-block;
-  background: #FFF;
-  color:#3b3b3b;
+  background: #df2047;
+  color: #fff;
   font-size: 16px;
   text-shadow: none;
   padding: .5em 0;
@@ -1332,8 +1334,8 @@ textarea {
   border: 1px solid #bc1e3e;*/
   text-align: center;
   display: inline-block;
-  background: #df2047;
-    color:#FFF;
+  background: #2baf2b;
+  color: #fff;
   font-size: 16px;
   text-shadow: none;
   padding: .5em 0;
@@ -1802,7 +1804,8 @@ textarea {
   height: 36px;
   display: inline-block;
   border-radius: 50%;
-  background: #DF2047;
+  /*background: #DF2047;*/
+  background: #5e5e5e;
   line-height: 2.3rem;
 }
 
@@ -2079,3 +2082,95 @@ textarea {
 }
 
 
+/*CAMBIOS*/
+
+/*.ui-datepicker-prev .ui-icon{
+  background-position:-80px -192px !important;
+}
+
+.ui-datepicker-next .ui-icon{
+  background-position: -48px -192px !important;
+}
+
+.ui-corner-all{
+  border-radius: 0px !important;
+}
+
+.ui-widget-content{
+  border: 1px solid #e4e4e4;
+  background: #FFFFFF;
+}
+
+.ui-widget-content a{
+  color: #b01a3c;
+  font: 15px ProximaNova, sans-serif; 
+}
+
+.ui-state-hover,
+.ui-widget-content .ui-state-hover,
+.ui-widget-header .ui-state-hover,
+.ui-state-focus,
+.ui-widget-content .ui-state-focus,
+.ui-widget-header .ui-state-focus {
+  color: white;
+  font: 15px ProximaNova, sans-serif;
+  text-shadow: none;
+  background: rgb(139, 41, 41);
+  padding: 2px 10px 3px 10px;
+  border: none;
+}*/
+
+/*DESPUES DE INSTALAR EL ULTIMO JQUERY*/
+
+div.login_caja div.ui-input-text{
+  margin-top: 0 !important;
+}
+
+#btn_login{
+  padding: 10px;
+  display: inline-block;
+  color: white;
+}
+
+#cont_pie_nav li a{
+  padding: 0;
+}
+
+#cont_cab_nav li a{
+  padding: 0;
+}
+
+#cont_cab_nav label{
+  color: white;
+}
+
+.cab_nav div.con_cab_a{
+  background-color: #80172d;
+  color: white;
+  text-shadow: none;
+}
+
+#cont_cab_nav div{
+  padding-top: 6px;
+}
+
+.btn_back{
+  text-shadow: none !important;
+  color: white !important;
+  background: none !important;
+  padding: 0;
+}
+
+.btn_back label{
+  display: inline-block;
+  vertical-align: bottom;
+  margin-bottom: 5px;
+}
+
+#cont_pie_nav li a label{
+  display: inline-block;
+}
+
+#cont_pie_nav li a div{
+  margin-top: 11px;
+}

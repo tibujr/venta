@@ -6,18 +6,39 @@
     <meta name="format-detection" content="telephone=no" />
   	<meta name="viewport" content="user-scalable=no, maximum-scale=1, minimum-scale=1, user-scalable=no, initial-scale=1, width=device-width, height=device-height">
     
-    <link rel="stylesheet" href="css/jquery-ui.css" />
-    <!--<link rel="stylesheet" href="//code.jquery.com/ui/1.11.1/themes/smoothness/jquery-ui.css">-->
-    <link rel="stylesheet" href="css/jquery.mobile-1.3.2.min.css" />
+
+    <!--<link rel="stylesheet" href="css/jquery.mobile-1.3.2.min.css" />-->
+    <link rel="stylesheet" href="css/cal/jquery.mobile-1.4.4.min.css" />
+    <link rel="stylesheet" href="css/cal/jqm-datebox-1.4.4.min.css" />
     <link rel="stylesheet" type="text/css" href="css/estilo.css" />
 
+    <script type="text/javascript" src="js/phonegap.js"></script><!--uso-->
+
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <!--<script type="text/javascript" src="js/jquery.mobile-1.3.2.min.js"></script>-->
+    <script type="text/javascript" src="js/cal/jquery.mobile-1.4.4.min.js"></script>
+    <script type="text/javascript" src="js/cal/jquery.mousewheel.min.js"></script><!--RECONOCE PROPIEDADES DEL MOUSE-->
+    <script type="text/javascript" src="js/cal/jqm-datebox-1.4.4.core.min.js"></script>
+    <script type="text/javascript" src="js/cal/jqm-datebox-1.4.4.mode.datebox.min.js"></script>
+    <script type="text/javascript" src="js/cal/jqm-datebox-1.4.4.mode.flipbox.min.js"></script>
+    <script type="text/javascript" src="js/cal/jqm-datebox.lang.utf8.js"></script><!--ORDENA DD-MM-YY -->
+
+    <script type="text/javascript" src="js/accion.js"></script>
+    <script type="text/javascript" src="js/index.js"></script>
+
+    <script type="text/javascript">
+      jQuery.extend(jQuery.mobile,
+      {
+        ajaxEnabled: false
+      });
+    </script>
+    <!--<link rel="stylesheet" href="css/jquery.mobile-1.3.2.min.css" />
+    <link rel="stylesheet" type="text/css" href="css/estilo.css" />
     <script type="text/javascript" src="js/phonegap.js"></script>
     <script type="text/javascript" src="js/jquery.js"></script>
   	<script type="text/javascript" src="js/jquery.mobile-1.3.2.min.js"></script>
-    <script type="text/javascript" src="js/jquery-ui-1.10.4.custom.min.js"></script>
-    <!--<script src="//code.jquery.com/ui/1.11.1/jquery-ui.js"></script>-->
   	<script type="text/javascript" src="js/accion.js"></script>
-    <script type="text/javascript" src="js/index.js"></script>
+    <script type="text/javascript" src="js/index.js"></script>-->
     
     <script type="text/javascript">
       app.initialize();
@@ -27,7 +48,7 @@
   <section data-role="page" id="inicio" class="pagina">
     <article data-role="content" style="font-size:0;">
       <div id='onOf' style='display: none;'><div class="icon-wifi-full"></div><div id='bloq_wifi' class="icon-blocked"></div></div>
-      <div style="display: inline-block; margin-bottom: 10px; width: 100%; margin-top: 35%;"><img src="img/logo.jpg"></div>
+      <div style="display: inline-block; margin-bottom: 10px; width: 100%; margin-top: 35%;"><img src="img/logo_avanza.png"></div>
       <div class="login_caja"><input type="email" id="mail" name="mail" value="cmasias@roinet.pe" placeholder="Correo electrónico"></div>
       <div class="login_caja"><input type="password" id="clave" name="clave" value="123456" placeholder="******"></div>
       <div class="center-wrapper">
@@ -232,7 +253,7 @@
                   </article>
                   <article class='cont_req'>
                     <label class='fecha_aprox'>Fecha Aproximada de Cierre</label>
-                    <input type='text' placeholder='dd-mm-yyyy' id='fecha_aprox' name='fecha_aprox' class='datepicker inpt_sel'>
+                    <input type='text' id='fecha_aprox' name='fecha_aprox' class='datepicker inpt_sel'>
                   </article>
                   <section id='cont_reque' class='nvo_pros'>
                     <label class='lblRequi'>Requisitos</label>
@@ -240,7 +261,7 @@
                   <article class='cont_req'>
                     <label class='sig_cita hra_cita'>Siguiente reunión</label>
                     <div class='fecha_scit'><input type='text' placeholder='dd-mm-yyyy' name='sig_cita' id='sig_cita' class='datepicker inpt_sel'></div>
-                    <div class='hora_scit'><input type='time' max="23:00" min="07:00" step="900" id='hra_cita' class='inpt_sel'></div>
+                    <div class='hora_scit'><input type='time' placeholder='00:00' max="23:00" min="07:00" step="900" id='hra_cita' class='inpt_sel'></div>
                     <div class='check_actv'>
                       <input type='hidden' id='activ_check' name='activ_check' value=''>
                       <input type="checkbox" name="activ" id="activ" class='chkocultar'/>
@@ -1384,14 +1405,14 @@
   </div>
 
     <script>
-      $( ".datepicker" ).datepicker({
-        dateFormat: "dd/mm/yy",
+      /*$( ".datepicker" ).datepicker({
+        dateFormat: "dd-mm-yy",
         firstDay: 1,
         dayNames: [ "Domingo", "Lunes", "Martes", "Miercoles", "Jueves", "Viernes", "Sabado" ],
         dayNamesMin: [ "Do", "Lu", "Ma", "Mi", "Ju", "Vi", "Sa" ],
         monthNames: [ "Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre" ],
         monthNamesShort: [ "Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dec" ]
-      });
+      });*/
     </script>
 </body>
 </html>
