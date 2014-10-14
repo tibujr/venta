@@ -253,15 +253,15 @@
                   </article>
                   <article class='cont_req'>
                     <label class='fecha_aprox'>Fecha Aproximada de Cierre</label>
-                    <input type='text' id='fecha_aprox' name='fecha_aprox' class='datepicker inpt_sel'>
+                    <input type='text' id='fecha_aprox' name='fecha_aprox' data-role="datebox" data-options='{"mode":"flipbox", "useLang":"es-ES", "overrideDateFormat": "%Y-%m-%d"}'>
                   </article>
                   <section id='cont_reque' class='nvo_pros'>
                     <label class='lblRequi'>Requisitos</label>
                   </section>
                   <article class='cont_req'>
                     <label class='sig_cita hra_cita'>Siguiente reunión</label>
-                    <div class='fecha_scit'><input type='text' placeholder='dd-mm-yyyy' name='sig_cita' id='sig_cita' class='datepicker inpt_sel'></div>
-                    <div class='hora_scit'><input type='time' placeholder='00:00' max="23:00" min="07:00" step="900" id='hra_cita' class='inpt_sel'></div>
+                    <div class='fecha_scit'><input type='text' name='sig_cita' id='sig_cita' data-role="datebox" data-options='{"mode":"flipbox", "useLang":"es-ES", "overrideDateFormat": "%Y-%m-%d"}'></div>
+                    <div class='hora_scit'><input type='text' id='hra_cita' class='inpt_sel' data-role="datebox" data-options='{"mode":"timeflipbox", "useLang":"es-ES", "overrideTimeOutput":"%H:%M"}'></div>
                     <div class='check_actv'>
                       <input type='hidden' id='activ_check' name='activ_check' value=''>
                       <input type="checkbox" name="activ" id="activ" class='chkocultar'/>

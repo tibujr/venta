@@ -255,14 +255,14 @@ body{
   color: #a9a9a9;
 }
 
-.fase_tit  div span.ui-btn-inner, .fase_tit  div div span.ui-btn-inner, .contacto_filtro div span.ui-btn-inner, .contacto_filtro  div div span.ui-btn-inner, .actividad_tipo div span.ui-btn-inner, .actividad_tipo  div div span.ui-btn-inner {
+/*.fase_tit  div span.ui-btn-inner, .fase_tit  div div span.ui-btn-inner, .contacto_filtro div span.ui-btn-inner, .contacto_filtro  div div span.ui-btn-inner, .actividad_tipo div span.ui-btn-inner, .actividad_tipo  div div span.ui-btn-inner {
   font-size: 13px;
   height: 24px;
   padding: 10px 0 0 0;
   text-shadow: none;
   color: white;
   font-family: ProximaNovaLight, sans-serif;
-}
+}*/
 
 .fase_tit  div span.ui-btn-inner, .fase_tit  div div span.ui-btn-inner{
   background: #5e5e5e;
@@ -2173,4 +2173,39 @@ div.login_caja div.ui-input-text{
 
 #cont_pie_nav li a div{
   margin-top: 11px;
+}
+
+.fase_tit, .contacto_filtro, .actividad_tipo{
+  overflow: hidden;
+}
+
+.fase_tit div div div{
+  background: #4a4a4a !important;
+  text-shadow: none !important;
+  border: none;
+  font: 13px ProximaNovaLight, sans-serif;
+  border-radius: 0 !important;
+  box-shadow: none;
+  color: white !important;
+}
+
+.nvo_css_req label{
+  padding: 10px 0;
+  padding-left: 2.5em;
+  width: 88%;
+  background: none !important;
+  border: 0;
+}
+
+.cont_req .ui-input-text{
+  padding-bottom: 0 !important;
+}
+
+html .ui-bar-a .ui-btn.ui-btn-active, html .ui-body-a .ui-btn.ui-btn-active, html body .ui-group-theme-a .ui-btn.ui-btn-active, html head+body .ui-btn.ui-btn-a.ui-btn-active, .ui-page-theme-a .ui-checkbox-on:after, html .ui-bar-a .ui-checkbox-on:after, html .ui-body-a .ui-checkbox-on:after, html body .ui-group-theme-a .ui-checkbox-on:after, .ui-btn.ui-checkbox-on.ui-btn-a:after, .ui-page-theme-a .ui-flipswitch-active, html .ui-bar-a .ui-flipswitch-active, html .ui-body-a .ui-flipswitch-active, html body .ui-group-theme-a .ui-flipswitch-active, html body .ui-flipswitch.ui-bar-a.ui-flipswitch-active, .ui-page-theme-a .ui-slider-track .ui-btn-active, html .ui-bar-a .ui-slider-track .ui-btn-active, html .ui-body-a .ui-slider-track .ui-btn-active, html body .ui-group-theme-a .ui-slider-track .ui-btn-active, html body div.ui-slider-track.ui-body-a .ui-btn-active{
+  background-color: #0BA000 !important;
+}
+
+.sub-menu-nn li, .sub-menu-nn-d li{
+  color: white;
+  text-shadow: none; 
 }

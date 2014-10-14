@@ -675,8 +675,10 @@ $(document).ready(function () {
 			var a = "req_"+reqArr[i];
 			var b = "reqc_"+reqArr[i];
 			$('#'+a+":checkbox").prop('checked', false);
-			$('.'+b+" span span.ui-icon").addClass( "ui-icon-checkbox-off" )
-			$('.'+b+" span span.ui-icon").removeClass( "ui-icon-checkbox-on" )			
+			//$('.'+b+" span span.ui-icon").addClass( "ui-icon-checkbox-off" ) cambio JQ4
+			//$('.'+b+" span span.ui-icon").removeClass( "ui-icon-checkbox-on" ) cambio JQ4
+			$('.'+b).addClass( "ui-checkbox-off" );
+			$('.'+b).removeClass( "ui-checkbox-on" );			
 		}
 		console.log("limpiar chk")
 	}
@@ -791,8 +793,10 @@ $(document).ready(function () {
 			var b = "reqc_"+reqArr[i];
 			
 			$('#'+a+":checkbox").prop('checked', false);
-			$('.'+b+" span span.ui-icon").addClass( "ui-icon-checkbox-off" )
-			$('.'+b+" span span.ui-icon").removeClass( "ui-icon-checkbox-on" )
+			//$('.'+b+" span span.ui-icon").addClass( "ui-icon-checkbox-off" ) cambio JQ4
+			//$('.'+b+" span span.ui-icon").removeClass( "ui-icon-checkbox-on" ) cambio JQ4
+			$('.'+b).addClass( "ui-checkbox-off" )
+			$('.'+b).removeClass( "ui-checkbox-on" )
 		};
 
 		/*if(localStorage.getItem('onof') == 'on')
@@ -1081,7 +1085,8 @@ $(document).ready(function () {
 						var row = result.rows.item(i);
 						$("#cboFase").append("<option value='"+row.id+"'>"+row.descripcion+"</option>")
 						if(row.id == idFase){ 
-							$(".fase_tit div div div span span span").html(row.descripcion)
+							//$(".fase_tit div div div span span span").html(row.descripcion) CAMBIO JQ4
+							$(".fase_tit div div div span").html(row.descripcion)
 							$("#cboFase option[value="+ row.id +"]").attr("selected",true);
 						}
 					}
@@ -1236,15 +1241,17 @@ $(document).ready(function () {
 						if(data[a] == "S"){
 							console.log(a+" on")
 							$('#'+a+":checkbox").prop('checked', true);
-							//$('#'+ad+":checkbox").prop('checked', true);
-							$('.'+b+" span span.ui-icon").removeClass( "ui-icon-checkbox-off" )
-							$('.'+b+" span span.ui-icon").addClass( "ui-icon-checkbox-on" )
+							//$('.'+b+" span span.ui-icon").removeClass( "ui-icon-checkbox-off" )
+							//$('.'+b+" span span.ui-icon").addClass( "ui-icon-checkbox-on" )
+							$('.'+b).removeClass( "ui-checkbox-off" )
+							$('.'+b).addClass( "ui-checkbox-on" )
 						}else{
 							console.log(a+" off")
 							$('#'+a+":checkbox").prop('checked', false);
-							//$('#'+ad+":checkbox").prop('checked', false);
-							$('.'+b+" span span.ui-icon").addClass( "ui-icon-checkbox-off" )
-							$('.'+b+" span span.ui-icon").removeClass( "ui-icon-checkbox-on" )
+							//$('.'+b+" span span.ui-icon").addClass( "ui-icon-checkbox-off" )
+							//$('.'+b+" span span.ui-icon").removeClass( "ui-icon-checkbox-on" )
+							$('.'+b).addClass( "ui-checkbox-off" )
+							$('.'+b).removeClass( "ui-checkbox-on" )
 						}
 					}
 
@@ -1321,9 +1328,9 @@ $(document).ready(function () {
 						for(var i=0; i< data.length; i++)
 						{
 							reqArr[i]=data[i]['id_req'];
-							$( "#cont_reque, #req_detalle_venta" ).append("<article class='cont_req cont_ckh_reg'><input type='checkbox' name='req_"+data[i]['id_req']+"' id='req_"+data[i]['id_req']+"' class='chkocultar desa_det_venta'/><label class='lblcheck reqc_"+data[i]['id_req']+"' for='req_"+data[i]['id_req']+"' >"+data[i]['descripcion_req']+"</label></article>");
-							//$( "#req_detalle_venta" ).append("<article class='cont_req cont_ckh_reg'><input type='checkbox' name='reqd_"+data[i]['id_req']+"' id='reqd_"+data[i]['id_req']+"' class='chkocultar desa_det_venta'/><label class='lblcheck reqc_"+data[i]['id_req']+"' for='reqd_"+data[i]['id_req']+"' >"+data[i]['descripcion_req']+"</label></article>");
-							//$( "#cont_reque" ).append("<article class='cont_req cont_ckh_reg'><input type='checkbox' name='req_"+data[i]['id_req']+"' id='req_"+data[i]['id_req']+"' class='chkocultar desa_det_venta'/><label class='lblcheck reqc_"+data[i]['id_req']+"' for='req_"+data[i]['id_req']+"' >"+data[i]['descripcion_req']+"</label></article>");
+							//var ltdr = "<article class='cont_req cont_ckh_reg'><input type='checkbox' name='req_"+data[i]['id_req']+"' id='req_"+data[i]['id_req']+"' class='chkocultar desa_det_venta'/><label class='lblcheck reqc_"+data[i]['id_req']+"' for='req_"+data[i]['id_req']+"' >"+data[i]['descripcion_req']+"</label></article>";
+							var ltdr = "<article class='cont_req cont_ckh_reg nvo_css_req'><label class='reqc_"+data[i]['id_req']+"'><input type='checkbox' name='req_"+data[i]['id_req']+"' id='req_"+data[i]['id_req']+"' class='chkocultar desa_det_venta'>"+data[i]['descripcion_req']+"</label></article>";
+							$( "#cont_reque, #req_detalle_venta" ).append(ltdr);
 						}
 					}
 				},
@@ -1557,7 +1564,8 @@ $(document).ready(function () {
 							//llenado de combo
 							$("#cboFase").append("<option value='"+id+"'>"+desc+"</option>")
 							if(id == idFase){ 
-								$(".fase_tit div div div span span span").html(desc);
+								//$(".fase_tit div div div span span span").html(desc); CAMBIO JQ4
+								$(".fase_tit div div div span").html(desc);
 								$("#cboFase option[value="+ id +"]").attr("selected",true);
 							}
 
