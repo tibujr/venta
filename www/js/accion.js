@@ -690,13 +690,18 @@ $(document).ready(function () {
 		if(localStorage.getItem('onof') == 'on')
 		{	
 			//listarProspecto(idFase);
-			evaluarProspecto(idProsp,'p'); //p de perdido
-			alert("Prospecto Perdido");
+			var r = confirm("¿Desea cambiar estado a Perdido?");
+			if(r){
+				evaluarProspecto(idProsp,'p'); //p de perdido
+				alert("Prospecto Perdido");
+				$.mobile.back();
+			}else{
+				console.log("cancelado")
+			}
 		}else{
 			//getProspectoIdOff(idv);
 		}
-
-		$.mobile.back();
+		
 	});
 
 	$("body").on("click","#btn_ganado_det_ven", function(e){
@@ -706,13 +711,20 @@ $(document).ready(function () {
 		if(localStorage.getItem('onof') == 'on')
 		{	
 			//listarProspecto(idFase);
-			evaluarProspecto(idProsp,'g'); //g de ganado
-			alert("Prospecto Ganado");
+			/*evaluarProspecto(idProsp,'g'); //g de ganado
+			alert("Prospecto Ganado");*/
+			var r = confirm("¿Desea cambiar estado a Ganado?");
+			if(r){
+				evaluarProspecto(idProsp,'g'); //g de ganado
+				alert("Prospecto Ganado");
+				$.mobile.back();
+			}else{
+				console.log("cancelado")
+			}
 		}else{
 			//getProspectoIdOff(idv);
 		}
 
-		$.mobile.back();
 	});
 
 	function evaluarProspecto(id, va)

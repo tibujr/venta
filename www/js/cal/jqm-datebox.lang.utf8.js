@@ -499,7 +499,8 @@ jQuery.extend(jQuery.mobile.datebox.prototype.options.lang, {
 
 	'es-ES': {
 		setDateButtonLabel: "Guardar Fecha",
-		setTimeButtonLabel: "Guardar Hora",
+		//setTimeButtonLabel: "Guardar Hora",
+		setTimeButtonLabel: "Aceptar",
 		setDurationButtonLabel: "Guardar Duración",
 		calTodayButtonLabel: "Hoy",
 		titleDateDialogLabel: "Elija fecha",
