@@ -2179,7 +2179,7 @@ div.login_caja div.ui-input-text{
   overflow: hidden;
 }
 
-.fase_tit div div div{
+.fase_tit div div div, .contacto_filtro div div div, .actividad_tipo div div div{
   background: #4a4a4a !important;
   text-shadow: none !important;
   border: none;
@@ -2187,6 +2187,11 @@ div.login_caja div.ui-input-text{
   border-radius: 0 !important;
   box-shadow: none;
   color: white !important;
+}
+
+.contacto_filtro div div div, .actividad_tipo div div div{
+  background: #e5e5e5 !important;
+  color: #4e4e4e !important;
 }
 
 .nvo_css_req label{
@@ -2208,4 +2213,8 @@ html .ui-bar-a .ui-btn.ui-btn-active, html .ui-body-a .ui-btn.ui-btn-active, htm
 .sub-menu-nn li, .sub-menu-nn-d li{
   color: white;
   text-shadow: none; 
+}
+
+.sub-menu-nn li, .sub-menu-nn-d li{
+  cursor: pointer;
 }
