@@ -1711,7 +1711,7 @@ $(document).ready(function () {
 					$("#det_emp_dire").html(etd[0]['direccion_cuen']+", "+etd[0]['distrito_cuen']);
 				$("#det_emp_asig").html(etd[0]['nombre_usu']+" "+etd[0]['apellido_usu']);
 				//datos editar empresa
-				alert("editar")
+				alert("editar");
 				$("#edt_emp_nom").val(etd[0]['razon_social_cuen']);
 				$("#edt_emp_ruc").val(etd[0]['ruc_cuen']);
 				$("#edt_emp_ntrab").val(etd[0]['numero_trabajadores_cuen']);
@@ -1724,6 +1724,7 @@ $(document).ready(function () {
 				if(!etd[0]['id_tipo_cartera']){ $("#cboTipoCartera option[value=0]").attr("selected",'selected')}
 				else{$("#cboTipoCartera option[value='3").attr("selected",'selected')};
 
+				alert("editar1");
 				arEmpEdit['razonSocial'] = etd[0]['razon_social_cuen'];
 				arEmpEdit['ruc'] = etd[0]['ruc_cuen'];
 				arEmpEdit['numTrab'] = etd[0]['numero_trabajadores_cuen'];
