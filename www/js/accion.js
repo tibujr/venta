@@ -1723,9 +1723,8 @@ $(document).ready(function () {
 				}else{
 					$("#cont-cbo-tcartera span.ui-btn-text span").html(etd[0]['tipo_cartera_cuen']);
 				}*/
-				(!etd[0]['id_tipo_cartera'])? $("#cboTipoCartera option[value=0]").attr("selected",'selected'):$("#cboTipoCartera option[value='"+etd[0]['id_tipo_cartera']+"'").attr("selected",'selected');
-				/*alert("editar1");
-				if(!etd[0]['id_tipo_cartera']){ 
+				(!etd[0]['id_tipo_cartera'])? $("#cboTipoCartera option[value=0]").attr("selected",'selected'):$("#cboTipoCartera option[value='"+etd[0]['id_tipo_cartera']+"']").attr("selected",'selected');
+				/*if(!etd[0]['id_tipo_cartera']){ 
 					alert("editar01");
 					$("#cboTipoCartera option[value=0]").attr("selected",'selected')
 					alert("editar011");
