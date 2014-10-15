@@ -1711,48 +1711,25 @@ $(document).ready(function () {
 					$("#det_emp_dire").html(etd[0]['direccion_cuen']+", "+etd[0]['distrito_cuen']);
 				$("#det_emp_asig").html(etd[0]['nombre_usu']+" "+etd[0]['apellido_usu']);
 				//datos editar empresa
-				alert("editar");
 				$("#edt_emp_nom").val(etd[0]['razon_social_cuen']);
 				$("#edt_emp_ruc").val(etd[0]['ruc_cuen']);
 				$("#edt_emp_ntrab").val(etd[0]['numero_trabajadores_cuen']);
 				$("#edt_emp_vven").val(etd[0]['volumen_venta_cuen']);
 				$("#edt_emp_telf").val(etd[0]['telefono_cuen']);
 				(!etd[0]['tipo_cartera_cuen'])? $("#cont-cbo-tcartera span.ui-btn-text span").html("TIPO DE CARTERA") : $("#cont-cbo-tcartera span.ui-btn-text span").html(etd[0]['tipo_cartera_cuen']);
-				/*if(!etd[0]['tipo_cartera_cuen']){
-					$("#cont-cbo-tcartera span.ui-btn-text span").html("TIPO DE CARTERA");
-				}else{
-					$("#cont-cbo-tcartera span.ui-btn-text span").html(etd[0]['tipo_cartera_cuen']);
-				}*/
 				(!etd[0]['id_tipo_cartera'])? $("#cboTipoCartera option[value=0]").attr("selected",'selected'):$("#cboTipoCartera option[value='"+etd[0]['id_tipo_cartera']+"']").attr("selected",'selected');
-				/*if(!etd[0]['id_tipo_cartera']){ 
-					alert("editar01");
-					$("#cboTipoCartera option[value=0]").attr("selected",'selected')
-					alert("editar011");
-				}else{
-					alert("editar012");
-					$("#cboTipoCartera option[value='"+etd[0]['id_tipo_cartera']+"'").attr("selected",'selected')
-					alert("editar012b");
-				}*/
-
-				alert("editar3");
+				
 				arEmpEdit['razonSocial'] = etd[0]['razon_social_cuen'];
 				arEmpEdit['ruc'] = etd[0]['ruc_cuen'];
 				arEmpEdit['numTrab'] = etd[0]['numero_trabajadores_cuen'];
 				arEmpEdit['volVen'] = etd[0]['volumen_venta_cuen'];
-				alert("editar4");
-				//(!etd[0]['id_tipo_cartera'])? arEmpEdit['idTCart'] = 0 : arEmpEdit['idTCart'] = etd[0]['id_tipo_cartera'];
-				//(!etd[0]['tipo_cartera_cuen'])? arEmpEdit['desTCart'] = "TIPO DE CARTERA" : arEmpEdit['desTCart'] = etd[0]['tipo_cartera_cuen'];
-				if(!etd[0]['id_tipo_cartera']){ arEmpEdit['idTCart'] = 0;}
-				else{ arEmpEdit['idTCart'] = etd[0]['id_tipo_cartera'];}
-				alert("editar5");
-				if(!etd[0]['tipo_cartera_cuen']){ arEmpEdit['desTCart'] = "TIPO DE CARTERA"; }
-				else{ arEmpEdit['desTCart'] = etd[0]['tipo_cartera_cuen'];}
-				alert("editar6");
+				(!etd[0]['id_tipo_cartera'])? arEmpEdit['idTCart'] = 0 : arEmpEdit['idTCart'] = etd[0]['id_tipo_cartera'];
+				(!etd[0]['tipo_cartera_cuen'])? arEmpEdit['desTCart'] = "TIPO DE CARTERA" : arEmpEdit['desTCart'] = etd[0]['tipo_cartera_cuen'];
+				
 				
 				arEmpEdit['telf'] = etd[0]['telefono_cuen'];
 
 				/*DECISOR*/
-				alert("contacto")
 				var ctd = data['con'];
 				for(var i = 0; i < ctd.length; i++)
 				{
@@ -1765,7 +1742,6 @@ $(document).ready(function () {
 				}
 
 				/*PROSPECTO*/
-				alert("prospecto")
 				var ptd = data['pros'];
 				for(var i = 0; i < ptd.length; i++)
 				{
@@ -1776,7 +1752,6 @@ $(document).ready(function () {
 				}
 
 				/*ACTIVIDAD*/
-				alert("actividad")
 				var atd = data['act'];
 				for(var i = 0; i < atd.length; i++)
 				{
