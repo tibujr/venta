@@ -1722,6 +1722,7 @@ $(document).ready(function () {
 				if(!etd[0]['tipo_cartera_cuen']){$("#cont-cbo-tcartera span.ui-btn-text span").html("TIPO DE CARTERA");}
 				else{$("#cont-cbo-tcartera span.ui-btn-text span").html(etd[0]['tipo_cartera_cuen']);}
 				//(!etd[0]['id_tipo_cartera'])? $("#cboTipoCartera option[value=0]").attr("selected",'selected'):$("#cboTipoCartera option[value='3").attr("selected",'selected');
+				alert("editar2");
 				if(!etd[0]['id_tipo_cartera']){ $("#cboTipoCartera option[value=0]").attr("selected",'selected')}
 				else{$("#cboTipoCartera option[value='3").attr("selected",'selected')};
 
