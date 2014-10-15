@@ -260,7 +260,7 @@ $(document).ready(function () {
 
 	$("body").on("click",".sect_uno_item_mid", function(e){
 
-		var idAct = $(this).attr('id');
+		/*var idAct = $(this).attr('id');
 		$("#frmValAct").val("editar");
 
 		if(localStorage.getItem('onof') == 'on')
@@ -269,7 +269,7 @@ $(document).ready(function () {
 		}else{
 
 		}
-		$.mobile.changePage("#actividad_detalle", {transition:"slidedown"});
+		$.mobile.changePage("#actividad_detalle", {transition:"slidedown"});*/
 	});
 
 	function getDetalleActividad(id)

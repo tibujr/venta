@@ -2218,3 +2218,7 @@ html .ui-bar-a .ui-btn.ui-btn-active, html .ui-body-a .ui-btn.ui-btn-active, htm
 .sub-menu-nn li, .sub-menu-nn-d li{
   cursor: pointer;
 }
+
+.cont_ckh_act{
+  display: none;
+}

@@ -586,7 +586,7 @@
                   </div>
                 </section>
                 <section class="sec_cont_item_mid_nuevo">
-                  <input type="text" class="sec_cont_item_izq_text_nuevo" placeholder="RUC" id='edt_emp_ruc' name = 'edt_emp_ruc'></input>
+                  <input type="number" class="sec_cont_item_izq_text_nuevo" placeholder="RUC" id='edt_emp_ruc' name = 'edt_emp_ruc'></input>
                 </section>
               </section>
 
@@ -597,7 +597,7 @@
                   </div>
                 </section>
                 <section class="sec_cont_item_mid_nuevo">
-                  <input type="text" class="sec_cont_item_izq_text_nuevo" placeholder="Numero de Trabajadores" id='edt_emp_ntrab' name = 'edt_emp_ntrab'></input>
+                  <input type="number" class="sec_cont_item_izq_text_nuevo" placeholder="Numero de Trabajadores" id='edt_emp_ntrab' name = 'edt_emp_ntrab'></input>
                 </section>
               </section>
 
@@ -608,7 +608,7 @@
                   </div>
                 </section>
                 <section class="sec_cont_item_mid_nuevo">
-                  <input type="text" class="sec_cont_item_izq_text_nuevo" placeholder="Volumen de Venta" id='edt_emp_vven' name='edt_emp_vven'></input>
+                  <input type="number" class="sec_cont_item_izq_text_nuevo" placeholder="Volumen de Venta" id='edt_emp_vven' name='edt_emp_vven'></input>
                 </section>
               </section>
 
@@ -632,7 +632,7 @@
                   </div>
                 </section>
                 <section class="sec_cont_item_mid_nuevo">
-                  <input type="text" class="sec_cont_item_izq_text_nuevo" placeholder="Teléfono" id='edt_emp_telf' name='edt_emp_telf'></input>
+                  <input type="number" class="sec_cont_item_izq_text_nuevo" placeholder="Teléfono" id='edt_emp_telf' name='edt_emp_telf'></input>
                 </section>
               </section>
             </section>
@@ -1051,7 +1051,7 @@
                       </div>
                     </section>
                     <section class="sec_cont_item_mid_nuevo">
-                      <input type="text" class="sec_cont_item_izq_text_nuevo" placeholder="Numero de documento" id='dt_frm_per_ndoc' name='dt_frm_per_ndoc'></input>
+                      <input type="number" class="sec_cont_item_izq_text_nuevo" placeholder="Numero de documento" id='dt_frm_per_ndoc' name='dt_frm_per_ndoc'></input>
                     </section>
                   </section>
 
@@ -1073,7 +1073,7 @@
                       </div>
                     </section>
                     <section class="sec_cont_item_mid_nuevo">
-                      <input type="text" class="sec_cont_item_izq_text_nuevo" placeholder="Teléfono" id='dt_frm_per_telf' name='dt_frm_per_telf'></input>
+                      <input type="number" class="sec_cont_item_izq_text_nuevo" placeholder="Teléfono" id='dt_frm_per_telf' name='dt_frm_per_telf'></input>
                     </section>
                   </section>
                 </section>
@@ -1301,11 +1301,11 @@
                   </article>
                   <article class='cont_req'>
                     <label class='fmr_act_fecha'>Fecha</label>
-                    <input type='text' placeholder='dd-mm-yyyy' id='fmr_act_fecha' name='fmr_act_fecha' class='datepicker inpt_sel'>
+                    <input type='text' id='fmr_act_fecha' name='fmr_act_fecha' data-role="datebox" data-options='{"mode":"flipbox", "useLang":"es-ES", "overrideDateFormat": "%Y-%m-%d"}'>
                   </article>
                   <article class='cont_req'>
-                    <label class='fmr_act_hora'>Hora (Hora - Min.)</label>
-                    <input type='time' value='00:00' id='fmr_act_hora' name='fmr_act_hora' class='inpt_sel'>
+                    <label class='fmr_act_hora'>Hora</label>
+                    <input type='text' id='fmr_act_hora' name='fmr_act_hora' data-role="datebox" data-options='{"mode":"timeflipbox", "useLang":"es-ES", "overrideTimeOutput":"%H:%M"}'>
                   </article>
                   <article class='cont_req'>
                     <label class='cboDuracionAct'>Duración</label>
