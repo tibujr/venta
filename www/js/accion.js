@@ -1711,6 +1711,7 @@ $(document).ready(function () {
 					$("#det_emp_dire").html(etd[0]['direccion_cuen']+", "+etd[0]['distrito_cuen']);
 				$("#det_emp_asig").html(etd[0]['nombre_usu']+" "+etd[0]['apellido_usu']);
 				//datos editar empresa
+				alert("editar")
 				$("#edt_emp_nom").val(etd[0]['razon_social_cuen']);
 				$("#edt_emp_ruc").val(etd[0]['ruc_cuen']);
 				$("#edt_emp_ntrab").val(etd[0]['numero_trabajadores_cuen']);
@@ -1728,6 +1729,7 @@ $(document).ready(function () {
 				arEmpEdit['telf'] = etd[0]['telefono_cuen'];
 
 				/*DECISOR*/
+				alert("contacto")
 				var ctd = data['con'];
 				for(var i = 0; i < ctd.length; i++)
 				{
@@ -1740,6 +1742,7 @@ $(document).ready(function () {
 				}
 
 				/*PROSPECTO*/
+				alert("prospecto")
 				var ptd = data['pros'];
 				for(var i = 0; i < ptd.length; i++)
 				{
@@ -1750,6 +1753,7 @@ $(document).ready(function () {
 				}
 
 				/*ACTIVIDAD*/
+				alert("actividad")
 				var atd = data['act'];
 				for(var i = 0; i < atd.length; i++)
 				{
