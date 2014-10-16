@@ -114,8 +114,8 @@ $(document).ready(function () {
 	$('.lst_campos_act').css({height:alCact+'px'}); //52-
 
 	if(localStorage.getItem('usu_alm') != null){
-	   	//document.getElementById('mail').value = localStorage.getItem('usu_alm');
-	   //	document.getElementById('clave').value = localStorage.getItem('clv_alm');
+	   	document.getElementById('mail').value = localStorage.getItem('usu_alm');
+	    document.getElementById('clave').value = localStorage.getItem('clv_alm');
 	}
 
 	$("body").on('click', '#btn_login', function(e){
@@ -248,6 +248,27 @@ $(document).ready(function () {
 		$.mobile.changePage("#actividad", {transition:"slide"});
 	});
 
+	$("body").on('click', '.eva_act', function(e){
+		var idAct_ev =  $(this).attr('id');
+		console.log(idAct_ev)
+		if(localStorage.getItem('onof') == 'on'){
+			if(confirm('¿marcar como terminado?')){
+				var evId = idAct_ev.substring(4);
+				evaluarActividad(evId);
+				$(this).prop('checked', true);
+				$("."+idAct_ev+"_cn").css({display:'none'});
+			}else{
+				$(this).prop('checked', false);
+			}
+		}else{
+			//evaluar actividad ofline
+		}
+		/*alert("lol")
+		if(confirm('¿marcar como terminado?')){
+				console.log("pasa");
+			}*/
+	});
+	
 	$("body").on('click', '#cont_deta_act_blank_der', function(e){
 
 		if(localStorage.getItem('onof') == 'on'){
@@ -260,7 +281,8 @@ $(document).ready(function () {
 
 	$("body").on("click",".sect_uno_item_mid", function(e){
 
-		/*var idAct = $(this).attr('id');
+		var idAct = $(this).attr('id');
+		$("#id_act_frm").val(idAct);
 		$("#frmValAct").val("editar");
 
 		if(localStorage.getItem('onof') == 'on')
@@ -269,7 +291,26 @@ $(document).ready(function () {
 		}else{
 
 		}
-		$.mobile.changePage("#actividad_detalle", {transition:"slidedown"});*/
+		$.mobile.changePage("#actividad_detalle", {transition:"slidedown"});
+	});
+
+	$("body").on("click","#eliminar_actividad", function(e){
+
+		var idAct = $("#id_act_frm").val();
+
+		if(localStorage.getItem('onof') == 'on')
+		{	
+			if(confirm('¿Desea eliminar esta actividad?')){
+				eliminarActividadOn(idAct);
+				$(".act_"+idAct+"_cn").css({display:'none'});
+				$.mobile.changePage("#actividad", {transition:"slidedown"});
+			}else{
+				console.log("no")
+			}
+		}else{
+
+		}
+		//$.mobile.changePage("#actividad_detalle", {transition:"slidedown"});
 	});
 
 	function getDetalleActividad(id)
@@ -287,14 +328,23 @@ $(document).ready(function () {
 				//a.id_con, co.nombre_con, co.apellido_con, a.nota_act
 				limpiarDetalleActividad();
 				$("#det_act_tit").html(data.desc_tact);
-				$("#det_act_obj").html(data.objetivo_act);
+				(data.objetivo_act)?$("#det_act_obj").html(data.objetivo_act):$("#det_act_obj").html("---");
 				$("#det_act_fecha").html(data.fecha_act);
-				$("#det_act_hora").html(data.hora_act.substring(0,5));
-				$("#det_act_dura").html(data.duracion_act.substring(0,5));
-				$("#det_act_opor").html(data.titulo);
-				$("#det_act_emp").html(data.razon_social_cuen);
-				$("#det_act_cont").html(data.nombre_con+ " "+ data.apellido_con);
-				$("#det_act_nota").html(data.nota_act);
+				(data.hora_act)?$("#det_act_hora").html(data.hora_act.substring(0,5)):$("#det_act_hora").html("---");
+				(data.duracion_act)?$("#det_act_dura").html(data.duracion_act.substring(0,5)):$("#det_act_dura").html("---");
+				(data.titulo)?$("#det_act_opor").html(data.titulo):$("#det_act_opor").html("---");
+				(data.razon_social_cuen)?$("#det_act_emp").html(data.razon_social_cuen):$("#det_act_emp").html("---");
+				//$("#det_act_cont").html(data.nombre_con+ " "+ data.apellido_con);
+				if(data.nombre_con){
+					$("#det_act_cont").html(data.nombre_con);
+					if(data.apellido_con){
+						$("#det_act_cont").html(data.nombre_con+ " "+ data.apellido_con);
+					}
+				}else{
+					$("#det_act_cont").html("---");
+				}
+
+				(data.nota_act)?$("#det_act_nota").html(data.nota_act):$("#det_act_nota").html("---");
 
 				limpiarFormularioActividad();
 				$("#cboTipoActividad option[value="+ data.id_tact +"]").attr("selected",true);
@@ -430,7 +480,6 @@ $(document).ready(function () {
 			}
 			else if ($("#accion_frm_emp").val() == 'nuevo') 
 			{
-
 				agregarEmpresaOn();
 				//$.mobile.changePage("#contactos-empresa", {transition:"slide"});
 			}
@@ -1663,7 +1712,7 @@ $(document).ready(function () {
 				if(data != 0){
 					for(var i=0; i< data.length; i++)
 					{
-						$(".lst-empresa").append("<section class='cont_item_contend_uni_emp' id='emp_"+data[i]['id_cuen']+"'><section class='sec_cont_item_izq'><div class='sec_cont_item_izq_ico'><div class='icon-office ico-usr'></div></div></section><section class='sec_cont_item_mid'><div class='sec_cont_item_izq_text'>"+data[i]['razon_social_cuen']+" inc</div></section><section class='sec_cont_item_der'><div class='sec_cont_item_izq_flecha'><div class='icon-arrow-right'></div></div></section></section>");
+						$(".lst-empresa").append("<section class='cont_item_contend_uni_emp' id='emp_"+data[i]['id_cuen']+"'><section class='sec_cont_item_izq'><div class='sec_cont_item_izq_ico'><div class='icon-office ico-usr'></div></div></section><section class='sec_cont_item_mid'><div class='sec_cont_item_izq_text'>"+data[i]['razon_social_cuen']+"</div></section><section class='sec_cont_item_der'><div class='sec_cont_item_izq_flecha'><div class='icon-arrow-right'></div></div></section></section>");
 					}
 				}else{
 					alert("No tienes empresas asignadas")
@@ -2108,12 +2157,50 @@ $(document).ready(function () {
 						if(!data[i]['razon_social_cuen'])data[i]['razon_social_cuen'] = 'RAZON SOCIAL';
 						if(!data[i]['desc_tact'])data[i]['desc_tact'] = 'Pendiente';
 						if(!data[i]['hora_act'])data[i]['hora_act'] = '00:00';
-						var ac ="<article class='unid_cont_item_act'><section class='sect_uno_item_izq'><div class='div_fecha_act_top'>"+fg['diaNom']+"</div><div class='div_fecha_act_bot'>"+fg['diaNum']+" "+fg['mesNom']+"</div></section><section class='sect_uno_item_mid' id='"+data[i]['id_act']+"'><div class='div_tipo_act_top'>"+data[i]['desc_tact']+"</div><div class='div_tipo_act_bot'><div class='div_tipo_act_bot_izq'>"+data[i]['hora_act'].substring(0,5)+" / </div><div class='div_tipo_act_bot_der'> "+data[i]['razon_social_cuen']+"</div></div></section><section class='sect_uno_item_der'><article class='cont_req cont_ckh_act'><input type='checkbox' name='act_"+data[i]['id_act']+"' id='act_"+data[i]['id_act']+"' class='desa_det_venta'/><label class='lblcheck chk-lft' for='act_"+data[i]['id_act']+"'></label></article></section></article>";
+						var ac ="<article class='unid_cont_item_act act_"+data[i]['id_act']+"_cn'><section class='sect_uno_item_izq'><div class='div_fecha_act_top'>"+fg['diaNom']+"</div><div class='div_fecha_act_bot'>"+fg['diaNum']+" "+fg['mesNom']+"</div></section><section class='sect_uno_item_mid' id='"+data[i]['id_act']+"'><div class='div_tipo_act_top'>"+data[i]['desc_tact']+"</div><div class='div_tipo_act_bot'><div class='div_tipo_act_bot_izq'>"+data[i]['hora_act'].substring(0,5)+" / </div><div class='div_tipo_act_bot_der'> "+data[i]['razon_social_cuen']+"</div></div></section><section class='sect_uno_item_der'><article class='cont_req cont_ckh_act'><input type='checkbox' name='act_"+data[i]['id_act']+"' id='act_"+data[i]['id_act']+"' class='eva_act'/><label class='lblcheck chk-lft' for='act_"+data[i]['id_act']+"'></label></article></section></article>";
 			            $("#cnt_act_itm").append(ac);
 					}
 				}else{
 					alert("No tienes actividades asignadas")
 				}
+			},
+			error: function(data){
+				console.log(data);
+			}
+		});
+	}
+
+	function evaluarActividad(idAct)
+	{
+		var usuid = localStorage.getItem('id_usu');
+		$.ajax({
+			type: 'POST',
+			dataType: 'json', 
+			data: {usuid:usuid, idAct:idAct},
+			beforeSend : function (){
+		    },
+			url: urlP+"evaluarActividad",
+			success : function(data) {
+				alert("Se ejecuto correctamente");
+			},
+			error: function(data){
+				console.log(data);
+			}
+		});
+	}
+
+	function eliminarActividadOn(idAct)
+	{
+		var usuid = localStorage.getItem('id_usu');
+		$.ajax({
+			type: 'POST',
+			dataType: 'json', 
+			data: {usuid:usuid, idAct:idAct},
+			beforeSend : function (){
+		    },
+			url: urlP+"eliminarActividadOn",
+			success : function(data) {
+				alert("Se elimino la actividad correctamente");
 			},
 			error: function(data){
 				console.log(data);

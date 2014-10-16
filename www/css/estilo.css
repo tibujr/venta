@@ -2219,6 +2219,20 @@ html .ui-bar-a .ui-btn.ui-btn-active, html .ui-body-a .ui-btn.ui-btn-active, htm
   cursor: pointer;
 }
 
-.cont_ckh_act{
-  display: none;
+.actividad_tipo div div div{
+  background: #4e4e4e !important;
+  color: white !important;
+}
+
+.nvo_cn_frm_emp label{
+  display: inline-block;
+  font: 13px ProximaNovaLight, sans-serif;
+  margin-top: 10px;
+  padding-left: .4em;
+  color: #A2A2A2;
+  text-shadow: none;
+}
+
+.nvo_cn_frm_emp .ui-input-text{
+  margin-top: 0 !important;
 }

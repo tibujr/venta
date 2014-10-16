@@ -6,7 +6,7 @@
     <meta name="format-detection" content="telephone=no" />
   	<meta name="viewport" content="user-scalable=no, maximum-scale=1, minimum-scale=1, user-scalable=no, initial-scale=1, width=device-width, height=device-height">
     
-
+    <link rel="stylesheet" href="css/jquery-ui.css" /><!--autocolpletar-->
     <!--<link rel="stylesheet" href="css/jquery.mobile-1.3.2.min.css" />-->
     <link rel="stylesheet" href="css/cal/jquery.mobile-1.4.4.min.css" />
     <link rel="stylesheet" href="css/cal/jqm-datebox-1.4.4.min.css" />
@@ -17,6 +17,7 @@
     <script type="text/javascript" src="js/jquery.js"></script>
     <!--<script type="text/javascript" src="js/jquery.mobile-1.3.2.min.js"></script>-->
     <script type="text/javascript" src="js/cal/jquery.mobile-1.4.4.min.js"></script>
+    <script type="text/javascript" src="js/jquery-ui-1.10.4.custom.min.js"></script><!--autocolpletar-->
     <script type="text/javascript" src="js/cal/jquery.mousewheel.min.js"></script><!--RECONOCE PROPIEDADES DEL MOUSE-->
     <script type="text/javascript" src="js/cal/jqm-datebox-1.4.4.core.min.js"></script>
     <script type="text/javascript" src="js/cal/jqm-datebox-1.4.4.mode.datebox.min.js"></script>
@@ -32,13 +33,6 @@
         ajaxEnabled: false
       });
     </script>
-    <!--<link rel="stylesheet" href="css/jquery.mobile-1.3.2.min.css" />
-    <link rel="stylesheet" type="text/css" href="css/estilo.css" />
-    <script type="text/javascript" src="js/phonegap.js"></script>
-    <script type="text/javascript" src="js/jquery.js"></script>
-  	<script type="text/javascript" src="js/jquery.mobile-1.3.2.min.js"></script>
-  	<script type="text/javascript" src="js/accion.js"></script>
-    <script type="text/javascript" src="js/index.js"></script>-->
     
     <script type="text/javascript">
       app.initialize();
@@ -575,8 +569,9 @@
                     <div class="icon-cabinet"></div>
                   </div>
                 </section>
-                <section class="sec_cont_item_mid_nuevo">
-                  <input type="text" class="sec_cont_item_izq_text_nuevo" placeholder="Empresa" id='edt_emp_nom' name='edt_emp_nom'></input>
+                <section class="sec_cont_item_mid_nuevo nvo_cn_frm_emp">
+                  <label>Empresa</label>
+                  <input type="text" class="sec_cont_item_izq_text_nuevo" id='edt_emp_nom' name='edt_emp_nom'></input>
                 </section>
               </section>
               <section class="cont_item_contend_uni_nuevo">
@@ -585,8 +580,9 @@
                     <div class="icon-file"></div>
                   </div>
                 </section>
-                <section class="sec_cont_item_mid_nuevo">
-                  <input type="number" class="sec_cont_item_izq_text_nuevo" placeholder="RUC" id='edt_emp_ruc' name = 'edt_emp_ruc'></input>
+                <section class="sec_cont_item_mid_nuevo nvo_cn_frm_emp">
+                  <label>RUC</label>
+                  <input type="number" class="sec_cont_item_izq_text_nuevo" id='edt_emp_ruc' name = 'edt_emp_ruc'></input>
                 </section>
               </section>
 
@@ -596,8 +592,9 @@
                     <div class="icon-group"></div>
                   </div>
                 </section>
-                <section class="sec_cont_item_mid_nuevo">
-                  <input type="number" class="sec_cont_item_izq_text_nuevo" placeholder="Numero de Trabajadores" id='edt_emp_ntrab' name = 'edt_emp_ntrab'></input>
+                <section class="sec_cont_item_mid_nuevo nvo_cn_frm_emp">
+                  <label>Número de Trabajadores</label>
+                  <input type="number" class="sec_cont_item_izq_text_nuevo" id='edt_emp_ntrab' name = 'edt_emp_ntrab'></input>
                 </section>
               </section>
 
@@ -607,8 +604,9 @@
                     <div class="icon-coins"></div>
                   </div>
                 </section>
-                <section class="sec_cont_item_mid_nuevo">
-                  <input type="number" class="sec_cont_item_izq_text_nuevo" placeholder="Volumen de Venta" id='edt_emp_vven' name='edt_emp_vven'></input>
+                <section class="sec_cont_item_mid_nuevo nvo_cn_frm_emp">
+                  <label>Volumen de venta</label>
+                  <input type="number" class="sec_cont_item_izq_text_nuevo" id='edt_emp_vven' name='edt_emp_vven'></input>
                 </section>
               </section>
 
@@ -631,8 +629,9 @@
                     <div class="icon-phone"></div>
                   </div>
                 </section>
-                <section class="sec_cont_item_mid_nuevo">
-                  <input type="number" class="sec_cont_item_izq_text_nuevo" placeholder="Teléfono" id='edt_emp_telf' name='edt_emp_telf'></input>
+                <section class="sec_cont_item_mid_nuevo nvo_cn_frm_emp">
+                  <label>Teléfono</label>
+                  <input type="number" class="sec_cont_item_izq_text_nuevo" id='edt_emp_telf' name='edt_emp_telf'></input>
                 </section>
               </section>
             </section>
@@ -1014,8 +1013,9 @@
                         <div class="icon-user"></div>
                       </div>
                     </section>
-                    <section class="sec_cont_item_mid_nuevo">
-                      <input type="text" class="sec_cont_item_izq_text_nuevo" placeholder="Contacto Nombre" id='dt_frm_per_nom' name='dt_frm_per_nom'></input>
+                    <section class="sec_cont_item_mid_nuevo nvo_cn_frm_emp">
+                      <label>Nombre</label>
+                      <input type="text" class="sec_cont_item_izq_text_nuevo" id='dt_frm_per_nom' name='dt_frm_per_nom'></input>
                     </section>
                   </section>
                   
@@ -1024,8 +1024,9 @@
                       <div class="sec_cont_item_izq_ico_nuevo">
                       </div>
                     </section>
-                    <section class="sec_cont_item_mid_nuevo">
-                      <input type="text" class="sec_cont_item_izq_text_nuevo" placeholder="Contacto Apellido" id='dt_frm_per_ape' name='dt_frm_per_ape'></input>
+                    <section class="sec_cont_item_mid_nuevo nvo_cn_frm_emp">
+                      <label>Apellido</label>
+                      <input type="text" class="sec_cont_item_izq_text_nuevo" id='dt_frm_per_ape' name='dt_frm_per_ape'></input>
                     </section>
                   </section>
 
@@ -1050,8 +1051,9 @@
                         <div class="icon-file"></div>
                       </div>
                     </section>
-                    <section class="sec_cont_item_mid_nuevo">
-                      <input type="number" class="sec_cont_item_izq_text_nuevo" placeholder="Numero de documento" id='dt_frm_per_ndoc' name='dt_frm_per_ndoc'></input>
+                    <section class="sec_cont_item_mid_nuevo nvo_cn_frm_emp">
+                      <label>Número de documento</label>
+                      <input type="number" class="sec_cont_item_izq_text_nuevo" id='dt_frm_per_ndoc' name='dt_frm_per_ndoc'></input>
                     </section>
                   </section>
 
@@ -1061,8 +1063,9 @@
                         <div class="icon-envelope"></div>
                       </div>
                     </section>
-                    <section class="sec_cont_item_mid_nuevo">
-                      <input type="text" class="sec_cont_item_izq_text_nuevo" placeholder="Email" id='dt_frm_per_mail' name='dt_frm_per_mail'></input>
+                    <section class="sec_cont_item_mid_nuevo nvo_cn_frm_emp">
+                      <label>Correo electrónico</label>
+                      <input type="text" class="sec_cont_item_izq_text_nuevo" id='dt_frm_per_mail' name='dt_frm_per_mail'></input>
                     </section>
                   </section>
 
@@ -1072,8 +1075,9 @@
                         <div class="icon-phone"></div>
                       </div>
                     </section>
-                    <section class="sec_cont_item_mid_nuevo">
-                      <input type="number" class="sec_cont_item_izq_text_nuevo" placeholder="Teléfono" id='dt_frm_per_telf' name='dt_frm_per_telf'></input>
+                    <section class="sec_cont_item_mid_nuevo nvo_cn_frm_emp">
+                      <label>Teléfono</label>
+                      <input type="number" class="sec_cont_item_izq_text_nuevo" id='dt_frm_per_telf' name='dt_frm_per_telf'></input>
                     </section>
                   </section>
                 </section>
@@ -1131,7 +1135,7 @@
         <section class='cont_dato_detalle_venta'>
           <section class="cont_ind_deta_blank" style="margin-bottom: 10px;">
             <section class="cont_ind_deta_blank_izq"><div id="det_act_tit">ACTIVIDAD</div></section>
-            <section id="cont_deta_act_blank_der"><div class="icon-pencil"></div></section>
+            <section id="cont_deta_act_blank_der"><div class="icon-pencil" style='display: none;'></div></section>
           </section>
           <section class="cont_ind_det_fondo">
             <section class="cont_ind_det_f_conta">
@@ -1231,7 +1235,7 @@
             </section>
           </section>
           <section class='cnt-dt-act-elm'>
-            <span>Eliminar Actividad</span>
+            <span id='eliminar_actividad'>Eliminar Actividad</span>
           </section>
         </section>
       </section>
@@ -1277,15 +1281,16 @@
       </div>
     </article>
     <article data-role="content" class="cont_main"> 
-      <!--<input type='hidden' name='frmValAct' id='frmValAct' val=''>-->
+      <input type='hidden' name='id_act_frm' id='id_act_frm' val=''>
+      <input type='hidden' name='frmValAct' id='frmValAct' val=''>
       <section class='cont_items'>
         <section class='cont_dato_detalle_venta'>
           <article class="actividad_tipo">
             <div data-role="fieldcontain">
               <select name="cboTipoActividad" id="cboTipoActividad">
-                <option>Reunión</option>
+                <!--<option>Reunión</option>
                 <option>2</option>
-                <option>3</option>
+                <option>3</option>-->
               </select>
             </div>
           </article>
