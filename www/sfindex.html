@@ -43,7 +43,7 @@
     <article data-role="content" style="font-size:0;">
       <div id='onOf' style='display: none;'><div class="icon-wifi-full"></div><div id='bloq_wifi' class="icon-blocked"></div></div>
       <div style="display: inline-block; margin-bottom: 10px; width: 100%; margin-top: 35%;"><img src="img/logo_avanza.png"></div>
-      <div class="login_caja"><input type="email" id="mail" name="mail" value="@roinet.pe" placeholder="Correo electrónico"></div>
+      <div class="login_caja"><input type="email" id="mail" name="mail" value="cmasias@roinet.pe" placeholder="Correo electrónico"></div>
       <div class="login_caja"><input type="password" id="clave" name="clave" value="123456" placeholder="******"></div>
       <div class="center-wrapper">
         <div id="btn_login" data-role="button" data-theme="b" data-inline="true">INICIAR SESIÓN</div>
@@ -1135,7 +1135,7 @@
         <section class='cont_dato_detalle_venta'>
           <section class="cont_ind_deta_blank" style="margin-bottom: 10px;">
             <section class="cont_ind_deta_blank_izq"><div id="det_act_tit">ACTIVIDAD</div></section>
-            <section id="cont_deta_act_blank_der"><div class="icon-pencil" style='display:none;'></div></section>
+            <section id="cont_deta_act_blank_der"><div class="icon-pencil"></div></section>
           </section>
           <section class="cont_ind_det_fondo">
             <section class="cont_ind_det_f_conta">
@@ -1296,10 +1296,6 @@
           </article>
           <section class='cont_pupup_Nusu'>
                 <section class="lst_campos_act">
-                  <input type='hidden' id='accion_frm' name='accion_frm' value=''>
-                  <input type='hidden' id='id_pros' name='id_pros' value=''>
-                  <input type='hidden' id='id_cuen' name='id_cuen' value=''>
-                  <input type='hidden' id='id_con' name='id_con' value=''>
                   <article class='cont_req'>
                     <label class='fmr_act_obj'>Objetivo</label>
                     <input type='text' id='fmr_act_obj' name='fmr_act_obj' class='inpt_sel'>
@@ -1313,9 +1309,9 @@
                     <input type='text' id='fmr_act_hora' name='fmr_act_hora' data-role="datebox" data-options='{"mode":"timeflipbox", "useLang":"es-ES", "overrideTimeOutput":"%H:%M"}'>
                   </article>
                   <article class='cont_req'>
-                    <label class='cboDuracionAct'>Duración</label>
-                    <!--<input type='time' value='00:00' id='presu' name='presu' class='inpt_sel'>-->
-                    <section class="cnt_cbo_act_frm_tipo">
+                    <label class='fmr_act_dur'>Duración</label>
+                    <input type='text' id='fmr_act_dur' name='fmr_act_dur' class='inpt_sel' data-role="datebox" data-options='{"mode":"durationbox", "useLang":"es-ES", "overrideDurationFormat":"%Dl:%DM"}' >-->
+                    <!--<section class="cnt_cbo_act_frm_tipo">
                       <article class="contacto_filtro" id='cont-cbo-dura'>
                         <div data-role="fieldcontain">
                           <select name="cboDuracionAct" id="cboDuracionAct" class='inpt_sel'>
@@ -1326,13 +1322,13 @@
                           </select>
                         </div>
                       </article>
-                    </section>
+                    </section>-->
                   </article>
                   <article class='cont_req' style="margin-bottom: 0;">
                     <label>Asignar a:</label>
 
                     <section class="cnt_cbo_act_frm_tipo">
-                      <article class="contacto_filtro" id='cont-cbo-tdoc'>
+                      <article class="contacto_filtro" id="cbo-opor-act">
                         <div data-role="fieldcontain">
                           <select name="cboOportunidadAct" id="cboOportunidadAct">
                             <option>OPORTUNIDAD</option>
@@ -1341,7 +1337,7 @@
                       </article>
                     </section>
                     <section class="cnt_cbo_act_frm_tipo">
-                      <article class="contacto_filtro" id='cont-cbo-tdoc'>
+                      <article class="contacto_filtro" id="cbo-emp-act">
                         <div data-role="fieldcontain">
                           <select name="cboEmpresaAct" id="cboEmpresaAct">
                             <option>EMPRESA</option>
@@ -1350,7 +1346,7 @@
                       </article>
                     </section>
                     <section class="cnt_cbo_act_frm_tipo">
-                      <article class="contacto_filtro" id='cont-cbo-tdoc'>
+                      <article class="contacto_filtro" id="cbo-con-act">
                         <div data-role="fieldcontain">
                           <select name="cboContactoAct" id="cboContactoAct">
                             <option>CONTACTO</option>

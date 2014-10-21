@@ -279,6 +279,88 @@ $(document).ready(function () {
 		$.mobile.changePage("#frm_actividad_editar", {transition:"slide"});
 	});
 
+	$("body").on('change', '#cboOportunidadAct', function(e){
+		//var cIdAct = $("id_act_frm").val();
+		var cIdAct = $(this).val();
+		if(localStorage.getItem('onof') == 'on'){
+			llenarCombosFrmActividadOn(cIdAct,'o');
+		}else{
+			alert("id act: "+cIdAct)
+		}
+	});
+
+	$("body").on('change', '#cboEmpresaAct', function(e){
+		var cIdAct = $(this).val();//$("id_act_frm").val();
+		if(localStorage.getItem('onof') == 'on'){
+			llenarCombosFrmActividadOn(cIdAct,'e');
+		}else{
+			alert("id act: "+cIdAct)
+		}
+	});
+
+	$("body").on('change', '#cboContactoAct', function(e){
+		var cIdAct = $(this).attr('id');//$("id_act_frm").val();
+		if(localStorage.getItem('onof') == 'on'){
+			llenarCombosFrmActividadOn(cIdAct,'c');
+		}else{
+			alert("id act: "+cIdAct)
+		}
+	});
+
+	function llenarCombosFrmActividadOn(id, com){
+		$.ajax({
+			type: 'POST',
+			dataType: 'json', 
+			data: {id:id, com:com},
+			beforeSend : function (){
+		    },
+			url: urlP+"llenarCombosFrmActividadOn",
+			success : function(data) {
+				if(com == 'o'){
+					if(data.id_cuen){
+						$("#cbo-emp-act div div div span").html(data.razon_social_cuen);
+						$("#cboEmpresaAct option[value='"+data.id_cuen+"']").attr("selected",'selected');
+					}else{
+						$("#cbo-emp-act div div div span").html("EMPRESA");
+						$("#cboEmpresaAct option[value='0']").attr("selected",'selected');
+					}
+
+					if(data.id_con){
+						$("#cbo-con-act div div div span").html(data.nombre_con+" "+data.apellido_con);
+						$("#cboContactoAct option[value='"+data.id_con+"']").attr("selected",'selected');
+					}else{
+						$("#cbo-con-act div div div span").html("CONTACTO");
+						$("#cboContactoAct option[value='0']").attr("selected",'selected');
+					}
+				}else if(com == 'e'){
+					if(data.id_pros){
+						if(data.titulo){
+							$("#cbo-opor-act div div div span").html(data.titulo);
+						}else{
+							$("#cbo-opor-act div div div span").html(data.nombre_con+"venta's");
+						}
+						$("#cboOportunidadAct option[value='"+data.id_pros+"']").attr("selected",'selected');
+					}else{
+						$("#cbo-opor-act div div div span").html("EMPRESA");
+						$("#cboOportunidadAct option[value='0']").attr("selected",'selected');
+					}
+
+					if(data.id_con){
+						$("#cbo-con-act div div div span").html(data.nombre_con+" "+data.apellido_con);
+						$("#cboContactoAct option[value='"+data.id_con+"']").attr("selected",'selected');
+					}else{
+						$("#cbo-con-act div div div span").html("CONTACTO");
+						$("#cboContactoAct option[value='0']").attr("selected",'selected');
+					}
+				}
+				//console.log(data)
+			},
+			error: function(data){
+				console.log(data);
+			}
+		});
+	}
+
 	$("body").on("click",".sect_uno_item_mid", function(e){
 
 		var idAct = $(this).attr('id');
@@ -348,10 +430,42 @@ $(document).ready(function () {
 
 				limpiarFormularioActividad();
 				$("#cboTipoActividad option[value="+ data.id_tact +"]").attr("selected",true);
-				$("#fmr_act_obj").val(data.objetivo_act);
+				(data.objetivo_act)?$("#fmr_act_obj").val(data.objetivo_act) : $("#fmr_act_obj").val("");
 				$("#fmr_act_fecha").val(data.fecha_act);
-				$("#fmr_act_hora").val(data.hora_act.substring(0,5));
-				$("#cboDuracionAct option[value=0]").attr("selected",'selected');
+				(data.hora_act)?$("#fmr_act_hora").val(data.hora_act.substring(0,5)) : $("#fmr_act_hora").val("");
+				(data.duracion_act)?$("#fmr_act_dur").val(data.duracion_act.substring(0,5)) : $("#fmr_act_dur").val("");
+				console.log(data.id_pros);
+
+				if(!data.id_pros){
+					$("#cbo-opor-act div div div span").html("OPORTUNIDAD");
+					$("#cboOportunidadAct option[value='0']").attr("selected",'selected');
+				}else{
+					$("#cboOportunidadAct option[value='"+data.id_pros+"']").attr("selected",'selected');
+					if(data.titulo){$("#cbo-opor-act div div div span").html(data.titulo);}
+					else{$("#cbo-opor-act div div div span").html(data.nombre_con+" venta's");}
+				}
+
+				//(!data.titulo)? $("#cbo-emp-act div div div span").html("EMPRESA") : $("#cbo-emp-act div div div span").html(data.titulo);
+				//(!data.id_cuen)? $("#cboEmpresaAct option[value='0']").attr("selected",'selected') : $("#cboEmpresaAct option[value='"+data.id_cuen+"']").attr("selected",'selected');
+				if(data.id_cuen){
+					$("#cbo-emp-act div div div span").html(data.razon_social_cuen);
+					$("#cboEmpresaAct option[value='"+data.id_cuen+"']").attr("selected",'selected');
+				}else{ 
+					$("#cbo-emp-act div div div span").html("EMPRESA");
+					$("#cboEmpresaAct option[value='0']").attr("selected",'selected');
+				}
+
+				//(!data.titulo)? $("#cbo-con-act div div div span").html("CONTACTO") : $("#cbo-con-act div div div span").html(data.titulo);
+				//(!data.id_con)? $("#cboContactoAct option[value='0']").attr("selected",'selected') : $("#cboContactoAct option[value='"+data.id_con+"']").attr("selected",'selected');
+				if(!data.id_con){ 
+					$("#cbo-con-act div div div span").html("CONTACTO");
+					$("#cboContactoAct option[value='0']").attr("selected",'selected');
+				}else{ 
+					$("#cboContactoAct option[value='"+data.id_con+"']").attr("selected",'selected');
+					$("#cbo-con-act div div div span").html(data.nombre_con+" "+data.apellido_con);
+				}
+
+
 				$("#fmr_act_nota").val(data.nota_act);
 			},
 			error: function(data){
@@ -380,6 +494,8 @@ $(document).ready(function () {
 		$("#fmr_act_obj").val("");
 		$("#fmr_act_fecha").val("");
 		$("#fmr_act_hora").val("");
+		$("#fmr_act_dur").val("");
+		$("#cboOportunidadAct option[value='0']").attr("selected",'selected');
 		$("#fmr_act_nota").val("");
 	}
 
@@ -1241,9 +1357,11 @@ $(document).ready(function () {
 		{
 			if($("#req_"+reqArr[i]+":checked").val() == "on"){
 				reqArrTemp[reqArr[i]] = "S";
+				alert(reqArr[i]+" ON")
 			}
 			else{
 				reqArrTemp[reqArr[i]] = "N";
+				alert(reqArr[i]+" OF")
 			}
 		}
 
@@ -1302,15 +1420,11 @@ $(document).ready(function () {
 						if(data[a] == "S"){
 							console.log(a+" on")
 							$('#'+a+":checkbox").prop('checked', true);
-							//$('.'+b+" span span.ui-icon").removeClass( "ui-icon-checkbox-off" )
-							//$('.'+b+" span span.ui-icon").addClass( "ui-icon-checkbox-on" )
 							$('.'+b).removeClass( "ui-checkbox-off" )
 							$('.'+b).addClass( "ui-checkbox-on" )
 						}else{
 							console.log(a+" off")
 							$('#'+a+":checkbox").prop('checked', false);
-							//$('.'+b+" span span.ui-icon").addClass( "ui-icon-checkbox-off" )
-							//$('.'+b+" span span.ui-icon").removeClass( "ui-icon-checkbox-on" )
 							$('.'+b).addClass( "ui-checkbox-off" )
 							$('.'+b).removeClass( "ui-checkbox-on" )
 						}
@@ -1485,6 +1599,7 @@ $(document).ready(function () {
 
 	function llenarProspecto(id)
 	{
+		$("#cboOportunidadAct").html("<option value='0'>OPORTUNIDAD</option>");//limpia combo
 		var idP,idC,idO,pre,nec,prop,fecha,idFa,idE, cam;
 
 		$.ajax({
@@ -1501,6 +1616,11 @@ $(document).ready(function () {
 						//tx.executeSql("DELETE FROM tb_prospecto where cambio='n'",nullHandler,nullHandler);
 						for(var i=0; i< data.length; i++)
 						{ 
+							if(data[i]['id_estado'] == 1){//llenar combo actividad frm opor
+								var nmp = data[i]['titulo'];
+								if(!nmp){nmp=data[i]['nombre_con']+" venta's";}
+								$("#cboOportunidadAct").append("<option value='"+data[i]['id_pros']+"'>"+nmp+"</option>");
+							}
 							idP = data[i]['id_pros'];
 							idC = data[i]['id_cuen'];
 							idO = data[i]['id_con'];
@@ -1528,6 +1648,7 @@ $(document).ready(function () {
 
 	function llenarCuenta(id)
 	{
+		$("#cboEmpresaAct").html("<option value='0'>EMPRESA</option>");
 		var id, ruc, rs, vol, fecha, cam;
 		$.ajax({
 			type: 'POST',
@@ -1543,6 +1664,7 @@ $(document).ready(function () {
 						//tx.executeSql("DELETE FROM tb_cuenta where cambio='n'",nullHandler,nullHandler);
 						for(var i=0; i< data.length; i++)
 						{ 
+							if(data[i]['id_estado']!=30){$("#cboEmpresaAct").append("<option value='"+data[i]['id_cuen']+"'>"+data[i]['razon_social_cuen']+"</option>");}
 							id = data[i]['id_cuen'];
 							ruc = data[i]['ruc_cuen'];
 							rs = data[i]['razon_social_cuen'];
@@ -1565,6 +1687,7 @@ $(document).ready(function () {
 
 	function llenarContacto(id)
 	{
+		$("#cboContactoAct").html("<option value='0'>CONTACTO</option>");
 		var id, idc, nom, ape, mail, cel, cam;
 		$.ajax({
 			type: 'POST',
@@ -1580,6 +1703,7 @@ $(document).ready(function () {
 						//tx.executeSql("DELETE FROM tb_contacto where cambio='n'",nullHandler,nullHandler);
 						for(var i=0; i< data.length; i++)
 						{ 
+							if(data[i]['id_estado']!=35){$("#cboContactoAct").append("<option value='"+data[i]['id_con']+"'>"+data[i]['nombre_con']+" "+data[i]['apellido_con']+"</option>")};
 							id = data[i]['id_con'];
 							idc = data[i]['id_cuen'];
 							nom = data[i]['nombre_con'];
