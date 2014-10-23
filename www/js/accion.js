@@ -985,6 +985,83 @@ $(document).ready(function () {
 		$.mobile.changePage("#formulario_venta", {transition:"slidedown"});
 	});
 
+	$("body").on("click","#btn_add_venta", function(e){
+
+		$(".nvo_pros").css({display: 'none'});
+
+		$('#accion_frm').val("nuevo");
+		$('#id_pros').val("");
+		$('#id_cuen').val("");
+		$('#id_con').val("");
+		
+		$("#titpros").val("");
+		$("#rsoc_lbl, #nom_deci_lbl").css({display: 'none'});
+		$("#rsoc, #nom_deci").css({display: 'inline-block'});
+		$("#rsoc, #nom_deci").val("");
+		//$("#rsoc").val("").prop('disabled', false);
+		//$("#nom_deci").val("").prop('disabled', false);
+
+		$("#presu").val("");
+		$("#nece").val("");
+		$("#prop").val("");
+		$("#fecha_aprox").val("");
+
+		$("#ndeci").val("");
+		$("#pdeci").val("");
+		
+		$("#sig_cita").val("");
+		$("#hra_cita").val("");
+
+		for (var i = 0; i < reqArr.length; i++) {
+			var a = "req_"+reqArr[i];
+			var b = "reqc_"+reqArr[i];
+			
+			$('#'+a+":checkbox").prop('checked', false);
+			//$('.'+b+" span span.ui-icon").addClass( "ui-icon-checkbox-off" ) cambio JQ4
+			//$('.'+b+" span span.ui-icon").removeClass( "ui-icon-checkbox-on" ) cambio JQ4
+			$('.'+b).addClass( "ui-checkbox-off" )
+			$('.'+b).removeClass( "ui-checkbox-on" )
+		};
+
+		/*if(localStorage.getItem('onof') == 'on')
+		{
+			//getProspectoIdOn(idv);
+		}else{
+			getProspectoIdOff(idv);
+		}*/
+		$.mobile.changePage("#formulario_venta", {transition:"slidedown"});
+	});
+
+	$("body").on("click","#btn_add_venta_emp", function(e){
+
+		var idEmpNV = $("#idEmp").val();
+		if(localStorage.getItem('onof') == 'on')
+		{
+			llenarNuevoProspectoEmpresaON(idEmpNV,'e');
+		}else{
+			//trabajdno off
+		}
+		$.mobile.changePage("#formulario_venta", {transition:"slidedown"});
+	});
+
+	function llenarNuevoProspectoEmpresaON(id, val)
+	{
+		$.ajax({
+			type: 'POST',
+			dataType: 'json', 
+			data: {id:id, val:val},
+			beforeSend : function (){
+			},
+			url: urlP+"llenarNuevoProspectoEmpresaON",
+			success : function(data) {
+				
+			},
+			error: function(data){
+				console.log(data);
+			}
+		});
+	}
+
 	$("body").on("focus",".inpt_sel", function(e){
 		$("."+this.id).css({color:'#DF2047'});
 	});
