@@ -1355,13 +1355,13 @@ $(document).ready(function () {
 		var idReq;
 		for(i=0; i<reqArr.length; i++)
 		{
-			if($("#req_"+reqArr[i]+":checked").val() == "on"){
+			if($("#cont_reque #req_"+reqArr[i]+":checked").val() == "on"){
 				reqArrTemp[reqArr[i]] = "S";
-				alert(reqArr[i]+" ON")
+				//alert(reqArr[i]+" ON")
 			}
 			else{
 				reqArrTemp[reqArr[i]] = "N";
-				alert(reqArr[i]+" OF")
+				//alert(reqArr[i]+" OF")
 			}
 		}
 
