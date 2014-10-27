@@ -985,53 +985,6 @@ $(document).ready(function () {
 		$.mobile.changePage("#formulario_venta", {transition:"slidedown"});
 	});
 
-	$("body").on("click","#btn_add_venta", function(e){
-
-		$(".nvo_pros").css({display: 'none'});
-
-		$('#accion_frm').val("nuevo");
-		$('#id_pros').val("");
-		$('#id_cuen').val("");
-		$('#id_con').val("");
-		
-		$("#titpros").val("");
-		$("#rsoc_lbl, #nom_deci_lbl").css({display: 'none'});
-		$("#rsoc, #nom_deci").css({display: 'inline-block'});
-		$("#rsoc, #nom_deci").val("");
-		//$("#rsoc").val("").prop('disabled', false);
-		//$("#nom_deci").val("").prop('disabled', false);
-
-		$("#presu").val("");
-		$("#nece").val("");
-		$("#prop").val("");
-		$("#fecha_aprox").val("");
-
-		$("#ndeci").val("");
-		$("#pdeci").val("");
-		
-		$("#sig_cita").val("");
-		$("#hra_cita").val("");
-
-		for (var i = 0; i < reqArr.length; i++) {
-			var a = "req_"+reqArr[i];
-			var b = "reqc_"+reqArr[i];
-			
-			$('#'+a+":checkbox").prop('checked', false);
-			//$('.'+b+" span span.ui-icon").addClass( "ui-icon-checkbox-off" ) cambio JQ4
-			//$('.'+b+" span span.ui-icon").removeClass( "ui-icon-checkbox-on" ) cambio JQ4
-			$('.'+b).addClass( "ui-checkbox-off" )
-			$('.'+b).removeClass( "ui-checkbox-on" )
-		};
-
-		/*if(localStorage.getItem('onof') == 'on')
-		{
-			//getProspectoIdOn(idv);
-		}else{
-			getProspectoIdOff(idv);
-		}*/
-		$.mobile.changePage("#formulario_venta", {transition:"slidedown"});
-	});
-
 	$("body").on("click","#btn_add_venta_emp", function(e){
 
 		var idEmpNV = $("#idEmp").val();
@@ -1041,12 +994,24 @@ $(document).ready(function () {
 		}else{
 			//trabajdno off
 		}
-		$.mobile.changePage("#formulario_venta", {transition:"slidedown"});
+		//$.mobile.changePage("#formulario_venta", {transition:"slidedown"});
+	});
+
+	$("body").on("click","#btn_add_venta_con", function(e){
+
+		var idPerNV = $("#idPer").val();
+		if(localStorage.getItem('onof') == 'on')
+		{
+			llenarNuevoProspectoEmpresaON(idPerNV,'c');
+		}else{
+			//trabajdno off
+		}
+		//$.mobile.changePage("#formulario_venta", {transition:"slidedown"});
 	});
 
 	function llenarNuevoProspectoEmpresaON(id, val)
 	{
-		$.ajax({
+		$.ajax({//btn_add_venta_emp
 			type: 'POST',
 			dataType: 'json', 
 			data: {id:id, val:val},
@@ -1054,12 +1019,60 @@ $(document).ready(function () {
 			},
 			url: urlP+"llenarNuevoProspectoEmpresaON",
 			success : function(data) {
-				
+				if(data != 0){
+					limpiarFrmNODesdeCon();
+					$("#accion_frm").val("nuevo");
+
+					if(val == 'e'){
+						$("#id_cuen").val(id);
+						$("#rsoc").val($("#nomEmp").val());
+
+						if(data.length == 1)
+						{
+				            $("#id_con").val(data[0].id_con);
+		                    $("#nom_deci").val(data[0].value).prop('disabled', true);
+		                    $("#presu").focus();
+		                    $("#nom_deci").autocomplete({source: []});
+			            }else{
+							$("#nom_deci").autocomplete({
+								source: data,
+								minLength: 0,
+								autoFocus : true,
+								select: function(e,u){
+									$("#id_con").val(u.item.id_con); 
+								}
+							}).on('focus', function(event) {
+				                var self = this;
+				                $(self).autocomplete("search", "");
+				            });
+				            $("#nom_deci").focus();
+				        }
+				        $.mobile.changePage("#formulario_venta", {transition:"slidedown"});
+				    }else if(val == 'c'){
+				    	if(data.id_cuen){
+				    		$("#id_cuen").val(data.id_cuen);
+				    		$("#rsoc").val(data.razon_social_cuen);
+				    		$("#id_con").val(data.id_con);
+				    		$("#nom_deci").val(data.nombre_con+" "+data.apellido_con);
+				    		$.mobile.changePage("#formulario_venta", {transition:"slidedown"});
+				    	}else{
+				    		alert("debe asociar a una empresa primero");
+				    	}
+				    }
+				}
 			},
 			error: function(data){
 				console.log(data);
 			}
 		});
+	}
+
+	function limpiarFrmNODesdeCon(){
+		$("#id_cuen").val("");
+		$("#accion_frm").val("");
+		$("#rsoc").val("");
+		$("#id_con").val("");
+		$("#nom_deci").val("");
 	}
 
 	$("body").on("focus",".inpt_sel", function(e){
@@ -1901,7 +1914,8 @@ $(document).ready(function () {
 	function listarUsuarioEmpresaOn(id)
 	{
 		$(".lst-empresa").html("");
-		$("#idEmp").val("");//limpiamos valor de la empresa
+		$("#idEmp").val("");//limpiamos valor id de la empresa
+		$("#nomEmp").val("");//limpiamos valor nombre de la empresa
 		$.ajax({
 			type: 'POST',
 			dataType: 'json', 
@@ -1949,6 +1963,7 @@ $(document).ready(function () {
 
 				/*EMPRESA*/
 				var etd = data['emp'];
+				$("#nomEmp").val(etd[0]['razon_social_cuen']);
 				//datos detalle empresa
 				$("#det_emp_nom").html(etd[0]['razon_social_cuen']);
 				$("#det_emp_ruc").html(etd[0]['ruc_cuen']);
@@ -2098,7 +2113,8 @@ $(document).ready(function () {
 			success : function(data) {
 				if(data != ""){
 					$("#idEmp").val(data.id);
-					console.log("se agrego correctamente");
+					$("#nomEmp").val(eEmp);
+					console.log("se agrego empresa correctamente");
 				}
 			},
 			error: function(data){
