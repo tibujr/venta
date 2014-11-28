@@ -122,6 +122,8 @@ $(document).ready(function () {
 
 	$("body").on('click', '#btn_login', function(e){
 
+		$('#btn_login').css({display:'none'});
+
 		if( $("#mail").val() == ""){
 			$("#mail").focus().after("<span class='menError'>Ingresa un usuario</span>");
 			return false;
@@ -163,8 +165,11 @@ $(document).ready(function () {
 						}else{
 							alert("usuario o contraseña incorrectos")
 						}
+
+						$('#btn_login').css({display:'inline-block'});
 					},
 					error: function(data){
+						$('#btn_login').css({display:'inline-block'});
 						console.log(data);
 				    }
 				});
@@ -189,6 +194,8 @@ $(document).ready(function () {
 		               	}
 		          	},errorBD);
 		       	},errorBD,nullHandler);
+
+		       	$('#btn_login').css({display:'inline-block'});
 			}
 		}
 	});
