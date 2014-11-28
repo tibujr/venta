@@ -39,6 +39,14 @@
     </script>
 </head>
 <body>
+  <section id="load_pls"></section>
+  <section id="load_pls2"><div id="cn_load_pl"><div class="center-wrapper">
+        <section class="main">
+          <div class="bar">
+            <i class="sphere"></i>
+          </div>
+        </section>
+      </div></div></section>
   <section data-role="page" id="inicio" class="pagina">
     <article data-role="content" style="font-size:0;">
       <div id='onOf' style='display: none;'><div class="icon-wifi-full"></div><div id='bloq_wifi' class="icon-blocked"></div></div>
@@ -133,21 +141,7 @@
     </article>
     <article data-role="content" class="cont_main"> 
       <section class='cont_items'>
-
-        <!--<article class="contacto_filtro">
-          <div data-role="fieldcontain">
-            <select name="cboActividadFiltro" id="cboActividadFiltro">
-              <option value="volvo">Filtros </option>
-              <option value="volvo">Mis Empresas</option>
-              <option value="volvo">10 ultimas</option>
-              <option value="volvo">Del mes</option>
-            </select>
-          </div>
-        </article>-->
-
-      <!--<section class="cont_item_lst" id='cnt_act_itm'>-->
       <section class="cont_dato_detalle_venta" id='cnt_act_itm'>
-
               <article class="unid_cont_item_act">
                 <section class="sect_uno_item_izq">
                   <div class="div_fecha_act_top">Vie</div>
@@ -212,7 +206,6 @@
     </article>
     <article data-role="content" class="cont_main"> 
       <section class='cont_items'>
-        <!--<article class='popup_Nusu'>-->
           <section class='cont_pupup_Nusu'>
                 <section class="lst_campos">
                   <input type='hidden' id='accion_frm' name='accion_frm' value=''>
@@ -245,6 +238,56 @@
                     <label class='prop'>Propuesta</label>
                     <input type='text' id='prop' name='prop' class='inpt_sel'>
                   </article>
+
+                  <article class='cont_req nvo_pros'>
+                    <label>Agregar producto</label>
+
+                      <article class="producto_filtro" id="cbo-clase-prod">
+                        <div data-role="fieldcontain">
+                          <select name="cboClaseProducto" id="cboClaseProducto">
+                            <option>CLASE</option>
+                          </select>
+                        </div>
+                      </article>
+
+                      <article class="producto_filtro" id="cbo-categoria-prod">
+                        <div data-role="fieldcontain">
+                          <select name="cboCategoriaProducto" id="cboCategoriaProducto">
+                            <option>CATEGORIA</option>
+                          </select>
+                        </div>
+                      </article>
+
+                      <article class="producto_filtro" id="cbo-prod">
+                        <div data-role="fieldcontain">
+                          <select name="cboProducto" id="cboProducto">
+                            <option>PRODUCTO</option>
+                          </select>
+                        </div>
+                      </article>
+                  </article>
+
+                  <article class='cont_req nvo_pros'>
+                    <label>Detalle de pedido</label>
+                    <section id='cont_lst_item_prod'>
+                      <!--<section class='cont_item_prod'>
+                        <input type='number' id='cant_prod_1' value='1' >
+                        <label class='lbl_item_prod'>Producto 10</label>
+                        <div class='delete_item_prod'><img src="img/delete.png"></div>
+                      </section>
+                      <section class='cont_item_prod'>
+                        <input type='number' id='cant_prod_1' value='2' >
+                        <label class='lbl_item_prod'>Producto 11</label>
+                        <div class='delete_item_prod'><img src="img/delete.png"></div>
+                      </section>
+                      <section class='cont_item_prod'>
+                        <input type='number' id='cant_prod_1' value='13' >
+                        <label class='lbl_item_prod'>Producto 12</label>
+                        <div class='delete_item_prod'><img src="img/delete.png"></div>
+                      </section>-->
+                    </section>
+                  </article>
+
                   <article class='cont_req'>
                     <label class='fecha_aprox'>Fecha Aproximada de Cierre</label>
                     <input type='text' id='fecha_aprox' name='fecha_aprox' data-role="datebox" data-options='{"mode":"flipbox", "useLang":"es-ES", "overrideDateFormat": "%Y-%m-%d"}'>
@@ -268,7 +311,6 @@
                   <article id='btn_guardar_frm'><label>GUARDAR</label></article>
                 </section>
           </section>
-        <!--</article>-->
       </section>
     </article>
      <article data-role="footer" data-position="fixed" data-id="pie_fijo" data-theme="b" class="pie">
@@ -376,6 +418,19 @@
                 <section class="vent_ind_det_f_der">
                   <div class="vent_ind_der_top_color">Propuesta</div>
                   <div class="vent_ind_der_bot_white propu_emp_det_pros"></div>
+                </section>
+              </section>
+
+              <section class="vent_ind_det_f_cont ">
+                <section class="vent_ind_det_f_der prod_ls">
+                  <div class="vent_ind_der_top_color">Lista de Productos</div>
+                  <div class="vent_ind_der_bot_white propu_emp_det_pros"></div>
+                </section>
+                <section class='cont_imt_prod_do'> 
+                  <!--<section class='itm_prod_do'>
+                    <article class='cnt_itm_prod_to'>15</article>
+                    <article class='nom_itm_prod_to'>Producto 1</article>
+                  </section>-->
                 </section>
               </section>
 

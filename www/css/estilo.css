@@ -1,3 +1,37 @@
+/*load*/
+#load_pls, #load_pls2{
+  display: none;
+  width: 100%;
+  height: 100%;
+  background: black;
+  opacity: 0.7;
+  position: absolute;
+  z-index: 1;
+}
+
+#load_pls2{
+  background: none !important;
+  opacity: 1 !important;
+  z-index: 2 !important;
+}
+
+#load_pls2 div#cn_load_pl{
+  display: inline-block;
+  width: 100%;
+  height: auto;
+  top: 45%;
+  position: absolute;
+}
+
+#load_pls2 section.main{
+  display: inline-block;
+}
+
+#load_pls2 section.main .bar{
+  background: #FFFFFF;
+  box-shadow: 0 0 0 .05em #E4E4E4, 0 0 0 .18em #000000, inset 0 .1em .05em rgba(0,0,0,0.1), 0 .05em rgba(255,255,255,0.7);
+}
+
 /*CAMBIOS DEL SISTEMA*/
 body{
   margin: 0;
@@ -239,6 +273,105 @@ body{
 
 /*conetedor ventas*/
 
+section.cont_item_prod input.cantProdClas{
+  padding: 5px 0 !important;
+  border-bottom: 1px solid #D1D1D1;
+}
+
+.cantProdClas{
+  max-width: 14%;
+  display: inline-block;
+  border: none;
+  text-align: center;
+  font-size: 14px !important;
+}
+
+.cont_item_prod div.ui-input-text .cantProdClas{
+  display: inline-block;
+  width: 100%;
+  min-width: 100%;
+  text-align: center;
+}
+
+.prod_ls{
+  border-bottom: none !important;
+  padding-bottom: 3px !important;
+}
+
+.cont_imt_prod_do{
+  display: inline-block;
+  width: 100%;
+  margin-bottom: 6px;
+}
+
+.itm_prod_do{
+  display: inline-block;
+  width: 80%;
+  font-size: 0;
+  border-bottom: 1px solid #F8F8F8;
+}
+
+.cnt_itm_prod_to{
+  display: inline-block;
+  width: 20%;
+  font-size: 12px;
+  padding: 4px 0;
+  vertical-align: middle;
+  color: #8F8F8F;
+  text-decoration: none;
+  text-shadow: none;
+}
+
+.nom_itm_prod_to{
+  display: inline-block;
+  width: 80%;
+  max-width: 80%;
+  font-size: 12px;
+  color: #8F8F8F;
+  text-shadow: none;
+  text-align: left;
+  vertical-align: middle;
+  padding: 4px 0;
+}
+
+.cont_item_prod{
+  display: inline-block;
+  width: 100%;
+  height: auto;
+  border-bottom: 1px solid rgb(237, 237, 237);
+  padding-bottom: 1px;
+}
+
+.cont_item_prod div.ui-input-text{
+  width: 14%;
+  display: inline-block;
+  margin: 0 !important;
+  vertical-align: middle;
+  border: none;
+  padding-bottom: 1px !important;
+}
+
+.cont_item_prod div.ui-input-text input{
+  text-align: center;
+  font-size: 14px;
+  border-bottom: 1px solid #E3E3E3;
+  padding-bottom: 1px;
+}
+
+.cont_item_prod label.lbl_item_prod{
+  vertical-align: middle;
+  width: 70%;
+  margin: 0 3% !important;
+  color: #4d4d4d;
+}
+
+.cont_item_prod div.delete_item_prod{
+  display: inline-block;
+  width: 10%;
+  vertical-align: middle;
+  text-align: center;
+}
+
 #rsoc_lbl, #nom_deci_lbl{
   font: 15px ProximaNova, sans-serif;
   margin-top: 7px;
@@ -268,7 +401,7 @@ body{
   background: #5e5e5e;
 }
 
-.contacto_filtro div span.ui-btn-inner, .contacto_filtro  div div span.ui-btn-inner {
+.contacto_filtro div span.ui-btn-inner, .contacto_filtro  div div span.ui-btn-inner, .producto_filtro div span.ui-btn-inner, .producto_filtro  div div span.ui-btn-inner  {
   background: #df2047;
 }
 
@@ -325,7 +458,7 @@ body{
   font-size: 0;
 }
 
-.fase_tit, .contacto_filtro, .actividad_tipo{
+.fase_tit, .contacto_filtro, .actividad_tipo, .producto_filtro{
   display: inline-block;
   width: 93%;
   height: 34px;
@@ -335,6 +468,10 @@ body{
   height: 34px;*/
   background: #afafaf;
   margin: 7px 0;
+}
+
+.producto_filtro{
+  width: 100%;
 }
 
 .cont_item_lst{
@@ -1809,7 +1946,7 @@ textarea {
   line-height: 2.3rem;
 }
 
-.fase_tit .ui-field-contain .ui-select, .contacto_filtro .ui-field-contain .ui-select, .actividad_tipo .ui-field-contain .ui-select{
+.fase_tit .ui-field-contain .ui-select, .contacto_filtro .ui-field-contain .ui-select, .actividad_tipo .ui-field-contain .ui-select, .producto_filtro .ui-field-contain .ui-select{
   width: 100% !important;
 }
 
@@ -2175,11 +2312,11 @@ div.login_caja div.ui-input-text{
   margin-top: 11px;
 }
 
-.fase_tit, .contacto_filtro, .actividad_tipo{
+.fase_tit, .contacto_filtro, .actividad_tipo, .producto_filtro{
   overflow: hidden;
 }
 
-.fase_tit div div div, .contacto_filtro div div div, .actividad_tipo div div div{
+.fase_tit div div div, .contacto_filtro div div div, .actividad_tipo div div div, .producto_filtro div div div{
   background: #4a4a4a !important;
   text-shadow: none !important;
   border: none;
@@ -2189,7 +2326,7 @@ div.login_caja div.ui-input-text{
   color: white !important;
 }
 
-.contacto_filtro div div div, .actividad_tipo div div div{
+.contacto_filtro div div div, .actividad_tipo div div div, .producto_filtro div div div{
   background: #e5e5e5 !important;
   color: #4e4e4e !important;
 }

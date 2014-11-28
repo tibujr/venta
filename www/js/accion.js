@@ -69,6 +69,7 @@ $(document).ready(function () {
 
 	//metodos inicializando
 	mostrarRequisitosHtml();
+	llenarClaseProducto();
 	llenarTipoActividad();
 	llenarTipoCartera();
 	llenarTipoDocumento();
@@ -79,6 +80,7 @@ $(document).ready(function () {
 
 	var arEmpEdit = new Array();//form edit Emp
 	var arPerEdit = new Array();//form edit PER
+	var arProd = new Array();//form edit PER
 
 	var estFlCon = 'on';
 	var reqArr = [];
@@ -334,6 +336,7 @@ $(document).ready(function () {
 			dataType: 'json', 
 			data: {usuE:usuE, tipoA:tipoA, objA:objA, fechaA:fechaA, horaA:horaA, durA:durA, oporA:oporA, empA:empA, contA:contA, notaA:notaA},
 			beforeSend : function (){
+				cargandoOnOf('on');
 		    },
 			url: urlP+"agregarActividadOn",
 			success : function(data) {
@@ -351,11 +354,14 @@ $(document).ready(function () {
 				}else{
 					alert(data);
 				}
+				cargandoOnOf('of');
 			},
 			error: function(data){
 				console.log(data);
+				cargandoOnOf('of');
 			}
 		});
+		
 	}
 
 	function editarActividadOn(idAct)
@@ -377,6 +383,7 @@ $(document).ready(function () {
 			dataType: 'json', 
 			data: {idAct:idAct, usuE:usuE, tipoA:tipoA, objA:objA, fechaA:fechaA, horaA:horaA, durA:durA, oporA:oporA, empA:empA, contA:contA, notaA:notaA},
 			beforeSend : function (){
+				cargandoOnOf('on');
 		    },
 			url: urlP+"editarActividadOn",
 			success : function(data) {
@@ -392,8 +399,10 @@ $(document).ready(function () {
 				}else{
 					alert(data);
 				}
+				cargandoOnOf('of');
 			},
 			error: function(data){
+				cargandoOnOf('of');
 				console.log(data);
 			}
 		});
@@ -433,6 +442,7 @@ $(document).ready(function () {
 			dataType: 'json', 
 			data: {id:id, com:com},
 			beforeSend : function (){
+				cargandoOnOf('on');
 		    },
 			url: urlP+"llenarCombosFrmActividadOn",
 			success : function(data) {
@@ -495,8 +505,10 @@ $(document).ready(function () {
 					}
 				}
 				//console.log(data)
+				cargandoOnOf('of');
 			},
 			error: function(data){
+				cargandoOnOf('of');
 				console.log(data);
 			}
 		});
@@ -543,6 +555,7 @@ $(document).ready(function () {
 			dataType: 'json', 
 			data: {id:id},
 			beforeSend : function (){
+				cargandoOnOf('on');
 		    },
 			url: urlP+"getDetalleActividad",
 			success : function(data) {
@@ -604,8 +617,10 @@ $(document).ready(function () {
 
 
 				$("#fmr_act_nota").val(data.nota_act);
+				cargandoOnOf('of');
 			},
 			error: function(data){
+				cargandoOnOf('of');
 				console.log(data);
 			}
 		});
@@ -644,24 +659,8 @@ $(document).ready(function () {
 		$("#cbo-con-act div div div span").html("CONTACTO");
 	}
 
-	/*$("body").on('click', '#btn_guardar_act', function(e){
-		$("#frmValAct").val("editar");
-		if(localStorage.getItem('onof') == 'on')
-		{
-			if($("#frmValAct").val() == 'editar'){
-
-			}else if($("#frmValAct").val() == 'nuevo'){
-
-			}
-		}else{
-
-		}
-		$.mobile.changePage("#actividad", {transition:"slide"});
-	});*/
-
 	$("body").on('click', '#add-actividad-bot', function(e){
 		$("#frmValAct").val("nuevo");
-		//limpiarDetalleActividad();
 		limpiarFormularioActividad();
 		$.mobile.changePage("#frm_actividad_editar", {transition:"slide"});
 	});
@@ -690,13 +689,6 @@ $(document).ready(function () {
 	});
 
 	$("body").on('click', '#add_decisor_empresa', function(e){
-		//var idEp = $('#idEmp').val();
-		/*if(localStorage.getItem('onof') == 'on'){
-			//llenarFase();
-			//agregarDeciso(id);
-		}else{
-			mostrarDataOffline()
-		}*/
 		limpiarEditarPersona();
 		$("#accion_frm_per").val("empresa");
 		$.mobile.changePage("#contacto_per_nuevo_editar", {transition:"slide"});
@@ -749,13 +741,7 @@ $(document).ready(function () {
 			else if ($("#accion_frm_emp").val() == 'nuevo') 
 			{
 				agregarEmpresaOn();
-
-				//var nei = $("#idEmp").val();
-				//console.log("id_nueva_empresa : "+nei);
-
-				
 				$.mobile.changePage("#contacto_deta_empresa", {transition:"slidedown"});
-				//$.mobile.changePage("#contactos-empresa", {transition:"slide"});
 			}
 		}else{
 			if ($("#accion_frm_emp").val() == 'editar')
@@ -767,27 +753,7 @@ $(document).ready(function () {
 				alert("nuevo of")
 			}
 		}
-
-		//$.mobile.back();
-		//$.mobile.changePage("#contacto_deta_empresa", {transition:"slide"});
 	});
-
-	/*function validarCamposFrmContacto()
-	{
-		if($("#edt_emp_nom").val() == ""){
-			$("#edt_emp_nom").focus().after("<span class='menError'>Ingresar Razón Social</span>");
-			return false;
-		}else if($("#edt_emp_ruc").val() == ""){
-			$("#edt_emp_ruc").focus().after("<span class='menError'>Ingresar RUC</span>");
-			return false;
-		}else if($("#edt_emp_ntrab").val() == ""){
-			$("#edt_emp_ntrab").focus().after("<span class='menError'>Número de trabajadores</span>");
-			return false;
-		}else if($("#edt_emp_ntrab").val() == ""){
-			$("#edt_emp_ntrab").focus().after("<span class='menError'>Número de trabajadores</span>");
-			return false;
-		}
-	}*/
 
 	$("body").on('click', '#btn_guardar_per', function(e){
 		
@@ -826,8 +792,6 @@ $(document).ready(function () {
 				alert("nuevo of")
 			}
 		}
-
-		//$.mobile.back();
 	});
 
 	$("body").on('click', '#btn_persona', function(e){
@@ -1060,6 +1024,7 @@ $(document).ready(function () {
 			dataType: 'json', 
 			data: {us:us, id:id, va:va},
 			beforeSend : function (){
+				cargandoOnOf('on');
 			},
 			url: urlP+"evaluarProspecto",
 			success : function(data) {
@@ -1068,8 +1033,10 @@ $(document).ready(function () {
 				llenarCuenta(us);
 				llenarContacto(us);
 				limpiarDataEdit();
+				cargandoOnOf('of');
 			},
 			error: function(data){
+				cargandoOnOf('of');
 				console.log(data);
 			}
 		});
@@ -1087,11 +1054,7 @@ $(document).ready(function () {
 			$(".desa_det_venta").prop('disabled', false);
 			$("#rsoc_lbl, #nom_deci_lbl").css({display: 'inline-block'});
 			$("#rsoc, #nom_deci").css({display: 'none'});
-			//$("#nom_deci").prop('disabled', true);
-
-			//getProspectoIdOn(idv);
 		}else{
-			//getProspectoIdOff(idv);
 		}
 
 		$.mobile.changePage("#formulario_venta", {transition:"slidedown"});
@@ -1100,6 +1063,12 @@ $(document).ready(function () {
 
 	$("body").on("click","#btn_add_venta", function(e){
 
+		limpiarOportunidadFD();
+
+		$.mobile.changePage("#formulario_venta", {transition:"slidedown"});
+	});
+
+	function limpiarOportunidadFD(){
 		$(".nvo_pros").css({display: 'none'});
 
 		$('#accion_frm').val("nuevo");
@@ -1111,8 +1080,6 @@ $(document).ready(function () {
 		$("#rsoc_lbl, #nom_deci_lbl").css({display: 'none'});
 		$("#rsoc, #nom_deci").css({display: 'inline-block'});
 		$("#rsoc, #nom_deci").val("");
-		//$("#rsoc").val("").prop('disabled', false);
-		//$("#nom_deci").val("").prop('disabled', false);
 
 		$("#presu").val("");
 		$("#nece").val("");
@@ -1130,43 +1097,33 @@ $(document).ready(function () {
 			var b = "reqc_"+reqArr[i];
 			
 			$('#'+a+":checkbox").prop('checked', false);
-			//$('.'+b+" span span.ui-icon").addClass( "ui-icon-checkbox-off" ) cambio JQ4
-			//$('.'+b+" span span.ui-icon").removeClass( "ui-icon-checkbox-on" ) cambio JQ4
 			$('.'+b).addClass( "ui-checkbox-off" )
 			$('.'+b).removeClass( "ui-checkbox-on" )
 		};
-
-		/*if(localStorage.getItem('onof') == 'on')
-		{
-			//getProspectoIdOn(idv);
-		}else{
-			getProspectoIdOff(idv);
-		}*/
-		$.mobile.changePage("#formulario_venta", {transition:"slidedown"});
-	});
+	}
 
 	$("body").on("click","#btn_add_venta_emp", function(e){
+
+		limpiarOportunidadFD();
 
 		var idEmpNV = $("#idEmp").val();
 		if(localStorage.getItem('onof') == 'on')
 		{
 			llenarNuevoProspectoEmpresaON(idEmpNV,'e');
 		}else{
-			//trabajdno off
 		}
-		//$.mobile.changePage("#formulario_venta", {transition:"slidedown"});
 	});
 
 	$("body").on("click","#btn_add_venta_con", function(e){
+
+		limpiarOportunidadFD();
 
 		var idPerNV = $("#idPer").val();
 		if(localStorage.getItem('onof') == 'on')
 		{
 			llenarNuevoProspectoEmpresaON(idPerNV,'c');
 		}else{
-			//trabajdno off
 		}
-		//$.mobile.changePage("#formulario_venta", {transition:"slidedown"});
 	});
 
 	function llenarNuevoProspectoEmpresaON(id, val)
@@ -1176,6 +1133,7 @@ $(document).ready(function () {
 			dataType: 'json', 
 			data: {id:id, val:val},
 			beforeSend : function (){
+				cargandoOnOf('on');
 			},
 			url: urlP+"llenarNuevoProspectoEmpresaON",
 			success : function(data) {
@@ -1207,6 +1165,7 @@ $(document).ready(function () {
 				            });
 				            $("#nom_deci").focus();
 				        }
+				        cargandoOnOf('of');
 				        $.mobile.changePage("#formulario_venta", {transition:"slidedown"});
 				    }else if(val == 'c'){
 				    	if(data.id_cuen){
@@ -1214,6 +1173,7 @@ $(document).ready(function () {
 				    		$("#rsoc").val(data.razon_social_cuen);
 				    		$("#id_con").val(data.id_con);
 				    		$("#nom_deci").val(data.nombre_con+" "+data.apellido_con);
+				    		cargandoOnOf('of');
 				    		$.mobile.changePage("#formulario_venta", {transition:"slidedown"});
 				    	}else{
 				    		alert("debe asociar a una empresa primero");
@@ -1222,6 +1182,7 @@ $(document).ready(function () {
 				}
 			},
 			error: function(data){
+				cargandoOnOf('of');
 				console.log(data);
 			}
 		});
@@ -1393,6 +1354,7 @@ $(document).ready(function () {
 					dataType: 'json', 
 					data: {usuid:usuid, idAct:idAct},
 					beforeSend : function (){
+						cargandoOnOf('of');
 				    },
 					url: urlP+"evaluarActividad",
 					success : function(data) {
@@ -1404,9 +1366,11 @@ $(document).ready(function () {
 						$("#activ:checkbox").prop('checked', false);
 						$(".lbact span span.ui-icon").addClass( "ui-icon-checkbox-off" )
 						$(".lbact span span.ui-icon").removeClass( "ui-icon-checkbox-on" )
+						cargandoOnOf('of');
 					},
 					error: function(data){
 						console.log(data);
+						cargandoOnOf('of');
 					}
 				});
 			}
@@ -1565,6 +1529,7 @@ $(document).ready(function () {
 			dataType: 'json', 
 			data: {titPros:titPros, nomE:nomE, apeE:apeE, preE:preE, necE:necE, fecE:fecE, fecha_scit:fecha_scit, hora_scit:hora_scit, usuG:usuG, idCuenta:idCuenta, idContact:idContact},
 			beforeSend : function (){
+				cargandoOnOf('on');
 		    },
 			url: urlP+"guardaNuevoProspecto",
 			success : function(data) {
@@ -1577,9 +1542,11 @@ $(document).ready(function () {
 					llenarContacto(usuid);
 					limpiarDataEdit();
 				}
+				cargandoOnOf('of');
 			},
 			error: function(data){
 				console.log(data);
+				cargandoOnOf('of');
 			}
 		});
 	}
@@ -1607,21 +1574,20 @@ $(document).ready(function () {
 		{
 			if($("#cont_reque #req_"+reqArr[i]+":checked").val() == "on"){
 				reqArrTemp[reqArr[i]] = "S";
-				//alert(reqArr[i]+" ON")
 			}
 			else{
 				reqArrTemp[reqArr[i]] = "N";
-				//alert(reqArr[i]+" OF")
 			}
 		}
 
 		$.ajax({
 			type: 'POST',
 			dataType: 'json', 
-			data: {titOpor:titOpor, preE:preE, necE:necE, proE:proE, fecE:fecE, idProsp:idProsp, idCuenta:idCuenta, idContact:idContact, reqArrTemp:reqArrTemp, fecha_scit:fecha_scit, hora_scit:hora_scit, usuedt:usuedt, idacti:idacti},
+			data: {titOpor:titOpor, preE:preE, necE:necE, proE:proE, fecE:fecE, idProsp:idProsp, idCuenta:idCuenta, idContact:idContact, reqArrTemp:reqArrTemp, fecha_scit:fecha_scit, hora_scit:hora_scit, usuedt:usuedt, idacti:idacti, arProd:arProd},
 			beforeSend : function (){
+				cargandoOnOf('on');
 		    },
-			url: urlP+"editProspectoOn",
+			url: urlP+"editProspectoOn_2",
 			success : function(data) {
 				if(data != 0){
 					console.log(data);
@@ -1632,11 +1598,39 @@ $(document).ready(function () {
 					llenarContacto(usuid);
 					limpiarDataEdit();
 				}
+				cargandoOnOf('of');
 			},
 			error: function(data){
+				cargandoOnOf('of');
 				console.log(data);
 			}
 		});
+	}
+
+	function checkRequisitoOffAll(){
+		for (var i = 0; i < reqArr.length; i++) {
+			var a = "req_"+reqArr[i];
+			var b = "reqc_"+reqArr[i];
+			/*if(data[a] == "S"){
+				$('#'+a+":checkbox").prop('checked', true);
+				$('.'+b).addClass( "ui-checkbox-on" )
+				$('.'+b).removeClass( "ui-checkbox-off" )
+			}else{*/
+				$('#'+a+":checkbox").prop('checked', false);
+				$('.'+b).addClass( "ui-checkbox-off" )
+				$('.'+b).removeClass( "ui-checkbox-on" )
+			//}
+		}
+	}
+
+	function cargandoOnOf(val){
+		if(val == 'on'){
+			$("#load_pls").css({display: 'inline-block'});
+			$("#load_pls2").css({display: 'inline-block'});
+		}else{
+			$("#load_pls").css({display: 'none'});
+			$("#load_pls2").css({display: 'none'});
+		}
 	}
 
 	function getProspectoDetalleOn(id)//trae todos los datos del prospecto incluyendo los requisitos 
@@ -1646,8 +1640,9 @@ $(document).ready(function () {
 			dataType: 'json', 
 			data: {id:id},
 			beforeSend : function (){
+				cargandoOnOf('on');
 		    },
-			url: urlP+"getProspectoDetalleOn",
+			url: urlP+"getProspectoDetalleOn_2",
 			success : function(data) {
 				if(data != 0){
 
@@ -1663,23 +1658,23 @@ $(document).ready(function () {
 					$(".fecha_emp_det_pros").html(data.fecha_cierre_pros);
 					$(".propu_emp_det_pros").html(data.propuesta_pros);
 
+					checkRequisitoOffAll();
 					for (var i = 0; i < reqArr.length; i++) {
 						var a = "req_"+reqArr[i];
-						//var ad = "req_"+reqArr[i];
 						var b = "reqc_"+reqArr[i];
 						if(data[a] == "S"){
 							console.log(a+" on")
 							$('#'+a+":checkbox").prop('checked', true);
-							$('.'+b).removeClass( "ui-checkbox-off" )
 							$('.'+b).addClass( "ui-checkbox-on" )
+							$('.'+b).removeClass( "ui-checkbox-off" )
 						}else{
 							console.log(a+" off")
 							$('#'+a+":checkbox").prop('checked', false);
-							$('.'+b).addClass( "ui-checkbox-off" )
-							$('.'+b).removeClass( "ui-checkbox-on" )
+							$('.cont_req .'+b).addClass( "ui-checkbox-off" )
+							$('.cont_req .'+b).removeClass( "ui-checkbox-on" )
 						}
 					}
-
+					
 					/* FORMULARIO EDITAR*/
 
 					$("#titpros").val(data.titulo);
@@ -1713,12 +1708,34 @@ $(document).ready(function () {
 						$(".hora_scit").css({width : '45%'});
 						$(".check_actv").css({display : 'none'});
 					}
+
+
+					//productos
+					$(".cont_imt_prod_do").html("");
+					$("#cont_lst_item_prod").html("");
+					arProd=[];
+					if(data['lst_prod'] != 0){
+						for(var i = 0 ; i < data['lst_prod'].length; i++){
+
+							arProd.push({idProd:data['lst_prod'][i]['id_producto'], nomProd:data['lst_prod'][i]['descripcion_prod'], cant:data['lst_prod'][i]['cantidad']});
+
+							var lp = "<section class='itm_prod_do det_op_"+data['lst_prod'][i]['id_producto']+"'><article class='cnt_itm_prod_to'>"+data['lst_prod'][i]['cantidad']+"</article><article class='nom_itm_prod_to'>"+data['lst_prod'][i]['descripcion_prod']+"</article></section>";
+							$(".cont_imt_prod_do").append(lp);
+							//var cad 2= "<section class='cont_item_prod' id='cont_prod_"+data['lst_prod'][i]['id_producto']+"'><div class='ui-input-text ui-body-inherit ui-corner-all ui-shadow-inset'><input class='cantProdClas' type='number' id='cp_"+data['lst_prod'][i]['id_producto']+"' value='"+data['lst_prod'][i]['cantidad']+"'></div><label class='lbl_item_prod'>"+data['lst_prod'][i]['descripcion_prod']+"</label><div class='delete_item_prod' id='dp_"+data['lst_prod'][i]['id_producto']+"'><img src='img/delete.png'></div></section>";
+							var cad = "<section class='cont_item_prod' id='cont_prod_"+data['lst_prod'][i]['id_producto']+"'><input class='cantProdClas' type='number' id='cp_"+data['lst_prod'][i]['id_producto']+"' value='"+data['lst_prod'][i]['cantidad']+"' ><label class='lbl_item_prod'>"+data['lst_prod'][i]['descripcion_prod']+"</label><div class='delete_item_prod' id='dp_"+data['lst_prod'][i]['id_producto']+"'><img src='img/delete.png'></div></section>";
+							$("#cont_lst_item_prod").append(cad);
+
+						}
+					}
 				}
+				cargandoOnOf('of');
 			},
 			error: function(data){
 				console.log(data);
+				cargandoOnOf('of');
 			}
 		});
+		
 	}
 
 	function llenarVentaBD(id)
@@ -1753,10 +1770,33 @@ $(document).ready(function () {
 						for(var i=0; i< data.length; i++)
 						{
 							reqArr[i]=data[i]['id_req'];
-							//var ltdr = "<article class='cont_req cont_ckh_reg'><input type='checkbox' name='req_"+data[i]['id_req']+"' id='req_"+data[i]['id_req']+"' class='chkocultar desa_det_venta'/><label class='lblcheck reqc_"+data[i]['id_req']+"' for='req_"+data[i]['id_req']+"' >"+data[i]['descripcion_req']+"</label></article>";
 							var ltdr = "<article class='cont_req cont_ckh_reg nvo_css_req'><label class='reqc_"+data[i]['id_req']+"'><input type='checkbox' name='req_"+data[i]['id_req']+"' id='req_"+data[i]['id_req']+"' class='chkocultar desa_det_venta'>"+data[i]['descripcion_req']+"</label></article>";
 							$( "#cont_reque, #req_detalle_venta" ).append(ltdr);
 						}
+					}
+				},
+				error: function(data){
+					console.log(data);
+				}
+			});
+		}
+	}
+
+	function llenarClaseProducto()
+	{
+		$( "#cboClaseProducto" ).html("<option value='0'>SELECCIONAR CLASE</option>");
+		if(localStorage.getItem('onof') == 'on'){
+			$.ajax({
+				type: 'POST',
+				dataType: 'json', 
+				data: {},
+				beforeSend : function (){
+			    },
+				url: urlP+"searchClaseProducto",
+				success : function(data) {
+					for(var i=0; i< data.length; i++)
+					{
+						$( "#cboClaseProducto" ).append("<option value='"+data[i]['id_clase_producto']+"'>"+data[i]['descripcion']+"</option>");
 					}
 				},
 				error: function(data){
@@ -2081,6 +2121,7 @@ $(document).ready(function () {
 			dataType: 'json', 
 			data: {id:id},
 			beforeSend : function (){
+				cargandoOnOf('on');
 		    },
 			url: urlP+"listarUsuarioEmpresaOn",
 			success : function(data) {
@@ -2092,9 +2133,11 @@ $(document).ready(function () {
 				}else{
 					alert("No tienes empresas asignadas")
 				}
+				cargandoOnOf('of');
 			},
 			error: function(data){
 				console.log(data);
+				cargandoOnOf('of');
 			}
 		});
 	}
@@ -2116,6 +2159,7 @@ $(document).ready(function () {
 			dataType: 'json', 
 			data: {idEmp:idEmp},
 			beforeSend : function (){
+				cargandoOnOf('on');
 		    },
 			url: urlP+"getDetalleEmpresaOn",
 			success : function(data) {
@@ -2186,9 +2230,12 @@ $(document).ready(function () {
 					var ac ="<article class='unid_cont_item_act'><section class='sect_uno_item_izq'><div class='div_fecha_act_top'>"+fg['diaNom']+"</div><div class='div_fecha_act_bot'>"+fg['diaNum']+" "+fg['mesNom']+"</div></section><section class='sect_uno_item_mid' id='"+atd[i]['id_act']+"'><div class='div_tipo_act_top'>"+atd[i]['desc_tact']+"</div><div class='div_tipo_act_bot'><div class='div_tipo_act_bot_izq'>"+atd[i]['hora_act'].substring(0,5)+" / </div><div class='div_tipo_act_bot_der'> "+etd[0]['razon_social_cuen']+"</div></div></section><section class='sect_uno_item_der'><article class='cont_req cont_ckh_act'><input type='checkbox' name='act_"+atd[i]['id_act']+"' id='act_"+atd[i]['id_act']+"' class='chkocultar desa_det_venta'/><label class='lblcheck chk-lft' for='act_"+atd[i]['id_act']+"'></label></article></section></article>";
 		            $("#cont_actv_gen_emp").append(ac);
 				}
+
+				cargandoOnOf('of');
 			},
 			error: function(data){
 				console.log(data);
+				cargandoOnOf('of');
 			}
 		});
 	}
@@ -2235,6 +2282,7 @@ $(document).ready(function () {
 			dataType: 'json', 
 			data: {usuE:usuE, idEmp:idEmp, eEmp:eEmp, eRuc:eRuc, nTrab:nTrab, vVen:vVen, tCar:tCar, eTelf:eTelf},
 			beforeSend : function (){
+				cargandoOnOf('on');
 		    },
 			url: urlP+"editarEmpresaOn",
 			success : function(data) {
@@ -2246,9 +2294,11 @@ $(document).ready(function () {
 					$("#det_emp_telf").html(eTelf);
 					$("#det_emp_tCartera").html($("#cboTipoCartera option:selected").text());
 				}
+				cargandoOnOf('of');
 			},
 			error: function(data){
 				console.log(data);
+				cargandoOnOf('of');
 			}
 		});
 	}
@@ -2267,6 +2317,7 @@ $(document).ready(function () {
 			dataType: 'json', 
 			data: {usuE:usuE, eEmp:eEmp, eRuc:eRuc, nTrab:nTrab, vVen:vVen, tCar:tCar, eTelf:eTelf},
 			beforeSend : function (){
+				cargandoOnOf('on');
 		    },
 			url: urlP+"agregarEmpresaOn",
 			success : function(data) {
@@ -2276,9 +2327,11 @@ $(document).ready(function () {
 					getDetalleEmpresaOn(data.id);
 					console.log("se EMPRESA agrego empresa correctamente");
 				}
+				cargandoOnOf('of');
 			},
 			error: function(data){
 				console.log(data);
+				cargandoOnOf('of');
 			}
 		});
 	}
@@ -2292,6 +2345,7 @@ $(document).ready(function () {
 			dataType: 'json', 
 			data: {id:id},
 			beforeSend : function (){
+				cargandoOnOf('on');
 		    },
 			url: urlP+"listarUsuarioPersonaOn",
 			success : function(data) {
@@ -2304,9 +2358,11 @@ $(document).ready(function () {
 				}else{
 					alert("No tienes personas asignadas")
 				}
+				cargandoOnOf('of');
 			},
 			error: function(data){
 				console.log(data);
+				cargandoOnOf('of');
 			}
 		});
 	}
@@ -2327,6 +2383,7 @@ $(document).ready(function () {
 			dataType: 'json', 
 			data: {idPer:idPer},
 			beforeSend : function (){
+				cargandoOnOf('on');
 		    },
 			url: urlP+"getDetallePersonaOn",
 			success : function(data) {
@@ -2380,9 +2437,12 @@ $(document).ready(function () {
 					var ac ="<article class='unid_cont_item_act'><section class='sect_uno_item_izq'><div class='div_fecha_act_top'>"+fg['diaNom']+"</div><div class='div_fecha_act_bot'>"+fg['diaNum']+" "+fg['mesNom']+"</div></section><section class='sect_uno_item_mid' id='"+atd[i]['id_act']+"'><div class='div_tipo_act_top'>"+atd[i]['desc_tact']+"</div><div class='div_tipo_act_bot'><div class='div_tipo_act_bot_izq'>"+atd[i]['hora_act'].substring(0,5)+" / </div><div class='div_tipo_act_bot_der'> "+etd[0]['razon_social_cuen']+"</div></div></section><section class='sect_uno_item_der'><article class='cont_req cont_ckh_act'><input type='checkbox' name='act_"+atd[i]['id_act']+"' id='act_"+atd[i]['id_act']+"' class='chkocultar desa_det_venta'/><label class='lblcheck chk-lft' for='act_"+atd[i]['id_act']+"'></label></article></section></article>";
 		            $("#cont_actv_per").append(ac);
 				}
+
+				cargandoOnOf('of');
 			},
 			error: function(data){
 				console.log(data);
+				cargandoOnOf('of');
 			}
 		});
 	}
@@ -2422,6 +2482,7 @@ $(document).ready(function () {
 			dataType: 'json', 
 			data: {usuE:usuE, idPer:idPer, nPer:nPer, aPer:aPer, tDoc:tDoc, ndoc:ndoc, mailp:mailp, telp:telp},
 			beforeSend : function (){
+				cargandoOnOf('on');
 		    },
 			url: urlP+"editarPersonaOn",
 			success : function(data) {
@@ -2433,9 +2494,11 @@ $(document).ready(function () {
 					$("#frm_per_tdoc").html($("#cboTipoDocumento option:selected").text());
 					console.log("se edito persona")
 				}
+				cargandoOnOf('of');
 			},
 			error: function(data){
 				console.log(data);
+				cargandoOnOf('of');
 			}
 		});
 	}
@@ -2454,6 +2517,7 @@ $(document).ready(function () {
 			dataType: 'json', 
 			data: {usuE:usuE, nPer:nPer, aPer:aPer, tDoc:tDoc, ndoc:ndoc, mailp:mailp, telp:telp},
 			beforeSend : function (){
+				cargandoOnOf('on');
 		    },
 			url: urlP+"agregarPersonaOn",
 			success : function(data) {
@@ -2462,9 +2526,11 @@ $(document).ready(function () {
 					getDetallePersonaOn(data.id)
 					console.log("se agrego correctamente");
 				}
+				cargandoOnOf('of');
 			},
 			error: function(data){
 				console.log(data);
+				cargandoOnOf('of');
 			}
 		});
 	}
@@ -2484,6 +2550,7 @@ $(document).ready(function () {
 			dataType: 'json', 
 			data: {usuE:usuE, idEmp:idEmp, nPer:nPer, aPer:aPer, tDoc:tDoc, ndoc:ndoc, mailp:mailp, telp:telp},
 			beforeSend : function (){
+				cargandoOnOf('on');
 		    },
 			url: urlP+"agregarPersonaEmpresaOn",
 			success : function(data) {
@@ -2493,9 +2560,11 @@ $(document).ready(function () {
 					//$("#idPer").val(data.id);
 					//console.log("se agrego correctamente");
 				}
+				cargandoOnOf('of');
 			},
 			error: function(data){
 				console.log(data);
+				cargandoOnOf('of');
 			}
 		});
 	}
@@ -2525,6 +2594,7 @@ $(document).ready(function () {
 			dataType: 'json', 
 			data: {usuE:usuE},
 			beforeSend : function (){
+				cargandoOnOf('on');
 		    },
 			url: urlP+"listarUsuarioActividad",
 			success : function(data) {
@@ -2541,9 +2611,11 @@ $(document).ready(function () {
 				}else{
 					alert("No tienes actividades asignadas")
 				}
+				cargandoOnOf('of');
 			},
 			error: function(data){
 				console.log(data);
+				cargandoOnOf('of');
 			}
 		});
 	}
@@ -2556,13 +2628,16 @@ $(document).ready(function () {
 			dataType: 'json', 
 			data: {usuid:usuid, idAct:idAct},
 			beforeSend : function (){
+				cargandoOnOf('on');
 		    },
 			url: urlP+"evaluarActividad",
 			success : function(data) {
+				cargandoOnOf('of');
 				alert("Se ejecuto correctamente");
 			},
 			error: function(data){
 				console.log(data);
+				cargandoOnOf('of');
 			}
 		});
 	}
@@ -2575,16 +2650,182 @@ $(document).ready(function () {
 			dataType: 'json', 
 			data: {usuid:usuid, idAct:idAct},
 			beforeSend : function (){
+				cargandoOnOf('on');
 		    },
 			url: urlP+"eliminarActividadOn",
 			success : function(data) {
+				cargandoOnOf('of');
 				alert("Se elimino la actividad correctamente");
 			},
 			error: function(data){
+				cargandoOnOf('of');
 				console.log(data);
 			}
 		});
 	}
+
+
+	$("body").on("change","#cboClaseProducto", function(e){
+		var idCeP = $("#cboClaseProducto").val();
+		if(localStorage.getItem('onof') == 'on'){
+			
+			if(idCeP != 0){
+
+				$("#cboCategoriaProducto").html("<option value='0'>SELECCIONAR CATEGORIA</option>");
+				$("#cbo-categoria-prod div div div span").html("SELECCIONAR CATEGORIA");
+				$("#cboCategoriaProducto option[value=0]").attr("selected",'selected');
+
+				$("#cboProducto").html("<option value='0'>PRODUCTO</option>");
+				$("#cbo-prod div div div span").html("PRODUCTO");
+				$("#cboProducto option[value=0]").attr("selected",'selected');
+				
+				$.ajax({
+					type: 'POST',
+					dataType: 'json', 
+					data: {id:idCeP},
+					beforeSend : function (){
+						cargandoOnOf('on');
+				    },
+					url: urlP+"searchCategoriaProducto",
+					success : function(data) {
+						for(var i = 0; i < data.length; i++)
+						{
+							$( "#cboCategoriaProducto" ).append("<option value='"+data[i]['id_categoria_prod']+"'>"+data[i]['descripcion']+"</option>");
+						}
+						cargandoOnOf('of');
+					},
+					error: function(data){
+						console.log(data);
+						cargandoOnOf('of');
+					}
+
+				});
+
+			}else{
+				$("#cboCategoriaProducto").html("<option value='0'>CATEGORIA</option>");
+				$("#cbo-categoria-prod div div div span").html("CATEGORIA");
+				$("#cboCategoriaProducto option[value=0]").attr("selected",'selected');
+
+				$("#cboProducto").html("<option value='0'>PRODUCTO</option>");
+				$("#cbo-prod div div div span").html("PRODUCTO");
+				$("#cboProducto option[value=0]").attr("selected",'selected');
+			}
+		}else{
+
+		}
+	});
+
+	$("body").on("change","#cboCategoriaProducto", function(e){
+		var idCaP = $("#cboCategoriaProducto").val();
+		if(localStorage.getItem('onof') == 'on'){
+			
+			if(idCaP != 0){
+				$("#cboProducto").html("<option value='0'>SELECCIONAR PRODUCTO</option>");
+				$("#cbo-prod div div div span").html("SELECCIONAR PRODUCTO");
+				$("#cboProducto option[value=0]").attr("selected",'selected');
+				
+				$.ajax({
+					type: 'POST',
+					dataType: 'json', 
+					data: {id:idCaP},
+					beforeSend : function (){
+						cargandoOnOf('on');
+				    },
+					url: urlP+"searchProducto",
+					success : function(data) {
+						for(var i = 0; i < data.length; i++)
+						{
+							$( "#cboProducto" ).append("<option value='"+data[i]['id_producto']+"'>"+data[i]['descripcion_prod']+"</option>");
+						}
+						cargandoOnOf('of');
+					},
+					error: function(data){
+						console.log(data);
+						cargandoOnOf('of');
+					}
+
+				});
+			}else{
+				$("#cboProducto").html("<option value='0'>PRODUCTO</option>");
+				$("#cbo-prod div div div span").html("PRODUCTO");
+				$("#cboProducto option[value=0]").attr("selected",'selected');
+			}
+		}else{
+
+		}
+	});
+
+	$("body").on("change","#cboProducto", function(e){
+		var idProd = $("#cboProducto").val();
+		var nomProd = $("#cboProducto option:selected").text();
+
+		var tmpVeri = "no";
+
+		if(idProd != 0){
+
+			if(localStorage.getItem('onof') == 'on'){
+				if(arProd.length != 0){
+					for(var i = 0; i<arProd.length; i++){
+						if(arProd[i].idProd == idProd){
+							tmpVeri = "si";
+						}
+					}
+					if(tmpVeri == "no"){
+						arProd.push({idProd:idProd, nomProd:nomProd, cant:1});
+						var cad = "<section class='cont_item_prod' id='cont_prod_"+idProd+"'><div class='ui-input-text ui-body-inherit ui-corner-all ui-shadow-inset'><input class='cantProdClas' type='number' id='cp_"+idProd+"' value='1'></div><label class='lbl_item_prod'>"+nomProd+"</label><div class='delete_item_prod' id='dp_"+idProd+"'><img src='img/delete.png'></div></section>";
+						$("#cont_lst_item_prod").append(cad);
+					}else{
+						alert("El producto ya esta en la lista");
+					}
+				}else{
+					arProd.push({idProd:idProd, nomProd:nomProd, cant:1});
+					var cad = "<section class='cont_item_prod' id='cont_prod_"+idProd+"'><div class='ui-input-text ui-body-inherit ui-corner-all ui-shadow-inset'><input class='cantProdClas' type='number' id='cp_"+idProd+"' value='1'></div><label class='lbl_item_prod'>"+nomProd+"</label><div class='delete_item_prod' id='dp_"+idProd+"'><img src='img/delete.png'></div></section>";
+					$("#cont_lst_item_prod").append(cad);
+				}
+				
+				//console.log("cantidad: "+arProd.length+", array:"+ arProd)
+			}else{
+
+			}
+		}
+	});
+
+	$("body").on("click",".delete_item_prod", function(e){
+		var idNv = $(this).attr('id').substring(3);
+		if(localStorage.getItem('onof') == 'on'){
+			for(var i = 0; i<arProd.length; i++){
+				if(arProd[i].idProd == idNv){
+					console.log(i);
+
+					arProd.splice(i, 1);
+
+					console.log(arProd)
+
+					$("#cont_prod_"+idNv).remove(); 
+				}
+			}
+		}else{
+
+		}
+	});
+
+	$("body").on("focusout", ".cantProdClas", function(e){
+		var tmpIP = $(this).attr('id').substring(3);		
+		//console.log($(idNv).val())
+		if($(this).val() != ""){
+			for(var i = 0; i<arProd.length; i++){
+				if(arProd[i].idProd == tmpIP)
+				{
+					arProd[i].cant = $(this).val();
+				}
+			}
+		}else{
+			alert("error al momento de ingresar la cantidad");
+			$(this).focus();
+		}
+		
+		console.log(arProd)
+	});
 
 });
 
