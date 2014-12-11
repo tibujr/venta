@@ -59,6 +59,10 @@
 
     <gap:plugin name="com.sharinglabs.cordova.plugin.datepicker" /><!--datepicker-->
 
+    <gap:plugin name="com.pushwoosh.plugins.pushwoosh" version="3.4.1" /><!--notificion-->
+
     <access origin="*" />
+    <access origin="*.pushwoosh.com"/> <!-- allow pushwoosh service -->
+    
     <access uri="*" />
 </widget>

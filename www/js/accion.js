@@ -971,8 +971,6 @@ $(document).ready(function () {
 			var a = "req_"+reqArr[i];
 			var b = "reqc_"+reqArr[i];
 			$('#'+a+":checkbox").prop('checked', false);
-			//$('.'+b+" span span.ui-icon").addClass( "ui-icon-checkbox-off" ) cambio JQ4
-			//$('.'+b+" span span.ui-icon").removeClass( "ui-icon-checkbox-on" ) cambio JQ4
 			$('.'+b).addClass( "ui-checkbox-off" );
 			$('.'+b).removeClass( "ui-checkbox-on" );			
 		}
@@ -1057,7 +1055,7 @@ $(document).ready(function () {
 		$(".nvo_pros").css({display: 'inline-block'});
 
 		if(localStorage.getItem('onof') == 'on')
-		{	
+		{
 			$(".desa_det_venta").prop('disabled', false);
 			$("#rsoc_lbl, #nom_deci_lbl").css({display: 'inline-block'});
 			$("#rsoc, #nom_deci").css({display: 'none'});
@@ -1587,6 +1585,8 @@ $(document).ready(function () {
 			}
 		}
 
+		if(arProd.length <= 0){arProd = 0}
+
 		$.ajax({
 			type: 'POST',
 			dataType: 'json', 
@@ -1614,22 +1614,6 @@ $(document).ready(function () {
 		});
 	}
 
-	function checkRequisitoOffAll(){
-		for (var i = 0; i < reqArr.length; i++) {
-			var a = "req_"+reqArr[i];
-			var b = "reqc_"+reqArr[i];
-			/*if(data[a] == "S"){
-				$('#'+a+":checkbox").prop('checked', true);
-				$('.'+b).addClass( "ui-checkbox-on" )
-				$('.'+b).removeClass( "ui-checkbox-off" )
-			}else{*/
-				$('#'+a+":checkbox").prop('checked', false);
-				$('.'+b).addClass( "ui-checkbox-off" )
-				$('.'+b).removeClass( "ui-checkbox-on" )
-			//}
-		}
-	}
-
 	function cargandoOnOf(val){
 		if(val == 'on'){
 			$("#load_pls").css({display: 'inline-block'});
@@ -1637,6 +1621,19 @@ $(document).ready(function () {
 		}else{
 			$("#load_pls").css({display: 'none'});
 			$("#load_pls2").css({display: 'none'});
+		}
+	}
+
+	function checkRequisitoOffAll(){
+		for (var i = 0; i < reqArr.length; i++) {
+			var a = "req_"+reqArr[i];
+			var b = "reqc_"+reqArr[i];
+
+			console.log("id: "+a+" - clase: "+b);
+
+			$('#'+a+":checkbox").prop('checked', true);
+			$('.'+b).addClass( "ui-checkbox-on" );
+			$('.'+b).removeClass( "ui-checkbox-off" );
 		}
 	}
 
@@ -1665,21 +1662,26 @@ $(document).ready(function () {
 					$(".fecha_emp_det_pros").html(data.fecha_cierre_pros);
 					$(".propu_emp_det_pros").html(data.propuesta_pros);
 
-					checkRequisitoOffAll();
+					//checkRequisitoOffAll();
+					console.log(data)
 					for (var i = 0; i < reqArr.length; i++) {
 						var a = "req_"+reqArr[i];
-						var b = "reqc_"+reqArr[i];
+						var b = ".reqc_"+reqArr[i];
 						if(data[a] == "S"){
-							console.log(a+" on")
-							$('#'+a+":checkbox").prop('checked', true);
-							$('.'+b).addClass( "ui-checkbox-on" )
-							$('.'+b).removeClass( "ui-checkbox-off" )
+							console.log("A: "+a+" "+data[a]);
+							$(b).addClass( "ui-checkbox-on" );
+							$(b).removeClass( "ui-checkbox-off" );
+							//$("#cont_reque #"+a).prop('checked', true);
+							$("#cont_reque #"+a+":checkbox").prop('checked', true);
 						}else{
-							console.log(a+" off")
-							$('#'+a+":checkbox").prop('checked', false);
-							$('.cont_req .'+b).addClass( "ui-checkbox-off" )
-							$('.cont_req .'+b).removeClass( "ui-checkbox-on" )
+							console.log("B: "+a+" "+data[a]);
+							$("#cont_reque #"+a+":checkbox").prop('checked', false);
+							$(b).addClass( "ui-checkbox-off" )
+							$(b).removeClass( "ui-checkbox-on" )
 						}
+
+						//$("#req_2:checkbox").prop('checked', false);
+						console.log("data que entra : "+data[a]+" - requerimiento : "+reqArr[i]+" - "+$("#cont_reque #req_"+reqArr[i]+":checked").val())
 					}
 					
 					/* FORMULARIO EDITAR*/
@@ -1776,10 +1778,12 @@ $(document).ready(function () {
 					{
 						for(var i=0; i< data.length; i++)
 						{
+							//reqArr.push({idReq:['id_req'], nomProd:nomProd, cant:1});
 							reqArr[i]=data[i]['id_req'];
 							var ltdr = "<article class='cont_req cont_ckh_reg nvo_css_req'><label class='reqc_"+data[i]['id_req']+"'><input type='checkbox' name='req_"+data[i]['id_req']+"' id='req_"+data[i]['id_req']+"' class='chkocultar desa_det_venta'>"+data[i]['descripcion_req']+"</label></article>";
-							$( "#cont_reque, #req_detalle_venta" ).append(ltdr);
+							$( "#req_detalle_venta, #cont_reque" ).append(ltdr);
 						}
+						console.log(reqArr)
 					}
 				},
 				error: function(data){
@@ -2359,7 +2363,7 @@ $(document).ready(function () {
 				if(data != 0){
 					for(var i=0; i< data.length; i++)
 					{
-						var cadP ="<section class='cont_item_contend_uni_per' id='"+data[i]['id_con']+"'><section class='sec_cont_item_izq'><div class='sec_cont_item_izq_ico'><div class='icon-user ico-usr'></div></div></section><section class='sec_cont_item_mid'><div class='sec_cont_item_izq_text' >"+data[i]['contacto']+"</div></section><section class='sec_cont_item_der'><div class='sec_cont_item_izq_flecha'><div class='icon-plus'></div></div></section></section>";
+						var cadP ="<section class='cont_item_contend_uni_per' id='"+data[i]['id_con']+"'><section class='sec_cont_item_izq'><div class='sec_cont_item_izq_ico'><div class='icon-user ico-usr'></div></div></section><section class='sec_cont_item_mid'><div class='sec_cont_item_izq_text' >"+data[i]['contacto']+"</div></section><section class='sec_cont_item_der'><div class='sec_cont_item_izq_flecha'><div class='icon-arrow-right'></div></div></section></section>";
 						$(".lst-persona").append(cadP);
 					}
 				}else{
