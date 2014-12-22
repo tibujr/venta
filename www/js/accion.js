@@ -295,11 +295,12 @@ $(document).ready(function () {
 				editarActividadOn($("#id_act_frm").val());
 				$.mobile.back();
 			}else if($("#frmValAct").val() == "nuevo"){
-				if(verificarCampoAct()){
+				verificarCampoAct();
+				/*if(verificarCampoAct()){
 					limpiarDetalleActividad();
 					agregarActividadOn();
 					$.mobile.changePage("#actividad_detalle", {transition:"slide"});
-				}
+				}*/
 			}
 		}
 	});
@@ -308,21 +309,29 @@ $(document).ready(function () {
 	{
 		if($("#cboTipoActividad").val() == 0){
 			$(".actividad_tipo").focus();
+			alert("Indicar el tipo de Actividad");
 			return false;
 		}else if($("#fmr_act_obj").val() == ""){
 			$("#fmr_act_obj").focus();
+			alert("Indicar el objetivo");
 			return false;
 		}else if($("#fmr_act_fecha").val() == ""){
 			$("#fmr_act_fecha").focus();
+			alert("Indicar la fecha");
 			return false;
 		}else if($("#fmr_act_hora").val() == ""){
 			$("#fmr_act_hora").focus();
+			alert("Indicar la hora");
 			return false;
 		}else if($("#fmr_act_dur").val() == ""){
 			$("#fmr_act_dur").focus();
+			alert("Indicar la duración");
 			return false;
 		}else{
-			return true;
+			limpiarDetalleActividad();
+			agregarActividadOn();
+			$.mobile.changePage("#actividad_detalle", {transition:"slide"});
+			//return true;
 		}
 	}
 
@@ -349,6 +358,7 @@ $(document).ready(function () {
 			success : function(data) {
 				if(data){
 					console.log(data)
+					$("#det_act_tit").html($("#cboTipoActividad option:selected").text());
 					$("#id_act_frm").val(data.id)
 					$("#det_act_obj").html(objA);
 					$("#det_act_fecha").html(fechaA);
@@ -542,12 +552,18 @@ $(document).ready(function () {
 
 		if(localStorage.getItem('onof') == 'on')
 		{	
-			if(confirm('¿Desea eliminar esta actividad?')){
+			var observacion = prompt('¿Por qué esta eliminando la actividad?','');
+			if(observacion){
+				eliminarActividadOn(idAct, observacion);
+				$(".act_"+idAct+"_cn").css({display:'none'});
+				$.mobile.changePage("#actividad", {transition:"slidedown"});
+			}else{
+				alert("Error: debe ingresar una observación")
+			}
+			/*if(confirm('¿Desea eliminar esta actividad?')){
 				eliminarActividadOn(idAct);
 				$(".act_"+idAct+"_cn").css({display:'none'});
 				$.mobile.changePage("#actividad", {transition:"slidedown"});
-			}/*else{
-				console.log("no")
 			}*/
 		}else{
 
@@ -566,10 +582,9 @@ $(document).ready(function () {
 		    },
 			url: urlP+"getDetalleActividad",
 			success : function(data) {
-				//a.id_tact, t.desc_tact, a.objetivo_act, a.fecha_act, a.hora_act, 
-				//a.duracion_act, a.id_pros, p.titulo, a.id_cuen, cu.razon_social_cuen , 
-				//a.id_con, co.nombre_con, co.apellido_con, a.nota_act
+				//a.id_tact, t.desc_tact
 				limpiarDetalleActividad();
+
 				$("#det_act_tit").html(data.desc_tact);
 				(data.objetivo_act)?$("#det_act_obj").html(data.objetivo_act):$("#det_act_obj").html("---");
 				$("#det_act_fecha").html(data.fecha_act);
@@ -591,11 +606,11 @@ $(document).ready(function () {
 
 				limpiarFormularioActividad();
 				$("#cboTipoActividad option[value="+ data.id_tact +"]").attr("selected",true);
+				$("#cbo-tipo-act div div div span").html(data.desc_tact);
 				(data.objetivo_act)?$("#fmr_act_obj").val(data.objetivo_act) : $("#fmr_act_obj").val("");
 				$("#fmr_act_fecha").val(data.fecha_act);
 				(data.hora_act)?$("#fmr_act_hora").val(data.hora_act.substring(0,5)) : $("#fmr_act_hora").val("");
 				(data.duracion_act)?$("#fmr_act_dur").val(data.duracion_act.substring(0,5)) : $("#fmr_act_dur").val("");
-				console.log(data.id_pros);
 
 				if(!data.id_pros){
 					$("#cbo-opor-act div div div span").html("OPORTUNIDAD");
@@ -704,6 +719,7 @@ $(document).ready(function () {
 	$("body").on("click",".cont_item_contend_uni_emp", function(e){
 		var idEmpUsu = $(this).attr('id');//$("#id_emp_sel").val();
 		var idted = idEmpUsu.substring(4);
+		console.log(idted)
 		$("#id_emp_sel").val(idted);
 		if(localStorage.getItem('onof') == 'on'){
 			getDetalleEmpresaOn(idted);
@@ -2196,8 +2212,17 @@ $(document).ready(function () {
 				$("#edt_emp_ntrab").val(etd[0]['numero_trabajadores_cuen']);
 				$("#edt_emp_vven").val(etd[0]['volumen_venta_cuen']);
 				$("#edt_emp_telf").val(etd[0]['telefono_cuen']);
-				(!etd[0]['tipo_cartera_cuen'])? $("#cont-cbo-tcartera span.ui-btn-text span").html("TIPO DE CARTERA") : $("#cont-cbo-tcartera span.ui-btn-text span").html(etd[0]['tipo_cartera_cuen']);
-				(!etd[0]['id_tipo_cartera'])? $("#cboTipoCartera option[value=0]").attr("selected",'selected'):$("#cboTipoCartera option[value='"+etd[0]['id_tipo_cartera']+"']").attr("selected",'selected');
+				
+				if(!etd[0]['tipo_cartera_cuen']){
+					$("#cont-cbo-tcartera div div div span").html("TIPO DE CARTERA");
+					$("#cboTipoCartera option[value='0']").attr("selected",'selected');
+				}else{
+					$("#cont-cbo-tcartera div div div span").html(etd[0]['tipo_cartera_cuen']);
+					$("#cboTipoCartera option[value='"+etd[0]['id_tipo_cartera']+"']").attr("selected",'selected');
+				}
+
+				//(!etd[0]['tipo_cartera_cuen'])? $("#cont-cbo-tcartera span.ui-btn-text span").html("TIPO DE CARTERA") : $("#cont-cbo-tcartera span.ui-btn-text span").html(etd[0]['tipo_cartera_cuen']);
+				//(!etd[0]['id_tipo_cartera'])? $("#cboTipoCartera option[value=0]").attr("selected",'selected'):$("#cboTipoCartera option[value='"+etd[0]['id_tipo_cartera']+"']").attr("selected",'selected');
 				
 				arEmpEdit['razonSocial'] = etd[0]['razon_social_cuen'];
 				arEmpEdit['ruc'] = etd[0]['ruc_cuen'];
@@ -2304,6 +2329,7 @@ $(document).ready(function () {
 					$("#det_emp_voluV").html(vVen);
 					$("#det_emp_telf").html(eTelf);
 					$("#det_emp_tCartera").html($("#cboTipoCartera option:selected").text());
+					$("#emp_"+idEmp+" .sec_cont_item_mid .sec_cont_item_izq_text").html(eEmp);
 				}
 				cargandoOnOf('of');
 			},
@@ -2653,13 +2679,13 @@ $(document).ready(function () {
 		});
 	}
 
-	function eliminarActividadOn(idAct)
+	function eliminarActividadOn(idAct, obs)
 	{
 		var usuid = localStorage.getItem('id_usu');
 		$.ajax({
 			type: 'POST',
 			dataType: 'json', 
-			data: {usuid:usuid, idAct:idAct},
+			data: {usuid:usuid, idAct:idAct, obs:obs},
 			beforeSend : function (){
 				cargandoOnOf('on');
 		    },

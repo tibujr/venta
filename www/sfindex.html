@@ -613,7 +613,7 @@
                 </section>
                 <section class="sec_cont_item_mid_nuevo nvo_cn_frm_emp">
                   <label>RUC</label>
-                  <input type="number" class="sec_cont_item_izq_text_nuevo" id='edt_emp_ruc' name = 'edt_emp_ruc'></input>
+                  <input type="number" class="sec_cont_item_izq_text_nuevo" id='edt_emp_ruc' name = 'edt_emp_ruc' oninput="maxLengthCheck(this,11)"></input>
                 </section>
               </section>
 
@@ -625,7 +625,7 @@
                 </section>
                 <section class="sec_cont_item_mid_nuevo nvo_cn_frm_emp">
                   <label>Número de Trabajadores</label>
-                  <input type="number" class="sec_cont_item_izq_text_nuevo" id='edt_emp_ntrab' name = 'edt_emp_ntrab'></input>
+                  <input type="number" class="sec_cont_item_izq_text_nuevo" id='edt_emp_ntrab' name = 'edt_emp_ntrab' oninput="maxLengthCheck(this,5)"></input>
                 </section>
               </section>
 
@@ -662,7 +662,7 @@
                 </section>
                 <section class="sec_cont_item_mid_nuevo nvo_cn_frm_emp">
                   <label>Teléfono</label>
-                  <input type="number" class="sec_cont_item_izq_text_nuevo" id='edt_emp_telf' name='edt_emp_telf'></input>
+                  <input type="number" class="sec_cont_item_izq_text_nuevo" id='edt_emp_telf' name='edt_emp_telf' oninput="maxLengthCheck(this,12)"></input>
                 </section>
               </section>
             </section>
@@ -1084,7 +1084,7 @@
                     </section>
                     <section class="sec_cont_item_mid_nuevo nvo_cn_frm_emp">
                       <label>Número de documento</label>
-                      <input type="number" class="sec_cont_item_izq_text_nuevo" id='dt_frm_per_ndoc' name='dt_frm_per_ndoc'></input>
+                      <input type="number" class="sec_cont_item_izq_text_nuevo" id='dt_frm_per_ndoc' name='dt_frm_per_ndoc' oninput="maxLengthCheck(this,20)"></input>
                     </section>
                   </section>
 
@@ -1108,7 +1108,7 @@
                     </section>
                     <section class="sec_cont_item_mid_nuevo nvo_cn_frm_emp">
                       <label>Teléfono</label>
-                      <input type="number" class="sec_cont_item_izq_text_nuevo" id='dt_frm_per_telf' name='dt_frm_per_telf'></input>
+                      <input type="number" class="sec_cont_item_izq_text_nuevo" id='dt_frm_per_telf' name='dt_frm_per_telf' oninput="maxLengthCheck(this,11)"></input>
                     </section>
                   </section>
                 </section>
@@ -1418,5 +1418,15 @@
     </article>
     <section id='agregar_contacto_np'>Agregar</section>
   </div>
+
+  <!--validar check-->
+  <script>
+    function maxLengthCheck(object, cant)
+    {
+      if (object.value.length <= cant)
+        console.log(object.value.length)
+        object.value = object.value.slice(0, cant)
+    }
+  </script>
 </body>
 </html>
