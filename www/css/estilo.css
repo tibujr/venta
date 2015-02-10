@@ -2083,10 +2083,13 @@ textarea {
 
 .sub-menu-nn li, .sub-menu-nn-d li{
   width: 100% !important;
-  padding: 10px 5px;
+  /*padding: 10px 5px;*/
+  padding: 15px 10px;/*add*/
   display: block;
   background: #80172D;
-  font-size: 12px;
+  /*font-size: 12px;*/
+  font-size: 14px;/*add*/
+  border-bottom: 1px solid #490d1a;/*add*/
   word-break: break-all;
 }
 

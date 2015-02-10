@@ -1158,49 +1158,61 @@ $(document).ready(function () {
 			},
 			url: urlP+"llenarNuevoProspectoEmpresaON",
 			success : function(data) {
-				if(data != 0){
+				//if(data != 0){
 					limpiarFrmNODesdeCon();
 					$("#accion_frm").val("nuevo");
 
 					if(val == 'e'){
 						$("#id_cuen").val(id);
 						$("#rsoc").val($("#nomEmp").val());
+						$("#titpros").val("ventas "+$("#nomEmp").val());//nuevo
 
-						if(data.length == 1)
-						{
-				            $("#id_con").val(data[0].id_con);
-		                    $("#nom_deci").val(data[0].value).prop('disabled', true);
-		                    $("#presu").focus();
-		                    $("#nom_deci").autocomplete({source: []});
-			            }else{
-							$("#nom_deci").autocomplete({
-								source: data,
-								minLength: 0,
-								autoFocus : true,
-								select: function(e,u){
-									$("#id_con").val(u.item.id_con); 
-								}
-							}).on('focus', function(event) {
-				                var self = this;
-				                $(self).autocomplete("search", "");
-				            });
-				            $("#nom_deci").focus();
-				        }
+						if(data != 0){
+							if(data.length == 1)
+							{
+					            $("#id_con").val(data[0].id_con);
+			                    $("#nom_deci").val(data[0].value).prop('disabled', true);
+			                    $("#presu").focus();
+			                    $("#nom_deci").autocomplete({source: []});
+				            }else{
+								$("#nom_deci").autocomplete({
+									source: data,
+									minLength: 0,
+									autoFocus : true,
+									select: function(e,u){
+										$("#id_con").val(u.item.id_con); 
+									}
+								}).on('focus', function(event) {
+					                var self = this;
+					                $(self).autocomplete("search", "");
+					            });
+					            $("#nom_deci").focus();
+					        }
+					        $.mobile.changePage("#formulario_venta", {transition:"slidedown"});
+					    }else{
+					    	alert("Debe agregar un contacto");
+					    	$("#accion_frm_per").val("empresa");
+							$.mobile.changePage("#contacto_per_nuevo_editar", {transition:"slide"});
+					    }
 				        cargandoOnOf('of');
-				        $.mobile.changePage("#formulario_venta", {transition:"slidedown"});
+				       
 				    }else if(val == 'c'){
 				    	if(data.id_cuen){
 				    		$("#id_cuen").val(data.id_cuen);
 				    		$("#rsoc").val(data.razon_social_cuen);
 				    		$("#id_con").val(data.id_con);
 				    		$("#nom_deci").val(data.nombre_con+" "+data.apellido_con);
+				    		$("#titpros").val("ventas "+data.razon_social_cuen);//nuevo
 				    		cargandoOnOf('of');
 				    		$.mobile.changePage("#formulario_venta", {transition:"slidedown"});
 				    	}else{
 				    		alert("debe asociar a una empresa primero");
 				    	}
 				    }
-				}
+				/*}else{
+					alert("no se encontraron datos");
+					cargandoOnOf('of');
+				}*/
 			},
 			error: function(data){
 				cargandoOnOf('of');
@@ -1277,7 +1289,7 @@ $(document).ready(function () {
 		}
 	});
 
-	$("#nom_deci, #presu, #nece, #fecha_aprox, #sig_cita, #hra_cita").keyup(function(){
+	$("#titpros, #nom_deci, #presu, #nece, #fecha_aprox, #sig_cita, #hra_cita").keyup(function(){
 		if( $(this).val() != "" ){
 			$(".menError").fadeOut();			
 			return false;
