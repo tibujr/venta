@@ -8,6 +8,7 @@ $(document).ready(function () {
 //*************************************** BASE DE DATOS WEBSQL
 
 	var urlP = "https://roinet.pe/ventas/index.php/mobile_controller/";
+	//var urlP = "https://roinet.pe/NWROInet/venta/index.php/mobile_controller/";
 	var db;
 	var shortName = 'ventaBD';
 	var version = '1.0';
@@ -259,16 +260,19 @@ $(document).ready(function () {
 
 	$("body").on('click', '.eva_act', function(e){
 		var idAct_ev =  $(this).attr('id');
-		console.log(idAct_ev)
+		//console.log(idAct_ev)
 		if(localStorage.getItem('onof') == 'on'){
 			if(confirm('¿marcar como terminado?')){
 				var evId = idAct_ev.substring(4);
 				evaluarActividad(evId);
 				$(this).prop('checked', true);
 				$("."+idAct_ev+"_cn").css({display:'none'});
+				console.log("true")
 			}else{
 				$(this).prop('checked', false);
+				console.log("false")
 			}
+
 		}else{
 			//evaluar actividad ofline
 		}
@@ -1613,7 +1617,6 @@ $(document).ready(function () {
 			}
 		}
 
-		//console.log(reqArrTemp);
 		if(arProd.length <= 0){arProd = 0}
 
 		$.ajax({
@@ -1623,10 +1626,9 @@ $(document).ready(function () {
 			beforeSend : function (){
 				cargandoOnOf('on');
 		    },
-			url: urlP+"editProspectoOn_2",
+			url: urlP+"editProspectoOn",
 			success : function(data) {
 				if(data != 0){
-					console.log(data);
 					var usuid = localStorage.getItem('id_usu');
 					llenarFase()
 					llenarProspecto(usuid);
@@ -1638,7 +1640,6 @@ $(document).ready(function () {
 			},
 			error: function(data){
 				cargandoOnOf('of');
-				console.log(data);
 			}
 		});
 	}
@@ -1657,8 +1658,6 @@ $(document).ready(function () {
 		for (var i = 0; i < reqArr.length; i++) {
 			var a = "req_"+reqArr[i];
 			var b = "reqc_"+reqArr[i];
-
-			console.log("id: "+a+" - clase: "+b);
 
 			$('#'+a+":checkbox").prop('checked', true);
 			$('.'+b).addClass( "ui-checkbox-on" );
@@ -1692,25 +1691,22 @@ $(document).ready(function () {
 					$(".propu_emp_det_pros").html(data.propuesta_pros);
 
 					//checkRequisitoOffAll();
-					console.log(data)
 					for (var i = 0; i < reqArr.length; i++) {
 						var a = "req_"+reqArr[i];
 						var b = ".reqc_"+reqArr[i];
 						if(data[a] == "S"){
-							console.log("A: "+a+" "+data[a]);
 							$(b).addClass( "ui-checkbox-on" );
 							$(b).removeClass( "ui-checkbox-off" );
 							//$("#cont_reque #"+a).prop('checked', true);
 							$("#cont_reque #"+a+":checkbox").prop('checked', true);
 						}else{
-							console.log("B: "+a+" "+data[a]);
 							$("#cont_reque #"+a+":checkbox").prop('checked', false);
 							$(b).addClass( "ui-checkbox-off" )
 							$(b).removeClass( "ui-checkbox-on" )
 						}
 
 						//$("#req_2:checkbox").prop('checked', false);
-						console.log("data que entra : "+data[a]+" - requerimiento : "+reqArr[i]+" - "+$("#cont_reque #req_"+reqArr[i]+":checked").val())
+						//console.log("data que entra : "+data[a]+" - requerimiento : "+reqArr[i]+" - "+$("#cont_reque #req_"+reqArr[i]+":checked").val())
 					}
 					
 					/* FORMULARIO EDITAR*/
@@ -1769,7 +1765,6 @@ $(document).ready(function () {
 				cargandoOnOf('of');
 			},
 			error: function(data){
-				console.log(data);
 				cargandoOnOf('of');
 			}
 		});
@@ -1812,11 +1807,10 @@ $(document).ready(function () {
 							var ltdr = "<article class='cont_req cont_ckh_reg nvo_css_req'><label class='reqc_"+data[i]['id_req']+"'><input type='checkbox' name='req_"+data[i]['id_req']+"' id='req_"+data[i]['id_req']+"' class='chkocultar desa_det_venta'>"+data[i]['descripcion_req']+"</label></article>";
 							$( "#req_detalle_venta, #cont_reque" ).append(ltdr);
 						}
-						console.log(reqArr)
 					}
 				},
 				error: function(data){
-					console.log(data);
+					alert("error al llamar requisitos")
 				}
 			});
 		}
@@ -2622,15 +2616,22 @@ $(document).ready(function () {
 	function generaFecha(d)
 	{
 		var fret = new Array();
-		var fecha = (d).split('-').join('/');
-		var nf = new Date(fecha);
-		var Anio = nf.getFullYear();
-		//var Fecha = Dia[nf.getDay()] + ", " + nf.getDate() + " de " + Mes[nf.getMonth()] + " del " + Anio + ". ";
-		if (d.length < 11) {
-			fret['diaNom'] = Dia[nf.getDay()];
-			fret['diaNum'] = nf.getDate();
-			fret['mesNom'] = Mes[nf.getMonth()];
+		if(d != null){
+			var fecha = (d).split('-').join('/');
+			var nf = new Date(fecha);
+			var Anio = nf.getFullYear();
+			//var Fecha = Dia[nf.getDay()] + ", " + nf.getDate() + " de " + Mes[nf.getMonth()] + " del " + Anio + ". ";
+			if (d.length < 11) {
+				fret['diaNom'] = Dia[nf.getDay()];
+				fret['diaNum'] = nf.getDate();
+				fret['mesNom'] = Mes[nf.getMonth()];
+			}
+		}else{
+			fret['diaNom'] = "00";
+			fret['diaNum'] = "00";
+			fret['mesNom'] = "00";
 		}
+		
 		return fret;
 	}
 
