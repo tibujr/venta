@@ -300,11 +300,6 @@ $(document).ready(function () {
 				$.mobile.back();
 			}else if($("#frmValAct").val() == "nuevo"){
 				verificarCampoAct();
-				/*if(verificarCampoAct()){
-					limpiarDetalleActividad();
-					agregarActividadOn();
-					$.mobile.changePage("#actividad_detalle", {transition:"slide"});
-				}*/
 			}
 		}
 	});
