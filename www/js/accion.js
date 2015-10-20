@@ -304,6 +304,19 @@ $(document).ready(function () {
 		}
 	});
 
+	function limpiarDetalleActividad()
+	{
+		$("#det_act_tit").html("");
+		$("#det_act_obj").html("");
+		$("#det_act_fecha").html("");
+		$("#det_act_hora").html("");
+		$("#det_act_dura").html("");
+		$("#det_act_opor").html("");
+		$("#det_act_emp").html("");
+		$("#det_act_cont").html("");
+		$("#det_act_nota").html("");
+	}
+
 	function verificarCampoAct()
 	{
 		if($("#cboTipoActividad").val() == 0){
@@ -356,7 +369,6 @@ $(document).ready(function () {
 			url: urlP+"agregarActividadOn",
 			success : function(data) {
 				if(data){
-					console.log(data)
 					$("#det_act_tit").html($("#cboTipoActividad option:selected").text());
 					$("#id_act_frm").val(data.id)
 					$("#det_act_obj").html(objA);
@@ -404,6 +416,7 @@ $(document).ready(function () {
 			url: urlP+"editarActividadOn",
 			success : function(data) {
 				if(data == 'ok'){
+					limpiarDetalleActividad();
 					$("#det_act_obj").html(objA);
 					$("#det_act_fecha").html(fechaA);
 					$("#det_act_hora").html(horaA);
@@ -462,15 +475,15 @@ $(document).ready(function () {
 		    },
 			url: urlP+"llenarCombosFrmActividadOn",
 			success : function(data) {
+				
 				if(com == 'o'){
 					if(data.id_cuen){
-						$("#cbo-emp-act div div div span").html(data.razon_social_cuen);
+						$("#cbo-emp-act div div div span").html(data.razon_social_cuen);						
 						$("#cboEmpresaAct option[value='"+data.id_cuen+"']").attr("selected",'selected');
 					}else{
 						$("#cbo-emp-act div div div span").html("EMPRESA");
 						$("#cboEmpresaAct option[value='0']").attr("selected",'selected');
 					}
-
 					if(data.id_con){
 						$("#cbo-con-act div div div span").html(data.nombre_con+" "+data.apellido_con);
 						$("#cboContactoAct option[value='"+data.id_con+"']").attr("selected",'selected');
@@ -501,11 +514,8 @@ $(document).ready(function () {
 					}
 				}else if(com == 'c'){
 					if(data.id_pros){
-						if(data.titulo){
-							$("#cbo-opor-act div div div span").html(data.titulo);
-						}else{
-							$("#cbo-opor-act div div div span").html(data.nombre_con+"venta's");
-						}
+						if(data.titulo){ $("#cbo-opor-act div div div span").html(data.titulo); }
+						else{ $("#cbo-opor-act div div div span").html(data.nombre_con+"venta's"); }
 						$("#cboOportunidadAct option[value='"+data.id_pros+"']").attr("selected",'selected');
 					}else{
 						$("#cbo-opor-act div div div span").html("OPORTUNIDAD");
@@ -522,6 +532,9 @@ $(document).ready(function () {
 				}
 				//console.log(data)
 				cargandoOnOf('of');
+				//
+				console.log(data);
+				console.log( $("#cboOportunidadAct").val() + ' - '+$("#cboEmpresaAct").val() + ' - '+ $("#cboContactoAct").val() );
 			},
 			error: function(data){
 				cargandoOnOf('of');
@@ -645,19 +658,6 @@ $(document).ready(function () {
 				console.log(data);
 			}
 		});
-	}
-
-	function limpiarDetalleActividad()
-	{
-		$("#det_act_tit").html("");
-		$("#det_act_obj").html("");
-		$("#det_act_fecha").html("");
-		$("#det_act_hora").html("");
-		$("#det_act_dura").html("");
-		$("#det_act_opor").html("");
-		$("#det_act_emp").html("");
-		$("#det_act_cont").html("");
-		$("#det_act_nota").html("");
 	}
 
 	function limpiarFormularioActividad()
@@ -1983,7 +1983,7 @@ $(document).ready(function () {
 						//tx.executeSql("DELETE FROM tb_cuenta where cambio='n'",nullHandler,nullHandler);
 						for(var i=0; i< data.length; i++)
 						{ 
-							if(data[i]['id_estado']!=30){$("#cboEmpresaAct").append("<option value='"+data[i]['id_cuen']+"'>"+data[i]['razon_social_cuen']+"</option>");}
+							if(data[i]['id_estado']==29){$("#cboEmpresaAct").append("<option value='"+data[i]['id_cuen']+"'>"+data[i]['razon_social_cuen']+"</option>");}
 							id = data[i]['id_cuen'];
 							ruc = data[i]['ruc_cuen'];
 							rs = data[i]['razon_social_cuen'];
