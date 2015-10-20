@@ -316,14 +316,10 @@ $(document).ready(function () {
 
 	function limpiarDetalleActividad()
 	{
-		$("#det_act_tit").html("");
-		$("#det_act_obj").html("");
-		$("#det_act_fecha").html("");
-		$("#det_act_hora").html("");
-		$("#det_act_dura").html("");
-		$("#det_act_opor").html("");
-		$("#det_act_emp").html("");
-		$("#det_act_cont").html("");
+		$("#det_act_tit").html(""); $("#det_act_obj").html("");
+		$("#det_act_fecha").html(""); $("#det_act_hora").html("");
+		$("#det_act_dura").html(""); $("#det_act_opor").html("");
+		$("#det_act_emp").html(""); $("#det_act_cont").html("");
 		$("#det_act_nota").html("");
 	}
 
@@ -357,8 +353,7 @@ $(document).ready(function () {
 		}
 	}
 
-	var usuE = 0; var tipoA = 0; var objA = ""; var fechaA = ""; var horaA = ""; var durA = "";
-	var notaA = "";
+	var usuE = 0; var tipoA = 0; var objA = ""; var fechaA = ""; var horaA = ""; var durA = ""; var notaA = "";
 
 	function obtenerDatosFormularioActividad()
 	{
@@ -477,71 +472,20 @@ $(document).ready(function () {
 			success : function(data) {
 				
 				if(com == 'o'){
-					/*if(data.id_cuen){
-						$("#cbo-emp-act div div div span").html(data.razon_social_cuen);						
-						$("#cboEmpresaAct option[value='"+data.id_cuen+"']").attr("selected",'selected');
-					}else{
-						$("#cbo-emp-act div div div span").html("EMPRESA");
-						$("#cboEmpresaAct option[value='0']").attr("selected",'selected');
-					}
-					if(data.id_con){
-						$("#cbo-con-act div div div span").html(data.nombre_con+" "+data.apellido_con);
-						$("#cboContactoAct option[value='"+data.id_con+"']").attr("selected",'selected');
-					}else{
-						$("#cbo-con-act div div div span").html("CONTACTO");
-						$("#cboContactoAct option[value='0']").attr("selected",'selected');
-					}*/
 					$("#cbo-emp-act div div div span").html(data.razon_social_cuen);
 					idCuenAct = data.id_cuen;
 					$("#cbo-con-act div div div span").html(data.nombre_con+" "+data.apellido_con);
 					idConAct = data.id_con;
 				}
 				else if(com == 'e'){
-					/*if(data.id_pros){
-						if(data.titulo){
-							$("#cbo-opor-act div div div span").html(data.titulo);
-						}else{
-							$("#cbo-opor-act div div div span").html(data.nombre_con+"venta's");
-						}
-						$("#cboOportunidadAct option[value='"+data.id_pros+"']").attr("selected",'selected');
-					}else{
-						$("#cbo-opor-act div div div span").html("OPORTUNIDAD");
-						$("#cboOportunidadAct option[value='0']").attr("selected",'selected');
-					}
-
-					if(data.id_con){
-						$("#cbo-con-act div div div span").html(data.nombre_con+" "+data.apellido_con);
-						$("#cboContactoAct option[value='"+data.id_con+"']").attr("selected",'selected');
-					}else{
-						$("#cbo-con-act div div div span").html("CONTACTO");
-						$("#cboContactoAct option[value='0']").attr("selected",'selected');
-					}*/
-					if(data.titulo){
-						$("#cbo-opor-act div div div span").html(data.titulo);
-					}else{
-						$("#cbo-opor-act div div div span").html(data.nombre_con+"venta's");
-					}
+					if(data.titulo){$("#cbo-opor-act div div div span").html(data.titulo);}
+					else{$("#cbo-opor-act div div div span").html(data.nombre_con+"venta's");}
 					idOporAct = data.id_pros;
 					$("#cbo-con-act div div div span").html(data.nombre_con+" "+data.apellido_con);
 					idConAct = data.id_con;
 				}
 				else if(com == 'c'){
-					/*if(data.id_pros){
-						if(data.titulo){ $("#cbo-opor-act div div div span").html(data.titulo); }
-						else{ $("#cbo-opor-act div div div span").html(data.nombre_con+"venta's"); }
-						$("#cboOportunidadAct option[value='"+data.id_pros+"']").attr("selected",'selected');
-					}else{
-						$("#cbo-opor-act div div div span").html("OPORTUNIDAD");
-						$("#cboOportunidadAct option[value='0']").attr("selected",'selected');
-					}
-
-					if(data.id_cuen){
-						$("#cbo-emp-act div div div span").html(data.razon_social_cuen);
-						$("#cboEmpresaAct option[value='"+data.id_cuen+"']").attr("selected",'selected');
-					}else{
-						$("#cbo-emp-act div div div span").html("EMPRESA");
-						$("#cboEmpresaAct option[value='0']").attr("selected",'selected');
-					}*/
+					//$("#cboEmpresaAct option[value='0']").attr("selected",'selected');
 					if(data.titulo){ $("#cbo-opor-act div div div span").html(data.titulo); }
 					else{ $("#cbo-opor-act div div div span").html(data.nombre_con+"venta's"); }
 					idOporAct = data.id_pros;
