@@ -505,6 +505,7 @@ section.cont_item_prod input.cantProdClas{
   font: 14px ProximaNova, sans-serif;
   color: #df2047;
   cursor: pointer;
+  z-index: 10;
 }
 
 .cont_btn_form article label, .cont_btn_form article a{

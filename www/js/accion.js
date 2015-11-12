@@ -67,13 +67,14 @@ $(document).ready(function () {
 //*********************************************** FIN BASE DE DATOS WEBSQL
 	
 	//asignando valor para saber si trabaja on o offline
-	localStorage.setItem('onof', 'on');
+	
 
 	//metodos inicializando
 
 	iniciarApp();
 
 	function iniciarApp(){
+		localStorage.setItem('onof', 'on');
 		mostrarRequisitosHtml();
 		llenarClaseProducto();
 		llenarTipoActividad();
@@ -301,11 +302,14 @@ $(document).ready(function () {
 	var idCuenAct = 0;
 	var idConAct = 0;
 
-	$("body").on('click', '#btn_guardar_frm_act', function(e){
+	$("body").on('click', '#btn_guardar_frm_act', function(e)
+	{
 		if(localStorage.getItem('onof') == 'on'){
+
 			if(idOporAct != 0 && idCuenAct != 0 && idConAct != 0){
 				obtenerDatosFormularioActividad();
 				if($("#frmValAct").val() == "editar"){
+					console.log("entra")
 					editarActividadOn($("#id_act_frm").val());
 					listarUsuarioActividad();
 					$.mobile.changePage("#actividad", {transition:"slide"});
@@ -399,6 +403,7 @@ $(document).ready(function () {
 
 	function editarActividadOn(idAct)
 	{
+		console.log("entra1")
 		$.ajax({
 			type: 'POST',
 			dataType: 'json', 
@@ -408,6 +413,7 @@ $(document).ready(function () {
 		    },
 			url: urlP+"editarActividadOn",
 			success : function(data) {
+				console.log("entra2")
 				if(data == 'ok'){
 					alert("Actividad Editada");
 				}else{
@@ -556,6 +562,7 @@ $(document).ready(function () {
 		    },
 			url: urlP+"getDetalleActividad",
 			success : function(data) {
+
 				//a.id_tact, t.desc_tact
 				limpiarDetalleActividad();
 
@@ -611,6 +618,10 @@ $(document).ready(function () {
 					$("#cbo-con-act div div div span").html(data.nombre_con+" "+data.apellido_con);
 				}
 
+				//console.log(idOporAct+" - "+idCuenAct+" - "+idConAct)
+				idOporAct = data.id_pros;
+				idCuenAct = data.id_cuen;
+				idConAct = data.id_con;
 
 				$("#fmr_act_nota").val(data.nota_act);
 				cargandoOnOf('of');
