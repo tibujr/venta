@@ -7,8 +7,9 @@ $(document).ready(function () {
 
 //*************************************** BASE DE DATOS WEBSQL
 
-	var urlP = "https://roinet.pe/ventas/index.php/mobile_controller/";
+	//var urlP = "https://roinet.pe/ventas/index.php/mobile_controller/";
 	//var urlP = "https://roinet.pe/NWROInet/venta/index.php/mobile_controller/";
+	var urlP = "https://roinet.pe/tune/index.php/mobile_controller/";
 	var db;
 	var shortName = 'ventaBD';
 	var version = '1.0';
@@ -69,12 +70,16 @@ $(document).ready(function () {
 	localStorage.setItem('onof', 'on');
 
 	//metodos inicializando
-	mostrarRequisitosHtml();
-	llenarClaseProducto();
-	llenarTipoActividad();
-	llenarTipoCartera();
-	llenarTipoDocumento();
 
+	iniciarApp();
+
+	function iniciarApp(){
+		mostrarRequisitosHtml();
+		llenarClaseProducto();
+		llenarTipoActividad();
+		llenarTipoCartera();
+		llenarTipoDocumento();
+	}
 	//calendario español
 	var Dia = new Array("Dom", "Lun", "Mar", "Mié", "Jue", "Vie", "Sáb");
 	var Mes = new Array("Ene", "Feb", "Mar", "Abr", "May", "Jun", "Jul", "Ago", "Sep","Oct", "Nov", "Dic");
@@ -148,7 +153,7 @@ $(document).ready(function () {
 					success : function(data) {
 						$(".main").css({display: 'none'});
 						if(data != 0){
-							console.log("login online")
+							//console.log("login online")
 							localStorage.setItem('id_usu', data.id_usu);
 							localStorage.setItem('usu_alm', usu);
 							localStorage.setItem('clv_alm', clv);
@@ -164,14 +169,14 @@ $(document).ready(function () {
 
 							$.mobile.changePage("#venta", { transition: "slide"/*, changeHash: false */});
 						}else{
-							alert("usuario o contraseña incorrectos")
+							alert("usuario o contraseña incorrectos");
 						}
 
 						$('#btn_login').css({display:'inline-block'});
 					},
 					error: function(data){
 						$('#btn_login').css({display:'inline-block'});
-						console.log(data);
+						//console.log(data);
 				    }
 				});
 			}else{
@@ -183,7 +188,7 @@ $(document).ready(function () {
 		                 	if(row.mail == usu && row.clave == clv)
 							{
 								localStorage.setItem('id_usu', row.id);
-								console.log(" login offline")
+								//console.log(" login offline")
 								$("#d_usu h1").html(row.nombre);
 								$.mobile.changePage("#venta", {transition:"slide"});
 								mostrarDataOffline();
@@ -260,17 +265,17 @@ $(document).ready(function () {
 
 	$("body").on('click', '.eva_act', function(e){
 		var idAct_ev =  $(this).attr('id');
-		//console.log(idAct_ev)
+		////console.log(idAct_ev)
 		if(localStorage.getItem('onof') == 'on'){
 			if(confirm('¿marcar como terminado?')){
 				var evId = idAct_ev.substring(4);
 				evaluarActividad(evId);
 				$(this).prop('checked', true);
 				$("."+idAct_ev+"_cn").css({display:'none'});
-				console.log("true")
+				//console.log("true")
 			}else{
 				$(this).prop('checked', false);
-				console.log("false")
+				//console.log("false")
 			}
 
 		}else{
@@ -278,7 +283,7 @@ $(document).ready(function () {
 		}
 		/*alert("lol")
 		if(confirm('¿marcar como terminado?')){
-				console.log("pasa");
+				//console.log("pasa");
 			}*/
 	});
 	
@@ -386,7 +391,7 @@ $(document).ready(function () {
 				cargandoOnOf('of');
 			},
 			error: function(data){
-				console.log(data);
+				//console.log(data);
 				cargandoOnOf('of');
 			}
 		});
@@ -413,7 +418,7 @@ $(document).ready(function () {
 			},
 			error: function(data){
 				cargandoOnOf('of');
-				console.log(data);
+				//console.log(data);
 			}
 		});
 	}
@@ -492,15 +497,15 @@ $(document).ready(function () {
 					$("#cbo-emp-act div div div span").html(data.razon_social_cuen);
 					idCuenAct = data.id_cuen;
 				}
-				//console.log(data)
+				////console.log(data)
 				cargandoOnOf('of');
 				//
-				console.log(data);
-				console.log( idOporAct +' - '+ idCuenAct +' - '+ idConAct );
+				//console.log(data);
+				//console.log( idOporAct +' - '+ idCuenAct +' - '+ idConAct );
 			},
 			error: function(data){
 				cargandoOnOf('of');
-				console.log(data);
+				//console.log(data);
 			}
 		});
 	}
@@ -612,7 +617,7 @@ $(document).ready(function () {
 			},
 			error: function(data){
 				cargandoOnOf('of');
-				console.log(data);
+				//console.log(data);
 			}
 		});
 	}
@@ -661,7 +666,7 @@ $(document).ready(function () {
 		if(localStorage.getItem('onof') == 'on'){
 			listarUsuarioEmpresaOn(id_usu_emp);
 		}else{
-			console.log("lista empresa off")
+			//console.log("lista empresa off")
 		}
 		$.mobile.changePage("#contactos-empresa", {transition:"slide"});
 	});
@@ -675,7 +680,7 @@ $(document).ready(function () {
 	$("body").on("click",".cont_item_contend_uni_emp", function(e){
 		var idEmpUsu = $(this).attr('id');//$("#id_emp_sel").val();
 		var idted = idEmpUsu.substring(4);
-		console.log(idted)
+		//console.log(idted)
 		$("#id_emp_sel").val(idted);
 		if(localStorage.getItem('onof') == 'on'){
 			getDetalleEmpresaOn(idted);
@@ -704,7 +709,7 @@ $(document).ready(function () {
 		var idEmp = $("#idEmp").val();
 
 		if(localStorage.getItem('onof') == 'on'){
-			console.log($("#accion_frm_emp").val())
+			//console.log($("#accion_frm_emp").val())
 			if ($("#accion_frm_emp").val() == 'editar')
 			{
 				arEmpEdit['razonSocial'] = $("#edt_emp_nom").val();
@@ -739,7 +744,7 @@ $(document).ready(function () {
 		var idper = $("#idPer").val();
 
 		if(localStorage.getItem('onof') == 'on'){
-			console.log($("#accion_frm_per").val())
+			//console.log($("#accion_frm_per").val())
 			if ($("#accion_frm_per").val() == 'editar')
 			{
 				arPerEdit['nom'] = $("#dt_frm_per_nom").val();
@@ -781,7 +786,7 @@ $(document).ready(function () {
 		if(localStorage.getItem('onof') == 'on'){
 			listarUsuarioPersonaOn(id_usu_emp);
 		}else{
-			console.log("lista empresa off")
+			//console.log("lista empresa off")
 		}
 
 		$.mobile.changePage("#contactos-persona", {transition:"slide"});
@@ -792,7 +797,7 @@ $(document).ready(function () {
 		if(localStorage.getItem('onof') == 'on'){
 			getDetallePersonaOn(idPerDet);
 		}else{
-			console.log("lista empresa off")
+			//console.log("lista empresa off")
 		}
 
 		$.mobile.changePage("#contacto_deta_persona", {transition:"slidedown"});
@@ -946,7 +951,7 @@ $(document).ready(function () {
 			$('.'+b).addClass( "ui-checkbox-off" );
 			$('.'+b).removeClass( "ui-checkbox-on" );			
 		}
-		console.log("limpiar chk")
+		//console.log("limpiar chk")
 	}
 
 	$("body").on("click","#btn_perdido_det_ven", function(e){
@@ -962,7 +967,7 @@ $(document).ready(function () {
 				alert("Prospecto Perdido");
 				$.mobile.back();
 			}else{
-				console.log("cancelado")
+				//console.log("cancelado")
 			}
 		}else{
 			//getProspectoIdOff(idv);
@@ -985,7 +990,7 @@ $(document).ready(function () {
 				alert("Prospecto Ganado");
 				$.mobile.back();
 			}else{
-				console.log("cancelado")
+				//console.log("cancelado")
 			}
 		}else{
 			//getProspectoIdOff(idv);
@@ -1014,7 +1019,7 @@ $(document).ready(function () {
 			},
 			error: function(data){
 				cargandoOnOf('of');
-				console.log(data);
+				//console.log(data);
 			}
 		});
 	}
@@ -1172,7 +1177,7 @@ $(document).ready(function () {
 			},
 			error: function(data){
 				cargandoOnOf('of');
-				console.log(data);
+				//console.log(data);
 			}
 		});
 	}
@@ -1278,7 +1283,7 @@ $(document).ready(function () {
 				url: urlP+"search_empresa",
 				success : function(datab) {
 	              if (datab != 0) {
-	              	console.log(datab)
+	              	//console.log(datab)
 	                $("#rsoc").autocomplete({
 	                  	source: datab,
 	                  	minLength: 1,
@@ -1326,7 +1331,7 @@ $(document).ready(function () {
 	                }
 	          },
 	          error: function(data){
-	            console.log(data);
+	            //console.log(data);
 	          }
 	        });
         }
@@ -1358,13 +1363,13 @@ $(document).ready(function () {
 						cargandoOnOf('of');
 					},
 					error: function(data){
-						console.log(data);
+						//console.log(data);
 						cargandoOnOf('of');
 					}
 				});
 			}
 		}else{
-			console.log("no");
+			//console.log("no");
 			$("#activ:checkbox").prop('checked', false);
 		}
 	});
@@ -1523,7 +1528,7 @@ $(document).ready(function () {
 			url: urlP+"guardaNuevoProspecto",
 			success : function(data) {
 				if(data != 0){
-					console.log(data+" : inserto con exito");
+					//console.log(data+" : inserto con exito");
 					var usuid = localStorage.getItem('id_usu');
 					llenarFase()
 					llenarProspecto(usuid);
@@ -1534,7 +1539,7 @@ $(document).ready(function () {
 				cargandoOnOf('of');
 			},
 			error: function(data){
-				console.log(data);
+				//console.log(data);
 				cargandoOnOf('of');
 			}
 		});
@@ -1658,7 +1663,7 @@ $(document).ready(function () {
 						}
 
 						//$("#req_2:checkbox").prop('checked', false);
-						//console.log("data que entra : "+data[a]+" - requerimiento : "+reqArr[i]+" - "+$("#cont_reque #req_"+reqArr[i]+":checked").val())
+						////console.log("data que entra : "+data[a]+" - requerimiento : "+reqArr[i]+" - "+$("#cont_reque #req_"+reqArr[i]+":checked").val())
 					}
 					
 					/* FORMULARIO EDITAR*/
@@ -1762,7 +1767,7 @@ $(document).ready(function () {
 					}
 				},
 				error: function(data){
-					alert("error al llamar requisitos")
+					alert("Verificar coneccion a internet, error al llamar requisitos!!")
 				}
 			});
 		}
@@ -1786,7 +1791,7 @@ $(document).ready(function () {
 					}
 				},
 				error: function(data){
-					console.log(data);
+					//console.log(data);
 				}
 			});
 		}
@@ -1812,7 +1817,7 @@ $(document).ready(function () {
 					}
 				},
 				error: function(data){
-					console.log(data);
+					//console.log(data);
 				}
 			});
 		}
@@ -1839,7 +1844,7 @@ $(document).ready(function () {
 					}
 				},
 				error: function(data){
-					console.log(data);
+					//console.log(data);
 				}
 			});
 		}
@@ -1867,7 +1872,7 @@ $(document).ready(function () {
 					}
 				},
 				error: function(data){
-					console.log(data);
+					//console.log(data);
 				}
 			});
 		}
@@ -1917,7 +1922,7 @@ $(document).ready(function () {
 				}
 			},
 			error: function(data){
-				console.log(data);
+				//console.log(data);
 			}
 		});
 	}
@@ -1956,7 +1961,7 @@ $(document).ready(function () {
 				}
 			},
 			error: function(data){
-				console.log(data);
+				//console.log(data);
 			}
 		});
 	}
@@ -1997,7 +2002,7 @@ $(document).ready(function () {
 				}
 			},
 			error: function(data){
-				console.log(data);
+				//console.log(data);
 			}
 		});
 	}
@@ -2037,7 +2042,7 @@ $(document).ready(function () {
 				}
 			},
 			error: function(data){
-				console.log(data);
+				//console.log(data);
 			}
 		});
 	}
@@ -2063,7 +2068,7 @@ $(document).ready(function () {
 				}
 			},
 			error: function(data){
-				console.log(data);
+				//console.log(data);
 			}
 		});
 	}
@@ -2092,7 +2097,7 @@ $(document).ready(function () {
 				}
 			},
 			error: function(data){
-				console.log(data);
+				//console.log(data);
 			}
 		});
 	}
@@ -2122,7 +2127,7 @@ $(document).ready(function () {
 				cargandoOnOf('of');
 			},
 			error: function(data){
-				console.log(data);
+				//console.log(data);
 				cargandoOnOf('of');
 			}
 		});
@@ -2149,7 +2154,7 @@ $(document).ready(function () {
 		    },
 			url: urlP+"getDetalleEmpresaOn",
 			success : function(data) {
-				console.log(data);
+				//console.log(data);
 
 				/*EMPRESA*/
 				var etd = data['emp'];
@@ -2229,7 +2234,7 @@ $(document).ready(function () {
 				cargandoOnOf('of');
 			},
 			error: function(data){
-				console.log(data);
+				//console.log(data);
 				cargandoOnOf('of');
 			}
 		});
@@ -2293,7 +2298,7 @@ $(document).ready(function () {
 				cargandoOnOf('of');
 			},
 			error: function(data){
-				console.log(data);
+				//console.log(data);
 				cargandoOnOf('of');
 			}
 		});
@@ -2321,12 +2326,12 @@ $(document).ready(function () {
 					$("#idEmp").val(data.id);
 					$("#nomEmp").val(eEmp);
 					getDetalleEmpresaOn(data.id);
-					console.log("se EMPRESA agrego empresa correctamente");
+					//console.log("se EMPRESA agrego empresa correctamente");
 				}
 				cargandoOnOf('of');
 			},
 			error: function(data){
-				console.log(data);
+				//console.log(data);
 				cargandoOnOf('of');
 			}
 		});
@@ -2357,7 +2362,7 @@ $(document).ready(function () {
 				cargandoOnOf('of');
 			},
 			error: function(data){
-				console.log(data);
+				//console.log(data);
 				cargandoOnOf('of');
 			}
 		});
@@ -2383,7 +2388,7 @@ $(document).ready(function () {
 		    },
 			url: urlP+"getDetallePersonaOn",
 			success : function(data) {
-				console.log(data);
+				//console.log(data);
 
 				/*PERSONA*/
 				var etd = data['per'];
@@ -2437,7 +2442,7 @@ $(document).ready(function () {
 				cargandoOnOf('of');
 			},
 			error: function(data){
-				console.log(data);
+				//console.log(data);
 				cargandoOnOf('of');
 			}
 		});
@@ -2488,12 +2493,12 @@ $(document).ready(function () {
 					$("#frm_per_mail").html(mailp);
 					$("#frm_per_tel").html(telp);
 					$("#frm_per_tdoc").html($("#cboTipoDocumento option:selected").text());
-					console.log("se edito persona")
+					//console.log("se edito persona")
 				}
 				cargandoOnOf('of');
 			},
 			error: function(data){
-				console.log(data);
+				//console.log(data);
 				cargandoOnOf('of');
 			}
 		});
@@ -2520,12 +2525,12 @@ $(document).ready(function () {
 				if(data != ""){
 					$("#idPer").val(data.id);
 					getDetallePersonaOn(data.id)
-					console.log("se agrego correctamente");
+					//console.log("se agrego correctamente");
 				}
 				cargandoOnOf('of');
 			},
 			error: function(data){
-				console.log(data);
+				//console.log(data);
 				cargandoOnOf('of');
 			}
 		});
@@ -2554,12 +2559,12 @@ $(document).ready(function () {
 					var de ="<section class='cont_ind_det_fondo_deci'><section class='cont_ind_det_f_conta'><section class='cont_ind_det_f_izq'><div class='cont_ind_det_izq_ico'><div class='icon-user ico-usr'></div></div></section><section class='cont_ind_det_f_der'><div class='cont_ind_der_top' id='det_emp_cont_nom'>"+$("#dt_frm_per_nom").val()+" "+$("#dt_frm_per_ape").val()+"</div><div class='cont_ind_der_bot' id='det_emp_cont_cargo'>CARGO</div></section></section><section class='cont_ind_det_f_conta'><section class='cont_ind_det_f_izq'><div class='cont_ind_det_izq_ico'><div class='icon-phone'></div></div></section><section class='cont_ind_det_f_der'><div class='cont_ind_der_top' id='det_emp_cont_celu'>"+$("#dt_frm_per_telf").val()+"</div><div class='cont_ind_der_bot'>Celular</div></section></section><section class='cont_ind_det_f_conta'><section class='cont_ind_det_f_izq'><div class='cont_ind_det_izq_ico'><div class='icon-envelope'></div></div></section><section class='cont_ind_det_f_der'><div class='cont_ind_der_top' id='det_emp_cont_mail'>"+$("#dt_frm_per_mail").val()+"</div><div class='cont_ind_der_bot'>Correo</div></section></section></section>";
 					$("#cnt_cnt_emp_deci").append(de);
 					//$("#idPer").val(data.id);
-					//console.log("se agrego correctamente");
+					////console.log("se agrego correctamente");
 				}
 				cargandoOnOf('of');
 			},
 			error: function(data){
-				console.log(data);
+				//console.log(data);
 				cargandoOnOf('of');
 			}
 		});
@@ -2617,7 +2622,7 @@ $(document).ready(function () {
 				cargandoOnOf('of');
 			},
 			error: function(data){
-				console.log(data);
+				//console.log(data);
 				cargandoOnOf('of');
 			}
 		});
@@ -2639,7 +2644,7 @@ $(document).ready(function () {
 				alert("Se ejecuto correctamente");
 			},
 			error: function(data){
-				console.log(data);
+				//console.log(data);
 				cargandoOnOf('of');
 			}
 		});
@@ -2662,7 +2667,7 @@ $(document).ready(function () {
 			},
 			error: function(data){
 				cargandoOnOf('of');
-				console.log(data);
+				//console.log(data);
 			}
 		});
 	}
@@ -2698,7 +2703,7 @@ $(document).ready(function () {
 						cargandoOnOf('of');
 					},
 					error: function(data){
-						console.log(data);
+						//console.log(data);
 						cargandoOnOf('of');
 					}
 
@@ -2743,7 +2748,7 @@ $(document).ready(function () {
 						cargandoOnOf('of');
 					},
 					error: function(data){
-						console.log(data);
+						//console.log(data);
 						cargandoOnOf('of');
 					}
 
@@ -2786,7 +2791,7 @@ $(document).ready(function () {
 					$("#cont_lst_item_prod").append(cad);
 				}
 				
-				//console.log("cantidad: "+arProd.length+", array:"+ arProd)
+				////console.log("cantidad: "+arProd.length+", array:"+ arProd)
 			}else{
 
 			}
@@ -2798,11 +2803,11 @@ $(document).ready(function () {
 		if(localStorage.getItem('onof') == 'on'){
 			for(var i = 0; i<arProd.length; i++){
 				if(arProd[i].idProd == idNv){
-					console.log(i);
+					//console.log(i);
 
 					arProd.splice(i, 1);
 
-					console.log(arProd)
+					//console.log(arProd)
 
 					$("#cont_prod_"+idNv).remove(); 
 				}
@@ -2814,7 +2819,7 @@ $(document).ready(function () {
 
 	$("body").on("focusout", ".cantProdClas", function(e){
 		var tmpIP = $(this).attr('id').substring(3);		
-		//console.log($(idNv).val())
+		////console.log($(idNv).val())
 		if($(this).val() != ""){
 			for(var i = 0; i<arProd.length; i++){
 				if(arProd[i].idProd == tmpIP)
@@ -2827,7 +2832,7 @@ $(document).ready(function () {
 			$(this).focus();
 		}
 		
-		console.log(arProd)
+		//console.log(arProd)
 	});
 
 });
