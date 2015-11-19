@@ -7,9 +7,9 @@ $(document).ready(function () {
 
 //*************************************** BASE DE DATOS WEBSQL
 
-	//var urlP = "https://roinet.pe/ventas/index.php/mobile_controller/";
+	var urlP = "https://roinet.pe/ventas/index.php/mobile_controller/";
 	//var urlP = "https://roinet.pe/NWROInet/venta/index.php/mobile_controller/";
-	var urlP = "https://roinet.pe/tune/index.php/mobile_controller/";
+	//var urlP = "https://roinet.pe/tune/index.php/mobile_controller/";
 	var db;
 	var shortName = 'ventaBD';
 	var version = '1.0';
