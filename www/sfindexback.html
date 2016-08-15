@@ -1,0 +1,1434 @@
+<!DOCTYPE html> 
+<html>
+<head>
+  	<meta charset="UTF-8">
+  	<title>Ventas - Roinet</title>
+    <meta name="format-detection" content="telephone=no" />
+  	<meta name="viewport" content="user-scalable=no, maximum-scale=1, minimum-scale=1, user-scalable=no, initial-scale=1, width=device-width, height=device-height">
+    
+    <link rel="stylesheet" href="css/jquery-ui.css" /><!--autocolpletar-->
+    <!--<link rel="stylesheet" href="css/jquery.mobile-1.3.2.min.css" />-->
+    <link rel="stylesheet" href="css/cal/jquery.mobile-1.4.4.min.css" />
+    <link rel="stylesheet" href="css/cal/jqm-datebox-1.4.4.min.css" />
+    <link rel="stylesheet" type="text/css" href="css/estilo.css" />
+    <link type="text/css" rel="stylesheet" href="css/materialize/materialize.min.css"  media="screen,projection"/><!--material design-->
+
+    <script type="text/javascript" src="js/phonegap.js"></script><!--uso-->
+
+    <script type="text/javascript" src="js/jquery.js"></script>
+    <!--<script type="text/javascript" src="js/jquery.mobile-1.3.2.min.js"></script>-->
+    <script type="text/javascript" src="js/jquery-ui-1.10.4.custom.min.js"></script><!--autocolpletar-->
+    <script type="text/javascript" src="js/cal/jquery.mobile-1.4.4.min.js"></script>
+    <script type="text/javascript" src="js/cal/jquery.mousewheel.min.js"></script><!--RECONOCE PROPIEDADES DEL MOUSE-->
+    <script type="text/javascript" src="js/materialize/materialize.min.js"></script><!--material design-->
+    <script type="text/javascript" src="js/cal/jqm-datebox-1.4.4.core.min.js"></script>
+    <script type="text/javascript" src="js/cal/jqm-datebox-1.4.4.mode.datebox.min.js"></script>
+    <script type="text/javascript" src="js/cal/jqm-datebox-1.4.4.mode.flipbox.min.js"></script>
+    <script type="text/javascript" src="js/cal/jqm-datebox.lang.utf8.js"></script><!--ORDENA DD-MM-YY -->
+
+    <script type="text/javascript" src="js/accion.js"></script>
+    <script type="text/javascript" src="js/index.js"></script>
+
+    <script type="text/javascript">
+      jQuery.extend(jQuery.mobile,
+      {
+        ajaxEnabled: false
+      });
+    </script>
+    
+    <script type="text/javascript">
+      app.initialize();
+    </script>
+</head>
+<body>
+  <section id="load_pls"></section>
+  <section id="load_pls2"><div id="cn_load_pl"><div class="center-wrapper">
+        <section class="main">
+          <div class="bar">
+            <i class="sphere"></i>
+          </div>
+        </section>
+      </div></div></section>
+  <section data-role="page" id="inicio" class="pagina">
+    <article data-role="content" style="font-size:0;">
+      <div id='onOf' style='display: none;'><div class="icon-wifi-full"></div><div id='bloq_wifi' class="icon-blocked"></div></div>
+      <div style="display: inline-block; margin-bottom: 10px; width: 100%; margin-top: 35%;"><img src="img/logo_avanza.png"></div>
+      <div class="login_caja"><input type="email" id="mail" name="mail" value="@roinet.pe" placeholder="Correo electrónico"></div>
+      <div class="login_caja"><input type="password" id="clave" name="clave" value="" placeholder="Contraseña"></div>
+      <div class="center-wrapper">
+        <div id="btn_login" data-role="button" data-theme="b" data-inline="true">INICIAR SESIÓN</div>
+      </div>
+      <div class="center-wrapper">
+        <section class="main">
+          <div class="bar">
+            <i class="sphere"></i>
+          </div>
+        </section>
+      </div>
+    </article>
+  </section>
+
+  <section data-role="page" id="venta">
+    <article data-role="header" id="d_usu" data-id="top_fijo" data-position="fixed" class="cab_nav">
+      <a href="#" data-rel="back" class="btn_back"><div class="icon-arrow-left atras_btn"></div><label>Atras</label></a>
+      <div class="con_cab_a"><h1>Ventas</h1></div>
+      <div data-role="navbar" data-grid="d" id="cont_cab_nav">
+        <ul>
+          <li><a href="javascript:;" style="border-bottom: 6px solid #490d1a; height: 44px;"><div class="icon-office"></div><label>OPORTUNIDADES</label></a></li>
+          <li><a href="javascript:;" id="btn_actividad"><div class="icon-calendar"></div><label>ACTIVIDADES</label></a></li>
+          <li>
+            <a href="javascript:;" id='btn_contacto'><div class="icon-address-book"></div>
+              <label>CONTACTOS</label>
+            </a>
+            <ul id="sub-menu-vent" class="ocultar sub-menu-nn">
+                  <li id='btn_empresa'>Empresa</li>
+                  <li id='btn_persona'>Persona</li>
+            </ul>
+          </li>
+          <!--<li><a href="javascript:;"><div class="icon-pie"></div><label>ESTADISTICAS</label></a></li>
+          <li><a href="javascript:;"><div class="icon-star"></div><label>LOGROS</label></a></li>-->
+        </ul>
+      </div>
+    </article>
+    <article data-role="content" class="cont_main"> 
+      <section class='cont_items'>
+        <article class="fase_tit">
+          <div data-role="fieldcontain">
+            <select name="cboFase" id="cboFase"></select>
+          </div>
+        </article>
+        <section class='cont_item_lst lst_itm'></section>
+      </section>
+    </article>
+    <article data-role="footer" data-position="fixed" data-id="pie_fijo" data-theme="b" class="pie">
+      <div data-role="navbar" data-grid="b" id="cont_pie_nav">
+        <ul>
+          <li><a href="javascript:;" id='btn_add_venta'><div class="icon-plus"> <label>Oportunidad</label></div></a></li>
+          <li>
+            <a href="javascript:;" id='add-contacto-bot'>
+              <div class="icon-plus"> <label>Contacto</label></div>
+            </a>
+            <ul id="sub-menu-act-bot" class="ocultar sub-menu-nn-d">
+              <li id='btn_empresa_bot'>Nueva Empresa</li>
+              <li id='btn_persona_bot'>Nueva Persona</li>
+            </ul>
+          </li>
+          <li><a href="javascript:;" class="sin_r" id='add-actividad-bot'><div class="icon-plus"> <label>Actividad</label></div></a></li>
+        </ul>
+      </div>
+    </article>
+  </section>
+
+  <section data-role="page" id="actividad">
+    <article data-role="header" id="d_usu" data-id="top_fijo" data-position="fixed" class="cab_nav">
+      <a href="#" data-rel="back" class="btn_back"><div class="icon-arrow-left atras_btn"></div><label>Atras</label></a>
+      <div class="con_cab_a"><h1>Actividades</h1></div>
+      <div data-role="navbar" data-grid="d" id="cont_cab_nav">
+        <ul>
+          <li><a href="javascript:;" id='btn_venta'><div class="icon-office"></div><label>OPORTUNIDADES</label></a></li>
+          <li><a href="javascript:;" style="border-bottom: 6px solid #490d1a; height: 44px;"><div class="icon-calendar"></div><label>ACTIVIDADES</label></a></li>
+          <li>
+            <a href="javascript:;" id='btn_contacto'><div class="icon-address-book"></div>
+              <label>CONTACTOS</label>
+            </a>
+            <ul id="sub-menu-vent" class="ocultar sub-menu-nn">
+                  <li id='btn_empresa'>Empresa</li>
+                  <li id='btn_persona'>Persona</li>
+            </ul>
+          </li>
+          <!--<li><a href="javascript:;"><div class="icon-pie"></div><label>METRICAS</label></a></li>
+          <li><a href="javascript:;"><div class="icon-star"></div><label>LOGROS</label></a></li>-->
+        </ul>
+      </div>
+    </article>
+    <article data-role="content" class="cont_main"> 
+      <section class='cont_items'>
+      <section class="cont_dato_detalle_venta" id='cnt_act_itm'>
+              <article class="unid_cont_item_act">
+                <section class="sect_uno_item_izq">
+                  <div class="div_fecha_act_top">Vie</div>
+                  <div class="div_fecha_act_bot">30 Ago</div>
+                </section>
+                <section class="sect_uno_item_mid">
+                  <div class="div_tipo_act_top">Reunión</div>
+                  <div class="div_tipo_act_bot">
+                    <div class="div_tipo_act_bot_izq">13:00 /</div>
+                    <div class="div_tipo_act_bot_der">Teléfonica del Perú</div>
+                  </div>
+                </section>
+                <section class="sect_uno_item_der">
+                  <article class='cont_req cont_ckh_act'>
+                    <input type='checkbox' name='req_1' id='req_1' class='chkocultar desa_det_venta'/>
+                    <label class='lblcheck chk-lft' for='req_1'></label>
+                  </article>
+                </section>
+              </article>
+      </section>
+    </article>
+     <article data-role="footer" data-position="fixed" data-id="pie_fijo" data-theme="b" class="pie">
+        <div data-role="navbar" data-grid="b" id="cont_pie_nav">
+          <ul>
+            <li><a href="javascript:;" id='btn_add_venta'><div class="icon-plus"> <label>Oportunidad</label></div></a></li> 
+            <li>
+              <a href="javascript:;" id='add-contacto-bot'>
+              <div class="icon-plus"> <label>Contacto</label></div>
+            </a>
+            <ul id="sub-menu-act-bot" class="ocultar sub-menu-nn-d">
+              <li id='btn_empresa_bot'>Nueva Empresa</li>
+              <li id='btn_persona_bot'>Nueva Persona</li>
+            </ul>
+            </li>
+            <li><a href="javascript:;" class="sin_r" id='add-actividad-bot'><div class="icon-plus"> <label>Actividad</label></div></a></li>
+          </ul>
+      </div>
+    </article>
+  </section>
+  
+  <section data-role="page" id="formulario_venta">
+    <article data-role="header" id="d_usu" data-id="top_fijo" data-position="fixed" class="cab_nav">
+      <a href="#" data-rel="back" class="btn_back"><div class="icon-arrow-left atras_btn"></div><label>Atras</label></a>
+      <div class="con_cab_a"><h1>Datos de venta</h1></div>
+      <div data-role="navbar" data-grid="d" id="cont_cab_nav">
+        <ul>
+          <li><a href="javascript:;" style="border-bottom: 6px solid #490d1a; height: 44px;"><div class="icon-office"></div><label>OPORTUNIDADES</label></a></li>
+          <li><a href="javascript:;" id='btn_actividad'><div class="icon-calendar"></div><label>ACTIVIDADES</label></a></li>
+          <li>
+            <a href="javascript:;" id='btn_contacto'><div class="icon-address-book"></div>
+              <label>CONTACTOS</label>
+            </a>
+            <ul id="sub-menu-vent" class="ocultar sub-menu-nn">
+                  <li id='btn_empresa'>Empresa</li>
+                  <li id='btn_persona'>Persona</li>
+            </ul>
+          </li>
+          <!--<li><a href="javascript:;"><div class="icon-pie"></div><label>ESTADISTICAS</label></a></li>
+          <li><a href="javascript:;"><div class="icon-star"></div><label>LOGROS</label></a></li>-->
+        </ul>
+      </div>
+    </article>
+    <article data-role="content" class="cont_main"> 
+      <section class='cont_items'>
+          <section class='cont_pupup_Nusu'>
+                <section class="lst_campos">
+                  <input type='hidden' id='accion_frm' name='accion_frm' value=''>
+                  <input type='hidden' id='id_pros' name='id_pros' value=''>
+                  <input type='hidden' id='id_cuen' name='id_cuen' value=''>
+                  <input type='hidden' id='id_con' name='id_con' value=''>
+                  <!--<article class='cont_req'>
+                    <label class='titpros' style='heigth: 0px;'>Titulo</label>
+                    <input type='text' id='titpros' name='titpros' class='inpt_sel'>
+                  </article>-->
+                  <article class='cont_req'>
+                    <label class='rsoc' style='heigth: 0px;'>Razón Social</label>
+                    <span id='rsoc_lbl'>Roinet SAC</span>
+                    <input type='text' id='rsoc' name='rsoc' class='inpt_sel'>
+                  </article>
+                  <article class='cont_req'>
+                    <label class='nom_deci'>Decisor</label>
+                    <span id='nom_deci_lbl'>Moises Tiburcio</span>
+                    <input type='text' id='nom_deci' name='nom_deci' class='inpt_sel'>
+                  </article>
+                  <article class='cont_req'>
+                    <label class='presu'>Presupuesto</label>
+                    <input type='number' id='presu' name='presu' class='inpt_sel'>
+                  </article>
+                  <article class='cont_req'>
+                    <label class='nece'>Necesidad</label>
+                    <input type='text' id='nece' name='nece' class='inpt_sel'>
+                  </article>
+                  <article class='cont_req nvo_pros'>
+                    <label class='prop'>Propuesta</label>
+                    <input type='text' id='prop' name='prop' class='inpt_sel'>
+                  </article>
+
+                  <article class='cont_req nvo_pros'>
+                    <label>Agregar producto</label>
+
+                      <article class="producto_filtro" id="cbo-clase-prod">
+                        <div data-role="fieldcontain">
+                          <select name="cboClaseProducto" id="cboClaseProducto">
+                            <option>CLASE</option>
+                          </select>
+                        </div>
+                      </article>
+
+                      <article class="producto_filtro" id="cbo-categoria-prod">
+                        <div data-role="fieldcontain">
+                          <select name="cboCategoriaProducto" id="cboCategoriaProducto">
+                            <option>CATEGORIA</option>
+                          </select>
+                        </div>
+                      </article>
+
+                      <article class="producto_filtro" id="cbo-prod">
+                        <div data-role="fieldcontain">
+                          <select name="cboProducto" id="cboProducto">
+                            <option>PRODUCTO</option>
+                          </select>
+                        </div>
+                      </article>
+                  </article>
+
+                  <article class='cont_req nvo_pros'>
+                    <label>Detalle de pedido</label>
+                    <section id='cont_lst_item_prod'>
+                      <!--<section class='cont_item_prod'>
+                        <input type='number' id='cant_prod_1' value='1' >
+                        <label class='lbl_item_prod'>Producto 10</label>
+                        <div class='delete_item_prod'><img src="img/delete.png"></div>
+                      </section>
+                      <section class='cont_item_prod'>
+                        <input type='number' id='cant_prod_1' value='2' >
+                        <label class='lbl_item_prod'>Producto 11</label>
+                        <div class='delete_item_prod'><img src="img/delete.png"></div>
+                      </section>
+                      <section class='cont_item_prod'>
+                        <input type='number' id='cant_prod_1' value='13' >
+                        <label class='lbl_item_prod'>Producto 12</label>
+                        <div class='delete_item_prod'><img src="img/delete.png"></div>
+                      </section>-->
+                    </section>
+                  </article>
+
+                  <article class='cont_req'>
+                    <label class='fecha_aprox'>Fecha Aproximada de Cierre</label>
+                    <input type='text' id='fecha_aprox' name='fecha_aprox' data-role="datebox" data-options='{"mode":"flipbox", "useLang":"es-ES", "overrideDateFormat": "%Y-%m-%d"}'>
+                  </article>
+                  <section id='cont_reque' class='nvo_pros'>
+                    <label class='lblRequi'>Requisitos</label>
+                  </section>
+                  <article class='cont_req'>
+                    <label class='sig_cita hra_cita'>Siguiente reunión</label>
+                    <div class='fecha_scit'><input type='text' name='sig_cita' id='sig_cita' data-role="datebox" data-options='{"mode":"flipbox", "useLang":"es-ES", "overrideDateFormat": "%Y-%m-%d"}'></div>
+                    <div class='hora_scit'><input type='text' id='hra_cita' class='inpt_sel' data-role="datebox" data-options='{"mode":"timeflipbox", "useLang":"es-ES", "overrideTimeOutput":"%H:%M"}'></div>
+                    <div class='check_actv'>
+                      <input type='hidden' id='activ_check' name='activ_check' value=''>
+                      <input type="checkbox" name="activ" id="activ" class='chkocultar'/>
+                      <label for="activ" class='lblcheck lbact'></label>
+                    </div>
+                  </article>
+                </section>
+                <section class='cont_btn_form'>
+                  <article id='btn_cancelar_frm'><a href="#" data-rel='back'>CANCELAR</a></article>
+                  <article id='btn_guardar_frm'><label>GUARDAR</label></article>
+                </section>
+          </section>
+      </section>
+    </article>
+     <article data-role="footer" data-position="fixed" data-id="pie_fijo" data-theme="b" class="pie">
+        <div data-role="navbar" data-grid="b" id="cont_pie_nav">
+          <ul>
+            <li><a href="javascript:;"><div class="icon-plus"> <label>Oportunidad</label></div></a></li>
+            <li>
+              <a href="javascript:;">
+                <div class="icon-plus"> <label>Contacto</label></div>
+              </a>
+              <ul id="sub-menu-act-bot" class="ocultar sub-menu-nn-d">
+                <li id='btn_empresa_bot'>Nueva Empresa</li>
+                <li id='btn_persona_bot'>Nueva Persona</li>
+              </ul>
+            </li>
+            <li><a href="javascript:;" class="sin_r"><div class="icon-plus"> <label>Actividad</label></div></a></li>
+          </ul>
+      </div>
+    </article>
+  </section>
+
+  <section data-role="page" id="venta_detalle">
+    <article data-role="header" id="d_usu" data-id="top_fijo" data-position="fixed" class="cab_nav">
+      <a href="#" data-rel="back" class="btn_back"><div class="icon-arrow-left atras_btn"></div><label>Atras</label></a>
+      <div class="con_cab_a"><h1>Datos de la venta</h1></div>
+      <div data-role="navbar" data-grid="d" id="cont_cab_nav">
+        <ul>
+          <li><a href="javascript:;" style="border-bottom: 6px solid #490d1a; height: 44px;"><div class="icon-office"></div><label>OPORTUNIDADES</label></a></li>
+          <li><a href="javascript:;" id='btn_actividad'><div class="icon-calendar"></div><label>ACTIVIDADES</label></a></li>
+          <li>
+            <a href="javascript:;" id='btn_contacto'><div class="icon-address-book"></div>
+              <label>CONTACTOS</label>
+            </a>
+            <ul id="sub-menu-vent" class="ocultar sub-menu-nn">
+                  <li id='btn_empresa'>Empresa</li>
+                  <li id='btn_persona'>Persona</li>
+            </ul>
+          </li>
+          <!--<li><a href="javascript:;"><div class="icon-pie"></div><label>ESTADISTICAS</label></a></li>
+          <li><a href="javascript:;"><div class="icon-star"></div><label>LOGROS</label></a></li>-->
+        </ul>
+      </div>
+    </article>
+    <article data-role="content" class="cont_main"> 
+      <section class='cont_items'>
+        <section class='cont_dato_detalle_venta'>
+            <section class="vent_ind_item_act">
+              <section class="vent_ind_item_porc"></section>
+
+              <section class="vent_div_nuevo">
+                <section class="vent_div_nuevo_cont">
+                  <div class="punto-text-big avance_face_nom_dp"></div>
+                </section>
+              </section>
+            </section>
+            
+            <section class="vent_ind_deta_btns">
+              <div class="white-button" id='btn_perdido_det_ven'>PERDIDO</div>
+              <div class="color-button" id='btn_ganado_det_ven'>GANADO</div>
+              <div class="edits-button edit_prosp_frm"><div class="icon-pencil"></div></div>
+            </section>
+
+            <section class="vent_ind_det_fondo">
+              <section class="vent_ind_det_f_cont">
+                <section class="vent_ind_det_f_izq">
+                  <div class="vent_ind_det_izq_ico">
+                    <div class="icon-user"></div>
+                  </div>
+                </section>
+                <section class="vent_ind_det_f_der">
+                  <div class="vent_ind_der_top nom_con_det_pros"></div>
+                  <div class="vent_ind_der_bot nom_emp_det_pros"></div>
+                </section>
+              </section>
+
+              <section class="vent_ind_det_f_cont">
+                <section class="vent_ind_det_f_izq">
+                  <div class="vent_ind_det_izq_ico ico-margin">
+                    <div class="icon-dollar"></div>
+                  </div>
+                </section>
+                <section class="vent_ind_det_f_der">
+                  <div class="vent_ind_der_mid valor_emp_det_pros"></div>
+                </section>
+              </section>
+
+              <section class="vent_ind_det_f_cont">
+                <section class="vent_ind_det_f_izq">
+                  <div class="vent_ind_det_izq_ico">
+                    <div class="icon-file"></div>
+                  </div>
+                </section>
+                <section class="vent_ind_det_f_der">
+                  <div class="vent_ind_der_top_color">Necesidad</div>
+                  <div class="vent_ind_der_bot_white nece_emp_det_pros"></div>
+                </section>
+              </section>
+
+              <section class="vent_ind_det_f_cont">
+                <section class="vent_ind_det_f_izq">
+                  <div class="vent_ind_det_izq_ico">
+                    <div class="icon-edit"></div>
+                  </div>
+                </section>
+                <section class="vent_ind_det_f_der">
+                  <div class="vent_ind_der_top_color">Propuesta</div>
+                  <div class="vent_ind_der_bot_white propu_emp_det_pros"></div>
+                </section>
+              </section>
+
+              <section class="vent_ind_det_f_cont ">
+                <section class="vent_ind_det_f_der prod_ls">
+                  <div class="vent_ind_der_top_color">Lista de Productos</div>
+                  <div class="vent_ind_der_bot_white propu_emp_det_pros"></div>
+                </section>
+                <section class='cont_imt_prod_do'> 
+                  <!--<section class='itm_prod_do'>
+                    <article class='cnt_itm_prod_to'>15</article>
+                    <article class='nom_itm_prod_to'>Producto 1</article>
+                  </section>-->
+                </section>
+              </section>
+
+              <section class="vent_ind_det_f_cont">
+                <section class="vent_ind_det_f_izq">
+                  <div class="vent_ind_det_izq_ico ico-margin">
+                    <div class="icon-calendar"></div>
+                  </div>
+                </section>
+                <section class="vent_ind_det_f_der">
+                  <div class="vent_ind_der_mid txt_sm fecha_emp_det_pros"></div>
+                </section>
+              </section>
+              
+              <section class="vent_ind_det_f_cont" id="req_detalle_venta"></section>
+            </section>
+        </section>
+      </section>
+    </article>
+     <article data-role="footer" data-position="fixed" data-id="pie_fijo" data-theme="b" class="pie">
+        <div data-role="navbar" data-grid="b" id="cont_pie_nav">
+          <ul>
+            <li><a href="javascript:;" id='btn_add_venta'><div class="icon-plus"> <label>Oportunidad</label></div></a></li>
+            <li>
+              <a href="javascript:;" id='add-contacto-bot'>
+                <div class="icon-plus"> <label>Contacto</label></div>
+              </a>
+              <ul id="sub-menu-act-bot" class="ocultar sub-menu-nn-d">
+                <li id='btn_empresa_bot'>Nueva Empresa</li>
+                <li id='btn_persona_bot'>Nueva Persona</li>
+              </ul>
+            </li>
+            <li><a href="javascript:;" class="sin_r" id='add-actividad-bot'><div class="icon-plus"> <label>Actividad</label></div></a></li>
+          </ul>
+      </div>
+    </article>
+  </section>
+  
+  <section data-role="page" id="contactos-empresa">
+    <article data-role="header" id="d_usu" data-id="top_fijo" data-position="fixed" class="cab_nav">
+      <a href="#" data-rel="back" class="btn_back"><div class="icon-arrow-left atras_btn"></div><label>Atras</label></a>
+      <div class="con_cab_a"><h1>Contactos Empresa</h1></div>
+      <div data-role="navbar" data-grid="d" id="cont_cab_nav">
+        <ul>
+          <li><a href="javascript:;" id='btn_venta'><div class="icon-office"></div><label>OPORTUNIDADES</label></a></li>
+          <li><a href="javascript:;" id='btn_actividad'><div class="icon-calendar"></div><label>ACTIVIDADES</label></a></li>
+          <li>
+            <a href="javascript:;" id='btn_contacto' style="border-bottom: 6px solid #490d1a; height: 44px;"><div class="icon-address-book"></div><label>CONTACTOS</label>
+            </a>
+            <ul id="sub-menu-vent" class="ocultar sub-menu-nn">
+                  <!--<li id='btn_empresa'>Empresa</li>-->
+                  <li id='btn_persona' style='padding: 5px 20px;'>Persona</li>
+            </ul>
+          </li>
+          <!--<li><a href="javascript:;" id='btn_estadistica'><div class="icon-pie"></div><label>ESTADISTICAS</label></a></li>
+          <li><a href="javascript:;" id='btn_logro'><div class="icon-star"></div><label>LOGROS</label></a></li>-->
+        </ul>
+      </div>
+    </article>
+
+    <article data-role="content" class="cont_main"> 
+      <section class='cont_items'>
+        <section class='cont_dato_detalle_venta'>
+          <input type='hidden' name='id_emp_sel' id='id_emp_sel' val=''>
+          <article class="unid_cont_item_act_contac lst-empresa"></article>
+      </section>
+      </section>
+    </article>
+     <article data-role="footer" data-position="fixed" data-id="pie_fijo" data-theme="b" class="pie">
+        <div data-role="navbar" data-grid="b" id="cont_pie_nav">
+          <ul>
+            <li><a href="javascript:;" id="btn_add_venta"><div class="icon-plus"> <label>Oportunidad</label></div></a></li> 
+            <li>
+              <a href="javascript:;" id='add-contacto-bot'>
+                <div class="icon-plus"> <label>Contacto</label></div>
+              </a>
+              <ul id="sub-menu-act-bot" class="ocultar sub-menu-nn-d">
+                <li id='btn_empresa_bot'>Nueva Empresa</li>
+                <li id='btn_persona_bot'>Nueva Persona</li>
+              </ul>
+            </li>
+            <li><a href="javascript:;" class="sin_r" id='add-actividad-bot'><div class="icon-plus"> <label>Actividad</label></div></a></li>
+          </ul>
+      </div>
+    </article>
+  </section>
+
+  <section data-role="page" id="contactos-persona">
+    <article data-role="header" id="d_usu" data-id="top_fijo" data-position="fixed" class="cab_nav">
+      <a href="#" data-rel="back" class="btn_back"><div class="icon-arrow-left atras_btn"></div><label>Atras</label></a>
+      <div class="con_cab_a"><h1>Contactos Persona</h1></div>
+      <div data-role="navbar" data-grid="d" id="cont_cab_nav">
+        <ul>
+          <li><a href="javascript:;" id='btn_venta'><div class="icon-office"></div><label>OPORTUNIDADES</label></a></li>
+          <li><a href="javascript:;" id='btn_actividad'><div class="icon-calendar"></div><label>ACTIVIDADES</label></a></li>
+          <li>
+            <a href="javascript:;" id='btn_contacto' style="border-bottom: 6px solid #490d1a; height: 44px;">
+              <div class="icon-address-book"></div>
+              <label>CONTACTOS</label>
+            </a>
+            <ul id="sub-menu-vent" class="ocultar sub-menu-nn">
+              <li id='btn_empresa' style='padding: 5px 20px;'>Empresa</li>
+              <!--<li id='btn_persona'>Persona</li>-->
+            </ul>
+          </li>
+          <!--<li><a href="javascript:;" id='btn_estadistica'><div class="icon-pie"></div><label>ESTADISTICAS</label></a></li>
+          <li><a href="javascript:;" id='btn_logro'><div class="icon-star"></div><label>LOGROS</label></a></li>-->
+        </ul>
+      </div>
+    </article>
+    <article data-role="content" class="cont_main"> 
+      <section class='cont_items'>
+        <section class='cont_dato_detalle_venta'>
+          <article class="unid_cont_item_act_contac lst-persona"></article><!-- lista de personas-->
+        </section>
+      </section>
+    </article>
+     <article data-role="footer" data-position="fixed" data-id="pie_fijo" data-theme="b" class="pie">
+        <div data-role="navbar" data-grid="b" id="cont_pie_nav">
+          <ul>
+            <li><a href="javascript:;" id="btn_add_venta"><div class="icon-plus"> <label>Oportunidad</label></div></a></li>
+            <li>
+              <a href="javascript:;" id='add-contacto-bot'><div class="icon-plus"> <label>Contacto</label></div>
+              </a>
+              <ul id="sub-menu-act-bot" class="ocultar sub-menu-nn-d">
+                <li id='btn_empresa_bot'>Nueva Empresa</li>
+                <li id='btn_persona_bot'>Nueva Persona</li>
+              </ul>
+            </li>
+            <li><a href="javascript:;" class="sin_r" id='add-actividad-bot'><div class="icon-plus"> <label>Actividad</label></div></a></li>
+          </ul>
+      </div>
+    </article>
+  </section>
+
+  <section data-role="page" id="contacto_emp_nuevo_editar">
+    <article data-role="header" id="d_usu" data-id="top_fijo" data-position="fixed" class="cab_nav">
+      <a href="#" data-rel="back" class="btn_back"><div class="icon-arrow-left atras_btn"></div><label>Atras</label></a>
+      <div class="con_cab_a"><h1>Contacto Empresa Nuevo</h1></div>
+      <div data-role="navbar" data-grid="d" id="cont_cab_nav">
+        <ul>
+          <li><a href="javascript:;" id='btn_venta'><div class="icon-office"></div><label>OPORTUNIDADES</label></a></li>
+          <li><a href="javascript:;" id='btn_actividad'><div class="icon-calendar"></div><label>ACTIVIDADES</label></a></li>
+          <li>
+            <a href="javascript:;" id='btn_contacto' style="border-bottom: 6px solid #490d1a; height: 44px;"><div class="icon-address-book"></div><label>CONTACTOS</label>
+            </a>
+            <ul id="sub-menu-vent" class="ocultar sub-menu-nn">
+                  <li id='btn_empresa'>Empresa</li>
+                  <li id='btn_persona'>Persona</li>
+            </ul>
+          </li>
+          <!--<li><a href="javascript:;"><div class="icon-pie"></div><label>ESTADISTICAS</label></a></li>
+          <li><a href="javascript:;"><div class="icon-star"></div><label>LOGROS</label></a></li>-->
+        </ul>
+      </div>
+    </article>
+    <article data-role="content" class="cont_main"> 
+      <input type='hidden' name='accion_frm_emp' id='accion_frm_emp' value='' >
+      <section class='cont_items'>
+        <section class='cont_dato_detalle_venta'>
+
+          <section class='cont_pupup_Nusu'>
+            <section class="lst_campos">
+              <section class="cont_item_contend_uni_nuevo">
+                <section class="sec_cont_item_izq_nuevo">
+                  <div class="sec_cont_item_izq_ico_nuevo">
+                    <div class="icon-cabinet"></div>
+                  </div>
+                </section>
+                <section class="sec_cont_item_mid_nuevo nvo_cn_frm_emp">
+                  <label>Empresa</label>
+                  <input type="text" class="sec_cont_item_izq_text_nuevo" id='edt_emp_nom' name='edt_emp_nom'></input>
+                </section>
+              </section>
+              <section class="cont_item_contend_uni_nuevo">
+                <section class="sec_cont_item_izq_nuevo">
+                  <div class="sec_cont_item_izq_ico_nuevo">
+                    <div class="icon-file"></div>
+                  </div>
+                </section>
+                <section class="sec_cont_item_mid_nuevo nvo_cn_frm_emp">
+                  <label>RUC</label>
+                  <input type="number" class="sec_cont_item_izq_text_nuevo" id='edt_emp_ruc' name = 'edt_emp_ruc' oninput="maxLengthCheck(this,11)"></input>
+                </section>
+              </section>
+
+              <section class="cont_item_contend_uni_nuevo">
+                <section class="sec_cont_item_izq_nuevo">
+                  <div class="sec_cont_item_izq_ico_nuevo">
+                    <div class="icon-group"></div>
+                  </div>
+                </section>
+                <section class="sec_cont_item_mid_nuevo nvo_cn_frm_emp">
+                  <label>Número de Trabajadores</label>
+                  <input type="number" class="sec_cont_item_izq_text_nuevo" id='edt_emp_ntrab' name = 'edt_emp_ntrab' oninput="maxLengthCheck(this,5)"></input>
+                </section>
+              </section>
+
+              <section class="cont_item_contend_uni_nuevo">
+                <section class="sec_cont_item_izq_nuevo">
+                  <div class="sec_cont_item_izq_ico_nuevo">
+                    <div class="icon-coins"></div>
+                  </div>
+                </section>
+                <section class="sec_cont_item_mid_nuevo nvo_cn_frm_emp">
+                  <label>Volumen de venta</label>
+                  <input type="number" class="sec_cont_item_izq_text_nuevo" id='edt_emp_vven' name='edt_emp_vven'></input>
+                </section>
+              </section>
+
+              <section class="cont_item_contend_uni_nuevo">
+                <section class="sec_cont_item_izq_nuevo">
+                  <div class="sec_cont_item_izq_ico_nuevo"></div>
+                </section>
+                <section class="sec_cont_item_mid_nuevo">
+                  <article class="contacto_filtro" id='cont-cbo-tcartera'>
+                    <div data-role="fieldcontain">
+                      <select name="cboTipoCartera" id="cboTipoCartera"></select>
+                    </div>
+                  </article>
+                </section>
+              </section>
+
+              <section class="cont_item_contend_uni_nuevo">
+                <section class="sec_cont_item_izq_nuevo">
+                  <div class="sec_cont_item_izq_ico_nuevo">
+                    <div class="icon-phone"></div>
+                  </div>
+                </section>
+                <section class="sec_cont_item_mid_nuevo nvo_cn_frm_emp">
+                  <label>Teléfono</label>
+                  <input type="number" class="sec_cont_item_izq_text_nuevo" id='edt_emp_telf' name='edt_emp_telf' oninput="maxLengthCheck(this,12)"></input>
+                </section>
+              </section>
+            </section>
+            <section class='cont_btn_form'>
+              <article id='btn_cancelar_frm'><a href='#' data-rel='back'>CANCELAR</a></article>
+              <article id='btn_guardar_emp'><label>GUARDAR</label></article>
+            .</section>
+          </section>
+        </section>
+      </section>
+    </article>
+     <article data-role="footer" data-position="fixed" data-id="pie_fijo" data-theme="b" class="pie">
+        <div data-role="navbar" data-grid="b" id="cont_pie_nav">
+          <ul>
+            <li><a href="javascript:;"><div class="icon-plus"> <label>Oportunidad</label></div></a></li>
+            <li>
+              <a href="javascript:;"><div class="icon-plus"> <label>Contacto</label></div></a>
+              <ul id="sub-menu-act-bot" class="ocultar sub-menu-nn-d">
+                <li id='btn_empresa_bot'>Nueva Empresa</li>
+                <li id='btn_persona_bot'> Nueva Persona </li>
+              </ul>
+            </li>
+            <li><a href="javascript:;" class="sin_r"><div class="icon-plus"> <label>Actividad</label></div></a></li>
+          </ul>
+      </div>
+    </article>
+  </section>
+
+  <section data-role="page" id="contacto_deta_empresa">
+    <article data-role="header" id="d_usu" data-id="top_fijo" data-position="fixed" class="cab_nav">
+      <a href="#" data-rel="back" class="btn_back"><div class="icon-arrow-left atras_btn"></div><label>Atras</label></a>
+      <div class="con_cab_a"><h1>Contacto Detalle Empresa</h1></div>
+      <div data-role="navbar" data-grid="d" id="cont_cab_nav">
+        <ul>
+          <li><a href="javascript:;" id='btn_venta'><div class="icon-office"></div><label>OPORTUNIDADES</label></a></li>
+          <li><a href="javascript:;" id='btn_actividad'><div class="icon-calendar"></div><label>ACTIVIDADES</label></a></li>
+          <li>
+            <a href="javascript:;" id='btn_contacto' style="border-bottom: 6px solid #490d1a; height: 44px;"><div class="icon-address-book"></div><label>CONTACTOS</label>
+            </a>
+            <ul id="sub-menu-vent" class="ocultar sub-menu-nn">
+                <li id='btn_persona' style='padding: 5px 15px;'>Persona</li>
+            </ul>
+          </li> 
+          <!--<li><a href="javascript:;"><div class="icon-pie"></div><label>METRICAS</label></a></li>
+          <li><a href="javascript:;"><div class="icon-star"></div><label>LOGROS</label></a></li>-->
+        </ul>
+      </div>
+    </article>
+    <article data-role="content" class="cont_main"> 
+      <section class='cont_items'>
+        <section class='cont_dato_detalle_venta'>
+
+            <input type='hidden' name='idEmp' id='idEmp' val=''>
+            <input type='hidden' name='nomEmp' id='nomEmp' val=''>
+
+            <section class="cont_ind_deta_blank">
+              <section class="cont_ind_deta_blank_izq"><div id='det_emp_nom'></div></section>
+              <section id="cont_deta_emp_blank_der"><div class="icon-pencil"></div></section>
+            </section>
+            
+            <section class="cont_ind_deta_btns">
+              <div class="color-button" id="btn-general-demp">GENERAL</div>
+              <div class="white-button" id="btn-actividad-demp">ACTIVIDADES</div>
+              <div class="white-button" id="btn-oportunidad-demp">OPORTUNIDAD</div>
+            </section>
+
+            <section class="cont_ind_det_fondo_cont" id='cont_deta_gen_emp' style='margin-top: 10px;'>
+              <section class="cont_ind_det_fondo">
+
+                <section class="cont_ind_det_f_conta">
+                  <section class="cont_ind_det_f_izq">
+                    <div class="cont_ind_det_izq_ico">
+                      <div class="icon-file"></div>
+                    </div>
+                  </section>
+                  <section class="cont_ind_det_f_der">
+                    <div class="cont_ind_der_bot">RUC</div>
+                    <div class="cont_ind_der_top" id="det_emp_ruc"></div>
+                  </section>
+                </section>
+              
+                <section class="cont_ind_det_f_conta">
+                  <section class="cont_ind_det_f_izq">
+                    <div class="cont_ind_det_izq_ico">
+                      <div class="icon-group"></div>
+                    </div>
+                  </section>
+                  <section class="cont_ind_det_f_der">
+                    <div class="cont_ind_der_bot">Cantidad de trabajadores</div>
+                    <div class="cont_ind_der_top" id="det_emp_numT"></div>
+                  </section>
+                </section>
+
+                <section class="cont_ind_det_f_conta">
+                  <section class="cont_ind_det_f_izq">
+                    <div class="cont_ind_det_izq_ico">
+                      <div class="icon-coins"></div>
+                    </div>
+                  </section>
+                  <section class="cont_ind_det_f_der">
+                    <div class="cont_ind_der_bot">Volumen de ventas</div>
+                    <div class="cont_ind_der_top" id="det_emp_voluV"></div>
+                  </section>
+                </section>
+
+                <section class="cont_ind_det_f_conta">
+                  <section class="cont_ind_det_f_izq">
+                    <div class="cont_ind_det_izq_ico">
+                      <div class="icon-moneybag"></div>
+                    </div>
+                  </section>
+                  <section class="cont_ind_det_f_der">
+                    <div class="cont_ind_der_bot">Giro</div>
+                    <div class="cont_ind_der_top" id="det_emp_giro"></div>
+                  </section>
+                </section>
+
+                <section class="cont_ind_det_f_conta">
+                  <section class="cont_ind_det_f_izq">
+                    <div class="cont_ind_det_izq_ico">
+                      <div class="icon-address-book"></div>
+                    </div>
+                  </section>
+                  <section class="cont_ind_det_f_der">
+                    <div class="cont_ind_der_bot">Tipo de cartera</div>
+                    <div class="cont_ind_der_top" id="det_emp_tCartera"></div>
+                  </section>
+                </section>
+
+                <section class="cont_ind_det_f_conta">
+                  <section class="cont_ind_det_f_izq">
+                    <div class="cont_ind_det_izq_ico">
+                      <div class="icon-phone"></div>
+                    </div>
+                  </section>
+                  <section class="cont_ind_det_f_der">
+                    <div class="cont_ind_der_bot">Teléfono</div>
+                    <div class="cont_ind_der_top" id="det_emp_telf"></div>
+                  </section>
+                </section>
+
+                <section class="cont_ind_det_f_conta">
+                  <section class="cont_ind_det_f_izq">
+                    <div class="cont_ind_det_izq_ico">
+                      <div class="icon-location"></div>
+                    </div>
+                  </section>
+                  <section class="cont_ind_det_f_der">
+                    <div class="cont_ind_der_bot">Dirección</div>
+                    <div class="cont_ind_der_top" id="det_emp_dire"></div>
+                  </section>
+                </section>
+
+                <section class="cont_ind_det_f_conta">
+                  <section class="cont_ind_det_f_izq">
+                    <div class="cont_ind_det_izq_ico">
+                      <div class="icon-user"></div>
+                    </div>
+                  </section>
+                  <section class="cont_ind_det_f_der">
+                    <div class="cont_ind_der_bot">Asignado</div>
+                    <div class="cont_ind_der_top" id="det_emp_asig"></div>
+                  </section>
+                </section>
+
+              </section>
+
+              <section class="vent_ind_deta_act">
+                  <section id="add_decisor_empresa">+ Agregar decisor</section>             
+              </section>
+
+              <section id='cnt_cnt_emp_deci'></section>
+            </section>
+
+            <section id='cont_actv_gen_emp' style='display:none;'></section>
+            <section id='cont_oport_gen_emp' style='display:none;'></section>
+
+        </section>
+      </section>
+    </article>
+    <article data-role="footer" data-position="fixed" data-id="pie_fijo" data-theme="b" class="pie">
+        <div data-role="navbar" data-grid="b" id="cont_pie_nav">
+          <ul>
+            <li><a href="javascript:;" id="btn_add_venta_emp"><div class="icon-plus"> <label>Oportunidad</label></div></a></li>
+            <li>
+              <a href="javascript:;" id='add-contacto-bot'><div class="icon-plus"> <label>Contacto</label></div>
+              </a>
+              <ul id="sub-menu-act-bot" class="ocultar sub-menu-nn-d">
+                <li id='btn_empresa_bot'>Nueva Empresa</li>
+                <li id='btn_persona_bot'>Nueva Persona</li>
+              </ul>
+            </li>
+            <li><a href="javascript:;" class="sin_r" id='add-actividad-bot'><div class="icon-plus"> <label>Actividad</label></div></a></li>
+          </ul>
+      </div>
+    </article>
+  </section>
+
+  <section data-role="page" id="contacto_deta_persona">
+    <article data-role="header" id="d_usu" data-id="top_fijo" data-position="fixed" class="cab_nav">
+      <a href="#" data-rel="back" class="btn_back"><div class="icon-arrow-left atras_btn"></div><label>Atras</label></a>
+      <div class="con_cab_a"><h1>Contacto Detalle Persona</h1></div>
+      <div data-role="navbar" data-grid="d" id="cont_cab_nav">
+        <ul>
+          <li><a href="javascript:;" id='btn_venta'><div class="icon-office"></div><label>OPORTUNIDADES</label></a></li>
+          <li><a href="javascript:;" id='btn_actividad'><div class="icon-calendar"></div><label>ACTIVIDADES</label></a></li>
+          <li>
+            <a href="javascript:;" id='btn_contacto' style="border-bottom: 6px solid #490d1a; height: 44px;"><div class="icon-address-book"></div><label>CONTACTOS</label>
+            </a>
+            <ul id="sub-menu-vent" class="ocultar sub-menu-nn">
+                  <li id='btn_empresa' style='padding: 5px 15px;'>Empresa</li>
+            </ul>
+          </li>
+          <!--<li><a href="javascript:;"><div class="icon-pie"></div><label>METRICAS</label></a></li>
+          <li><a href="javascript:;"><div class="icon-star"></div><label>LOGROS</label></a></li>-->
+        </ul>
+      </div>
+    </article>
+    <article data-role="content" class="cont_main"> 
+      <section class='cont_items'>
+        <section class='cont_dato_detalle_venta'>
+
+            <input type='hidden' name='idPer' id='idPer' val=''>
+
+            <section class="cont_ind_deta_blank">
+              <section class="cont_ind_deta_blank_izq"><div id='frm_per_nom'></div></section>
+              <section id="cont_deta_per_blank_der"><div class="icon-pencil"></div></section>
+            </section>
+            
+            <section class="cont_ind_deta_btns">
+              <div class="color-button" id='btn-general-dper'>GENERAL</div>
+              <div class="white-button" id='btn-actividad-dper'>ACTIVIDADES</div>
+              <div class="white-button" id='btn-oportunidad-dper'>VENTAS</div>
+            </section>
+
+            <section class="cont_ind_det_fondo_cont" id='cont_desc_per' style='margin-top: 10px;'>
+              <section class="cont_ind_det_fondo">
+
+                <section class="cont_ind_det_f_conta">
+                  <section class="cont_ind_det_f_izq">
+                    <div class="cont_ind_det_izq_ico">
+                      <div class="icon-address-book"></div>
+                    </div>
+                  </section>
+                  <section class="cont_ind_det_f_der">
+                    <div class="cont_ind_der_bot">Tipo de documento</div>
+                    <div class="cont_ind_der_top" id='frm_per_tdoc'></div>
+                  </section>
+                </section>
+
+                <section class="cont_ind_det_f_conta">
+                  <section class="cont_ind_det_f_izq">
+                    <div class="cont_ind_det_izq_ico">
+                      <div class="icon-file"></div>
+                    </div>
+                  </section>
+                  <section class="cont_ind_det_f_der">
+                    <div class="cont_ind_der_bot">Numero de documento</div>
+                    <div class="cont_ind_der_top" id='frm_per_ndoc'></div>
+                  </section>
+                </section>
+
+                <section class="cont_ind_det_f_conta">
+                  <section class="cont_ind_det_f_izq">
+                    <div class="cont_ind_det_izq_ico">
+                      <div class="icon-envelope2"></div>
+                    </div>
+                  </section>
+                  <section class="cont_ind_det_f_der">
+                    <div class="cont_ind_der_bot">Email</div>
+                    <div class="cont_ind_der_top" id='frm_per_mail'></div>
+                  </section>
+                </section>
+
+                <section class="cont_ind_det_f_conta">
+                  <section class="cont_ind_det_f_izq">
+                    <div class="cont_ind_det_izq_ico">
+                      <div class="icon-phone"></div>
+                    </div>
+                  </section>
+                  <section class="cont_ind_det_f_der">
+                    <div class="cont_ind_der_bot">Teléfono</div>
+                    <div class="cont_ind_der_top" id='frm_per_tel'></div>
+                  </section>
+                </section>
+
+                <section class="cont_ind_det_f_conta">
+                  <section class="cont_ind_det_f_izq">
+                    <div class="cont_ind_det_izq_ico">
+                      <div class="icon-star"></div>
+                    </div>
+                  </section>
+                  <section class="cont_ind_det_f_der">
+                    <div class="cont_ind_der_bot">Cargo</div>
+                    <div class="cont_ind_der_top" id='frm_per_cargo'></div>
+                  </section>
+                </section>
+
+                <section class="cont_ind_det_f_conta">
+                  <section class="cont_ind_det_f_izq">
+                    <div class="cont_ind_det_izq_ico">
+                      <div class="icon-office"></div>
+                    </div>
+                  </section>
+                  <section class="cont_ind_det_f_der">
+                    <div class="cont_ind_der_bot">Empresa</div>
+                    <div class="cont_ind_der_top" id='frm_per_emp'></div>
+                  </section>
+                </section>
+
+                <section class="cont_ind_det_f_conta">
+                  <section class="cont_ind_det_f_izq">
+                    <div class="cont_ind_det_izq_ico">
+                      <div class="icon-user"></div>
+                    </div>
+                  </section>
+                  <section class="cont_ind_det_f_der">
+                    <div class="cont_ind_der_bot">Asignado</div>
+                    <div class="cont_ind_der_top" id='frm_per_asig'></div>
+                  </section>
+                </section>
+
+              </section>
+
+            </section>
+            <section id='cont_actv_per'></section>
+            <section id='cont_oport_per'></section>
+        </section>
+      </section>
+    </article>
+    <article data-role="footer" data-position="fixed" data-id="pie_fijo" data-theme="b" class="pie">
+        <div data-role="navbar" data-grid="b" id="cont_pie_nav">
+          <ul>
+            <li><a href="javascript:;" id="btn_add_venta_con"><div class="icon-plus"> <label>Oportunidad</label></div></a></li>
+            <li>
+              <a href="javascript:;" id='add-contacto-bot'><div class="icon-plus"> <label>Contacto</label></div>
+              </a>
+              <ul id="sub-menu-act-bot" class="ocultar sub-menu-nn-d">
+                <li id='btn_empresa_bot'>Nueva Empresa</li>
+                <li id='btn_persona_bot'>Nueva Persona</li>
+              </ul>
+            </li>
+            <li><a href="javascript:;" class="sin_r" id='add-actividad-bot'><div class="icon-plus"> <label>Actividad</label></div></a></li>
+          </ul>
+      </div>
+    </article>
+  </section>
+
+  <section data-role="page" id="contacto_per_nuevo_editar">
+    <article data-role="header" id="d_usu" data-id="top_fijo" data-position="fixed" class="cab_nav">
+      <a href="#" data-rel="back" class="btn_back"><div class="icon-arrow-left atras_btn"></div><label>Atras</label></a>
+      <div class="con_cab_a"><h1>Contacto Persona Nuevo</h1></div>
+      <div data-role="navbar" data-grid="d" id="cont_cab_nav">
+        <ul>
+          <li><a href="javascript:;" id='btn_venta'><div class="icon-office"></div><label>OPORTUNIDADES</label></a></li>
+          <li><a href="javascript:;" id='btn_actividad'><div class="icon-calendar"></div><label>ACTIVIDADES</label></a></li>
+          <li>
+            <a href="javascript:;" id='btn_contacto' style="border-bottom: 6px solid #490d1a; height: 44px;"><div class="icon-address-book"></div><label>CONTACTOS</label>
+            </a>
+            <ul id="sub-menu-vent" class="ocultar sub-menu-nn">
+                  <li id='btn_empresa'>Empresa</li>
+                  <li id='btn_persona'>Persona</li>
+            </ul>
+          </li>
+          <!--<li><a href="javascript:;"><div class="icon-pie"></div><label>METRICAS</label></a></li>
+          <li><a href="javascript:;"><div class="icon-star"></div><label>LOGROS</label></a></li>-->
+        </ul>
+      </div>
+    </article>
+    <article data-role="content" class="cont_main"> 
+      <input type='hidden' name='accion_frm_per' id='accion_frm_per' value='' >
+      <section class='cont_items'>
+        <section class='cont_dato_detalle_venta'>
+          <section class='cont_pupup_Nusu'>
+                <section class="lst_campos">
+                  <section class="cont_item_contend_uni_nuevo">
+                    <section class="sec_cont_item_izq_nuevo">
+                      <div class="sec_cont_item_izq_ico_nuevo">
+                        <div class="icon-user"></div>
+                      </div>
+                    </section>
+                    <section class="sec_cont_item_mid_nuevo nvo_cn_frm_emp">
+                      <label>Nombre</label>
+                      <input type="text" class="sec_cont_item_izq_text_nuevo" id='dt_frm_per_nom' name='dt_frm_per_nom'></input>
+                    </section>
+                  </section>
+                  
+                  <section class="cont_item_contend_uni_nuevo">
+                    <section class="sec_cont_item_izq_nuevo">
+                      <div class="sec_cont_item_izq_ico_nuevo">
+                      </div>
+                    </section>
+                    <section class="sec_cont_item_mid_nuevo nvo_cn_frm_emp">
+                      <label>Apellido</label>
+                      <input type="text" class="sec_cont_item_izq_text_nuevo" id='dt_frm_per_ape' name='dt_frm_per_ape'></input>
+                    </section>
+                  </section>
+
+                 <section class="cont_item_contend_uni_nuevo">
+                    <section class="sec_cont_item_izq_nuevo">
+                      <div class="sec_cont_item_izq_ico_nuevo">
+                        <div class="icon-address-book"></div>
+                      </div>
+                    </section>
+                    <section class="sec_cont_item_mid_nuevo">
+                      <article class="contacto_filtro" id='cont-cbo-tdoc'>
+                        <div data-role="fieldcontain">
+                          <select name="cboTipoDocumento" id="cboTipoDocumento"></select>
+                        </div>
+                      </article>
+                    </section>
+                  </section>
+
+                  <section class="cont_item_contend_uni_nuevo">
+                    <section class="sec_cont_item_izq_nuevo">
+                      <div class="sec_cont_item_izq_ico_nuevo">
+                        <div class="icon-file"></div>
+                      </div>
+                    </section>
+                    <section class="sec_cont_item_mid_nuevo nvo_cn_frm_emp">
+                      <label>Número de documento</label>
+                      <input type="number" class="sec_cont_item_izq_text_nuevo" id='dt_frm_per_ndoc' name='dt_frm_per_ndoc' oninput="maxLengthCheck(this,20)"></input>
+                    </section>
+                  </section>
+
+                  <section class="cont_item_contend_uni_nuevo">
+                    <section class="sec_cont_item_izq_nuevo">
+                      <div class="sec_cont_item_izq_ico_nuevo">
+                        <div class="icon-envelope"></div>
+                      </div>
+                    </section>
+                    <section class="sec_cont_item_mid_nuevo nvo_cn_frm_emp">
+                      <label>Correo electrónico</label>
+                      <input type="text" class="sec_cont_item_izq_text_nuevo" id='dt_frm_per_mail' name='dt_frm_per_mail'></input>
+                    </section>
+                  </section>
+
+                  <section class="cont_item_contend_uni_nuevo">
+                    <section class="sec_cont_item_izq_nuevo">
+                      <div class="sec_cont_item_izq_ico_nuevo">
+                        <div class="icon-phone"></div>
+                      </div>
+                    </section>
+                    <section class="sec_cont_item_mid_nuevo nvo_cn_frm_emp">
+                      <label>Teléfono</label>
+                      <input type="number" class="sec_cont_item_izq_text_nuevo" id='dt_frm_per_telf' name='dt_frm_per_telf' oninput="maxLengthCheck(this,11)"></input>
+                    </section>
+                  </section>
+                </section>
+                <section class='cont_btn_form'>
+                  <article id='btn_cancelar_frm'><a href="#" data-rel='back'>CANCELAR</a></article>
+                  <article id='btn_guardar_per'><label>GUARDAR</label></article>
+                </section>
+          </section>
+      </section>
+    </section>
+  </article>
+     <article data-role="footer" data-position="fixed" data-id="pie_fijo" data-theme="b" class="pie">
+        <div data-role="navbar" data-grid="b" id="cont_pie_nav">
+          <ul>
+            <li><a href="javascript:;"><div class="icon-plus"> <label>Oportunidad</label></div></a></li>
+            <li>
+              <a href="javascript:;"><div class="icon-plus"> <label>Contacto</label></div>
+              </a>
+              <ul id="sub-menu-act-bot" class="ocultar sub-menu-nn-d">
+                <li id='btn_empresa_bot'>Nueva Empresa</li>
+                <li id='btn_persona_bot'>Nueva Persona</li>
+              </ul>
+            </li>
+            <li><a href="javascript:;" class="sin_r"><div class="icon-plus"> <label>Actividad</label></div></a></li>
+          </ul>
+      </div>
+    </article>
+  </section>
+
+  <section data-role="page" id="actividad_detalle">
+    <article data-role="header" id="d_usu" data-id="top_fijo" data-position="fixed" class="cab_nav">
+      <a href="#" data-rel="back" class="btn_back"><div class="icon-arrow-left atras_btn"></div><label>Atras</label></a>
+      <div class="con_cab_a"><h1>Actividad Detalle</h1></div>
+      <div data-role="navbar" data-grid="d" id="cont_cab_nav">
+        <ul>
+          <li><a href="javascript:;" id='btn_venta'><div class="icon-office"></div><label>OPORTUNIDADES</label></a></li>
+          <li><a href="javascript:;" style="border-bottom: 6px solid #490d1a; height: 44px;" id='btn_actividad'><div class="icon-calendar"></div><label>ACTIVIDADES</label></a></li>
+          <li>
+            <a href="javascript:;" id='btn_contacto' >
+              <div class="icon-address-book"></div><label>CONTACTOS</label>
+            </a>
+            <ul id="sub-menu-vent" class="ocultar sub-menu-nn">
+                  <li id='btn_empresa'>Empresa</li>
+                  <li id='btn_persona'>Persona</li>
+            </ul>
+          </li>
+          <!--<li><a href="javascript:;"><div class="icon-pie"></div><label>METRICAS</label></a></li>
+          <li><a href="javascript:;"><div class="icon-star"></div><label>LOGROS</label></a></li>-->
+        </ul>
+      </div>
+    </article>
+    <article data-role="content" class="cont_main"> 
+      <section class='cont_items'>
+        <section class='cont_dato_detalle_venta'>
+          <section class="cont_ind_deta_blank" style="margin-bottom: 10px;">
+            <section class="cont_ind_deta_blank_izq"><div id="det_act_tit">ACTIVIDAD</div></section>
+            <section id="cont_deta_act_blank_der"><div class="icon-pencil"></div></section>
+          </section>
+          <section class="cont_ind_det_fondo">
+            <section class="cont_ind_det_f_conta">
+              <section class="cont_ind_det_f_izq">
+                <div class="cont_ind_det_izq_ico">
+                  <div class="icon-star"></div>
+                </div>
+              </section>
+              <section class="cont_ind_det_f_der">
+                <div class="cont_ind_der_bot">OBJETIVO</div>
+                <div class="cont_ind_der_top" id="det_act_obj"></div>
+              </section>
+            </section>
+            
+            <section class="cont_ind_det_f_conta">
+              <section class="cont_ind_det_f_izq">
+                <div class="cont_ind_det_izq_ico">
+                  <div class="icon-calendar"></div>
+                </div>
+              </section>
+              <section class="cont_ind_det_f_der">
+                <div class="cont_ind_der_bot">FECHA</div>
+                <div class="cont_ind_der_top" id="det_act_fecha"></div>
+              </section>
+            </section>
+
+            <section class="cont_ind_det_f_conta">
+              <section class="cont_ind_det_f_izq">
+                <div class="cont_ind_det_izq_ico">
+                  <div class="icon-time"></div>
+                </div>
+              </section>
+              <section class="cont_ind_det_f_der">
+                <div class="cont_ind_der_bot">HORA</div>
+                <div class="cont_ind_der_top" id="det_act_hora"></div>
+              </section>
+            </section>
+
+            <section class="cont_ind_det_f_conta">
+              <section class="cont_ind_det_f_izq">
+                <div class="cont_ind_det_izq_ico">
+                  <div class="icon-stopwatch"></div>
+                </div>
+              </section>
+              <section class="cont_ind_det_f_der">
+                <div class="cont_ind_der_bot">DURACION</div>
+                <div class="cont_ind_der_top" id="det_act_dura"></div>
+              </section>
+            </section>
+
+            <section class="cont_ind_det_f_conta">
+              <section class="cont_ind_det_f_izq">
+                <div class="cont_ind_det_izq_ico">
+                  <div class="icon-moneybag"></div>
+                </div>
+              </section>
+              <section class="cont_ind_det_f_der">
+                <div class="cont_ind_der_bot">ASIGNADO A OPORTUNIDAD</div>
+                <div class="cont_ind_der_top" id="det_act_opor"></div>
+              </section>
+            </section>
+
+            <section class="cont_ind_det_f_conta">
+              <section class="cont_ind_det_f_izq">
+                <div class="cont_ind_det_izq_ico">
+                  <div class="icon-office"></div>
+                </div>
+              </section>
+              <section class="cont_ind_det_f_der">
+                <div class="cont_ind_der_bot">ASIGNADO A EMPRESA</div>
+                <div class="cont_ind_der_top" id="det_act_emp"></div>
+              </section>
+            </section>
+
+            <section class="cont_ind_det_f_conta">
+              <section class="cont_ind_det_f_izq">
+                <div class="cont_ind_det_izq_ico">
+                  <div class="icon-user"></div>
+                </div>
+              </section>
+              <section class="cont_ind_det_f_der">
+                <div class="cont_ind_der_bot">ASIGNADO A CONTACTO</div>
+                <div class="cont_ind_der_top" id="det_act_cont"></div>
+              </section>
+            </section>
+
+            <section class="cont_ind_det_f_conta">
+              <section class="cont_ind_det_f_izq">
+                <div class="cont_ind_det_izq_ico">
+                  <div class="icon-file"></div>
+                </div>
+              </section>
+              <section class="cont_ind_det_f_der">
+                <div class="cont_ind_der_bot">NOTA</div>
+                <div class="cont_ind_der_top" id="det_act_nota"></div>
+              </section>
+            </section>
+          </section>
+          <section class='cnt-dt-act-elm'>
+            <span id='eliminar_actividad'>Eliminar Actividad</span>
+          </section>
+        </section>
+      </section>
+    </article>
+    <article data-role="footer" data-position="fixed" data-id="pie_fijo" data-theme="b" class="pie">
+        <div data-role="navbar" data-grid="b" id="cont_pie_nav">
+          <ul>
+            <li><a href="javascript:;" id="btn_venta_bot"><div class="icon-plus"> <label>Oportunidad</label></div></a></li>
+            <li>
+               <a href="javascript:;" id='add-contacto-bot'><div class="icon-plus"> <label>Contacto</label></div>
+              </a>
+              <ul id="sub-menu-act-bot" class="ocultar sub-menu-nn-d">
+                <li id='btn_empresa_bot'>Nueva Empresa</li>
+                <li id='btn_persona_bot'>Nueva Persona</li>
+              </ul>
+            </li>
+            <li><a href="javascript:;" class="sin_r" id='add-actividad-bot'><div class="icon-plus"> <label>Actividad</label></div></a></li>
+          </ul>
+      </div>
+    </article>
+  </section>
+
+  <section data-role="page" id="frm_actividad_editar">
+    <article data-role="header" id="d_usu" data-id="top_fijo" data-position="fixed" class="cab_nav">
+      <a href="#" data-rel="back" class="btn_back"><div class="icon-arrow-left atras_btn"></div><label>Atras</label></a>
+      <div class="con_cab_a"><h1>Actividad Detalle</h1></div>
+      <div data-role="navbar" data-grid="d" id="cont_cab_nav">
+        <ul>
+          <li><a href="javascript:;" id='btn_venta'><div class="icon-office"></div><label>OPORTUNIDADES</label></a></li>
+          <li><a href="javascript:;" style="border-bottom: 6px solid #490d1a; height: 44px;" id='btn_actividad'><div class="icon-calendar"></div><label>ACTIVIDADES</label></a></li>
+          <li>
+            <a href="javascript:;" id='btn_contacto' >
+              <div class="icon-address-book"></div><label>CONTACTOS</label>
+            </a>
+            <ul id="sub-menu-vent" class="ocultar sub-menu-nn">
+                  <li id='btn_empresa'>Empresa</li>
+                  <li id='btn_persona'>Persona</li>
+            </ul>
+          </li>
+          <!--<li><a href="javascript:;"><div class="icon-pie"></div><label>METRICAS</label></a></li>
+          <li><a href="javascript:;"><div class="icon-star"></div><label>LOGROS</label></a></li>-->
+        </ul>
+      </div>
+    </article>
+    <article data-role="content" class="cont_main"> 
+      <input type='hidden' name='id_act_frm' id='id_act_frm' val=''>
+      <input type='hidden' name='frmValAct' id='frmValAct' val=''>
+      <section class='cont_items'>
+        <section class='cont_dato_detalle_venta'>
+          <article class="actividad_tipo" id="cbo-tipo-act">
+            <div data-role="fieldcontain">
+              <select name="cboTipoActividad" id="cboTipoActividad">
+              </select>
+            </div>
+          </article>
+          <section class='cont_pupup_Nusu'>
+                <section class="lst_campos_act">
+                  <article class='cont_req'>
+                    <label class='fmr_act_obj'>Objetivo</label>
+                    <input type='text' id='fmr_act_obj' name='fmr_act_obj' class='inpt_sel'>
+                  </article>
+                  <article class='cont_req'>
+                    <label class='fmr_act_fecha'>Fecha</label>
+                    <input type='text' id='fmr_act_fecha' name='fmr_act_fecha' data-role="datebox" data-options='{"mode":"flipbox", "useLang":"es-ES", "overrideDateFormat": "%Y-%m-%d"}'>
+                  </article>
+                  <article class='cont_req'>
+                    <label class='fmr_act_hora'>Hora</label>
+                    <input type='text' id='fmr_act_hora' name='fmr_act_hora' data-role="datebox" data-options='{"mode":"timeflipbox", "useLang":"es-ES", "overrideTimeOutput":"%H:%M"}'>
+                  </article>
+                  <article class='cont_req'>
+                    <label class='fmr_act_dur'>Duración</label>
+                    <input type='text' id='fmr_act_dur' name='fmr_act_dur' class='inpt_sel' data-role="datebox" data-options='{"mode":"durationbox", "useLang":"es-ES", "overrideDurationFormat":"%Dl:%DM"}' >-->
+                  </article>
+                  <article class='cont_req' style="margin-bottom: 0;">
+                    <label>Asignar a:</label>
+
+                    <section class="cnt_cbo_act_frm_tipo">
+                      <article class="contacto_filtro" id="cbo-opor-act">
+                        <div data-role="fieldcontain">
+                          <select name="cboOportunidadAct" id="cboOportunidadAct">
+                            <option>OPORTUNIDAD</option>
+                          </select>
+                        </div>
+                      </article>
+                    </section>
+                    <section class="cnt_cbo_act_frm_tipo">
+                      <article class="contacto_filtro" id="cbo-emp-act">
+                        <div data-role="fieldcontain">
+                          <select name="cboEmpresaAct" id="cboEmpresaAct">
+                            <option>EMPRESA</option>
+                          </select>
+                        </div>
+                      </article>
+                    </section>
+                    <section class="cnt_cbo_act_frm_tipo">
+                      <article class="contacto_filtro" id="cbo-con-act">
+                        <div data-role="fieldcontain">
+                          <select name="cboContactoAct" id="cboContactoAct">
+                            <option>CONTACTO</option>
+                          </select>
+                        </div>
+                      </article>
+                    </section>
+
+                  </article>
+                  <article class='cont_req nvo_pros'>
+                    <label class='fmr_act_nota'>Nota</label>
+                    <textarea style='height: 24px; font-size:13px;' name="fmr_act_nota" id="fmr_act_nota" class="div_textarea_act_mid_all_uni inpt_sel"  cols="20" placeholder="Agregar Nota"></textarea>
+                  </article>
+                </section>
+                <section class='cont_btn_form'>
+                  <article id='btn_cancelar_frm'><a href="#" data-rel='back'>CANCELAR</a></article>
+                  <article id='btn_guardar_frm_act'><label>GUARDAR</label></article>
+                </section>
+          </section>
+        </section>
+      </section>
+    </article>
+    <article data-role="footer" data-position="fixed" data-id="pie_fijo" data-theme="b" class="pie">
+        <div data-role="navbar" data-grid="b" id="cont_pie_nav">
+          <ul>
+            <li><a href="javascript:;"><div class="icon-plus"> <label>Oportunidad</label></div></a></li>
+            <li>
+               <a href="javascript:;"><div class="icon-plus"> <label>Contacto</label></div>
+              </a>
+              <ul id="sub-menu-act-bot" class="ocultar sub-menu-nn-d">
+                <li id='btn_empresa_bot'>Nueva Empresa</li>
+                <li id='btn_persona_bot'>Nueva Persona</li>
+              </ul>
+            </li>
+            <li><a href="javascript:;" class="sin_r"><div class="icon-plus"> <label>Actividad</label></div></a></li>
+          </ul>
+      </div>
+    </article>
+  </section>
+
+  <!-- FIN FORMULARIO 1-->
+  <section id='popup_fnd'></section>
+  <div id='agre_cont'>
+    <input type='hidden' id='nomConNP' name='nomConNP' value=''>
+    <input type='hidden' id='apeConNP' name='apeConNP' value=''>
+    <h1>NUEVO CONTACTO</h1>
+    <article class='cont_req'>
+      <label class='ndeci' style='heigth: 0px;'>Nombre</label>
+      <input type='text' id='ndeci' name='ndeci' class='inpt_sel'>
+    </article>
+    <article class='cont_req'>
+      <label class='pdeci' style='heigth: 0px;'>Apellido</label>
+      <input type='text' id='pdeci' name='pdeci' class='inpt_sel'>
+    </article>
+    <section id='agregar_contacto_np'>Agregar</section>
+  </div>
+
+  <!--validar check-->
+  <script>
+    function maxLengthCheck(object, cant)
+    {
+      if (object.value.length <= cant)
+        console.log(object.value.length)
+        object.value = object.value.slice(0, cant)
+    }
+  </script>
+</body>
+</html>
